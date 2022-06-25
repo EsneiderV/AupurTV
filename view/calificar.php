@@ -11,11 +11,12 @@ if (!isset($_SESSION['rol'])) {
 if (isset($_POST['calificar'])) {
   $idCalificante = $_SESSION['id'];
   $idCalificador = $_POST['id']; 
+  $area = $_POST['area'];
   $nota = $_POST['valor'];
   $mes = date('m');
   $preguntas = mostrarPreguntasid($conexion);
   foreach ($nota as $key => $value) {
-    guardarCalificaciones($preguntas[$key],$idCalificante,$idCalificador,$value,$mes,$conexion);
+    guardarCalificaciones($preguntas[$key],$idCalificante,$idCalificador,$value,$mes,$area,$conexion);
   }
   echo '<script type="text/javascript">
         alert("Enviado correctamente");
@@ -23,8 +24,8 @@ if (isset($_POST['calificar'])) {
         </script>';
 
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,6 +61,7 @@ if (isset($_POST['calificar'])) {
         <button class=" btnmodal" data-bs-toggle="modal" data-bs-target="#exampleModal" data-nombre="<?php echo $usuario['nombre'] ?>" 
       data-area="<?php echo $usuario['ambiente'] ?>"
       data-id="<?php echo $usuario['id']?>"
+      data-areaid="<?php echo $usuario['area']?>"
       >Foto <?php echo $usuario['nombre'] . ' - ' . $usuario['ambiente'] ?> </button> <br> <br>
         <?php
       }
@@ -87,6 +89,7 @@ if (isset($_POST['calificar'])) {
         <div class="modal-body">
           <form action="" method="POST">
             <input type="text" name="id" class="id_calificado" hidden>
+            <input type="text" name="area" class="area" hidden>
             <div class="contenedor">
               <?php
               $preguntas = mostrarPreguntas($conexion);
@@ -118,6 +121,7 @@ const usuarios_calificar = document.querySelector('.usuarios_calificar');
         const btnmodal = e.target;
         document.querySelector('.modal-title').textContent = `${btnmodal.dataset.nombre}   ${ btnmodal.dataset.area}`
         document.querySelector('.id_calificado').value = `${btnmodal.dataset.id}`
+        document.querySelector('.area').value = `${btnmodal.dataset.areaid}`
 
       }
     })

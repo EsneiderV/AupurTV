@@ -28,7 +28,7 @@ function redireccion($rol)
 
 function mostrarUsuario($conexion,$id)
 {
-    $query = "SELECT id,usuarios.nombre, area.nombre AS 'ambiente' FROM usuarios INNER JOIN area ON area.codigo = usuarios.area WHERE id != '$id'";
+    $query = "SELECT id,usuarios.nombre, area.nombre AS 'ambiente',usuarios.area FROM usuarios INNER JOIN area ON area.codigo = usuarios.area WHERE id != '$id'";
     return $consulta = mysqli_query($conexion, $query);
 }
 
@@ -37,6 +37,7 @@ function mostrarPreguntas($conexion)
     $query = "SELECT * FROM preguntas ";
     return $consulta = mysqli_query($conexion, $query);
 }
+
 function mostrarPreguntasid($conexion)
 {
     $query = "SELECT id FROM preguntas ";
@@ -50,9 +51,9 @@ function mostrarPreguntasid($conexion)
     return $retornoA;
 }
 
-function guardarCalificaciones($idP,$idCalificante,$idCalificador,$nota,$mes,$conexion)
+function guardarCalificaciones($idP,$idCalificante,$idCalificador,$nota,$mes,$area,$conexion)
 {
-        $query = "INSERT INTO `calificaciones`(`idP`, `idCalificante`, `idCalificador`, `nota`, `mes`) VALUES ('$idP','$idCalificante','$idCalificador','$nota','$mes')";
+        $query = "INSERT INTO `calificaciones`(`idP`, `idCalificante`, `idCalificador`, `nota`, `mes`,area) VALUES ('$idP','$idCalificante','$idCalificador','$nota','$mes','$area')";
         $insertar = mysqli_query($conexion, $query);
 }
 
@@ -79,4 +80,29 @@ function empleadoCalificado($mes,$idCalificante,$idCalificador,$conexion)
     $query = "SELECT * FROM `calificaciones` WHERE `idCalificante` = '$idCalificante' AND `idCalificador` = '$idCalificador' AND `mes` = '$mes'";
     return $consulta = mysqli_query($conexion, $query);
 }
+
+function mostrarUsuarioAdmin($conexion)
+{
+    $query = "SELECT id,usuarios.nombre, area.nombre AS 'ambiente' FROM usuarios INNER JOIN area ON area.codigo = usuarios.area ";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+function mostrarCalificacionAdmin($idusuario,$idPregunta,$mes,$conexion)
+{
+    $query = "SELECT nota FROM `calificaciones` WHERE `idCalificador` = '$idusuario' AND `mes` = '$mes' AND `idP` = '$idPregunta';";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+function mostrarArea($conexion)
+{
+    $query = "SELECT * FROM `area` ";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+function mostrarNotaArea($mes,$area,$conexion)
+{
+    $query = "SELECT preguntas.pregunta, AVG(nota) AS 'promedio' FROM `calificaciones` INNER JOIN preguntas ON calificaciones.idP = preguntas.id WHERE `mes` = '$mes' AND `area` = '$area' GROUP BY `idP`";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
 
