@@ -1,0 +1,30 @@
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+/* Inicio de cesccion */
+
+.usuario-html,
+.usuario-body {
+    height: 100%;
+
+}
+
+.usuario-body {
+    background-color: rgba(17, 99, 17, 0.849);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr 2fr;
+}
+
+.usuario-login {
+    background-color: aqua;
+    grid-row: 2 / 6;
+    grid-column: 3 / 6;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+}
