@@ -45,7 +45,7 @@ if (isset($_SESSION['rol'])) {
             <button class="empleado-item">
                 <a href="calificar.php" class="empleado-enlace">Calificar</a>
             </button>
-            <button class="empleado-item">Mi inventario</button>
+            <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#inventario">Mi inventario</button>
             <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
             <button class="empleado-item">
                 <a class="empleado-enlace" target="_blank" href="https://mail.google.com/mail/u/0/">
@@ -71,10 +71,10 @@ if (isset($_SESSION['rol'])) {
                     $datos = datosPersonales($_SESSION['id'], $conexion);
                     $datos = mysqli_fetch_array($datos)
                     ?>
-                    <p><span>Documento : <?php echo $datos['id'] ?></span></p>
-                    <p><span>Nombres : <?php echo $datos['nombre'] ?></span></p>
-                    <p><span>Rol : <?php echo $datos['rol'] ?></span></p>
-                    <p><span>Área : <?php echo $datos['area'] ?></span></p>
+                    <p class="empleados-p-directorio"> <span> <b>ID :</b> <?php echo $datos['id'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b>NOMBRES :</b> <?php echo $datos['nombre'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b> ROL: </b> <?php echo $datos['rol'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b>ÁREA :</b> <?php echo $datos['area'] ?></span> </p>
 
                     <?php
                     ?>
@@ -86,10 +86,36 @@ if (isset($_SESSION['rol'])) {
         </div>
     </div>
 
+     <!-- Inventario -->
+     <div class="modal fade" id="inventario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title a-ms-40 fs-2 a-f-t-r" id="exampleModalLabel">Inventario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    $inventarios = mostrarInventario($_SESSION['id'],$conexion);
+                    while ($inventario = mysqli_fetch_array($inventarios)) {
+                    ?>
+                            <hr>
+                            <p class="empleados-p-directorio">
+                                <span> <b>COD :</b> <?php echo $inventario['cod'] ?> </span>
+                                <span> <b>NOM :</b> <?php echo $inventario['nombre'] ?> </span>
+                                <span> <b>EST :</b> <?php echo $inventario['estado'] ?></span>
+                            </p>
 
-
-
-
+                    <?php
+                        }
+                    ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Directorio-->
     <div class="modal fade" id="directorio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -112,9 +138,9 @@ if (isset($_SESSION['rol'])) {
                     ?>
                             <hr>
                             <p class="empleados-p-directorio">
-                                <span><?php echo $directorio['nombre'] ?> </span>
-                                <span> EM :  <?php echo $directorio['correo'] ?> </span>
-                                <span> CEL : <?php echo $directorio['telefono'] ?></span>
+                                <span> <b> <?php echo $directorio['nombre'] ?> </b> </span>
+                                <span> <b>EM :</b>  <?php echo $directorio['correo'] ?> </span>
+                                <span> <b>CEL :</b> <?php echo $directorio['telefono'] ?></span>
                             </p>
 
                     <?php
