@@ -10,19 +10,18 @@ if (!isset($_SESSION['rol'])) {
 
 if (isset($_POST['calificar'])) {
   $idCalificante = $_SESSION['id'];
-  $idCalificador = $_POST['id']; 
+  $idCalificador = $_POST['id'];
   $area = $_POST['area'];
   $nota = $_POST['valor'];
   $mes = date('m');
   $preguntas = mostrarPreguntasid($conexion);
   foreach ($nota as $key => $value) {
-    guardarCalificaciones($preguntas[$key],$idCalificante,$idCalificador,$value,$mes,$area,$conexion);
+    guardarCalificaciones($preguntas[$key], $idCalificante, $idCalificador, $value, $mes, $area, $conexion);
   }
   echo '<script type="text/javascript">
         alert("Enviado correctamente");
         window.location.href="calificar.php";
         </script>';
-
 }
 ?>
 
@@ -35,49 +34,55 @@ if (isset($_POST['calificar'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../controllers/bootstrap/bootstrap.min.css">
   <script src="../controllers/bootstrap/bootstrap.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../controllers/css/style.css">
   <title>Calificar</title>
 </head>
 
-<body>
-  <div class="usuarios_calificar">
-    <h1>CALIFICAR</h1>
+<body class="calificar-body">
 
-    <?php
-    $mes = date('m');
-    $usuarios = mostrarUsuario($conexion,$_SESSION['id']);
-    while ($usuario = mysqli_fetch_array($usuarios)) {
+  <h1 class="calificar-titulo">CALIFICAR</h1>
 
-     $calificado = empleadoCalificado($mes,$_SESSION['id'],$usuario['id'],$conexion);
-      if($calificado->num_rows > 0){
-        ?>
-<button class=" btnmodal" data-bs-toggle="modal" data-bs-target="#exampleModal" data-nombre="<?php echo $usuario['nombre'] ?>" 
-      data-area="<?php echo $usuario['ambiente'] ?>"
-      data-id="<?php echo $usuario['id']?>"
-      disabled>Foto <?php echo $usuario['nombre'] . ' - ' . $usuario['ambiente'] ?> </button> <br> <br>
-        <?php 
-      }else{
-
-        ?>
-        <button class=" btnmodal" data-bs-toggle="modal" data-bs-target="#exampleModal" data-nombre="<?php echo $usuario['nombre'] ?>" 
-      data-area="<?php echo $usuario['ambiente'] ?>"
-      data-id="<?php echo $usuario['id']?>"
-      data-areaid="<?php echo $usuario['area']?>"
-      >Foto <?php echo $usuario['nombre'] . ' - ' . $usuario['ambiente'] ?> </button> <br> <br>
+  <div class="calificar-contenedorp-empleado">
+    
+    
+    <?php 
+    $mes = date('m'); // retiene el mes actual
+     $areas = mostrarArea($conexion); //recolecta todas las areas
+     while ($area = mysqli_fetch_array($areas)) { // mostrar cada area en un cuadro
+      $usuarios = mostrarUsuario($conexion, $_SESSION['id'],$area['codigo']);
+       echo "<div class='calificar-contenedor-empleado'>";
+       echo "<h3 class='calificar-contenedor-titulo'>".strtoupper($area['nombre'])."</h1>";
+       while ($usuario = mysqli_fetch_array($usuarios)) {
+        $calificado = empleadoCalificado($mes, $_SESSION['id'], $usuario['id'], $conexion);
+        if ($calificado->num_rows > 0) {
+          ?>
+          <button class=" btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="#exampleModal" data-nombre="<?php echo $usuario['nombre'] ?>" 
+          data-id="<?php echo $usuario['id'] ?>" disabled>
+          <span class="calificar-contenedor-imagen"><img src="../IMG-20190806-WA0020.jpg" alt="foto compañero"></span> 
+          <span class="calificar-nombre-btn"><?php echo $usuario['nombre'] ?></span> 
+        </button> 
         <?php
-      }
+
+          
+        }else{
+          ?>
+          <button class=" btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="#exampleModal" data-nombre="<?php echo $usuario['nombre'] ?>" 
+          data-id="<?php echo $usuario['id'] ?>" >
+          <span class="calificar-contenedor-imagen"><img src="../IMG-20190806-WA0020.jpg" alt="foto compañero"></span> 
+          <span class="calificar-nombre-btn"><?php echo $usuario['nombre'] ?></span> 
+        </button> 
+        <?php
+        }
+       }
+       echo "</div>";
+     }
     ?>
 
-      
-
-    <?php
-    }
-
-
-    ?>
+    
   </div>
-
-
-
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -112,18 +117,16 @@ if (isset($_POST['calificar'])) {
 
 
 
-
   <script>
 // modal
-const usuarios_calificar = document.querySelector('.usuarios_calificar');
-    usuarios_calificar.addEventListener('click', e => {
-      if (e.target.classList.contains('btnmodal')) {
-        const btnmodal = e.target;
-        document.querySelector('.modal-title').textContent = `${btnmodal.dataset.nombre}   ${ btnmodal.dataset.area}`
+const calificarcontenedorpempleado = document.querySelector('.calificar-contenedorp-empleado');
+    calificarcontenedorpempleado.addEventListener('click', e => {
+    if(e.target.classList.contains('btnmodal')){
+      const btnmodal = e.target;
+      document.querySelector('.modal-title').textContent = `${btnmodal.dataset.nombre}`
         document.querySelector('.id_calificado').value = `${btnmodal.dataset.id}`
         document.querySelector('.area').value = `${btnmodal.dataset.areaid}`
-
-      }
+    }
     })
 
     // poner calificacion

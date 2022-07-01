@@ -43,16 +43,16 @@ if (isset($_SESSION['rol'])) {
         <div class="empleado-items">
             <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#datosPersonales">Datos personales</button>
             <button class="empleado-item">
-                <a href="calificar.php" class="empleado-enlace">Calificar</a>
+                <a href="calificar.php" class="empleado-enlace a-f-r">Calificar</a>
             </button>
             <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#inventario">Mi inventario</button>
             <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
             <button class="empleado-item">
-                <a class="empleado-enlace" target="_blank" href="https://mail.google.com/mail/u/0/">
+                <a class="empleado-enlace a-f-r" target="_blank" href="https://mail.google.com/mail/u/0/">
                     Mi correo
                 </a>
             </button>
-            <a href="../models/Cerrar.php" class="empleado-enlace">Cerrar sesion</a>
+            <a href="../models/Cerrar.php" class="empleado-enlace a-f-r">Cerrar sesion</a>
         </div>
     </div>
 

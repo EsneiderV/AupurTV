@@ -26,9 +26,9 @@ function redireccion($rol)
     }
 }
 
-function mostrarUsuario($conexion,$id)
+function mostrarUsuario($conexion,$id,$area)
 {
-    $query = "SELECT id,usuarios.nombre, area.nombre AS 'ambiente',usuarios.area FROM usuarios INNER JOIN area ON area.codigo = usuarios.area WHERE id != '$id'";
+    $query = "SELECT id,usuarios.nombre, area.nombre AS 'ambiente',usuarios.area FROM usuarios INNER JOIN area ON area.codigo = usuarios.area WHERE id != '$id' AND usuarios.area = '$area'";
     return $consulta = mysqli_query($conexion, $query);
 }
 
