@@ -105,4 +105,10 @@ function mostrarNotaArea($mes,$area,$conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+function  mostrarDirectorio($idArea,$conexion)
+{
+    $query = "SELECT nombre, correo, telefono FROM `usuarios` WHERE `area` = '$idArea'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
 

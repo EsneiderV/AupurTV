@@ -39,20 +39,22 @@ if (isset($_SESSION['rol'])) {
 
 
     <div class="empleado-opciones">
-        <h1>    <?php echo $_SESSION['nombre'] ?></h1>
+        <h1> <?php echo $_SESSION['nombre'] ?></h1>
         <div class="empleado-items">
             <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#datosPersonales">Datos personales</button>
             <button class="empleado-item">
                 <a href="calificar.php" class="empleado-enlace">Calificar</a>
             </button>
             <button class="empleado-item">Mi inventario</button>
-            <button class="empleado-item">Mi directorio</button>
-            <button class="empleado-item">Mi correo</button>
+            <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
+            <button class="empleado-item">
+                <a class="empleado-enlace" target="_blank" href="https://mail.google.com/mail/u/0/">
+                    Mi correo
+                </a>
+            </button>
             <a href="../models/Cerrar.php" class="empleado-enlace">Cerrar sesion</a>
         </div>
     </div>
-
-
 
 
 
@@ -61,7 +63,7 @@ if (isset($_SESSION['rol'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Datos personales</h5>
+                    <h5 class="modal-title a-ms-25 fs-2 a-f-t-r" id="exampleModalLabel">Datos personales</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -75,6 +77,51 @@ if (isset($_SESSION['rol'])) {
                     <p><span>Área : <?php echo $datos['area'] ?></span></p>
 
                     <?php
+                    ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- Directorio-->
+    <div class="modal fade" id="directorio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title a-ms-40 fs-2 a-f-t-r" id="exampleModalLabel">Directorio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    $areas = mostrarArea($conexion);
+                    while ($area = mysqli_fetch_array($areas)) {
+                        echo "<details>";
+                        echo "<summary >" . $area['nombre'] . "</summary>";
+                        $directorios = mostrarDirectorio($area['codigo'], $conexion);
+                        while ($directorio = mysqli_fetch_array($directorios)) {
+
+
+                    ?>
+                            <hr>
+                            <p class="empleados-p-directorio">
+                                <span><?php echo $directorio['nombre'] ?> </span>
+                                <span> EM :  <?php echo $directorio['correo'] ?> </span>
+                                <span> CEL : <?php echo $directorio['telefono'] ?></span>
+                            </p>
+
+                    <?php
+                        }
+                        echo "<hr/>";
+                        echo "</details>";
+                    }
                     ?>
                 </div>
                 <div class="modal-footer">

@@ -155,3 +155,10 @@ body {
 }
 
 
+.empleados-p-directorio{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+    
