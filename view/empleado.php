@@ -130,11 +130,7 @@ if (isset($_SESSION['rol'])) {
                     $areas = mostrarArea($conexion);
                     while ($area = mysqli_fetch_array($areas)) {
                         echo "<details>";
-<<<<<<< HEAD
-                        echo "<summary   class='pt-4 h5'>" . $area['nombre'] . "</summary>";
-=======
                         echo "<summary class='pt-4 h5'>" . $area['nombre'] . "</summary>";
->>>>>>> origin/Esneider
                         $directorios = mostrarDirectorio($area['codigo'], $conexion);
                         while ($directorio = mysqli_fetch_array($directorios)) {
 

@@ -10,11 +10,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-    <h1>Hola</h1>
-=======
-    <h6> Hola lola</h6>
->>>>>>> origin/Esneider
     <div class="second">
         <a href="view/usuario.php">Login</a>
     </div>
