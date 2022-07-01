@@ -42,12 +42,13 @@ if (isset($_POST['calificar'])) {
 </head>
 
 <body class="calificar-body">
-
-  <h1 class="calificar-titulo">CALIFICAR</h1>
+  <div class="calificar-contenedor-auto">
+    <a href="empleado.php"> ᗕ Volver atrás</a>
+    <h1>CALIFICAR</h1>
+    <button data-bs-toggle="modal" data-bs-target="#autoevaluacion">Auto evaluación</button>
+  </div>
 
   <div class="calificar-contenedorp-empleado">
-    
-    
     <?php 
     $mes = date('m'); // retiene el mes actual
      $areas = mostrarArea($conexion); //recolecta todas las areas
@@ -80,9 +81,8 @@ if (isset($_POST['calificar'])) {
        echo "</div>";
      }
     ?>
-
-    
   </div>
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -114,6 +114,24 @@ if (isset($_POST['calificar'])) {
       </div>
     </div>
   </div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="autoevaluacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <h1>kkkkk</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 
 

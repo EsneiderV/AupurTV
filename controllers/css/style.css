@@ -171,11 +171,6 @@ body {
 
 }
 
-.calificar-titulo {
-    text-align: center;
-    padding: 2%;
-}
-
 .calificar-contenedor-empleado {
     background-color: rgba(242, 248, 248, 0.068);
     border-radius: 2%;
@@ -226,4 +221,14 @@ body {
 
 .calificar-nombre-btn{
     font-size: x-large;
+}
+
+.calificar-contenedor-auto{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
