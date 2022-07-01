@@ -71,7 +71,7 @@ if (isset($_SESSION['rol'])) {
                     $datos = datosPersonales($_SESSION['id'], $conexion);
                     $datos = mysqli_fetch_array($datos)
                     ?>
-                    <p class="empleados-p-directorio"> <span> <b>ID :</b> <?php echo $datos['id'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b>DOCUMENTO :</b> <?php echo $datos['id'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>NOMBRES :</b> <?php echo $datos['nombre'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b> ROL: </b> <?php echo $datos['rol'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>ÁREA :</b> <?php echo $datos['area'] ?></span> </p>
@@ -130,7 +130,7 @@ if (isset($_SESSION['rol'])) {
                     $areas = mostrarArea($conexion);
                     while ($area = mysqli_fetch_array($areas)) {
                         echo "<details>";
-                        echo "<summary   class='pt-4'>" . $area['nombre'] . "</summary>";
+                        echo "<summary   class='pt-4  h5'>" . $area['nombre'] . "</summary>";
                         $directorios = mostrarDirectorio($area['codigo'], $conexion);
                         while ($directorio = mysqli_fetch_array($directorios)) {
 

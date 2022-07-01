@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <h1>Hola</h1>
     <div class="second">
         <a href="view/usuario.php">Login</a>
     </div>
