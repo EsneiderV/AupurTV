@@ -111,4 +111,10 @@ function  mostrarDirectorio($idArea,$conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+function  mostrarInventario($id,$conexion)
+{
+    $query = "SELECT `cod`,`nombre`,`estado` FROM `inventariogeneral` WHERE `id_responsable` = '$id'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
 
