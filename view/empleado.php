@@ -63,7 +63,7 @@ if (isset($_SESSION['rol'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title a-ms-25 fs-2 a-f-t-r" id="exampleModalLabel">Datos personales</h5>
+                    <h5 class="modal-title a-ms-25 fs-2 a-f-t-r" id="exampleModalLabel">DATOS PERSONALES</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -91,7 +91,7 @@ if (isset($_SESSION['rol'])) {
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title a-ms-40 fs-2 a-f-t-r" id="exampleModalLabel">Inventario</h5>
+                    <h5 class="modal-title a-ms-30 fs-2 a-f-t-r" id="exampleModalLabel">INVENTARIO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -122,7 +122,7 @@ if (isset($_SESSION['rol'])) {
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title a-ms-40 fs-2 a-f-t-r" id="exampleModalLabel">Directorio</h5>
+                    <h5 class="modal-title a-ms-40 fs-2 a-f-t-r" id="exampleModalLabel">DIRECTORIO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -130,7 +130,11 @@ if (isset($_SESSION['rol'])) {
                     $areas = mostrarArea($conexion);
                     while ($area = mysqli_fetch_array($areas)) {
                         echo "<details>";
-                        echo "<summary   class='pt-4  h5'>" . $area['nombre'] . "</summary>";
+<<<<<<< HEAD
+                        echo "<summary   class='pt-4 h5'>" . $area['nombre'] . "</summary>";
+=======
+                        echo "<summary class='pt-4 h5'>" . $area['nombre'] . "</summary>";
+>>>>>>> origin/Esneider
                         $directorios = mostrarDirectorio($area['codigo'], $conexion);
                         while ($directorio = mysqli_fetch_array($directorios)) {
 
