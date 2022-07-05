@@ -39,7 +39,7 @@ if (isset($_SESSION['rol'])) {
 
 
     <div class="jefe-opciones">
-        <h1> <?php echo strtoupper($_SESSION['nombre']) ?>   Gefe</h1>
+        <h1> <?php echo strtoupper($_SESSION['nombre']) ?>   Jefe</h1>
         <div class="jefe-items">
             <button class="jefe-item" data-bs-toggle="modal" data-bs-target="#datosPersonales">Datos personales</button>
             <button class="jefe-item">
