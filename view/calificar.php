@@ -63,7 +63,6 @@ if (isset($_POST['calificar'])) {
         }else{
           $modal = '#general';
         }
-        echo $modal;
         if ($calificado->num_rows > 0) {
           ?>
           <button class="btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" 
