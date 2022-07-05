@@ -14,7 +14,7 @@
     $mes = date('m');
     $usuarios = mostrarUsuarioAdmin($conexion);
     while ($usuario = mysqli_fetch_array($usuarios)) {
-        $preguntas = mostrarPreguntas($conexion);
+        $preguntas = mostrarPreguntas(0,$conexion);
         echo "<h1>".$usuario['nombre']."</h1>";
         while ($pregunta = mysqli_fetch_array($preguntas)) {
              $calificaciones = mostrarCalificacionAdmin($usuario['id'], $pregunta['id'], $mes, $conexion);

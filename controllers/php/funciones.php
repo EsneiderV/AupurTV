@@ -18,6 +18,11 @@ function redireccion($rol)
                 window.location.href="administrador.php";
                 </script>';
             break;
+        case '3':
+             echo '<script type="text/javascript">
+                 window.location.href="jefe.php";
+                </script>';
+            break;
         default:
             echo '<script type="text/javascript">
                 window.location.href="usuario.php";
@@ -76,7 +81,7 @@ function promedioPorPregunta($id,$mes,$conexion)
 
 function datosPersonales($id,$conexion)
 {
-    $query = "SELECT `id`, usuarios.nombre, rol.nombre AS 'rol', area.nombre AS 'area' FROM `usuarios` INNER JOIN rol ON rol.codigo = usuarios.rol INNER JOIN area ON area.codigo = usuarios.area WHERE id = '$id';";
+    $query = "SELECT `id`, usuarios.nombre, rol.nombre AS 'rol', area.nombre AS 'area',correo,telefono FROM `usuarios` INNER JOIN rol ON rol.codigo = usuarios.rol INNER JOIN area ON area.codigo = usuarios.area WHERE id = '$id';";
     return $consulta = mysqli_query($conexion, $query);
 }
 

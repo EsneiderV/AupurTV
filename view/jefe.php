@@ -3,7 +3,7 @@ session_start();
 include_once '../controllers/php/funciones.php';
 include_once '../models/Conexion.php';
 if (isset($_SESSION['rol'])) {
-    if ($_SESSION['rol'] != 1) {
+    if ($_SESSION['rol'] != 3) {
         echo '<script type="text/javascript">
                 window.location.href="usuario.php";
                 </script>';
@@ -38,22 +38,28 @@ if (isset($_SESSION['rol'])) {
     </div>
 
 
-    <div class="empleado-opciones">
-        <h1> <?php echo strtoupper($_SESSION['nombre']) ?></h1>
-        <div class="empleado-items">
-            <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#datosPersonales">Datos personales</button>
-            <button class="empleado-item">
+    <div class="jefe-opciones">
+        <h1> <?php echo strtoupper($_SESSION['nombre']) ?>   Gefe</h1>
+        <div class="jefe-items">
+            <button class="jefe-item" data-bs-toggle="modal" data-bs-target="#datosPersonales">Datos personales</button>
+            <button class="jefe-item">
                 <a href="calificar.php" class="empleado-enlace a-f-r">Calificar</a>
             </button>
-            <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#inventario">Mi inventario</button>
-            <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
-            <button class="empleado-item">
-                <a class="empleado-enlace a-f-r" target="_blank" href="https://mail.google.com/mail/u/0/">
+            <button class="jefe-item" data-bs-toggle="modal" data-bs-target="#inventario">Mi inventario</button>
+            <button class="jefe-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
+            <button class="jefe-item">
+                <a class="jefe-enlace a-f-r" target="_blank" href="https://mail.google.com/mail/u/0/">
+                Inventario area
+                </a>
+            </button>
+            <button class="jefe-item" data-bs-toggle="modal" data-bs-target="#directorio">Calificaciones area</button>
+            <button class="jefe-item">
+                <a class="jefe-enlace a-f-r" target="_blank" href="https://mail.google.com/mail/u/0/">
                     Mi correo
                 </a>
             </button>
-            <a href="../models/Cerrar.php" class="empleado-enlace a-f-r">Cerrar sesion</a>
         </div>
+        <a href="../models/Cerrar.php" class="jefe-enlace a-f-r">Cerrar sesion</a>
     </div>
 
 
@@ -73,8 +79,7 @@ if (isset($_SESSION['rol'])) {
                     ?>
                     <p class="empleados-p-directorio"> <span> <b>DOCUMENTO :</b> <?php echo $datos['id'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>NOMBRES :</b> <?php echo $datos['nombre'] ?></span> </p>
-                    <p class="empleados-p-directorio"> <span> <b>CORREO :</b> <?php echo $datos['correo'] ?></span> </p>
-                    <p class="empleados-p-directorio"> <span> <b>TELEFONO :</b> <?php echo $datos['telefono'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b> ROL: </b> <?php echo $datos['rol'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>ÁREA :</b> <?php echo $datos['area'] ?></span> </p>
 
                     <?php

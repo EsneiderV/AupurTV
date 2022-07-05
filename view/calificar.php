@@ -66,7 +66,7 @@ if (isset($_POST['calificar'])) {
         }
         if ($calificado->num_rows > 0) {
           ?>
-          <button class="btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" 
+          <button class="btnmodal calificar-btnmodal" data-bs-toggle="modal" 
           data-nombre="<?php echo $usuario['nombre'] ?>" 
           data-id="<?php echo $usuario['id'] ?>" 
           data-areaid="<?php echo $usuario['area'] ?>" 
@@ -84,7 +84,7 @@ if (isset($_POST['calificar'])) {
           data-id="<?php echo $usuario['id'] ?>" 
           data-areaid="<?php echo $usuario['area'] ?>" 
           >
-          <span class="calificar-contenedor-imagen"><img class="calificar-imagen-js" src="../IMG-20190806-WA0020.jpg" alt="foto compañero"></span> 
+          <span class="calificar-contenedor-imagen" ><img class="calificar-imagen-js" src="../IMG-20190806-WA0020.jpg" alt="foto compañero"></span> 
           <span class="calificar-nombre-btn"><?php echo $usuario['nombre'] ?></span> 
         </button> 
         <?php
@@ -111,7 +111,7 @@ if (isset($_POST['calificar'])) {
               $preguntas = mostrarPreguntas(0,$conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div><?php echo $pregunta['pregunta'] ?> <input type="range" name="valor[]" min="1" max="10" id="input" step="1"> <span class="numero">6</span></div>
+                <div><?php echo $pregunta['pregunta'] ?> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"> <span class="numero">5</span></div>
               <?php
               }
               ?>
@@ -144,7 +144,7 @@ if (isset($_POST['calificar'])) {
               $preguntas = mostrarPreguntas(1,$conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div><?php echo $pregunta['pregunta'] ?> <input type="range" name="valor[]" min="1" max="10" id="input" step="1"> <span class="numero">6</span></div>
+                <div><?php echo $pregunta['pregunta'] ?> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"> <span class="numero">5</span></div>
               <?php
               }
               ?>
@@ -165,11 +165,26 @@ if (isset($_POST['calificar'])) {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <h5 class="modal-title" id="exampleModalLabel">Auto evaluacion</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        <h1>kkkkk</h1>
+        <form action="" method="POST">
+            <div class="contenedor2">
+              <?php
+              $preguntas = mostrarPreguntas(0,$conexion);
+              while ($pregunta = mysqli_fetch_array($preguntas)) {
+              ?>
+                <div><?php echo $pregunta['pregunta'] ?> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"> <span class="numero">5</span></div>
+              <?php
+              }
+              ?>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" name="auto" class="btn btn-primary">Calificar</button>
+          </form>
         </div>
       </div>
     </div>
@@ -180,7 +195,7 @@ if (isset($_POST['calificar'])) {
 
 
 
-
+ 
 
 
 
@@ -243,6 +258,11 @@ if (isset($_POST['calificar'])) {
 
     const contenedor1 = document.querySelector('.contenedor1');
     contenedor1.addEventListener('click', (e) => {
+      e.target.nextSibling.nextSibling.textContent = e.target.value
+    })
+
+    const contenedor2 = document.querySelector('.contenedor2');
+    contenedor2.addEventListener('click', (e) => {
       e.target.nextSibling.nextSibling.textContent = e.target.value
     })
 

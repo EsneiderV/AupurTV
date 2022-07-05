@@ -21,7 +21,7 @@
         <div class="usuario-item-login">
             <form action="" method="POST">
                 <input name="documento" type="text" placeholder="Documento" required> <br> <br>
-                <input name="clave" type="text" placeholder="Contraseña" required> <br> <br>
+                <input name="clave" type="password" placeholder="Contraseña" required> <br> <br>
                 <button name="acceder" type="submit" >Acceder</button>
             </form>
         </div>
