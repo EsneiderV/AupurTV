@@ -12,8 +12,10 @@ body {
 }
 
 .usuario-body {
-    background: url(https://scontent.feoh2-1.fna.fbcdn.net/v/t39.30808-6/244439091_4259732457413708_6964607691919799066_n.jpg?stp=dst-jpg_p180x540&_nc_cat=100&ccb=1-7&_nc_sid=e3f864&_nc_ohc=AyqZ_6TP1LIAX8RlQq4&_nc_ht=scontent.feoh2-1.fna&oh=00_AT--dC1TuLDBWZV0WvL2Ss1HRbGUhHiBV1wgztabWDnc1w&oe=62C24E36) no-repeat center center fixed;
-    background-size: cover;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23BBBBBB' cx='50' cy='0' r='50'/%3E%3Cg fill='%23b6b6b6' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23b0b0b0' cx='50' cy='100' r='50'/%3E%3Cg fill='%23ababab' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23a6a6a6' cx='50' cy='200' r='50'/%3E%3Cg fill='%23a0a0a0' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%239b9b9b' cx='50' cy='300' r='50'/%3E%3Cg fill='%23969696' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23919191' cx='50' cy='400' r='50'/%3E%3Cg fill='%238b8b8b' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%23868686' cx='50' cy='500' r='50'/%3E%3Cg fill='%23818181' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%237c7c7c' cx='50' cy='600' r='50'/%3E%3Cg fill='%23777777' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23727272' cx='50' cy='700' r='50'/%3E%3Cg fill='%236d6d6d' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23686868' cx='50' cy='800' r='50'/%3E%3Cg fill='%23636363' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%235f5f5f' cx='50' cy='900' r='50'/%3E%3Cg fill='%235a5a5a' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23555555' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: contain;
+    ;
     display: grid;
     grid-template-columns: 2fr 1fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr 1fr 2fr;
     grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr 2fr;

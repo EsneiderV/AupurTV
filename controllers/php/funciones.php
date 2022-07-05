@@ -32,10 +32,21 @@ function mostrarUsuario($conexion,$id,$area)
     return $consulta = mysqli_query($conexion, $query);
 }
 
-function mostrarPreguntas($conexion)
+function mostrarPreguntas($tipo,$conexion)
 {
-    $query = "SELECT * FROM preguntas ";
-    return $consulta = mysqli_query($conexion, $query);
+    switch ($tipo) {
+        case 1:
+                $query = "SELECT * FROM preguntas WHERE general = 1 ";
+                return $consulta = mysqli_query($conexion, $query);
+            break;
+        
+        default:
+                $query = "SELECT * FROM preguntas ";
+                return $consulta = mysqli_query($conexion, $query);
+            break;
+    }
+
+   
 }
 
 function mostrarPreguntasid($conexion)
