@@ -23,6 +23,26 @@ if (isset($_POST['calificar'])) {
         window.location.href="calificar.php";
         </script>';
 }
+
+$redirecionar = '';
+switch ($_SESSION['rol']) {
+    case '1':
+        $redirecionar = 'empleado.php';
+        break;
+    
+    case '2':
+      $redirecionar = 'administrador.php';
+      break;
+
+    case '3':
+      $redirecionar = 'jefe.php';
+      break;
+    
+    default:
+        # code...
+        break;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +63,7 @@ if (isset($_POST['calificar'])) {
 
 <body class="calificar-body">
   <div class="calificar-contenedor-auto">
-    <a  href="empleado.php"> ᗕ Volver atrás</a>
+    <a  href="<?php echo $redirecionar ?>"> ᗕ Volver atrás</a>
     <h1>CALIFICAR</h1>
     <button data-bs-toggle="modal" data-bs-target="#autoevaluacion">Auto evaluación</button>
   </div>
