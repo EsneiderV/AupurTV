@@ -173,11 +173,6 @@ body {
 
 }
 
-.calificar-titulo {
-    text-align: center;
-    padding: 2%;
-}
-
 .calificar-contenedor-empleado {
     background-color: rgba(242, 248, 248, 0.068);
     border-radius: 2%;
@@ -228,4 +223,31 @@ body {
 
 .calificar-nombre-btn{
     font-size: x-large;
+}
+
+.calificar-contenedor-auto{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.calificar-contenedor-auto a{
+    text-decoration: none;
+    color: rgb(0,0,0);
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.calificar-contenedor-auto button{
+    background-color: transparent;
+    border: 0;
+    color: rgb(0,0,0);
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 110%;
 }
