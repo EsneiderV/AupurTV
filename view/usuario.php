@@ -29,7 +29,7 @@
 
         <div class="usuario-item-login">
             <a href="" class="usuario-enlaces">Recuperar contraseña</a>
-            <a href="" class="usuario-enlaces">Volver</a>
+            <a href="../index.php" class="usuario-enlaces">Volver</a>
         </div>
 
 
