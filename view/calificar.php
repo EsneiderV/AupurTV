@@ -43,7 +43,7 @@ if (isset($_POST['calificar'])) {
 
 <body class="calificar-body">
   <div class="calificar-contenedor-auto">
-    <a href="empleado.php"> ᗕ Volver atrás</a>
+    <a  href="empleado.php"> ᗕ Volver atrás</a>
     <h1>CALIFICAR</h1>
     <button data-bs-toggle="modal" data-bs-target="#autoevaluacion">Auto evaluación</button>
   </div>
