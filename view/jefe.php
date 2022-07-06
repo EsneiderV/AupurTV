@@ -48,7 +48,7 @@ if (isset($_SESSION['rol'])) {
             <button class="jefe-item" data-bs-toggle="modal" data-bs-target="#inventario">Mi inventario</button>
             <button class="jefe-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
             <button class="jefe-item">
-                <a class="jefe-enlace a-f-r" target="_blank" href="https://mail.google.com/mail/u/0/">
+                <a class="jefe-enlace a-f-r" href="inventarioArea.php">
                 Inventario area
                 </a>
             </button>

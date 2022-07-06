@@ -13,6 +13,16 @@
 </head>
 
 <body class="usuario-body">
+
+
+    <div class="usuario-contenedor-video">
+        <video class="video1" autoplay="" muted="" playsinline="" loop="" src="../aupur1.mp4"></video>
+    </div>
+
+    <div class="usuario-bga">
+    </div>
+
+    
     <div class="usuario-login">
 
         <div class="usuario-item-login titulo">
@@ -22,7 +32,7 @@
             <form action="" method="POST">
                 <input name="documento" type="text" placeholder="Documento" required> <br> <br>
                 <input name="clave" type="password" placeholder="Contraseña" required> <br> <br>
-                <button name="acceder" type="submit" >Acceder</button>
+                <button name="acceder" type="submit">Acceder</button>
             </form>
         </div>
 
@@ -31,9 +41,6 @@
             <a href="" class="usuario-enlaces">Recuperar contraseña</a>
             <a href="../index.php" class="usuario-enlaces">Volver</a>
         </div>
-
-
-
     </div>
 </body>
 

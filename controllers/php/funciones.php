@@ -133,4 +133,21 @@ function  mostrarInventario($id,$conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+function mostarInventarioAreaPersona($area,$conexion)
+{
+        $query = "SELECT `id_responsable`,nombre_responsable FROM `inventariogeneral` WHERE `area` = '$area' GROUP BY `id_responsable`";
+        return $consulta = mysqli_query($conexion, $query);
+}
+
+
+
+function mostarInventarioAreaProducto($id,$conexion)
+{
+
+    $query = "SELECT * FROM `inventariogeneral` WHERE `id_responsable` = '$id'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
+
 
