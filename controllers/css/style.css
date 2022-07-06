@@ -22,10 +22,13 @@ body {
     position: absolute;
     min-width: 100%;
    min-height: 100%;
-    background-color:#000000e0;
+    background-color:#000000cc;
 }
 
 .usuario-login {
+    box-shadow: 11px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 11px 10px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 11px 10px 5px 0px rgba(0,0,0,0.75);
     position: absolute;
     display: flex;
     flex-direction: column;
