@@ -302,25 +302,68 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-items: center;
-    align-content: space-around;
-}
+    align-content: center;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-left: 5%;
+    margin-top: 5%;
 
+}
 .inventarioArea-contenedor-producto{
-    border:  2px solid black;
-    width: 80%;
-    margin-bottom: 2%;
+    border: 2px solid black;
+    width: 60%;
+    margin-bottom: 3%;
 }
-
 .inventarioArea-div-producto{
     display: flex;
 }
-
 .inventarioArea-p-producto{
-    border:  2px solid black;
-   margin-left: 13%;
-   margin-right: 4%;
-   min-width: 40%;
-   text-align: center;
+    display: flex;
+    border: 2px solid black;
+    min-width: 40%;
+    margin-right: 4%;
+    margin-left: 13%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
 }
-
+.inventarioArea-agregar-articulo{
+    background-color: #e36b0f;
+    width: 30%;
+    position: fixed;
+    right: 5%;
+    top: 23%;
+    border-radius: 10px;
+    padding: 20px;
+}
+.inventarioArea-titulo{
+    margin-top: 2%;
+}
+.inventarioArea-formulario{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: flex-end;
+    align-items: center;
+}
+.inventarioArea-item-formulario{
+    margin: 2%;
+    width: 60%;
+    padding: 3px;
+    border-radius: 6px;
+    border: none;
+}
+.inventarioArea-item-formulario-agregar{
+    margin: 2%;
+    border-radius: 6px;
+    border: none;
+    padding: 6px;
+}
+.fa-trash-can:before {
+    color: #e36b0f;
+}
+.fa-pen-to-square:before{
+    color: #e36b0f;
+}
