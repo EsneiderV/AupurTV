@@ -81,9 +81,10 @@ if (isset($_SESSION['rol'])) {
                     $datos = datosPersonales($_SESSION['id'], $conexion);
                     $datos = mysqli_fetch_array($datos)
                     ?>
-                    <p class="empleados-p-directorio"> <span> <b>DOCUMENTO :</b> <?php echo $datos['id'] ?></span> </p>
+                     <p class="empleados-p-directorio"> <span> <b>DOCUMENTO :</b> <?php echo $datos['id'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>NOMBRES :</b> <?php echo $datos['nombre'] ?></span> </p>
-                    <p class="empleados-p-directorio"> <span> <b> ROL: </b> <?php echo $datos['rol'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b>CORREO :</b> <?php echo $datos['correo'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b>TELEFONO :</b> <?php echo $datos['telefono'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>ÁREA :</b> <?php echo $datos['area'] ?></span> </p>
 
                     <?php

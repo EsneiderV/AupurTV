@@ -15,8 +15,8 @@ if (isset($_SESSION['rol'])) {
 }
 
 $personas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
-$idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
-$articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
+$idPersonas = mostarUsuarioArea($_SESSION['area'], $conexion);
+$articulos = mostarUsuarioArea($_SESSION['area'], $conexion);
 
 // eliminar articulo
 if(isset($_GET['eliminar'])){
@@ -28,7 +28,39 @@ if(isset($_GET['eliminar'])){
       </script>';
 }
 
+if(isset($_POST['agregar'])){
+   $cod = $_POST['codigo'];
+   $nombre = $_POST['nombre'];
+   $estado = $_POST['estado'];
+   $id_responsable = $_POST['responsable'];
+   $area = $_SESSION['area'];
 
+   $consultaProducto = consultarProducto($cod,$conexion);
+   if ($consultaProducto->num_rows > 0) {
+    echo'<script type="text/javascript">
+    alert("El codigo del articulo ya esta registrado");
+    window.location.href="inventarioArea.php";
+    </script>';
+   }else{
+       insertarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$area,$conexion);
+       echo'<script type="text/javascript">
+            window.location.href="inventarioArea.php";
+            </script>';
+   }
+
+}
+
+   if(isset($_POST['modificar'])){
+     $cod = $_POST['codigo'];
+     $nombre = $_POST['nombre'];
+     $estado = $_POST['estado'];
+     $id_responsable = $_POST['responsable'];
+
+    modificarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$conexion);
+    echo'<script type="text/javascript">
+    window.location.href="inventarioArea.php";
+    </script>';
+    }
 
 ?>
 <!DOCTYPE html>
@@ -51,20 +83,20 @@ if(isset($_GET['eliminar'])){
 <body class="inventarioArea-body">
     <div class="inventarioArea-agregar-articulo">
         <h3 class="text-center">AGREGAR</h3>
-        <form action="" class="inventarioArea-formulario">
-            <input class="inventarioArea-item-formulario" type="number" name="codigo" placeholder="Codigo articulo">
-            <input class="inventarioArea-item-formulario" type="text" name="nombre" placeholder="Nombre articulo">
-            <input class="inventarioArea-item-formulario" type="text" name="estado" placeholder="Estado articulo">
-            <select class="inventarioArea-item-formulario" name="responsable">
-                <option>Seleccione...</option>
+        <form action="" class="inventarioArea-formulario" method="POST" id="formulario">
+            <input autocomplete="off" class="inventarioArea-item-formulario" type="number" name="codigo" placeholder="Codigo articulo" required>
+            <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="nombre" placeholder="Nombre articulo" required>
+            <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="estado" placeholder="Estado articulo" required>
+            <select class="inventarioArea-item-formulario" id="select-agregar" name="responsable" required>
+                <option value="0">Seleccione...</option>
                 <?php
                 while ($idPersona = mysqli_fetch_array($idPersonas)) {
                     echo "<option value=" . $idPersona['id_responsable'] . ">" . $idPersona['nombre_responsable'] . "</option>";
                 }
                 ?>
-                <option>Otro</option>
+           
             </select>
-            <button class="inventarioArea-item-formulario-agregar" type="submit">Agregar</button>
+            <button class="inventarioArea-item-formulario-agregar" type="submit" name="agregar">Agregar</button>
         </form>
     </div>
 
@@ -135,9 +167,9 @@ if(isset($_GET['eliminar'])){
                 </div>
                 <div class="modal-body">
                     <form action="" method="POST">
-                    Codigo : <input id="codigo" class="inventarioArea-item-formulario" type="number" name="codigo"> <br>
-                    Nombre : <input id="nombre" class="inventarioArea-item-formulario" type="text" name="nombre"> <br>
-                    Estado : <input id="estado" class="inventarioArea-item-formulario" type="text" name="estado"> <br>
+                    Codigo : <input autocomplete="off" readonly id="codigo" class="inventarioArea-item-formulario" type="number" name="codigo"> <br>
+                    Nombre : <input autocomplete="off" id="nombre" class="inventarioArea-item-formulario" type="text" name="nombre"> <br>
+                    Estado : <input autocomplete="off" id="estado" class="inventarioArea-item-formulario" type="text" name="estado"> <br>
                     Empleado : <select class="inventarioArea-item-formulario" name="responsable">
                             <option id="optionRes">Seleccione...</option>
                             <?php
@@ -145,14 +177,13 @@ if(isset($_GET['eliminar'])){
                                 echo "<option value=" . $articulo['id_responsable'] . ">" . $articulo['nombre_responsable'] . "</option>";
                             }
                             ?>
-                            <option>Otro</option>
                         </select>
 
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" name="calificar" class="btn btn-primary">Modificar</button>
+                    <button type="submit" name="modificar" class="btn btn-primary">Modificar</button>
                     </form>
                 </div>
             </div>
@@ -194,6 +225,19 @@ if(isset($_GET['eliminar'])){
             document.querySelector('#estado').value=btn.dataset.estado
             document.querySelector('#optionRes').value=`${btn.dataset.responsableid}`
             document.querySelector('#optionRes').textContent=`${btn.dataset.responsablenom}`
+        }
+
+    })
+
+    const form = document.querySelector('#formulario')
+    const btn = document.querySelector('.inventarioArea-item-formulario-agregar')
+    
+    btn.addEventListener('click',e =>{
+        const select = document.querySelector('#select-agregar').value
+    console.log(select)
+        if(select == 0){
+            e.preventDefault();
+            alert('Por favor seleccione un empleado')
         }
 
     })
