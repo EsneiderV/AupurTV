@@ -22,7 +22,7 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../controllers/bootstrap/bootstrap.min.css">
@@ -44,62 +44,109 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
             <input class="inventarioArea-item-formulario" type="text" name="estado" placeholder="Estado articulo">
             <select class="inventarioArea-item-formulario" name="responsable">
                 <option>Seleccione...</option>
-            <?php
+                <?php
                 while ($idPersona = mysqli_fetch_array($idPersonas)) {
-                    echo "<option value=".$idPersona['id_responsable'].">".$idPersona['nombre_responsable']."</option>";
+                    echo "<option value=" . $idPersona['id_responsable'] . ">" . $idPersona['nombre_responsable'] . "</option>";
                 }
-             ?>
-                <option>Otro</option>    
+                ?>
+                <option>Otro</option>
             </select>
             <button class="inventarioArea-item-formulario-agregar" type="submit">Agregar</button>
         </form>
     </div>
 
     <div class="inventarioArea-div-nav">
-        <a  href="jefe.php" class="inventarioArea-volver"> ᗕ Volver atrás</a>
+        <a href="jefe.php" class="inventarioArea-volver"> ᗕ Volver atrás</a>
         <h1 class="inventarioArea-titulo">Inventario Area</h1>
     </div>
 
-   
+
 
     <div class="inventarioArea-contenedor">
-    <?php
-    while ($persona = mysqli_fetch_array($personas)) {
-    ?>
-        <div class="inventarioArea-contenedor-producto">
-            <h4 class="text-center"> <?php echo $persona['nombre_responsable'] ?> </h4>
+        <?php
+        while ($persona = mysqli_fetch_array($personas)) {
+        ?>
+            <div class="inventarioArea-contenedor-producto">
+                <h4 class="text-center"> <?php echo $persona['nombre_responsable'] ?> </h4>
                 <?php
-               $productos = mostarInventarioAreaProducto($persona['id_responsable'],$conexion);
+                $productos = mostarInventarioAreaProducto($persona['id_responsable'], $conexion);
                 while ($producto = mysqli_fetch_array($productos)) {
                 ?>
-                <div class="inventarioArea-div-producto">
-                    <p class="inventarioArea-p-producto">
-                    <span>
-                    <?php echo $producto['cod']?>
-                    </span>
-                    <span>
-                    <?php echo $producto['nombre']?>
-                    </span>
-                    <span>
-                    <?php echo $producto['estado']?>
-                    </span>
-                    </p> 
+                    <div class="inventarioArea-div-producto">
+                        <p class="inventarioArea-p-producto">
+                            <span>
+                                <?php echo $producto['cod'] ?>
+                            </span>
+                            <span>
+                                <?php echo $producto['nombre'] ?>
+                            </span>
+                            <span>
+                                <?php echo $producto['estado'] ?>
+                            </span>
+                        </p>
 
+<<<<<<< HEAD
                     <div>
                         <span> <i class="fa-solid fa-pen-to-square editar"></i> </span> 
                         <span> <i class="fa-solid fa-trash-can eliminar"></i> </span>
                     </div>
+=======
+                        <div>
+
+                            <button data-bs-toggle="modal" data-bs-target="#editar">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+
+                            <span> <i class="fa-solid fa-trash-can"></i> </span>
+                        </div>
+>>>>>>> 9b1bb0ac76fb3aa6f6c6117c7c1eb7294f1c6869
 
                     </div>
                 <?php
                 }
                 ?>
+            </div>
+        <?php
+        }
+
+        ?>
+    </div>
+
+
+    <!-- Modal para todas las preguntas -->
+    <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <?php
-    }
-    
-    ?>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        <input class="inventarioArea-item-formulario" type="number" name="codigo" placeholder="Codigo articulo">
+                        <input class="inventarioArea-item-formulario" type="text" name="nombre" placeholder="Nombre articulo">
+                        <input class="inventarioArea-item-formulario" type="text" name="estado" placeholder="Estado articulo">
+                        <select class="inventarioArea-item-formulario" name="responsable">
+                            <option>Seleccione...</option>
+                            <?php
+                            while ($idPersona = mysqli_fetch_array($idPersonas)) {
+                                echo "<option value=" . $idPersona['id_responsable'] . ">" . $idPersona['nombre_responsable'] . "</option>";
+                            }
+                            ?>
+                            <option>Otro</option>
+                        </select>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" name="calificar" class="btn btn-primary">Calificar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
+
 </html>
