@@ -90,8 +90,11 @@ $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
                         <div id="contenedorBtn">
                             <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar"
                             data-cod = "<?php echo $producto['cod'] ?>"
-                            data-nombre = " <?php echo $producto['nombre'] ?>"
-                            data-estado = " <?php echo $producto['estado'] ?>">
+                            data-nombre = "<?php echo $producto['nombre'] ?>"
+                            data-estado = "<?php echo $producto['estado'] ?>"
+                            data-responsableid = "<?php echo $producto['id_responsable'] ?>"
+                            data-responsablenom = "<?php echo $producto['nombre_responsable'] ?>"
+                            >
                                 <i class="fa-solid fa-pen-to-square modificarL"></i>
                             </button>
 
@@ -122,7 +125,7 @@ $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
                     Nombre : <input id="nombre" class="inventarioArea-item-formulario" type="text" name="nombre"> <br>
                     Estado : <input id="estado" class="inventarioArea-item-formulario" type="text" name="estado"> <br>
                     Empleado : <select class="inventarioArea-item-formulario" name="responsable">
-                            <option>Seleccione...</option>
+                            <option id="optionRes">Seleccione...</option>
                             <?php
                             while ($articulo = mysqli_fetch_array($articulos)) {
                                 echo "<option value=" . $articulo['id_responsable'] . ">" . $articulo['nombre_responsable'] . "</option>";
@@ -143,37 +146,6 @@ $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
     </div>
 
 
-    <!-- Modal para todas las preguntas -->
-    <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="POST">
-                        <input class="inventarioArea-item-formulario" type="number" name="codigo" placeholder="Codigo articulo">
-                        <input class="inventarioArea-item-formulario" type="text" name="nombre" placeholder="Nombre articulo">
-                        <input class="inventarioArea-item-formulario" type="text" name="estado" placeholder="Estado articulo">
-                        <select class="inventarioArea-item-formulario" name="responsable">
-                            <option>Seleccione...</option>
-                            <?php
-                            while ($idPersona = mysqli_fetch_array($idPersonas)) {
-                                echo "<option value=" . $idPersona['id_responsable'] . ">" . $idPersona['nombre_responsable'] . "</option>";
-                            }
-                            ?>
-                            <option>Otro</option>
-                        </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" name="calificar" class="btn btn-primary">Calificar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </body>
 </html>
@@ -186,6 +158,8 @@ $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
             document.querySelector('#codigo').value=btn.dataset.cod
             document.querySelector('#nombre').value=btn.dataset.nombre
             document.querySelector('#estado').value=btn.dataset.estado
+            document.querySelector('#optionRes').value=`${btn.dataset.responsableid}`;
+            document.querySelector('#optionRes').textContent=`${btn.dataset.responsablenom}`;
             
         }
 
@@ -194,7 +168,8 @@ $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
             document.querySelector('#codigo').value=btn.dataset.cod
             document.querySelector('#nombre').value=btn.dataset.nombre
             document.querySelector('#estado').value=btn.dataset.estado
-            
+            document.querySelector('#optionRes').value=`${btn.dataset.responsableid}`
+            document.querySelector('#optionRes').textContent=`${btn.dataset.responsablenom}`
         }
 
     })
