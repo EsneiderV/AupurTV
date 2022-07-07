@@ -87,7 +87,8 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
 
                         <div>
 
-                            <button data-bs-toggle="modal" data-bs-target="#editar">
+                            <button
+                            data-bs-toggle="modal" data-bs-target="#editar">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
 
@@ -111,7 +112,7 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -128,8 +129,6 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
                             ?>
                             <option>Otro</option>
                         </select>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
