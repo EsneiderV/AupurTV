@@ -135,14 +135,14 @@ function  mostrarInventario($id,$conexion)
 
 function mostarInventarioAreaPersona($area,$conexion)
 {
-        $query = "SELECT `id_responsable`,nombre_responsable FROM `inventariogeneral` WHERE `area` = '$area' GROUP BY `id_responsable`";
+        $query = "SELECT `id_responsable`, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE inventariogeneral.area = '$area' GROUP BY id_responsable";
         return $consulta = mysqli_query($conexion, $query);
 }
 
 function mostarInventarioAreaProducto($id,$conexion)
 {
 
-    $query = "SELECT * FROM `inventariogeneral` WHERE `id_responsable` = '$id'";
+    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE `id_responsable` = '$id'";
     return $consulta = mysqli_query($conexion, $query);
 }
 
@@ -154,4 +154,28 @@ function eliminarProducto($cod,$conexion)
 }
 
 
+function mostarUsuarioArea($area,$conexion)
+{
+        $query = "SELECT `id` AS 'id_responsable' ,`nombre` AS 'nombre_responsable' FROM `usuarios`  WHERE `area` = '$area'";
+        return $consulta = mysqli_query($conexion, $query);
+}
 
+
+function consultarProducto($cod,$conexion)
+{
+        $query = "SELECT `cod` FROM `inventariogeneral` WHERE `cod` = '$cod'";
+        return $consulta = mysqli_query($conexion, $query);
+}
+
+function insertarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$area,$conexion)
+{
+        $query = "INSERT INTO `inventariogeneral`(`cod`, `nombre`, `estado`, `id_responsable`, `area`) VALUES ('$cod','$nombre','$estado','$id_responsable','$area')";
+        $consulta = mysqli_query($conexion, $query);
+}
+
+
+function modificarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$conexion)
+{
+        $query = "UPDATE `inventariogeneral` SET `nombre`='$nombre',`estado`='$estado',`id_responsable`='$id_responsable' WHERE `cod`='$cod'";
+        $consulta = mysqli_query($conexion, $query);
+}
