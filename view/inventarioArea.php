@@ -18,6 +18,18 @@ $personas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
 $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
 $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
 
+// eliminar articulo
+if(isset($_GET['eliminar'])){
+     $cod = $_GET['eliminar'];
+ eliminarProducto($cod,$conexion);
+
+ echo'<script type="text/javascript">
+        window.location.href="inventarioArea.php";
+      </script>';
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +110,9 @@ $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
                                 <i class="fa-solid fa-pen-to-square modificarL"></i>
                             </button>
 
-                            <span> <i class="fa-solid fa-trash-can"></i> </span>
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can" href="inventarioArea.php?eliminar=<?php echo $producto['cod'] ?>">
+                                </a>
+                                
                         </div>
                     </div>
                 <?php
@@ -151,6 +165,16 @@ $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
 </html>
 
 <script>
+    function eliminar(){
+        let respuesta = confirm('¿Está seguro de que desea eliminar este articulo de forma permanente?');
+
+        if(respuesta){
+            return true
+        }else{
+            return false
+        }
+    }
+
     const div = document.querySelector('.inventarioArea-contenedor')
     div.addEventListener("click", e =>{
         if (e.target.classList.contains("modificar")) {

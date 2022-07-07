@@ -139,8 +139,6 @@ function mostarInventarioAreaPersona($area,$conexion)
         return $consulta = mysqli_query($conexion, $query);
 }
 
-
-
 function mostarInventarioAreaProducto($id,$conexion)
 {
 
@@ -148,6 +146,12 @@ function mostarInventarioAreaProducto($id,$conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+
+function eliminarProducto($cod,$conexion)
+{
+    $query = " DELETE FROM `inventariogeneral` WHERE `cod` = '$cod'";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
 
 
