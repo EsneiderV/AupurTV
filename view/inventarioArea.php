@@ -35,7 +35,7 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
     <title>Inventario Area</title>
 </head>
 
-<body>
+<body class="inventarioArea-body">
     <div class="inventarioArea-agregar-articulo">
         <h3 class="text-center">AGREGAR</h3>
         <form action="" class="inventarioArea-formulario">
@@ -86,8 +86,8 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
                     </p> 
 
                     <div>
-                        <span> <i class="fa-solid fa-pen-to-square"></i> </span> 
-                        <span> <i class="fa-solid fa-trash-can"></i> </span>
+                        <span> <i class="fa-solid fa-pen-to-square editar"></i> </span> 
+                        <span> <i class="fa-solid fa-trash-can eliminar"></i> </span>
                     </div>
 
                     </div>
