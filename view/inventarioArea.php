@@ -110,7 +110,7 @@ if(isset($_GET['eliminar'])){
                                 <i class="fa-solid fa-pen-to-square modificarL"></i>
                             </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can" href="inventarioArea.php?eliminar=<?php echo $producto['cod'] ?>">
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $producto['cod'] ?>">
                                 </a>
                                 
                         </div>

@@ -406,3 +406,8 @@ body {
 .modal-title{
     text-align: center;
 }
+.modificar{
+    font-size: 25px;
+    margin-left: 7px;
+    margin-bottom: 20px;
+}
