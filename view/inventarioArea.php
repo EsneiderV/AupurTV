@@ -16,6 +16,7 @@ if (isset($_SESSION['rol'])) {
 
 $personas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
 $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
+$articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
 
 ?>
 <!DOCTYPE html>
@@ -35,7 +36,7 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
     <title>Inventario Area</title>
 </head>
 
-<body>
+<body class="inventarioArea-body">
     <div class="inventarioArea-agregar-articulo">
         <h3 class="text-center">AGREGAR</h3>
         <form action="" class="inventarioArea-formulario">
@@ -85,16 +86,22 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
                             </span>
                         </p>
 
-                        <div>
 
+<<<<<<< HEAD
                             <button
                             data-bs-toggle="modal" data-bs-target="#editar">
+=======
+                        <div id="contenedorBtn">
+                            <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar"
+                            data-cod = "<?php echo $producto['cod'] ?>"
+                            data-nombre = " <?php echo $producto['nombre'] ?>"
+                            data-estado = " <?php echo $producto['estado'] ?>">
+>>>>>>> 62ef72f1219fcfea2799feae840f7fe45594283e
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
 
                             <span> <i class="fa-solid fa-trash-can"></i> </span>
                         </div>
-
                     </div>
                 <?php
                 }
@@ -104,6 +111,40 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
         }
 
         ?>
+    </div>
+
+    <!-- Modal para el boton de modificar articulos -->
+    <div class="modal fade" id="articulosModificar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Modificar articulo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                    Codigo : <input id="codigo" class="inventarioArea-item-formulario" type="number" name="codigo"> <br>
+                    Nombre : <input id="nombre" class="inventarioArea-item-formulario" type="text" name="nombre"> <br>
+                    Estado : <input id="estado" class="inventarioArea-item-formulario" type="text" name="estado"> <br>
+                    Empleado : <select class="inventarioArea-item-formulario" name="responsable">
+                            <option>Seleccione...</option>
+                            <?php
+                            while ($articulo = mysqli_fetch_array($articulos)) {
+                                echo "<option value=" . $articulo['id_responsable'] . ">" . $articulo['nombre_responsable'] . "</option>";
+                            }
+                            ?>
+                            <option>Otro</option>
+                        </select>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" name="calificar" class="btn btn-primary">Modificar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -140,5 +181,18 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
     </div>
 
 </body>
-
 </html>
+
+<script>
+    const div = document.querySelector('#contenedorBtn')
+    div.addEventListener("click", e =>{
+        if (e.target.classList.contains("modificar")) {
+            console.log(e.target)
+            document.querySelector('#codigo').value=e.target.dataset.cod
+            document.querySelector('#nombre').value=e.target.dataset.nombre
+            document.querySelector('#estado').value=e.target.dataset.estado
+            
+        }
+
+    })
+</script>
