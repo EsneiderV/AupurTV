@@ -87,17 +87,12 @@ $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
                         </p>
 
 
-<<<<<<< HEAD
-                            <button
-                            data-bs-toggle="modal" data-bs-target="#editar">
-=======
                         <div id="contenedorBtn">
                             <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar"
                             data-cod = "<?php echo $producto['cod'] ?>"
                             data-nombre = " <?php echo $producto['nombre'] ?>"
                             data-estado = " <?php echo $producto['estado'] ?>">
->>>>>>> 62ef72f1219fcfea2799feae840f7fe45594283e
-                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-pen-to-square modificarL"></i>
                             </button>
 
                             <span> <i class="fa-solid fa-trash-can"></i> </span>
@@ -184,13 +179,21 @@ $articulos = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
 </html>
 
 <script>
-    const div = document.querySelector('#contenedorBtn')
+    const div = document.querySelector('.inventarioArea-contenedor')
     div.addEventListener("click", e =>{
         if (e.target.classList.contains("modificar")) {
-            console.log(e.target)
-            document.querySelector('#codigo').value=e.target.dataset.cod
-            document.querySelector('#nombre').value=e.target.dataset.nombre
-            document.querySelector('#estado').value=e.target.dataset.estado
+            const btn = e.target; 
+            document.querySelector('#codigo').value=btn.dataset.cod
+            document.querySelector('#nombre').value=btn.dataset.nombre
+            document.querySelector('#estado').value=btn.dataset.estado
+            
+        }
+
+        if (e.target.classList.contains("modificarL")) {
+            const btn = e.target.parentNode; 
+            document.querySelector('#codigo').value=btn.dataset.cod
+            document.querySelector('#nombre').value=btn.dataset.nombre
+            document.querySelector('#estado').value=btn.dataset.estado
             
         }
 
