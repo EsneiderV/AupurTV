@@ -55,7 +55,12 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
         </form>
     </div>
 
-    <h1 class="text-center inventarioArea-titulo">Inventario Area</h1>
+    <div class="inventarioArea-div-nav">
+        <a  href="jefe.php" class="inventarioArea-volver"> ᗕ Volver atrás</a>
+        <h1 class="inventarioArea-titulo">Inventario Area</h1>
+    </div>
+
+   
 
     <div class="inventarioArea-contenedor">
     <?php
@@ -81,7 +86,7 @@ $idPersonas = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
                     </p> 
 
                     <div>
-                        <span> <i class="fa-solid fa-pen-to-square"></i> </span>
+                        <span> <i class="fa-solid fa-pen-to-square"></i> </span> 
                         <span> <i class="fa-solid fa-trash-can"></i> </span>
                     </div>
 
