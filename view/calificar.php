@@ -13,16 +13,37 @@ if (isset($_POST['calificar'])) {
   $idCalificador = $_POST['id'];
   $area = $_POST['area'];
   $nota = $_POST['valor'];
+  $tipo = $_POST['tipo'];
   $mes = date('m');
-  $preguntas = mostrarPreguntasid($conexion);
+  $preguntas = mostrarPreguntasid($tipo,$conexion);
   foreach ($nota as $key => $value) {
-    guardarCalificaciones($preguntas[$key], $idCalificante, $idCalificador, $value, $mes, $area, $conexion);
+     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1], $conexion);
   }
   echo '<script type="text/javascript">
-        alert("Enviado correctamente");
         window.location.href="calificar.php";
         </script>';
 }
+
+if (isset($_POST['auto'])) {
+  $idCalificante = $_SESSION['id'];
+  $idCalificador = $_SESSION['id'];
+  $area = $_SESSION['area'];
+  $nota = $_POST['valor'];
+  $tipo = 0;
+  $mes = date('m');
+  $preguntas = mostrarPreguntasid($tipo,$conexion);
+  foreach ($nota as $key => $value) {
+     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1], $conexion);
+  }
+  echo '<script type="text/javascript">
+        window.location.href="calificar.php";
+        </script>';
+}
+
+$idCalificante = $_SESSION['id'];
+$idCalificador = $_SESSION['id'];
+$mes = date('m');
+$autoCalificacion = empleadoAutocalificado($mes,$idCalificante,$idCalificador,$conexion);
 
 $redirecionar = '';
 switch ($_SESSION['rol']) {
@@ -65,7 +86,17 @@ switch ($_SESSION['rol']) {
   <div class="calificar-contenedor-auto">
     <a  href="<?php echo $redirecionar ?>"> ᗕ Volver atrás</a>
     <h1>CALIFICAR</h1>
-    <button data-bs-toggle="modal" data-bs-target="#autoevaluacion">Auto evaluación</button>
+
+    <?php 
+    if ($autoCalificacion->num_rows <= 0) {
+      echo "<button data-bs-toggle='modal' data-bs-target='#autoevaluacion'>Auto evaluación</button>";
+
+    }else{
+      echo "<button data-bs-toggle='modal' onclick='return auto()'>Auto evaluación</button>";
+
+    }
+    ?>
+    
   </div>
 
   <div class="calificar-contenedorp-empleado">
@@ -99,7 +130,7 @@ switch ($_SESSION['rol']) {
           
         }else{
           ?>
-          <button class="btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" 
+          <button  class="btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" 
           data-nombre="<?php echo $usuario['nombre'] ?>" 
           data-id="<?php echo $usuario['id'] ?>" 
           data-areaid="<?php echo $usuario['area'] ?>" 
@@ -126,6 +157,7 @@ switch ($_SESSION['rol']) {
           <form action="" method="POST">
             <input type="text" name="id" class="id_calificado"  hidden>
             <input type="text" name="area" class="area" hidden>
+            <input type="text" name="tipo" value="0" class="area" hidden>
             <div class="contenedor">
               <?php
               $preguntas = mostrarPreguntas(0,$conexion);
@@ -159,6 +191,7 @@ switch ($_SESSION['rol']) {
           <form action="" method="POST">
             <input type="text" name="id" class="id_calificado1" hidden>
             <input type="text" name="area" class="area1" hidden >
+            <input type="text" name="tipo" value="1" class="area" hidden>
             <div class="contenedor1">
               <?php
               $preguntas = mostrarPreguntas(1,$conexion);
@@ -180,7 +213,7 @@ switch ($_SESSION['rol']) {
   </div>
 
   
-  <!-- Modal -->
+  <!-- Modal para la autoevalucion -->
   <div class="modal fade" id="autoevaluacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -286,6 +319,9 @@ switch ($_SESSION['rol']) {
       e.target.nextSibling.nextSibling.textContent = e.target.value
     })
 
+    function auto(){
+      alert('Este mes ya te Autoevaluastes')
+    }
   </script>
 </body>
 
