@@ -166,7 +166,7 @@ if(isset($_POST['agregar'])){
                 </div>
                 <div class="modal-body">
                     <form action="" method="POST">
-                    Codigo : <input autocomplete="off" readonly id="codigo" class="inventarioArea-item-formulario" type="number" name="codigo"> <br>
+                    Código : <input autocomplete="off" readonly id="codigo" class="inventarioArea-item-formulario" type="number" name="codigo"> <br>
                     Nombre : <input autocomplete="off" id="nombre" class="inventarioArea-item-formulario" type="text" name="nombre"> <br>
                     Estado : <input autocomplete="off" id="estado" class="inventarioArea-item-formulario" type="text" name="estado"> <br>
                     Empleado : <select class="inventarioArea-item-formulario" name="responsable">

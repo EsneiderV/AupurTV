@@ -246,18 +246,6 @@ switch ($_SESSION['rol']) {
     </div>
   </div>
 
-
-
-
-
-
- 
-
-
-
-
-
-
   <script>
 
   const contenedordiv = document.querySelector('.calificar-contenedorp-empleado');
