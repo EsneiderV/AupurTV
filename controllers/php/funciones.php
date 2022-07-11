@@ -153,9 +153,9 @@ function mostrarPreguntasid($tipo,$conexion)
 
 }
 
-function guardarCalificaciones($idP,$idCalificante,$idCalificador,$nota,$mes,$area,$tipo,$conexion)
+function guardarCalificaciones($idP,$idCalificante,$idCalificador,$nota,$mes,$area,$tipo,$rol,$conexion)
 {
-        $query = "INSERT INTO `calificaciones`(`idP`, `idCalificante`, `idCalificador`, `nota`, `mes`,area,general) VALUES ('$idP','$idCalificante','$idCalificador','$nota','$mes','$area','$tipo')";
+        $query = "INSERT INTO `calificaciones`(`idP`, `idCalificante`, `idCalificador`, `nota`, `mes`,area,general,rol) VALUES ('$idP','$idCalificante','$idCalificador','$nota','$mes','$area','$tipo','$rol')";
         $insertar = mysqli_query($conexion, $query);
 }
 

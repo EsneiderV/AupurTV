@@ -14,10 +14,11 @@ if (isset($_POST['calificar'])) {
   $area = $_POST['area'];
   $nota = $_POST['valor'];
   $tipo = $_POST['tipo'];
+  $rol = $_SESSION['rol'];
   $mes = date('m');
   $preguntas = mostrarPreguntasid($tipo,$conexion);
   foreach ($nota as $key => $value) {
-     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1], $conexion);
+     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1],$rol, $conexion);
   }
   echo '<script type="text/javascript">
         window.location.href="calificar.php";
@@ -30,10 +31,11 @@ if (isset($_POST['auto'])) {
   $area = $_SESSION['area'];
   $nota = $_POST['valor'];
   $tipo = 0;
+  $rol = $_SESSION['rol'];
   $mes = date('m');
   $preguntas = mostrarPreguntasid($tipo,$conexion);
   foreach ($nota as $key => $value) {
-     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1], $conexion);
+     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1],$rol, $conexion);
   }
   echo '<script type="text/javascript">
         window.location.href="calificar.php";
