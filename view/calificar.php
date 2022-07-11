@@ -88,7 +88,7 @@ switch ($_SESSION['rol']) {
 <body class="calificar-body">
   <div class="calificar-contenedor-auto">
     <a  href="<?php echo $redirecionar ?>"> ᗕ Volver atrás</a>
-    <h1>CALIFICAR</h1>
+    <h1>Calificar</h1>
 
     <?php 
     if ($autoCalificacion->num_rows <= 0) {
