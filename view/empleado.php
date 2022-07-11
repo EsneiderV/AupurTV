@@ -74,7 +74,7 @@ if (isset($_SESSION['rol'])) {
                     <p class="empleados-p-directorio"> <span> <b>DOCUMENTO :</b> <?php echo $datos['id'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>NOMBRES :</b> <?php echo $datos['nombre'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>CORREO :</b> <?php echo $datos['correo'] ?></span> </p>
-                    <p class="empleados-p-directorio"> <span> <b>TELEFONO :</b> <?php echo $datos['telefono'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b>TELÉFONO :</b> <?php echo $datos['telefono'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>ÁREA :</b> <?php echo $datos['area'] ?></span> </p>
 
                     <?php

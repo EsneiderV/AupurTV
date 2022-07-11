@@ -49,12 +49,12 @@ if (isset($_SESSION['rol'])) {
             <button class="jefe-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
             <button class="jefe-item">
                 <a class="jefe-enlace a-f-r" href="inventarioArea.php">
-                Inventario area
+                Inventario área
                 </a>
             </button>
             <button class="jefe-item" >
             <a class="jefe-enlace a-f-r" href="calificacionArea.php">
-                Calificaciones area
+                Calificaciones área
                 </a>
             </button>
             <button class="jefe-item">
@@ -63,7 +63,7 @@ if (isset($_SESSION['rol'])) {
                 </a>
             </button>
         </div>
-        <a href="../models/Cerrar.php" class="jefe-enlace a-f-r">Cerrar sesion</a>
+        <a href="../models/Cerrar.php" class="jefe-enlace a-f-r">Cerrar sesión</a>
     </div>
 
 
@@ -84,7 +84,7 @@ if (isset($_SESSION['rol'])) {
                      <p class="empleados-p-directorio"> <span> <b>DOCUMENTO :</b> <?php echo $datos['id'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>NOMBRES :</b> <?php echo $datos['nombre'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>CORREO :</b> <?php echo $datos['correo'] ?></span> </p>
-                    <p class="empleados-p-directorio"> <span> <b>TELEFONO :</b> <?php echo $datos['telefono'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b>TELÉFONO :</b> <?php echo $datos['telefono'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>ÁREA :</b> <?php echo $datos['area'] ?></span> </p>
 
                     <?php

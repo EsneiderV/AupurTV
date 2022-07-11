@@ -22,17 +22,17 @@ include_once '../models/Conexion.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../controllers/bootstrap/bootstrap.min.css">
     <script src="../controllers/bootstrap/bootstrap.min.js"></script>
-    <title>Administracion</title>
+    <title>Administración</title>
 </head>
 <body>
-    <h1>Administracion</h1>
+    <h1>Administración</h1>
     <div>
         <button data-bs-toggle="modal" data-bs-target="#datosPersonales">Datos personales</button> <br>
         <button data-bs-toggle="modal" data-bs-target="#promedio">Promedio</button> <br>
         <a href="calificar.php">Calificar</a> <br>
         <button data-bs-toggle="modal" data-bs-target="#empleadoDelMes">Empleado del mes</button> <br>
         <a href="../view/calificacionG.php">Calificaciones generales</a> <br>
-        <a href="../models/Cerrar.php">Cerrar SECION</a> <br>
+        <a href="../models/Cerrar.php">Cerrar sesión</a> <br>
     </div>
 
     <!-- Modal Datos personales-->
