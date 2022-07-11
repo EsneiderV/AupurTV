@@ -101,7 +101,7 @@ if(isset($_POST['agregar'])){
 
     <div class="inventarioArea-div-nav">
         <a href="jefe.php" class="inventarioArea-volver"> ᗕ Volver atrás</a>
-        <h1 class="inventarioArea-titulo">Inventario Area</h1>
+        <h1 class="inventarioArea-titulo">Inventario Área</h1>
     </div>
 
 
