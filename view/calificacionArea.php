@@ -30,7 +30,7 @@ if (isset($_SESSION['rol'])) {
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/510f22fb48.js" crossorigin="anonymous"></script>
 
-    <title>Calificación Área</title>
+    <title>Calificación área</title>
 
     <!-- Mostrar el diagramas de reporte -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -61,7 +61,7 @@ if (isset($_SESSION['rol'])) {
 <body class="calificacionArea-body">
     <div class="inventarioArea-div-nav">
         <a href="jefe.php" class="inventarioArea-volver"> ᗕ Volver atrás</a>
-        <h1 class="inventarioArea-titulo">Inventario Área</h1>
+        <h1 class="inventarioArea-titulo">Inventario área</h1>
     </div>
 
 

@@ -83,9 +83,9 @@ if(isset($_POST['agregar'])){
     <div class="inventarioArea-agregar-articulo">
         <h3 class="text-center">AGREGAR</h3>
         <form action="" class="inventarioArea-formulario" method="POST" id="formulario">
-            <input autocomplete="off" class="inventarioArea-item-formulario" type="number" name="codigo" placeholder="Codigo articulo" required>
-            <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="nombre" placeholder="Nombre articulo" required>
-            <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="estado" placeholder="Estado articulo" required>
+            <input autocomplete="off" class="inventarioArea-item-formulario" type="number" name="codigo" placeholder="Código artículo" required>
+            <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="nombre" placeholder="Nombre artículo" required>
+            <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="estado" placeholder="Estado artículo" required>
             <select class="inventarioArea-item-formulario" id="select-agregar" name="responsable" required>
                 <option value="0">Seleccione...</option>
                 <?php
@@ -101,7 +101,7 @@ if(isset($_POST['agregar'])){
 
     <div class="inventarioArea-div-nav">
         <a href="jefe.php" class="inventarioArea-volver"> ᗕ Volver atrás</a>
-        <h1 class="inventarioArea-titulo">Inventario Área</h1>
+        <h1 class="inventarioArea-titulo">Inventario área</h1>
     </div>
 
 
