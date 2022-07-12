@@ -23,7 +23,7 @@ include_once '../models/Conexion.php';
     <link rel="icon" href="https://aupur.co/wp-content/uploads/2021/07/cropped-Logos-AUPUR-32x32.png" sizes="32x32">
     <link rel="stylesheet" href="../controllers/bootstrap/bootstrap.min.css">
     <script src="../controllers/bootstrap/bootstrap.min.js"></script>
-    <title>Administración</title>
+    <title>Administración - Aupur Televisión</title>
 </head>
 <body>
     <h1>Administración</h1>

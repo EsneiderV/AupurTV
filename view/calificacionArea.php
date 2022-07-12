@@ -30,7 +30,7 @@ if (isset($_SESSION['rol'])) {
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/510f22fb48.js" crossorigin="anonymous"></script>
 
-    <title>Calificación área</title>
+    <title>Calificación área - Aupur Televisión</title>
 
     <!-- Mostrar el diagramas de reporte -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

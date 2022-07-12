@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://aupur.co/wp-content/uploads/2021/07/cropped-Logos-AUPUR-32x32.png" sizes="32x32">
-    <title>Calificacion general</title>
+    <title>Calificacion general - Aupur Televisión</title>
 </head>
 <body>
 <h1>CALIFICACIONES GENERALES</h1>
