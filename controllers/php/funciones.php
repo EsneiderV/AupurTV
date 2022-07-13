@@ -1,31 +1,4 @@
 <?php
-
-function promedioPorPregunta($id,$mes,$conexion)
-{
-        $query = "SELECT `idP`, `pregunta`, AVG(`nota`) AS 'promedio',`idCalificador`,`mes` FROM `calificaciones` INNER JOIN preguntas ON preguntas.id = `idP` WHERE `idCalificador` = '$id' and `mes` = '$mes' GROUP BY idP;";
-        return $mostrar = mysqli_query($conexion, $query);
-}
-function empeladoDelMes($mes,$conexion)
-{
-    $query = "SELECT `idCalificador`,usuarios.nombre, area.nombre AS 'area', AVG(`nota`)AS 'promedio',`mes` FROM `calificaciones` INNER JOIN usuarios ON usuarios.id = calificaciones.idCalificador INNER JOIN area ON area.codigo = usuarios.area WHERE `mes` = '$mes' GROUP BY `idCalificador` ORDER BY promedio DESC LIMIT 1;";
-    return $consulta = mysqli_query($conexion, $query);
-}
-function mostrarUsuarioAdmin($conexion)
-{
-    $query = "SELECT id,usuarios.nombre, area.nombre AS 'ambiente' FROM usuarios INNER JOIN area ON area.codigo = usuarios.area ";
-    return $consulta = mysqli_query($conexion, $query);
-}
-function mostrarCalificacionAdmin($idusuario,$idPregunta,$mes,$conexion)
-{
-    $query = "SELECT nota FROM `calificaciones` WHERE `idCalificador` = '$idusuario' AND `mes` = '$mes' AND `idP` = '$idPregunta';";
-    return $consulta = mysqli_query($conexion, $query);
-}
-function mostrarNotaArea($mes,$area,$conexion)
-{
-    $query = "SELECT preguntas.pregunta, AVG(nota) AS 'promedio' FROM `calificaciones` INNER JOIN preguntas ON calificaciones.idP = preguntas.id WHERE `mes` = '$mes' AND `area` = '$area' GROUP BY `idP`";
-    return $consulta = mysqli_query($conexion, $query);
-}
-
 ///////////////// Logueo ////////////////////////
 
 function login($documento, $clave, $conexion)
@@ -39,22 +12,17 @@ function redireccion($rol)
     switch ($rol) {
         case '1':
             echo '<script type="text/javascript">
-                     window.location.href="empleado.php";
+                     window.location.href="view/empleado/empleado.php";
                      </script>';
             break;
         case '2':
             echo '<script type="text/javascript">
-                window.location.href="administrador.php";
-                </script>';
-            break;
-        case '3':
-             echo '<script type="text/javascript">
-                 window.location.href="jefe.php";
+                window.location.href="view/supervisor/supervisor.php";
                 </script>';
             break;
         default:
             echo '<script type="text/javascript">
-                window.location.href="usuario.php";
+                window.location.href="index.php";
                 </script>';
             break;
     }
@@ -81,7 +49,7 @@ function mostrarArea($conexion)
 
 function mostrarUsuario($conexion,$id,$area)
 {
-    $query = "SELECT id,usuarios.nombre, area.nombre AS 'ambiente',usuarios.area FROM usuarios INNER JOIN area ON area.codigo = usuarios.area WHERE id != '$id' AND usuarios.area = '$area'";
+    $query = "SELECT id,usuarios.nombre, area.nombre AS 'ambiente',usuarios.area,imagen,tipo_imagen FROM usuarios INNER JOIN area ON area.codigo = usuarios.area WHERE id != '$id' AND usuarios.area = '$area'";
     return $consulta = mysqli_query($conexion, $query);
 }
 

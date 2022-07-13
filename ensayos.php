@@ -8,7 +8,7 @@ if(isset($_POST['submit'])){
     $imagenSubida = fopen($_FILES['imagen']['tmp_name'],'r');
     $binariosImagen = fread($imagenSubida,$tamano);
     $binariosImagen =mysqli_escape_string($conexion,$binariosImagen);
-    $query = "INSERT INTO imagenes (nombre,imagen,tipo,tamano) VALUES ('$nombre','$binariosImagen','$tipo','$tamano')";
+    $query = "UPDATE `usuarios` SET `imagen`='$binariosImagen',`tipo_imagen`='$tipo'";
      $res =  mysqli_query($conexion,$query);
      if($res){
       echo 'Bien';
@@ -30,13 +30,11 @@ if(isset($_POST['submit'])){
 
     <div>
       <?php 
-       $query = "SELECT nombre,imagen,tipo FROM imagenes ";
+       $query = "SELECT imagen,tipo_imagen FROM usuarios ";
        $res =  mysqli_query($conexion,$query);
        while ($row = mysqli_fetch_assoc($res)) {
-         echo $row['nombre']."<br>";
-         echo $row['tipo']."<br>";
          ?>
-         <img width="100" src="data:<?php echo $row['tipo'] ?>;base64,<?php echo base64_encode($row['imagen']) ?>" alt="">
+         <img width="100" src="data:<?php echo $row['tipo_imagen'] ?>;base64,<?php echo base64_encode($row['imagen']) ?>" alt="">
          <?php
        }
       ?>

@@ -1,10 +1,10 @@
 <?php
-include_once '../controllers/php/funciones.php';
-include_once '../models/Conexion.php';
+include_once '../../controllers/php/funciones.php';
+include_once '../../models/Conexion.php';
 session_start();
 if (!isset($_SESSION['rol'])) {
   echo '<script type="text/javascript">
-        window.location.href="usuario.php";
+        window.location.href="../../index.php";
         </script>';
 }
 
@@ -50,17 +50,12 @@ $autoCalificacion = empleadoAutocalificado($mes,$idCalificante,$idCalificador,$c
 $redirecionar = '';
 switch ($_SESSION['rol']) {
     case '1':
-        $redirecionar = 'empleado.php';
+        $redirecionar = '../empleado/empleado.php';
         break;
     
     case '2':
-      $redirecionar = 'administrador.php';
+      $redirecionar = '../supervisor/supervisor.php';
       break;
-
-    case '3':
-      $redirecionar = 'jefe.php';
-      break;
-    
     default:
         # code...
         break;
@@ -76,12 +71,12 @@ switch ($_SESSION['rol']) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://aupur.co/wp-content/uploads/2021/07/cropped-Logos-AUPUR-32x32.png" sizes="32x32">
-  <link rel="stylesheet" href="../controllers/bootstrap/bootstrap.min.css">
-  <script src="../controllers/bootstrap/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../../controllers/bootstrap/bootstrap.min.css">
+  <script src="../../controllers/bootstrap/bootstrap.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../controllers/css/style.css">
+  <link rel="stylesheet" href="../../controllers/css/style.css">
   <title>Calificar - Aupur Televisión</title>
 </head>
 
@@ -125,7 +120,9 @@ switch ($_SESSION['rol']) {
           data-id="<?php echo $usuario['id'] ?>" 
           data-areaid="<?php echo $usuario['area'] ?>" 
           disabled>
-          <span class="calificar-contenedor-imagen"><img class="calificar-imagen-js" src="../IMG-20190806-WA0020.jpg" alt="foto compañero"></span> 
+          <span class="calificar-contenedor-imagen">
+          <img class="calificar-imagen-js" src="data:<?php echo $usuario['tipo_imagen'] ?>;base64,<?php echo base64_encode($usuario['imagen']) ?>" alt="foto de perfil">
+          </span> 
           <span class="calificar-nombre-btn"><?php echo $usuario['nombre'] ?></span> 
         </button> 
         <?php
@@ -138,7 +135,7 @@ switch ($_SESSION['rol']) {
           data-id="<?php echo $usuario['id'] ?>" 
           data-areaid="<?php echo $usuario['area'] ?>" 
           >
-          <span class="calificar-contenedor-imagen" ><img class="calificar-imagen-js" src="../IMG-20190806-WA0020.jpg" alt="foto compañero"></span> 
+          <span class="calificar-contenedor-imagen" ><img class="calificar-imagen-js" src="data:<?php echo $usuario['tipo_imagen'] ?>;base64,<?php echo base64_encode($usuario['imagen']) ?>" alt="foto de perfil"></span> 
           <span class="calificar-nombre-btn"><?php echo $usuario['nombre'] ?></span> 
         </button> 
         <?php
