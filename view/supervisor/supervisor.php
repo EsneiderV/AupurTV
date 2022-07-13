@@ -29,13 +29,13 @@ if (isset($_SESSION['rol'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
-    <title> <?php echo $_SESSION['nombre']?> - Aupur Televisión </title>
+    <title> <?php echo $_SESSION['nombre'] ?> - Aupur Televisión </title>
 </head>
 
 <body class="empleado-body">
 
     <div class="div-imagen">
-    <img class="empleado-foto" src="data:<?php echo $_SESSION['tipo_imagen'] ?>;base64,<?php echo base64_encode($_SESSION['imagen']) ?>" alt="foto de perfil">
+        <img class="empleado-foto" src="data:<?php echo $_SESSION['tipo_imagen'] ?>;base64,<?php echo base64_encode($_SESSION['imagen']) ?>" alt="foto de perfil">
     </div>
 
 
@@ -50,12 +50,12 @@ if (isset($_SESSION['rol'])) {
             <button class="jefe-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
             <button class="jefe-item">
                 <a class="jefe-enlace a-f-r" href="inventarioArea.php">
-                Inventario área
+                    Inventario área
                 </a>
             </button>
-            <button class="jefe-item" >
-            <a class="jefe-enlace a-f-r" href="calificacionArea.php">
-                Calificaciones área
+            <button class="jefe-item">
+                <a class="jefe-enlace a-f-r" href="calificacionArea.php">
+                    Calificaciones área
                 </a>
             </button>
             <button class="jefe-item">
@@ -82,7 +82,7 @@ if (isset($_SESSION['rol'])) {
                     $datos = datosPersonales($_SESSION['id'], $conexion);
                     $datos = mysqli_fetch_array($datos)
                     ?>
-                     <p class="empleados-p-directorio"> <span> <b>DOCUMENTO :</b> <?php echo $datos['id'] ?></span> </p>
+                    <p class="empleados-p-directorio"> <span> <b>DOCUMENTO :</b> <?php echo $datos['id'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>NOMBRES :</b> <?php echo $datos['nombre'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>CORREO :</b> <?php echo $datos['correo'] ?></span> </p>
                     <p class="empleados-p-directorio"> <span> <b>TELÉFONO :</b> <?php echo $datos['telefono'] ?></span> </p>
@@ -98,8 +98,8 @@ if (isset($_SESSION['rol'])) {
         </div>
     </div>
 
-     <!-- Inventario -->
-     <div class="modal fade" id="inventario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Inventario -->
+    <div class="modal fade" id="inventario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -108,18 +108,18 @@ if (isset($_SESSION['rol'])) {
                 </div>
                 <div class="modal-body">
                     <?php
-                    $inventarios = mostrarInventario($_SESSION['id'],$conexion);
+                    $inventarios = mostrarInventario($_SESSION['id'], $conexion);
                     while ($inventario = mysqli_fetch_array($inventarios)) {
                     ?>
-                            <hr>
-                            <p class="empleados-p-directorio">
-                                <span> <b>COD :</b> <?php echo $inventario['cod'] ?> </span>
-                                <span> <b>NOM :</b> <?php echo $inventario['nombre'] ?> </span>
-                                <span> <b>EST :</b> <?php echo $inventario['estado'] ?></span>
-                            </p>
+                        <hr>
+                        <p class="empleados-p-directorio">
+                            <span> <b>COD :</b> <?php echo $inventario['cod'] ?> </span>
+                            <span> <b>NOM :</b> <?php echo $inventario['nombre'] ?> </span>
+                            <span> <b>EST :</b> <?php echo $inventario['estado'] ?></span>
+                        </p>
 
                     <?php
-                        }
+                    }
                     ?>
                 </div>
                 <div class="modal-footer">
@@ -151,7 +151,7 @@ if (isset($_SESSION['rol'])) {
                             <hr>
                             <p class="empleados-p-directorio">
                                 <span> <b> <?php echo $directorio['nombre'] ?> </b> </span>
-                                <span> <b>EM :</b>  <?php echo $directorio['correo'] ?> </span>
+                                <span> <b>EM :</b> <?php echo $directorio['correo'] ?> </span>
                                 <span> <b>CEL :</b> <?php echo $directorio['telefono'] ?></span>
                             </p>
 
