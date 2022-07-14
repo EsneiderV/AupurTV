@@ -3,7 +3,7 @@ session_start();
 include_once '../../controllers/php/funciones.php';
 include_once '../../models/Conexion.php';
 if (isset($_SESSION['rol'])) {
-    if ($_SESSION['rol'] != 2) {
+    if ($_SESSION['rol'] != 2 && $_SESSION['rol'] !=3) {
         echo '<script type="text/javascript">
                 window.location.href="../../index.php";
                 </script>';
@@ -64,7 +64,7 @@ if (isset($_SESSION['rol'])) {
                 </a>
             </button>
         </div>
-        <a href="../models/Cerrar.php" class="jefe-enlace a-f-r">Cerrar sesión</a>
+        <a href="../../models/Cerrar.php" class="jefe-enlace a-f-r">Cerrar sesión</a>
     </div>
 
 
