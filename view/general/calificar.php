@@ -18,7 +18,7 @@ if (isset($_POST['calificar'])) {
   $mes = date('m');
   $preguntas = mostrarPreguntasid($tipo,$conexion);
   foreach ($nota as $key => $value) {
-     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1],$rol, $conexion);
+     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1],$rol,$_SESSION['area'], $conexion);
   }
   echo '<script type="text/javascript">
         window.location.href="calificar.php";
@@ -35,7 +35,7 @@ if (isset($_POST['auto'])) {
   $mes = date('m');
   $preguntas = mostrarPreguntasid($tipo,$conexion);
   foreach ($nota as $key => $value) {
-     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1],$rol, $conexion);
+     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area,$preguntas[$key][1],$rol,$_SESSION['area'], $conexion);
   }
   echo '<script type="text/javascript">
         window.location.href="calificar.php";
@@ -56,6 +56,10 @@ switch ($_SESSION['rol']) {
     case '2':
       $redirecionar = '../supervisor/supervisor.php';
       break;
+
+      case '3':
+        $redirecionar = '../supervisor/supervisor.php';
+        break;
     default:
         # code...
         break;

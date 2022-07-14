@@ -113,7 +113,7 @@ body {
 .empleado-foto {
     width: auto;
     height: 100%;
-    margin-left: -50px;
+    margin-left: -88px;
 }
 
 .empleado-opciones {
@@ -429,3 +429,18 @@ body {
     background-color: transparent;
 }
 
+/* iNVENTARIO AREA */
+
+.inventarioArea-por-persona{
+    border: 2px solid black;
+    margin: 2% 3%;
+}
+
+.inventarioArea-contenedor-por-persona{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 2% 5% 2% 5% ;
+}

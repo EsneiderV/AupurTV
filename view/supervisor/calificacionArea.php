@@ -3,7 +3,7 @@ session_start();
 include_once '../../controllers/php/funciones.php';
 include_once '../../models/Conexion.php';
 if (isset($_SESSION['rol'])) {
-    if ($_SESSION['rol'] != 2) {
+    if ($_SESSION['rol'] != 2 && $_SESSION['rol'] != 3) {
         echo '<script type="text/javascript">
                   window.location.href="../../index.php";
                 </script>';
@@ -13,6 +13,13 @@ if (isset($_SESSION['rol'])) {
                   window.location.href="../../index.php";
                 </script>';
 }
+
+
+$preguntas = mostrarPreguntas(0,$conexion);
+$preguntasA = mostrarPreguntas(0,$conexion);
+$usuarios = mostarUsuarioCalificacionArea($_SESSION['area'],$conexion);
+$mes = date('m');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,52 +32,105 @@ if (isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="../../controllers/bootstrap/bootstrap.min.css">
     <script src="../../controllers/bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../controllers/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/510f22fb48.js" crossorigin="anonymous"></script>
+
 
     <title>Calificación área - Aupur Televisión</title>
-
-    <!-- Mostrar el diagramas de reporte -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['presentacion personal',     11],
-          ['ambiente laboral',     11],
-          ['holores',     11],
-         
-        ]);
-
-        var options = {
-          title: 'Calificacion Grupo',
-          is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-
-    </script>
 </head>
 
 <body class="calificacionArea-body">
+
+
     <div class="inventarioArea-div-nav">
         <a href="supervisor.php" class="inventarioArea-volver"> ᗕ Volver atrás</a>
-        <h1 class="inventarioArea-titulo">Inventario área</h1>
+        <h1 class="inventarioArea-titulo">Calificación área</h1>
     </div>
 
+    <div class="inventarioArea-contenedor-por-persona">
+        <?php
+        $j = 0;
+        $aregloNotaEquipo = [];
+        while ($pregunta = mysqli_fetch_array($preguntas)) {
+            $aregloNotaEquipo[$j] = 0;
+            $j++;
+        }
 
-    <div id="piechart_3d" class="calificacionArea-grafico" style=" background-color: transparent; width: 0px; height: 0px"></div>
+        $i = 0;
+        while ($usuario = mysqli_fetch_array($usuarios)) {
 
-    <div >
+            echo '<div class="inventarioArea-por-persona">';
+            echo $usuario['nombre'].'<br>';
 
+            if($usuario['rol'] == 1){
+                $sesenta = calificacionPersonaPorcentage($mes,1,$usuario['id'],$conexion);
+                $veinte = calificacionPersonaPorcentage($mes,3,$usuario['id'],$conexion);
+                $diez = calificacionPersonaPorcentage($mes,2,$usuario['id'],$conexion);
+                $auto = autoCalificacionPersonaPorcentage($mes,$usuario['id'],$conexion);
+                $total = 0;
+                $contador =0;
+                foreach ($sesenta as $key => $value) {
+                    $notafinal = ($sesenta[$key]['1'] * 0.6) + ($veinte[$key]['1'] * 0.2) + ($diez[$key]['1'] * 0.1) + ($auto[$key]['1'] * 0.1) ;
+                    echo $sesenta[$key]['0'].'  =  '.$notafinal.'<br>';
+                    $contador = $contador + 1;
+                    $total = $total + $notafinal;
+                    $aregloNotaEquipo[$contador - 1] = $aregloNotaEquipo[$contador - 1] +  $notafinal;
+                }
+                if($total > 0 && $contador > 0){
+                    echo 'Nota final = '.$total/$contador;
+                }
+            }else if ($usuario['rol'] == 2){
+                $sesenta = calificacionPersonaPorcentage($mes,1,$usuario['id'],$conexion);
+                $treinta = calificacionPersonaPorcentage($mes,3,$usuario['id'],$conexion);
+                $auto = autoCalificacionPersonaPorcentage($mes,$usuario['id'],$conexion);
+                $total = 0;
+                $contador =0;
+                foreach ($sesenta as $key => $value) {
+                    $notafinal = ($sesenta[$key]['1'] * 0.7) + ($treinta[$key]['1'] * 0.2)  + ($auto[$key]['1'] * 0.1) ;
+    
+                    echo $sesenta[$key]['0'].'  =  '.$notafinal.'<br>';
+                    $contador = $contador + 1;
+                    $total = $total + $notafinal;
+                    $aregloNotaEquipo[$contador - 1] = $aregloNotaEquipo[$contador - 1] +  $notafinal;
+                }
+                if($total > 0 && $contador > 0){
+                    echo 'Nota final = '.$total/$contador;
+                }
+            }else if ($usuario['rol'] == 3){
+                $sesenta = calificacionPersonaPorcentage($mes,1,$usuario['id'],$conexion);
+                $treinta = calificacionPersonaPorcentage($mes,2,$usuario['id'],$conexion);
+                $auto = autoCalificacionPersonaPorcentage($mes,$usuario['id'],$conexion);
+                $total = 0;
+                $contador =0;
+                foreach ($sesenta as $key => $value) {
+                    $notafinal = ($sesenta[$key]['1'] * 0.7) + ($treinta[$key]['1'] * 0.2)  + ($auto[$key]['1'] * 0.1) ;
+                    echo $sesenta[$key]['0'].'  =  '.$notafinal.'<br>';
+                    $contador = $contador + 1;
+                    $total = $total + $notafinal;
+                    $aregloNotaEquipo[$contador - 1] = $aregloNotaEquipo[$contador - 1] +  $notafinal;
+                }
+                if($total > 0 && $contador > 0){
+                    echo 'Nota final = '.$total/$contador;
+                }
+            }
+            echo '</div>';
+            $i = $i+1;
+        }
+        ?>
     </div>
 
+    <div class="inventarioArea-contenedor-por-persona">
+        <?php 
+        $k = 0;
+        $finalArea = 0;
+            while ($preguntas = mysqli_fetch_array($preguntasA)) {
+                echo $preguntas['pregunta'].' = '.($aregloNotaEquipo[$k] / $i).'<br>';
+                 $finalArea = $finalArea + ($aregloNotaEquipo[$k] / $i);
+                $k++;
+            }
+
+            echo 'Nota Final = '.$finalArea /($k + 1);
+
+        ?>
+    </div>
 </body>
 
 </html>

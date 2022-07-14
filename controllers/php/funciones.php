@@ -15,7 +15,7 @@ function redireccion($rol)
                      window.location.href="view/empleado/empleado.php";
                      </script>';
             break;
-        case '2':
+        case '2' || '3':
             echo '<script type="text/javascript">
                 window.location.href="view/supervisor/supervisor.php";
                 </script>';
@@ -121,9 +121,9 @@ function mostrarPreguntasid($tipo,$conexion)
 
 }
 
-function guardarCalificaciones($idP,$idCalificante,$idCalificador,$nota,$mes,$area,$tipo,$rol,$conexion)
+function guardarCalificaciones($idP,$idCalificante,$idCalificador,$nota,$mes,$area,$tipo,$rol,$area_calificante,$conexion)
 {
-        $query = "INSERT INTO `calificaciones`(`idP`, `idCalificante`, `idCalificador`, `nota`, `mes`,area,general,rol) VALUES ('$idP','$idCalificante','$idCalificador','$nota','$mes','$area','$tipo','$rol')";
+        $query = "INSERT INTO `calificaciones`(`idP`, `idCalificante`, `idCalificador`, `nota`, `mes`,area,general,rol,area_calificante) VALUES ('$idP','$idCalificante','$idCalificador','$nota','$mes','$area','$tipo','$rol','$area_calificante')";
         $insertar = mysqli_query($conexion, $query);
 }
 
@@ -195,3 +195,39 @@ function mostarInventarioAreaProducto($id,$conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+///////// Calificacion area
+
+
+function mostarUsuarioCalificacionArea($area,$conexion)
+{
+        $query = "SELECT `id` ,`nombre`,rol FROM `usuarios`  WHERE `area` = '$area'";
+        return $consulta = mysqli_query($conexion, $query);
+}
+
+function calificacionPersonaPorcentage($mes,$rol,$id,$conexion)
+{
+
+    $query = "SELECT `idP`, `idCalificador`,AVG(nota) AS 'nota',preguntas.pregunta FROM calificaciones INNER JOIN preguntas ON preguntas.id = calificaciones.idP WHERE area_calificante = area AND `mes` = '$mes' AND `idCalificante` != `idCalificador` AND `rol` = '$rol' AND `idCalificador` = '$id' GROUP BY `idP`";
+    $consulta = mysqli_query($conexion, $query);
+    $retornoA = [];
+    $i = 0;
+    while($pregunta = mysqli_fetch_array($consulta)){
+        $retornoA[$i] = [$pregunta['pregunta'], $pregunta['nota']];
+        $i ++;
+    }
+    return $retornoA;
+}
+
+function autoCalificacionPersonaPorcentage($mes,$id,$conexion)
+{
+
+    $query = "SELECT `idP`, `idCalificador`,AVG(nota) AS 'nota',preguntas.pregunta FROM calificaciones INNER JOIN preguntas ON preguntas.id = calificaciones.idP WHERE area_calificante = area AND `mes` = '$mes' AND `idCalificante` = `idCalificador`  AND `idCalificador` = '$id' GROUP BY `idP`";
+    $consulta = mysqli_query($conexion, $query);
+    $retornoA = [];
+    $i = 0;
+    while($pregunta = mysqli_fetch_array($consulta)){
+        $retornoA[$i] = [$pregunta['pregunta'], $pregunta['nota']];
+        $i ++;
+    }
+    return $retornoA;
+}
