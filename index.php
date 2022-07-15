@@ -17,7 +17,7 @@
 
 
     <div class="usuario-contenedor-video">
-        <video class="video1" autoplay="" muted="" playsinline="" loop="" src="https://aupur.co/wp-content/uploads/2021/09/camara.mp4"></video>
+        <video class="video1" autoplay="" muted="" playsinline="" loop="" src=""></video>
     </div>
 
     <div class="usuario-login">
