@@ -61,6 +61,7 @@ $mes = date('m');
             echo $usuario['nombre'].'<br>';
 
             if($usuario['rol'] == 1){
+                
                 $sesenta = calificacionPersonaPorcentage($mes,1,$usuario['id'],$conexion);
                 $veinte = calificacionPersonaPorcentage($mes,3,$usuario['id'],$conexion);
                 $diez = calificacionPersonaPorcentage($mes,2,$usuario['id'],$conexion);
