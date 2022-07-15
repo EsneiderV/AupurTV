@@ -61,23 +61,32 @@ $mes = date('m');
             echo $usuario['nombre'].'<br>';
 
             if($usuario['rol'] == 1){
-                
                 $sesenta = calificacionPersonaPorcentage($mes,1,$usuario['id'],$conexion);
                 $veinte = calificacionPersonaPorcentage($mes,3,$usuario['id'],$conexion);
                 $diez = calificacionPersonaPorcentage($mes,2,$usuario['id'],$conexion);
                 $auto = autoCalificacionPersonaPorcentage($mes,$usuario['id'],$conexion);
-                $total = 0;
-                $contador =0;
-                foreach ($sesenta as $key => $value) {
-                    $notafinal = ($sesenta[$key]['1'] * 0.6) + ($veinte[$key]['1'] * 0.2) + ($diez[$key]['1'] * 0.1) + ($auto[$key]['1'] * 0.1) ;
-                    echo $sesenta[$key]['0'].'  =  '.$notafinal.'<br>';
-                    $contador = $contador + 1;
-                    $total = $total + $notafinal;
-                    $aregloNotaEquipo[$contador - 1] = $aregloNotaEquipo[$contador - 1] +  $notafinal;
+                if(sizeof($sesenta) <= 0 || sizeof($veinte) <= 0  || sizeof($diez) <= 0 || sizeof($auto) <= 0  ){
+                      echo '<p>El empleado aun no esta 100% calificado</p>'; 
+                      
+                      if(sizeof($sesenta) <= 0) echo '<p>Ninguno de tus compañeros te han calificaso</p>'; ;
+                      if(sizeof($veinte) <= 0) echo '<p>Aun no se toma la nota del director</p>'; ;
+                      if(sizeof($diez) <= 0) echo '<p>Aun no se toma la nota del cordinador</p>'; ;
+                      if(sizeof($auto) <= 0) echo '<p>Aun no se toma la auto evaluacion</p>'; ;
+                }else {
+                    $total = 0;
+                    $contador =0;
+                    foreach ($sesenta as $key => $value) {
+                        $notafinal = ($sesenta[$key]['1'] * 0.6) + ($veinte[$key]['1'] * 0.2) + ($diez[$key]['1'] * 0.1) + ($auto[$key]['1'] * 0.1) ;
+                        echo $sesenta[$key]['0'].'  =  '.$notafinal.'<br>';
+                        $contador = $contador + 1;
+                        $total = $total + $notafinal;
+                        $aregloNotaEquipo[$contador - 1] = $aregloNotaEquipo[$contador - 1] +  $notafinal;
+                    }
+                    if($total > 0 && $contador > 0){
+                        echo 'Nota final = '.$total/$contador;
+                    }
                 }
-                if($total > 0 && $contador > 0){
-                    echo 'Nota final = '.$total/$contador;
-                }
+
             }else if ($usuario['rol'] == 2){
                 $sesenta = calificacionPersonaPorcentage($mes,1,$usuario['id'],$conexion);
                 $treinta = calificacionPersonaPorcentage($mes,3,$usuario['id'],$conexion);
