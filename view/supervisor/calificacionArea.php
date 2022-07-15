@@ -146,7 +146,7 @@ $mes = date('m');
 
     <div class="inventarioArea-contenedor-por-persona">
         <?php 
-           echo "NOTA EQUIPO"."<br>";
+        echo "NOTA EQUIPO"."<br>";
         $k = 0;
         $finalArea = 0;
             while ($preguntas = mysqli_fetch_array($preguntasA)) {
