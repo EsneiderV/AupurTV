@@ -200,7 +200,7 @@ function mostarInventarioAreaProducto($id,$conexion)
 
 function mostarUsuarioCalificacionArea($area,$conexion)
 {
-        $query = "SELECT `id` ,`nombre`,rol FROM `usuarios`  WHERE `area` = '$area'";
+        $query = "SELECT `id` ,`nombre`,rol, area FROM `usuarios`  WHERE `area` = '$area'";
         return $consulta = mysqli_query($conexion, $query);
 }
 
