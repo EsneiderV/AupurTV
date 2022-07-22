@@ -2,6 +2,7 @@
 include_once '../../controllers/php/funciones.php'; // traemos las funciones que contiene las consultas sql
 include_once '../../models/Conexion.php'; // traemos la conexion con la base de datos 
 
+
 // verificamos que si se aya logiado primero el usuario
 session_start();
 if (!isset($_SESSION['rol'])) {
