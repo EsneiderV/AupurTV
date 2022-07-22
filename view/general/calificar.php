@@ -1,6 +1,8 @@
 <?php
-include_once '../../controllers/php/funciones.php';
-include_once '../../models/Conexion.php';
+include_once '../../controllers/php/funciones.php'; // traemos las funciones que contiene las consultas sql
+include_once '../../models/Conexion.php'; // traemos la conexion con la base de datos 
+
+// verificamos que si se aya logiado primero el usuario
 session_start();
 if (!isset($_SESSION['rol'])) {
   echo '<script type="text/javascript">
@@ -8,6 +10,7 @@ if (!isset($_SESSION['rol'])) {
         </script>';
 }
 
+// calificamos 
 if (isset($_POST['calificar'])) {
   $idCalificante = $_SESSION['id'];
   $idCalificador = $_POST['id'];
@@ -25,6 +28,7 @@ if (isset($_POST['calificar'])) {
         </script>';
 }
 
+// autoevaalumos
 if (isset($_POST['auto'])) {
   $idCalificante = $_SESSION['id'];
   $idCalificador = $_SESSION['id'];
@@ -47,6 +51,7 @@ $idCalificador = $_SESSION['id'];
 $mes = date('m');
 $autoCalificacion = empleadoAutocalificado($mes, $idCalificante, $idCalificador, $conexion);
 
+//redireccionar para volver atras
 $redirecionar = '';
 switch ($_SESSION['rol']) {
     case '1':
@@ -89,6 +94,7 @@ switch ($_SESSION['rol']) {
     <a href="<?php echo $redirecionar ?>"> ᗕ Volver atrás</a>
     <h1>Calificar</h1>
 
+  <!-- si ya esta auto evaluado sesavilitamos el boton -->
     <?php
     if ($autoCalificacion->num_rows <= 0) {
       echo "<button data-bs-toggle='modal' data-bs-target='#autoevaluacion'>Auto evaluación</button>";

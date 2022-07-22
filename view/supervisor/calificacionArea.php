@@ -1,26 +1,30 @@
 <?php
 session_start();
-include_once '../../controllers/php/funciones.php';
-include_once '../../models/Conexion.php';
+include_once '../../controllers/php/funciones.php'; // traemos las funciones que contiene las consultas sql
+include_once '../../models/Conexion.php'; // traemos las funciones que contiene las consultas sql
+
+// verificamos que el entre sea del rol cordinaccion y direccion
 if (isset($_SESSION['rol'])) {
     if ($_SESSION['rol'] != 2 && $_SESSION['rol'] != 3) {
         echo '<script type="text/javascript">
                   window.location.href="../../index.php";
                 </script>';
-  }
+    }
+
 } else {
   echo '<script type="text/javascript">
                   window.location.href="../../index.php";
                 </script>';
 }
 
-
 $preguntas = mostrarPreguntas(0,$conexion);
 $preguntasA = mostrarPreguntas(0,$conexion);
 $usuarios = mostarUsuarioCalificacionArea($_SESSION['area'],$conexion);
 $mes = date('m');
 
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,8 +78,8 @@ $mes = date('m');
                           if(sizeof($diez) <= 0) echo '<p>Aun no se toma la nota del coordinador</p>'; ;
                           if(sizeof($auto) <= 0) echo '<p>Aun no se toma la auto evaluacion</p>'; ;
                     }else {
-                        $total = 0;
-                        $contador =0;
+                         $total = 0;
+                         $contador =0;
                         foreach ($sesenta as $key => $value) {
                             $notafinal = ($sesenta[$key]['1'] * 0.6) + ($veinte[$key]['1'] * 0.2) + ($diez[$key]['1'] * 0.1) + ($auto[$key]['1'] * 0.1) ;
                             echo $sesenta[$key]['0'].'  =  '.$notafinal.'<br>';
@@ -97,6 +101,7 @@ $mes = date('m');
                         if(sizeof($sesenta) <= 0) echo '<p>Ninguno de tus compañeros te han calificaso</p>'; 
                         if(sizeof($treinta) <= 0) echo '<p>Aun no se toma la nota del director</p>'; 
                         if(sizeof($auto) <= 0) echo '<p>Aun no se toma la auto evaluacion</p>'; 
+
                     }else {
                     $total = 0;
                     $contador =0;
@@ -112,7 +117,10 @@ $mes = date('m');
                         echo 'Nota final = '.$total/$contador;
                     }
                 }
-    
+
+
+
+
                 }else if ($usuario['rol'] == 3){
                     $sesenta = calificacionPersonaPorcentage($mes,1,$usuario['id'],$conexion);
                     $treinta = calificacionPersonaPorcentage($mes,2,$usuario['id'],$conexion);
@@ -143,26 +151,27 @@ $mes = date('m');
                 if ($usuario['rol'] == 1 ){
                     $cincuenta = calificacionPersonaPorcentage($mes,1,$usuario['id'],$conexion);
                     $cuarenta = calificacionPersonaPorcentage($mes,3,$usuario['id'],$conexion);
-                    $auto = autoCalificacionPersonaPorcentage($mes,$usuario['id'],$conexion);
-                    if(sizeof($cincuenta) <= 0 || sizeof($cuarenta) <= 0 || sizeof($auto) <= 0 ){
+                    if(sizeof($cincuenta) <= 0 || sizeof($cuarenta) <= 0 ){
                         echo '<p>El empleado aun no esta 100% calificado</p>'; 
                         
                         if(sizeof($cincuenta) <= 0) echo '<p>Ninguno de tus compañeros te han calificaso</p>'; 
                         if(sizeof($cuarenta) <= 0) echo '<p>Aun no se toma la nota del gerente</p>'; 
-                        if(sizeof($auto) <= 0) echo '<p>Aun no se toma la auto evaluación</p>'; 
+                    
                     }else {
                         $total = 0;
                         $contador =0;
                         foreach ($cincuenta as $key => $value) {
-                            $notafinal = ($cincuenta[$key]['1'] * 0.5) + ($cuarenta[$key]['1'] * 0.4)  + ($auto[$key]['1'] * 0.1) ;
+                            $notafinal = ($cincuenta[$key]['1'] * 0.6) + ($cuarenta[$key]['1'] * 0.4) ;
                             echo $cincuenta[$key]['0'].'  =  '.$notafinal.'<br>';
                             $contador = $contador + 1;
                             $total = $total + $notafinal;
                             $aregloNotaEquipo[$contador - 1] = $aregloNotaEquipo[$contador - 1] +  $notafinal;
                         }
+
                         if($total > 0 && $contador > 0){
                             echo 'Nota final = '.$total/$contador;
                         }
+
                         }   
                 }elseif ($usuario['rol'] == 3) {
                     $noventa = calificacionPersonaPorcentage($mes,1,$usuario['id'],$conexion);
@@ -176,26 +185,30 @@ $mes = date('m');
                         $total = 0;
                         $contador =0;
                         foreach ($noventa as $key => $value) {
-                            $notafinal = ($noventa[$key]['1'] * 0.9) + ($auto[$key]['1'] * 0.1) ;
+                            $notafinal = ($noventa[$key]['1'] * 0.6) + ($auto[$key]['1'] * 0.4) ;
                             echo $noventa[$key]['0'].'  =  '.$notafinal.'<br>';
                             $contador = $contador + 1;
                             $total = $total + $notafinal;
                             $aregloNotaEquipo[$contador - 1] = $aregloNotaEquipo[$contador - 1] +  $notafinal;
                         }
                         if($total > 0 && $contador > 0){
+                          
                             echo 'Nota final = '.$total/$contador;
+
                         }
+                                  
                         } 
                 }
             }
 
-           
             echo '</div>';
             $i = $i+1;
+
         }
     
         ?>
     </div>
+
 
     <div class="inventarioArea-contenedor-por-persona">
         <?php 
@@ -212,6 +225,10 @@ $mes = date('m');
 
         ?>
     </div>
+
+    
+
 </body>
 
 </html>
+

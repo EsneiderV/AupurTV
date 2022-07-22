@@ -1,5 +1,5 @@
 <?php 
 session_start();
-session_destroy();
-header("Location: ../index.php");
-?>
+session_destroy(); // serramos la secion 
+header("Location: ../index.php"); // redireccionamos al incio
+?>   

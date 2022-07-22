@@ -1,7 +1,9 @@
 <?php
 session_start();
-include_once '../../controllers/php/funciones.php';
-include_once '../../models/Conexion.php';
+include_once '../../controllers/php/funciones.php'; // traemos las funciones que contiene las consultas sql
+include_once '../../models/Conexion.php'; // traemos la conexion con la base de datos 
+
+// verificamos que el usuario que entra si este registrado y sea de rol empleado
 if (isset($_SESSION['rol'])) {
     if ($_SESSION['rol'] != 1) {
         echo '<script type="text/javascript">
@@ -34,6 +36,7 @@ if (isset($_SESSION['rol'])) {
 
 <body class="empleado-body">
 
+    <!-- Mostramos la imagen de secion del usuario -->
     <div class="div-imagen">
         <img class="empleado-foto" src="data:<?php echo $_SESSION['tipo_imagen'] ?>;base64,<?php echo base64_encode($_SESSION['imagen']) ?>" alt="foto de perfil">
     </div>
@@ -69,6 +72,7 @@ if (isset($_SESSION['rol'])) {
                 </div>
                 <div class="modal-body">
                     <?php
+                    // mostramos los datos del usuario en una ventana modal
                     $datos = datosPersonales($_SESSION['id'], $conexion);
                     $datos = mysqli_fetch_array($datos)
                     ?>
@@ -98,6 +102,7 @@ if (isset($_SESSION['rol'])) {
                 </div>
                 <div class="modal-body">
                     <?php
+                    // mostramos los articulos que estan a nombre del usuario
                     $inventarios = mostrarInventario($_SESSION['id'], $conexion);
                     while ($inventario = mysqli_fetch_array($inventarios)) {
                     ?>
@@ -129,6 +134,7 @@ if (isset($_SESSION['rol'])) {
                 </div>
                 <div class="modal-body">
                     <?php
+                    // mostramos los datos de contacto de todos los usuarios
                     $areas = mostrarArea($conexion);
                     while ($area = mysqli_fetch_array($areas)) {
                         echo "<details>";
@@ -147,8 +153,10 @@ if (isset($_SESSION['rol'])) {
 
                     <?php
                         }
+
                         echo "<hr/>";
                         echo "</details>";
+
                     }
                     ?>
                 </div>
@@ -160,8 +168,7 @@ if (isset($_SESSION['rol'])) {
     </div>
 
 
-
-
 </body>
 
 </html>
+
