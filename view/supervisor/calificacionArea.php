@@ -61,6 +61,8 @@ $mes = date('m');
         $i = 0;
         while ($usuario = mysqli_fetch_array($usuarios)) {
 
+            // Muestra las calificaciones de cada persona de un area con su repectivos porcentajes y roles
+
             echo '<div class="inventarioArea-por-persona">';
             echo $usuario['nombre'].'<br>';
 
