@@ -102,6 +102,7 @@ switch ($_SESSION['rol']) {
     } else {
       echo "<button data-bs-toggle='modal' onclick='return auto()'>Auto evaluación</button>";
     }
+
     ?>
 
   </div>

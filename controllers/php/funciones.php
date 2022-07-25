@@ -251,3 +251,53 @@ function autoCalificacionPersonaPorcentage($mes,$id,$conexion)
     }
     return $retornoA;
 }
+
+//////////////// Administrador ////////////////////
+
+//USUARIOS///
+
+//consultar
+function AdMostrarUsuarios($conexion){
+    $query = "SELECT * FROM `usuarios`";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+//eliminar
+function AdEliminarUsuarios($id,$conexion){
+    $query = "DELETE FROM `usuarios` WHERE `id` = '$id'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+//insertar
+function AdInsertarUsuarios($id,$nombre,$clave,$rol,$area,$correo,$telefono,$imagen,$tipo_imagen,$conexion){
+    $query = "INSERT INTO `usuarios`(`id`, `nombre`, `clave`, `rol`, `area`, `correo`, `telefono`, `imagen`, `tipo_imagen`) VALUES (`$id`, `$nombre`, `$clave`, `$rol`, `$area`, `$correo`, `$telefono`, `$imagen`, `$tipo_imagen`)";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+//modificar
+function AdModificarUsuarios($id,$nombre,$clave,$rol,$area,$correo,$telefono,$imagen,$tipo_imagen,$conexion){
+    $query = "UPDATE `usuarios` SET `nombre`='$nombre',`clave`='$clave',`rol`='$rol',`area`='$area',`correo`='$correo',`telefono`='$telefono',`imagen`='$imagen',`tipo_imagen`='$tipo_imagen' WHERE `id`='$id'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
+//PREGUNTAS//
+
+//consultar
+function AdConsultarPreguntas($conexion){
+    $query = "SELECT * FROM `preguntas`";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+//eliminar
+function AdEliminarPreguntas($id,$conexion){
+    $query = "DELETE FROM `preguntas` WHERE `id` = '$id'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+//insertar
+
+
+//modificar
+
+
+
