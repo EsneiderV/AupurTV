@@ -295,9 +295,16 @@ function AdEliminarPreguntas($id,$conexion){
     return $consulta = mysqli_query($conexion, $query);
 }
 //insertar
-
+function AdInsertarPreguntas($id,$pregunta,$general,$conexion){
+    $query = "INSERT INTO `preguntas`(`id`, `pregunta`, `general`) VALUES ('$id','$pregunta','$general')";
+    return $consulta = mysqli_query($conexion,$query);
+}
 
 //modificar
+function AdModificarPregunta($id,$pregunta,$general,$conexion){
+    $query = "UPDATE `preguntas` SET `pregunta`='$pregunta',`general`='$general' WHERE `id`='$id'";
+    return $consulta = mysqli_query($conexion,$query);
+}
 
 
 
