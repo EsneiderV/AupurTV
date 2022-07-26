@@ -13,34 +13,25 @@
     <title>Login - Aupur Televisión</title>
 </head>
 
-<body class="usuario-body">
+<body class="index-body">
 
 
-    <div class="usuario-contenedor-video">
-        <video class="video1" autoplay="" muted="" playsinline="" loop="" src=""></video>
+
+    <div class="index-contenedor-form">
+        <h1>BIENVENIDO</h1>
+            <img class="index-form-imagen" src="mononosetapa.png" alt="">
+
+        <form action="" class="index-formulario" >
+            <input type="text" name="" id="">
+            <input type="password" name="" id=""> 
+            <button type="submit">Acceder</button>
+        </form>
+
+        <a href="#">Recuperar contraseña</a>
     </div>
 
-    <div class="usuario-login">
 
-        <div class="usuario-item-login titulo">
-            <h1>BIENVENIDO</h1>
-        </div>
-        <div class="usuario-item-login">
-            <form action="" method="POST">
-                <input name="documento" type="text" placeholder="Documento" required> <br> <br>
-                <input name="clave" type="password" placeholder="Contraseña" required> <br> <br>
-                <button name="acceder" type="submit">Acceder</button>
-            </form>
-        </div>
-
-
-        <div class="usuario-item-login">
-            <a href="" class="usuario-enlaces">Recuperar contraseña</a>
-            <a href="../index.php" class="usuario-enlaces">Volver</a>
-        </div>
-    </div>
 </body>
-
 </html>
 
 <?php
