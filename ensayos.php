@@ -40,6 +40,12 @@ if(isset($_POST['submit'])){
       ?>
     </div>
     
+    <style>
+      body{
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,0.9416141456582633) 0%, rgba(57,171,87,0.865983893557423) 56%, rgba(0,111,183,1) 100%);
+      }
+    </style>
 </body>
 </html>
 

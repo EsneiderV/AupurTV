@@ -305,6 +305,3 @@ function AdModificarPregunta($id,$pregunta,$general,$conexion){
     $query = "UPDATE `preguntas` SET `pregunta`='$pregunta',`general`='$general' WHERE `id`='$id'";
     return $consulta = mysqli_query($conexion,$query);
 }
-
-
-
