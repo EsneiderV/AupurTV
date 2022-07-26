@@ -19,18 +19,48 @@
 
     <div class="index-contenedor-form">
         <h1>BIENVENIDO</h1>
-            <img class="index-form-imagen" src="mononosetapa.png" alt="">
+        <img class="index-form-imagen" src="mononosetapa.png" alt="">
 
-        <form action="" class="index-formulario" >
-            <input type="text" name="" id="">
-            <input type="password" name="" id=""> 
+        <form action="#" method="post" class="index-formulario">
+
+            <div class="index-div-inputs">
+                <label class="index-label">
+                    <span class="index-span-input">Correo</span>
+                    <input type="text" autocomplete="off" name="usuario"  class="index-span-input"/>
+                </label>
+            </div>
+
+            <div class="index-div-inputs">
+                <label class="index-label">
+                    <span class="index-span-input">Clave</span>
+                    <input type="password" autocomplete="off" name="clave"  class="index-span-input"/>
+                </label>
+            </div>
+
             <button type="submit">Acceder</button>
         </form>
-
         <a href="#">Recuperar contraseña</a>
+
     </div>
 
-
+    <script>
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach( input => {
+            input.onfocus = ()=>{
+                input.value = input.value.trim();
+                if(input.value.trim().length == 0){
+                    input.previousElementSibling.classList.add('top');
+                }
+                input.previousElementSibling.classList.add('focus');
+                input.parentNode.classList.add('focus');
+            }
+            input.onblur = ()=>{
+                input.previousElementSibling.classList.remove('top');
+                input.previousElementSibling.classList.remove('focus');
+                input.parentNode.classList.remove('focus');
+            }
+        });
+    </script>
 </body>
 </html>
 
