@@ -11,23 +11,28 @@ function login($documento, $clave, $conexion)
 // despues del logueo manda al usuario a la vista de pendiendo de su rol
 function redireccion($rol)
 {
+
     switch ($rol) {
         case '1':
             echo '<script type="text/javascript">
                      window.location.href="view/empleado/empleado.php";
                      </script>';
             break;
+
         case '2' || '3':
             echo '<script type="text/javascript">
                 window.location.href="view/supervisor/supervisor.php";
                 </script>';
             break;
+
         default:
             echo '<script type="text/javascript">
                 window.location.href="index.php";
                 </script>';
             break;
+
     }
+
 }
 
 ////////////////// empleado//////////////////////////////////
@@ -156,7 +161,6 @@ function  mostrarDirectorio($idArea,$conexion)
 
 
 ////////////////// empleado Jefe//////////////////////////////////
-
 
 // Inventario Area
 

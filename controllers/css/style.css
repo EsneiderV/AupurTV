@@ -12,96 +12,49 @@ body {
 }
 
 .index-body {
-    background: rgba(0, 0, 0, 0.7) url('../../fondoLogin.jpeg');
-    height: 100%;
-    background-position: center;
+
+    background: url('../../fondoLogin.jpeg');
+    background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
-    background-blend-mode: darken;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
 }
 
-.index-contenedor-form {
-    background-color: #2C2C2D;
-    height: 70%;
-    width: 30%;
-    border-radius: 2%;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.index-form-imagen{
-height: 160px;
-}
-
-.index-formulario{
-    background-color: aqua;
-    height: 50%;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: space-around;
-    justify-content: center;
-}
-
- /*reposo*/
- .index-div-inputs{
-    margin-bottom: 5px;
-    padding-top: 10px;
-}
-.index-span-input{
-    font: 16px/16px verdana;
-    padding: 0;
-}
-.index-label{
-    display: block;
-    width: 400px;
-    border: 2px solid silver;
-    padding: 8px 10px;
-    position: relative;
-    box-sizing: border-box;
-    border-radius: 4px;
-    transition: .25s;
-}
-.index-label input{
-    display: block;
+.index-color {
+    height: 100%;
     width: 100%;
-    border: none;
-    background: transparent;
-    outline: none;
-}
-.index-label span{
-    color: silver;
+    background-color: #f5f4f3ce;
     position: absolute;
-    top: 8px;
-    left: 10px;
-    transition: .25s;
+    z-index: 100;
 }
 
-/*focus*/
-.index-label.focus{
-    border-color: #ff4040;
-}
-.index-label span.focus{
-    color: #ff4040;
+.index-contenedor-principal {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+
 }
 
-/*top*/
-.index-label span.top{
-    left: 2px;
-    top: -10px;
-    font-size: 12px;
-    background: white;
-    padding: 0 5px;
+.index-contenedor-formulario {
+    height: 88%;
+    width: 27%;
+    background: #006FB7;
+    box-shadow: -18px 9px 25px -2px rgba(0,0,0,0.75);
 }
+
+.index-titulo-formulario{
+  -webkit-text-stroke: 0.5px rgb(255, 255, 255);
+  color: #3DAB39; 
+  font-weight: bold;
+}
+
+
+
 
 /* Empleado */
 
@@ -352,6 +305,7 @@ height: 160px;
     flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
+
 }
 
 .inventarioArea-agregar-articulo {
