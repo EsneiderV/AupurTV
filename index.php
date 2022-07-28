@@ -19,16 +19,22 @@
 
     <div class="index-contenedor-principal">
         <div class="index-contenedor-formulario">
-            <img src="" alt="logo">
-            <h1 class="index-titulo-formulario">Registro</h1>
-            <form action="">
-                    <label for="correo">Correo</label>
-                    <input type="text" name="correo" id="correo">
-                    <label for="clave">Clave</label>
-                    <input type="password" name="clave" id="clave">
-                    <button type="submit">Registrarse</button>
+            <img src="logo.png" alt="logo" class="index-logo">
+            <form action="" class="index-login">
+                <div class="index-contenedor-inputs">
+                <label for="correo" class="index-label">Correo</label>
+                    <input type="text" name="correo" id="correo"  autocomplete="off" class="index-inputs">
+                </div>
+                <div class="index-contenedor-inputs">
+                <label for="clave" class="index-label">Clave</label>
+                    <input type="password" name="clave" id="clave" class="index-inputs">
+                </div>
+                   
+                       <button type="submit" class="index-submit">Ingresar</button>
+                   
             </form>
-            <img src="" alt="foto">
+
+            <img src="fotopie.jpg" alt="" class="index-foto-footer">
         </div>
     </div>
 </body>
