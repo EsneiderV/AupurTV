@@ -15,9 +15,7 @@
 </head>
 
 <body class="index-body">
-<div class="index-color"></div>
 
-    <div class="index-contenedor-principal">
         <div class="index-contenedor-formulario">
             <img src="logo.png" alt="logo" class="index-logo">
             <form action="" class="index-login">
@@ -36,7 +34,6 @@
 
             <img src="fotopie.jpg" alt="" class="index-foto-footer">
         </div>
-    </div>
 </body>
 </html>
 

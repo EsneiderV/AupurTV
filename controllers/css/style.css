@@ -18,27 +18,15 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-
-}
-
-.index-color {
-    height: 100%;
-    width: 100%;
-    background-color: #f5f4f3ce;
-    position: absolute;
-    z-index: 100;
-}
-
-.index-contenedor-principal {
-    position: absolute;
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 200;
 
 }
+
+
 
 .index-contenedor-formulario {
     height: 88%;
@@ -495,4 +483,21 @@ margin-top: 5%;
     justify-content: flex-start;
     align-items: center;
     margin: 2% 5% 2% 5%;
+}
+
+
+@media screen and (max-width: 600px) {
+    .index-contenedor-formulario {
+        width: 80%;
+        height: 65%;
+        background:#006FB7; 
+    }   
+}
+
+@media (max-height: 500px) {
+    .index-contenedor-formulario {
+        
+        height: 600px;
+        margin-top:420px;
+    }
 }
