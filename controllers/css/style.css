@@ -1,3 +1,16 @@
+@font-face {
+    font-family: Dcondensed;
+    src: url('/fonts/D-DINCONDENSED.OTF') format('opentype') ;
+}
+@font-face {
+    font-family: DBold;
+    src: url('/fonts/D-DINEXP-BOLD.OTF') format('opentype') ;
+}
+
+@font-face {
+    font-family: DBoldA;
+    src: url('/fonts/DIN-Alternate-Bold.otf') format('opentype') ;
+}
 * {
     margin: 0%;
     padding: 0%;
@@ -13,7 +26,7 @@ body {
 
 .index-body {
 
-    background: url('../../fondoLogin.jpeg');
+    background: url('../../image/fondoLogin.png');
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -41,11 +54,20 @@ body {
     justify-content: flex-start;
 }
 
-
-.index-logo{
-margin-top: 5%;
+.index-contenedor-logo{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
 }
 
+.index-logo{
+    max-width: 80%;
+    max-height: 80%;
+}
 
 .index-login{
     display: flex;
@@ -56,7 +78,7 @@ margin-top: 5%;
     width: 75%;
     height: 34%;
     margin-top: 5%;
-    margin-bottom: -10%;
+    margin-bottom: -5%;
 }
 
 
@@ -68,6 +90,7 @@ margin-top: 5%;
 .index-label{
     font-size: 20px;
     color: #FFF;
+    font-family: DBoldA;
 }
 
 .index-inputs{
@@ -77,7 +100,8 @@ margin-top: 5%;
     width: 100%;
     margin-top: 3%;
     color: #FFF;
-    font-size: 15px;
+    font-size: 20px;
+    Font-family: DBoldA;
 }
 
 .index-inputs:focus, .index-inputs:active{
@@ -91,18 +115,28 @@ margin-top: 5%;
     border-radius: 5%;
     padding: 2%;
     color: #FFF;
-    font-size: 20px;
+    font-size: 25px;
     cursor:pointer;
+    font-family: DBoldA;
 }
 
 .index-submit:hover{
     background-color: #EC6329;
 }
 
-.index-foto-footer{
+
+.index-foto-contenedor-footer{
     width: 100%;
-    height: 100%;
-    clip-path: polygon(0 0, 100% 67%, 100% 100%, 0% 100%);
+    height: 40%;
+    clip-path: polygon(0 0, 100% 67%, 100% 100%, 0% 100%); 
+}
+
+.index-foto-footer{
+   
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 /* Empleado */
@@ -491,13 +525,17 @@ margin-top: 5%;
         width: 80%;
         height: 65%;
         background:#006FB7; 
-    }   
+    } 
+    .index-login{
+
+        margin-bottom: 0%;
+    }
 }
 
 @media (max-height: 500px) {
     .index-contenedor-formulario {
         
         height: 600px;
-        margin-top:420px;
+        margin-top:300px;
     }
 }

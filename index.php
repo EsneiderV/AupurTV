@@ -17,8 +17,10 @@
 <body class="index-body">
 
         <div class="index-contenedor-formulario">
-            <img src="logo.png" alt="logo" class="index-logo">
-            <form action="" class="index-login">
+            <div class="index-contenedor-logo">
+                <img src="image/logo.png" alt="logo" class="index-logo">
+            </div>
+            <form action="" class="index-login" method="POST">
                 <div class="index-contenedor-inputs">
                 <label for="correo" class="index-label">Correo</label>
                     <input type="text" name="correo" id="correo"  autocomplete="off" class="index-inputs">
@@ -28,11 +30,15 @@
                     <input type="password" name="clave" id="clave" class="index-inputs">
                 </div>
                    
-                       <button type="submit" class="index-submit">Ingresar</button>
+                       <button type="submit" name="acceder" class="index-submit">Ingresar</button>
                    
             </form>
+<div class="index-foto-contenedor-footer">
 
-            <img src="fotopie.jpg" alt="" class="index-foto-footer">
+    <img src="image/footerLogin.jpeg" alt="foto de pie de pagina"  class="index-foto-footer">
+</div>
+
+            
         </div>
 </body>
 </html>
@@ -41,7 +47,7 @@
 include_once 'controllers/php/funciones.php';
 include_once 'models/Conexion.php';
 if (isset($_POST['acceder'])) {
-    $documento = $_POST['documento'];
+    $documento = $_POST['correo'];
     $clave = $_POST['clave'];
     $consulta =  login($documento, $clave, $conexion);
     if ($consulta->num_rows > 0) {
