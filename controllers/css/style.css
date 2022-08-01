@@ -18,98 +18,77 @@
 
 /* Inicio de cesccion */
 
-html,
-body {
-    height: 100%;
-
-}
-
 .index-body {
-
-    background: url('../../image/fondoLogin.png');
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: url(../../image/fondoLogin.png);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
 }
 
-
-
-.index-contenedor-formulario {
-    height: 88%;
-    width: 27%;
-    background:#006FB7;
-    box-shadow: -18px 9px 25px -2px rgb(0 0 0 / 75%);
+.index-login-container {
+    height: 35em;
+    width: 50em;
+    margin: 2em auto;
+    border-radius: 10px;
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: space-between;
-    align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+    overflow: hidden;
+    justify-content: space-around;
 }
 
-.index-contenedor-logo{
-    height: 30%;
-    width: 100%;
+.index-login-info-container {
+    width: 50%;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
     align-items: center;
-    justify-content: center;
+    text-align: center;
+    padding-top: 0.5rem;
+    background-color: #0075BC;
 }
 
-.index-logo{
-    max-width: 80%;
-    max-height: 80%;
+.index-logo-container {
+    height: 25%;
+    width: 85%;
 }
 
-.index-login{
+.index-logo {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.index-inputs-container {
+    height: 35%;
+    width: 85%;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    width: 75%;
-    height: 34%;
-    margin-top: 5%;
-    margin-bottom: -5%;
-}
-
-
-.index-contenedor-inputs{
-    width: 100%;
-    margin-bottom: 10%;
+    justify-content: space-around;
+    align-items: baseline;
 }
 
 .index-label{
-    font-size: 20px;
-    color: #FFF;
-    font-family: DBoldA;
+    color: #fff;
 }
 
-.index-inputs{
-    background-color: transparent;
+.index-input {
     border: none;
-    border-bottom: 1px solid rgb(255, 252, 252);
-    width: 100%;
-    margin-top: 3%;
-    color: #FFF;
-    font-size: 20px;
-    Font-family: DBoldA;
+    box-sizing: border-box;
+    background-color: transparent;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    width: 90%;
+    font-size: 1em;
 }
 
-.index-inputs:focus, .index-inputs:active{
+.index-input:focus,
+.index-input:active {
     outline: none;
 }
 
-
-.index-submit{
+.index-btn {
+    margin: 0 auto;
     background-color: transparent;
     border: 0.5px solid #FFF;
     border-radius: 5%;
@@ -118,26 +97,67 @@ body {
     font-size: 25px;
     cursor:pointer;
     font-family: DBoldA;
+    margin-bottom: -10%;
 }
 
-.index-submit:hover{
-    background-color: #EC6329;
-}
-
-
-.index-foto-contenedor-footer{
-    width: 100%;
+.index-footer-container {
     height: 40%;
-    clip-path: polygon(0 0, 100% 67%, 100% 100%, 0% 100%); 
+    width: 100%;
+    clip-path: polygon(0 0, 100% 67%, 100% 100%, 0% 100%);
 }
 
-.index-foto-footer{
-   
-  max-width: 100%;
-  max-height: 100%;
-  min-width: 100%;
-  min-height: 100%;
+.index-footer {
+    min-width: 100%;
+    max-height: 100%;
+    clip-path: polygon(0 0, 100% 67%, 100% 100%, 0% 100%);
 }
+
+@media screen and (max-width: 2000px) and (min-width: 1900px) {
+    .index-login-container {
+        width: 50%;
+        height: 40em; 
+    }
+    .index-html{
+        height: 100%;
+        width: 100%;
+    }
+
+    .index-body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .index-login-container {
+        width: 50%;
+        margin-top: 3rem;
+        
+    }
+
+    .index-login-info-container {
+        width: 100%;
+        border-radius: 5px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .index-login-container {
+        width: 90%;
+       
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .index-login-container {
+        margin-top: 7em;
+    }
+}
+
+
+
 
 /* Empleado */
 
@@ -519,23 +539,3 @@ body {
     margin: 2% 5% 2% 5%;
 }
 
-
-@media screen and (max-width: 600px) {
-    .index-contenedor-formulario {
-        width: 80%;
-        height: 65%;
-        background:#006FB7; 
-    } 
-    .index-login{
-
-        margin-bottom: 0%;
-    }
-}
-
-@media (max-height: 500px) {
-    .index-contenedor-formulario {
-        
-        height: 600px;
-        margin-top:300px;
-    }
-}

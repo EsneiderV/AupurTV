@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="usuario-html">
+<html lang="es" class="index-html">
 
 <head>
     <meta charset="UTF-8">
@@ -13,33 +13,29 @@
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <title>Login - Aupur Televisión</title>
 </head>
-
 <body class="index-body">
-
-        <div class="index-contenedor-formulario">
-            <div class="index-contenedor-logo">
-                <img src="image/logo.png" alt="logo" class="index-logo">
+    <div class="index-login-container">
+        <div class="index-login-info-container">
+            <div class="index-logo-container">
+               <img src="image/logo.png" alt="" class="index-logo">
             </div>
-            <form action="" class="index-login" method="POST">
-                <div class="index-contenedor-inputs">
-                <label for="correo" class="index-label">Correo</label>
-                    <input type="text" name="correo" id="correo"  autocomplete="off" class="index-inputs">
-                </div>
-                <div class="index-contenedor-inputs">
-                <label for="clave" class="index-label">Clave</label>
-                    <input type="password" name="clave" id="clave" class="index-inputs">
-                </div>
-                   
-                       <button type="submit" name="acceder" class="index-submit">Ingresar</button>
-                   
+            <form class="index-inputs-container">
+                <label  for="" class="index-label">Correo</label>
+                <input class="index-input" type="email" >
+
+                <label for="" class="index-label">Clave</label>
+                <input class="index-input" type="password">
+                    <button class="index-btn">Ingresar</button>
+
             </form>
-<div class="index-foto-contenedor-footer">
 
-    <img src="image/footerLogin.jpeg" alt="foto de pie de pagina"  class="index-foto-footer">
-</div>
-
-            
+            <div class="index-footer-container">
+                <img src="image/footerLogin.jpeg" alt="Imagen del footer" class="index-footer">
+            </div>
         </div>
+
+    </div>
+
 </body>
 </html>
 
