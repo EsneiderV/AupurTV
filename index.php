@@ -13,6 +13,7 @@
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <title>Login - Aupur Televisión</title>
 </head>
+
 <body class="index-body">
     <div class="index-login-container">
         <div class="index-login-info-container">
@@ -36,7 +37,7 @@
         </div>
 
     </div>
-
+    
 </body>
 </html>
 
