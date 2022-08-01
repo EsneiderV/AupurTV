@@ -37,7 +37,7 @@
         </div>
 
     </div>
-    
+
 </body>
 </html>
 
@@ -75,10 +75,6 @@ if (isset($_POST['acceder'])) {
         window.location.href="index.php";
         </script>';
 
-    }
-
-
-
-  
+    } 
 }
 ?>
