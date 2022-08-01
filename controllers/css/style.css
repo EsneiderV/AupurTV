@@ -47,6 +47,7 @@
     text-align: center;
     padding-top: 0.5rem;
     background-color: #0075BC;
+    box-shadow: -18px 9px 25px -2px rgb(0 0 0 / 75%);
 }
 
 .index-logo-container {
@@ -70,6 +71,8 @@
 
 .index-label{
     color: #fff;
+    font-family: DBoaldA;
+    font-size: 20px;
 }
 
 .index-input {
@@ -79,7 +82,8 @@
     border-bottom: 2px solid #fff;
     color: #fff;
     width: 90%;
-    font-size: 1em;
+    font-family: DBoaldA;
+    font-size: 20px;
 }
 
 .index-input:focus,
@@ -98,6 +102,10 @@
     cursor:pointer;
     font-family: DBoldA;
     margin-bottom: -10%;
+}
+
+.index-btn:hover{
+    background-color: #F36C35;
 }
 
 .index-footer-container {
