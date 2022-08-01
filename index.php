@@ -19,13 +19,14 @@
             <div class="index-logo-container">
                <img src="image/logo.png" alt="" class="index-logo">
             </div>
-            <form class="index-inputs-container">
-                <label  for="" class="index-label">Correo</label>
-                <input class="index-input" type="email" >
+            <form class="index-inputs-container" action="" method="POST">
+                <label  for="correo" class="index-label">Correo</label>
+                <input required name="correo" class="index-input" type="email" id="correo" >
 
-                <label for="" class="index-label">Clave</label>
-                <input class="index-input" type="password">
-                    <button class="index-btn">Ingresar</button>
+                <label  for="clave" class="index-label">Clave</label>
+                <input required name="clave"  class="index-input" type="password" id="clave">
+
+                <button class="index-btn" name="acceder">Ingresar</button>
 
             </form>
 
@@ -43,25 +44,40 @@
 include_once 'controllers/php/funciones.php';
 include_once 'models/Conexion.php';
 if (isset($_POST['acceder'])) {
-    $documento = $_POST['correo'];
+    $correo = $_POST['correo'];
     $clave = $_POST['clave'];
-    $consulta =  login($documento, $clave, $conexion);
-    if ($consulta->num_rows > 0) {
-        session_start();
-        $usuario = mysqli_fetch_array($consulta);
-        $_SESSION['id'] = $usuario['id'];
-        $_SESSION['nombre'] = $usuario['nombre'];
-        $_SESSION['clave'] = $usuario['clave'];
-        $_SESSION['rol'] = $usuario['rol'];
-        $_SESSION['area'] = $usuario['area'];
-        $_SESSION['imagen'] = $usuario['imagen'];
-        $_SESSION['tipo_imagen'] = $usuario['tipo_imagen'];
 
-        redireccion($_SESSION['rol']);
-    } else {
+   $consultaCorreo = loginCorreo($correo,$conexion);
+    if($consultaCorreo->num_rows > 0){
+        $consulta =  login($correo, $clave, $conexion);
+        if ($consulta->num_rows > 0) {
+            session_start();
+            $usuario = mysqli_fetch_array($consulta);
+            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['nombre'] = $usuario['nombre'];
+            $_SESSION['clave'] = $usuario['clave'];
+            $_SESSION['rol'] = $usuario['rol'];
+            $_SESSION['area'] = $usuario['area'];
+            $_SESSION['imagen'] = $usuario['imagen'];
+            $_SESSION['tipo_imagen'] = $usuario['tipo_imagen'];
+    
+            redireccion($_SESSION['rol']);
+        } else {
+            echo '<script type="text/javascript">
+            alert("Clave Incorrecta");
+            window.location.href="index.php";
+            </script>';
+        }
+    }else{
         echo '<script type="text/javascript">
-        alert("Usuario No Encontrado");
+        alert("El correo no se encuentra registrado");
+        window.location.href="index.php";
         </script>';
+
     }
+
+
+
+  
 }
 ?>

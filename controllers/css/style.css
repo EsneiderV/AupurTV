@@ -37,6 +37,7 @@
     justify-content: space-between;
     overflow: hidden;
     justify-content: space-around;
+
 }
 
 .index-login-info-container {
@@ -47,7 +48,7 @@
     text-align: center;
     padding-top: 0.5rem;
     background-color: #0075BC;
-    box-shadow: -18px 9px 25px -2px rgb(0 0 0 / 75%);
+    border-radius: 10px;
 }
 
 .index-logo-container {
@@ -100,7 +101,7 @@
     color: #FFF;
     font-size: 25px;
     cursor:pointer;
-    font-family: DBoldA;
+    font-family: DBoaldA;
     margin-bottom: -10%;
 }
 
@@ -118,9 +119,10 @@
     min-width: 100%;
     max-height: 100%;
     clip-path: polygon(0 0, 100% 67%, 100% 100%, 0% 100%);
+    border-radius: 0 0 10px 10px;
 }
 
-@media screen and (max-width: 2000px) and (min-width: 1900px) {
+@media screen and (max-width: 4100px) and (min-width: 1800px) {
     .index-login-container {
         width: 50%;
         height: 40em; 
@@ -285,8 +287,6 @@
     flex-direction: row;
     align-items: center;
 }
-
-
 
 .calificar-contenedor-imagen {
     display: inline-block;

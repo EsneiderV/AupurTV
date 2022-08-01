@@ -1,12 +1,21 @@
 <?php
 ///////////////// Logueo ////////////////////////
 
-//Verifica que el usuario si este registrado en la base de datos
-function login($documento, $clave, $conexion)
+// verificar si el correo existe
+function loginCorreo($correo,$conexion)
 {
-    $query = "SELECT * FROM usuarios WHERE id = '$documento' AND clave = '$clave'";
+    $query = "SELECT * FROM usuarios WHERE correo = '$correo'";
     return $consulta = mysqli_query($conexion, $query);
 }
+
+//Verifica que el usuario si este registrado en la base de datos
+function login($correo, $clave, $conexion)
+{
+    $query = "SELECT * FROM usuarios WHERE correo = '$correo' AND clave = '$clave'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
 
 // despues del logueo manda al usuario a la vista de pendiendo de su rol
 function redireccion($rol)
