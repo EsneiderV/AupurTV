@@ -13,6 +13,7 @@
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <title>Login - Aupur Televisión</title>
 </head>
+
 <body class="index-body">
     <div class="index-login-container">
         <div class="index-login-info-container">
@@ -22,22 +23,22 @@
             <form class="index-inputs-container" action="" method="POST">
                 <label  for="correo" class="index-label">Correo</label>
                 <input required name="correo" class="index-input" type="email" id="correo" >
-
+                                                                     
                 <label  for="clave" class="index-label">Clave</label>
                 <input required name="clave"  class="index-input" type="password" id="clave">
-
                 <button class="index-btn" name="acceder">Ingresar</button>
-
             </form>
-
             <div class="index-footer-container">
                 <img src="image/footerLogin.jpeg" alt="Imagen del footer" class="index-footer">
             </div>
+    
         </div>
-
+    
     </div>
 
+
 </body>
+
 </html>
 
 <?php
@@ -73,11 +74,8 @@ if (isset($_POST['acceder'])) {
         alert("El correo no se encuentra registrado");
         window.location.href="index.php";
         </script>';
-
-    }
-
-
-
-  
+    
+    } 
 }
+
 ?>
