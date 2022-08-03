@@ -1,18 +1,17 @@
 @font-face {
     font-family: Dcondensed;
-    src: url('/fonts/D-DINCONDENSED.OTF') format('opentype') ;
+    src: url('/fonts/D-DINCONDENSED.OTF') format('opentype');
 }
 
 @font-face {
     font-family: DBold;
-    src: url('/fonts/D-DINEXP-BOLD.OTF') format('opentype') ;
+    src: url('/fonts/D-DINEXP-BOLD.OTF') format('opentype');
 }
 
 @font-face {
     font-family: DBoldA;
-    src: url('/fonts/DIN-Alternate-Bold.otf') format('opentype') ;
+    src: url('/fonts/DIN-Alternate-Bold.otf') format('opentype');
 }
-
 * {
     margin: 0%;
     padding: 0%;
@@ -30,6 +29,7 @@
     background-attachment: fixed;
     background-size: cover;
 }
+
 
 .index-login-container {
     height: 35em;
