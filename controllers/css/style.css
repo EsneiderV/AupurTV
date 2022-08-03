@@ -124,11 +124,30 @@
     border-radius: 0 0 10px 10px;
 }
 
-@media screen and (max-width: 4100px) and (min-width: 1800px) {
+@media screen and (max-width: 4100px) and (min-width: 1800px){
 
     .index-login-container {
         width: 50%;
         height: 40em; 
+    }
+    .index-html{
+        height: 100%;
+        width: 100%;
+    }
+    .index-body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+    }
+
+}
+
+@media screen and (max-width: 2300px) and (min-width: 1800px) {
+
+    .index-login-container {
+        width: 50%;
+        height: 42em; 
     }
     .index-html{
         height: 100%;
