@@ -32,7 +32,6 @@ function Footer()
 }
 
 
-
 }
 
 require ("../models/Conexion.php");
@@ -53,3 +52,4 @@ while ($row=$resultado->fetch_assoc()) {
 
 	$pdf->Output();
 ?>
+
