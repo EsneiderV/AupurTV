@@ -18,6 +18,7 @@
     padding: 0%;
 }
 
+
 /* Inicio de cesccion */
 
 .index-body {
@@ -123,6 +124,8 @@
     clip-path: polygon(0 0, 100% 67%, 100% 100%, 0% 100%);
     border-radius: 0 0 10px 10px;
 }
+
+
 
 @media screen and (max-width: 4100px) and (min-width: 1800px) {
 
