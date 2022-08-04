@@ -124,13 +124,9 @@
     border-radius: 0 0 10px 10px;
 }
 
-<<<<<<< HEAD
+
+
 @media screen and (max-width: 4100px) and (min-width: 1800px){
-=======
-
-
-@media screen and (max-width: 4100px) and (min-width: 1800px) {
->>>>>>> origin/Johan
 
     .index-login-container {
         width: 50%;
