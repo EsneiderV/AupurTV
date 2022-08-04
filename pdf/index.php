@@ -1,12 +1,13 @@
 <?php
 require('fpdf/fpdf.php');
 
+
 class PDF extends FPDF
 {
 // Cabecera de página
 function Header()
 {
-	
+
     // Arial bold 15
     $this->SetFont('Arial','B',16);
     // Movernos a la derecha
@@ -16,7 +17,9 @@ function Header()
     // Salto de línea
     $this->Ln(20);
 
-    $this->Cell(80,10,'Nombre',1,1,'C',0);
+    $this->Cell(80,10,'Nombre',1,0,'C',0);
+    $this->Cell(80,10,'Nombre 2',1,1,'C',0);
+
 
 }
 
@@ -46,10 +49,7 @@ $pdf->SetFont('Arial','B',10);
 while ($row=$resultado->fetch_assoc()) {
 	$pdf->Cell(80,10,$row['nombre'],1,0,'C',0);
 	$pdf->Cell(80,10,$row['nombre'],1,1,'C',0);
-	$pdf->Cell(80,10,$row['nombre'],1,0,'C',0);
 } 
-
 
 	$pdf->Output();
 ?>
-
