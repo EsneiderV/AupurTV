@@ -1,22 +1,22 @@
 @font-face {
     font-family: Dcondensed;
-    src: url('/fonts/D-DINCONDENSED.OTF') format('opentype') ;
+    src: url('/fonts/D-DINCONDENSED.OTF') format('opentype');
 }
 
 @font-face {
     font-family: DBold;
-    src: url('/fonts/D-DINEXP-BOLD.OTF') format('opentype') ;
+    src: url('/fonts/D-DINEXP-BOLD.OTF') format('opentype');
 }
 
 @font-face {
     font-family: DBoldA;
-    src: url('/fonts/DIN-Alternate-Bold.otf') format('opentype') ;
+    src: url('/fonts/DIN-Alternate-Bold.otf') format('opentype');
 }
-
 * {
     margin: 0%;
     padding: 0%;
 }
+
 
 /* Inicio de cesccion */
 
@@ -30,6 +30,7 @@
     background-size: cover;
 }
 
+
 .index-login-container {
     height: 35em;
     width: 50em;
@@ -39,7 +40,6 @@
     justify-content: space-between;
     overflow: hidden;
     justify-content: space-around;
-
 }
 
 .index-login-info-container {
@@ -124,7 +124,13 @@
     border-radius: 0 0 10px 10px;
 }
 
+<<<<<<< HEAD
 @media screen and (max-width: 4100px) and (min-width: 1800px){
+=======
+
+
+@media screen and (max-width: 4100px) and (min-width: 1800px) {
+>>>>>>> origin/Johan
 
     .index-login-container {
         width: 50%;

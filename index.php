@@ -20,6 +20,7 @@
             <div class="index-logo-container">
                <img src="image/logo.png" alt="" class="index-logo">
             </div>
+
             <form class="index-inputs-container" action="" method="POST">
                 <label  for="correo" class="index-label">Correo</label>
                 <input required name="correo" class="index-input" type="email" id="correo" >
@@ -31,7 +32,7 @@
             <div class="index-footer-container">
                 <img src="image/footerLogin.jpeg" alt="Imagen del footer" class="index-footer">
             </div>
-    
+        
         </div>
     
     </div>
