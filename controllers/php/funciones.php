@@ -49,11 +49,11 @@ function redireccion($rol)
 //Datos personales/////
 
 //muestra los datos personales de cada usuario
-function datosPersonales($id,$conexion)
-{
-    $query = "SELECT `id`, usuarios.nombre, rol.nombre AS 'rol', area.nombre AS 'area',correo,telefono FROM `usuarios` INNER JOIN rol ON rol.codigo = usuarios.rol INNER JOIN area ON area.codigo = usuarios.area WHERE id = '$id';";
-    return $consulta = mysqli_query($conexion, $query);
-}
+// function datosPersonales($id,$conexion)
+// {
+//     $query = "SELECT `id`, usuarios.nombre, rol.nombre AS 'rol', area.nombre AS 'area',correo,telefono FROM `usuarios` INNER JOIN rol ON rol.codigo = usuarios.rol INNER JOIN area ON area.codigo = usuarios.area WHERE id = '$id';";
+//     return $consulta = mysqli_query($conexion, $query);
+// }
 
 // Calificar///
 
