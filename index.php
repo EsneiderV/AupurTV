@@ -56,6 +56,7 @@ if (isset($_POST['acceder'])) {
             $usuario = mysqli_fetch_array($consulta);
             $_SESSION['id'] = $usuario['id'];
             $_SESSION['nombre'] = $usuario['nombre'];
+            $_SESSION['apellidos'] = $usuario['apellidos'];
             $_SESSION['clave'] = $usuario['clave'];
             $_SESSION['rol'] = $usuario['rol'];
             $_SESSION['area'] = $usuario['area'];
