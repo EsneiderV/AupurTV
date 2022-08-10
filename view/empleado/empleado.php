@@ -30,7 +30,6 @@ if (isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="../../controllers/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
     <title> <?php echo $_SESSION['nombre'] ?> - Aupur Televisión </title>
 </head>
 
@@ -39,35 +38,27 @@ if (isset($_SESSION['rol'])) {
     <div class="empleado-contenedor-principal">
 
         <div class="empleado-contenedor-izquierdo">
+            <div class="empleado-contenedor-logo">
+                <img class="empleado-logo" src="../../image/logoNaranja.png" alt="logo de la empresa">
+            </div>
 
-        <div class="empleado-contenedor-logo">
-            <img class="empleado-logo" src="../../image/logoNaranja.png" alt="logo de la empresa">
-        </div>
-
-        
             <!-- Mostramos la imagen de secion del usuario -->
             <div class="empleado-contenedor-imagen">
                 <img class="empleado-imagen" src="data:<?php echo $_SESSION['tipo_imagen'] ?>;base64,<?php echo base64_encode($_SESSION['imagen']) ?>" alt="foto de perfil">
             </div>
         </div>
 
+        <div class="empleado-contenedor-derecho">
+            <div class="empleado-opciones">
+                <h1 class="empleado-nombre"> <?php echo strtoupper($_SESSION['nombre'].' '.$_SESSION['apellidos']) ?></h1>
+                <div class="empleado-items">
 
-
-
-        <div class="empleado-opciones">
-            <h1> <?php echo strtoupper($_SESSION['nombre']) ?></h1>
-            <div class="empleado-items">
-                <button class="empleado-item">
-                    <a href="../general/calificar.php" class="empleado-enlace a-f-r">Calificar</a>
-                </button>
-                <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#inventario">Mi inventario</button>
-                <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
-                <button class="empleado-item">
-                    <a class="empleado-enlace a-f-r" target="_blank" href="https://mail.google.com/mail/u/0/">
-                        Mi correo
-                    </a>
-                </button>
-                <a href="../../models/Cerrar.php" class="empleado-enlace a-f-r">Cerrar sesion</a>
+                    <a href="../general/calificar.php" class="empleado-enlace empleado-enlace-calificar">Calificar</a>
+                    <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#inventario">Inventario</button>
+                    <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Directorio</button>
+                    <a class="empleado-enlace" target="_blank" href="https://mail.google.com/mail/u/0/">Correo</a>
+                    <a href="../../models/Cerrar.php" class="empleado-enlace-salir">Salir</a>
+                </div>
             </div>
         </div>
     </div>
