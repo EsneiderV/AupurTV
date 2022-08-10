@@ -34,9 +34,8 @@
             </div>
         
         </div>
-    
-    </div>
 
+    </div>
 
 </body>
 
@@ -78,5 +77,4 @@ if (isset($_POST['acceder'])) {
     
     } 
 }
-
 ?>

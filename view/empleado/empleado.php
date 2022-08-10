@@ -18,7 +18,7 @@ if (isset($_SESSION['rol'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="empleado-html">
 
 <head>
     <meta charset="UTF-8">
@@ -36,61 +36,43 @@ if (isset($_SESSION['rol'])) {
 
 <body class="empleado-body">
 
-    <!-- Mostramos la imagen de secion del usuario -->
-    <div class="div-imagen">
-        <img class="empleado-foto" src="data:<?php echo $_SESSION['tipo_imagen'] ?>;base64,<?php echo base64_encode($_SESSION['imagen']) ?>" alt="foto de perfil">
-    </div>
+    <div class="empleado-contenedor-principal">
 
+        <div class="empleado-contenedor-izquierdo">
 
-    <div class="empleado-opciones">
-        <h1> <?php echo strtoupper($_SESSION['nombre']) ?></h1>
-        <div class="empleado-items">
-            <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#datosPersonales">Datos personales</button>
-            <button class="empleado-item">
-                <a href="../general/calificar.php" class="empleado-enlace a-f-r">Calificar</a>
-            </button>
-            <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#inventario">Mi inventario</button>
-            <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
-            <button class="empleado-item">
-                <a class="empleado-enlace a-f-r" target="_blank" href="https://mail.google.com/mail/u/0/">
-                    Mi correo
-                </a>
-            </button>
-            <a href="../../models/Cerrar.php" class="empleado-enlace a-f-r">Cerrar sesion</a>
+        <div class="empleado-contenedor-logo">
+            <img class="empleado-logo" src="../../image/logoNaranja.png" alt="logo de la empresa">
         </div>
-    </div>
+
+        
+            <!-- Mostramos la imagen de secion del usuario -->
+            <div class="empleado-contenedor-imagen">
+                <img class="empleado-imagen" src="data:<?php echo $_SESSION['tipo_imagen'] ?>;base64,<?php echo base64_encode($_SESSION['imagen']) ?>" alt="foto de perfil">
+            </div>
+        </div>
 
 
 
-    <!-- Modal Datos personales-->
-    <div class="modal fade" id="datosPersonales" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title a-ms-25 fs-2 a-f-t-r" id="exampleModalLabel">DATOS PERSONALES</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <?php
-                    // mostramos los datos del usuario en una ventana modal
-                    $datos = datosPersonales($_SESSION['id'], $conexion);
-                    $datos = mysqli_fetch_array($datos)
-                    ?>
-                    <p class="empleados-p-directorio"> <span> <b>DOCUMENTO :</b> <?php echo $datos['id'] ?></span> </p>
-                    <p class="empleados-p-directorio"> <span> <b>NOMBRES :</b> <?php echo $datos['nombre'] ?></span> </p>
-                    <p class="empleados-p-directorio"> <span> <b>CORREO :</b> <?php echo $datos['correo'] ?></span> </p>
-                    <p class="empleados-p-directorio"> <span> <b>TELÉFONO :</b> <?php echo $datos['telefono'] ?></span> </p>
-                    <p class="empleados-p-directorio"> <span> <b>ÁREA :</b> <?php echo $datos['area'] ?></span> </p>
 
-                    <?php
-                    ?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
+        <div class="empleado-opciones">
+            <h1> <?php echo strtoupper($_SESSION['nombre']) ?></h1>
+            <div class="empleado-items">
+                <button class="empleado-item">
+                    <a href="../general/calificar.php" class="empleado-enlace a-f-r">Calificar</a>
+                </button>
+                <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#inventario">Mi inventario</button>
+                <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Mi directorio</button>
+                <button class="empleado-item">
+                    <a class="empleado-enlace a-f-r" target="_blank" href="https://mail.google.com/mail/u/0/">
+                        Mi correo
+                    </a>
+                </button>
+                <a href="../../models/Cerrar.php" class="empleado-enlace a-f-r">Cerrar sesion</a>
             </div>
         </div>
     </div>
+
+
 
     <!-- Inventario -->
     <div class="modal fade" id="inventario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -156,7 +138,6 @@ if (isset($_SESSION['rol'])) {
 
                         echo "<hr/>";
                         echo "</details>";
-
                     }
                     ?>
                 </div>
@@ -171,4 +152,3 @@ if (isset($_SESSION['rol'])) {
 </body>
 
 </html>
-
