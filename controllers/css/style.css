@@ -274,7 +274,9 @@
     width: 105%;
     height: 20%;
     color: #FFF;
-    font-size: 200%;
+    font-size: 190%;
+    font-weight: bold;
+    -webkit-text-stroke:1px #e36b0f;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
