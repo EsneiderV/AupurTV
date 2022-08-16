@@ -18,7 +18,7 @@ if (isset($_SESSION['rol'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en" class="empleado-html">
+<html lang="es" class="empleado-html">
 
 <head>
     <meta charset="UTF-8">
