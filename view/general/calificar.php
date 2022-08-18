@@ -94,7 +94,7 @@ $mes = date('m'); // retiene el mes actual
 
   <div class="calificar-nav">
     <a class="calificar-volver-atras" href="<?php echo $redirecionar ?>"> ᗕ Volver atrás</a>
-    <h1 class="calificar-titulo">Calificacion</h1>
+    <h1 class="calificar-titulo">Calificación</h1>
   </div>
 
 
@@ -122,7 +122,7 @@ $mes = date('m'); // retiene el mes actual
         $areasA = mostrarAreaAdmi($conexion);
         while ($areaA = mysqli_fetch_array($areasA)) { // mostrar cada area en un cuadro
           $usuarios = mostrarUsuario($conexion, $_SESSION['id'], $areaA['codigo']);
-          echo "<h3 class=''>" . strtoupper($areaA['nombre']) . "</h1>";
+          echo "<h3 class='calificar-contenedor-titulo'>" . strtoupper($areaA['nombre']) . "</h1>";
           while ($usuario = mysqli_fetch_array($usuarios)) {
             $calificado = empleadoCalificado($mes, $_SESSION['id'], $usuario['id'], $conexion);
             $modal = '';
@@ -133,9 +133,9 @@ $mes = date('m'); // retiene el mes actual
             }
             if ($calificado->num_rows > 0) {
         ?>
-              <button class="calificar-btn-disable"  disabled>
-            <?php echo $usuario['nombre'] ?>
-          </button>
+              <button class="calificar-btn-disable" disabled>
+                <?php echo $usuario['nombre'] ?>
+              </button>
             <?php
 
 
@@ -170,7 +170,7 @@ $mes = date('m'); // retiene el mes actual
         }
         if ($calificado->num_rows > 0) {
     ?>
-          <button class="calificar-btn-disable"  disabled>
+          <button class="calificar-btn-disable" disabled>
             <?php echo $usuario['nombre'] ?>
           </button>
         <?php
@@ -203,9 +203,9 @@ $mes = date('m'); // retiene el mes actual
         </div>
         <div class="modal-body">
           <form action="" method="POST">
-            <input type="text" name="id" class="id_calificado">
-            <input type="text" name="area" class="area">
-            <input type="text" name="tipo" value="0" class="area">
+            <input type="text" name="id" class="id_calificado" hidden>
+            <input type="text" name="area" class="area" hidden>
+            <input type="text" name="tipo" value="0" class="area" hidden>
             <div class="contenedor">
               <?php
               $preguntas = mostrarPreguntas(0, $conexion);
@@ -215,6 +215,7 @@ $mes = date('m'); // retiene el mes actual
               <?php
               }
               ?>
+              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -237,9 +238,9 @@ $mes = date('m'); // retiene el mes actual
         </div>
         <div class="modal-body">
           <form action="" method="POST">
-            <input type="text" name="id" class="id_calificado1">
-            <input type="text" name="area" class="area1">
-            <input type="text" name="tipo" value="1" class="area">
+            <input type="text" name="id" class="id_calificado1" hidden>
+            <input type="text" name="area" class="area1" hidden>
+            <input type="text" name="tipo" value="1" class="area" hidden>
             <div class="contenedor1">
               <?php
               $preguntas = mostrarPreguntas(1, $conexion);
@@ -249,6 +250,7 @@ $mes = date('m'); // retiene el mes actual
               <?php
               }
               ?>
+              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -326,7 +328,7 @@ $mes = date('m'); // retiene el mes actual
     function buscarInpust() {
       const inputs = document.querySelectorAll('input[type="range"]');
       inputs.forEach(input => {
-        input.addEventListener('input',e => {
+        input.addEventListener('input', e => {
           const valor = e.target.value;
           const span = e.target.nextSibling;
           span.textContent = valor;
