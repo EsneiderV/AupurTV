@@ -554,6 +554,7 @@
     margin-left: 3%;
     text-decoration: none;
     color: rgb(0, 0, 0);
+    font-weight: bold;
 }
 .calificar-volver-atras:hover{
     text-decoration: none;
@@ -648,10 +649,10 @@
 .calificar-btn-disable{
     background: transparent;
     width: 80%;
-    color: rgb(135, 131, 131);
+    color: #f36c35;
     font-size: 140%;
     border: none;
-    border-bottom: 2px solid rgb(135, 131, 131);
+    border-bottom: 2px solid #f36c35;
     font-weight: bold;
 }
 
