@@ -108,7 +108,7 @@ if (isset($_SESSION['rol'])) {
                 <div class="modal-body">
                     <?php
                     // mostramos los datos de contacto de todos los usuarios
-                    $areas = mostrarArea($conexion);
+                    $areas = mostrarAreaDirectorio($conexion);
                     while ($area = mysqli_fetch_array($areas)) {
                         echo "<details>";
                         echo "<summary class='pt-4 h5'>" . $area['nombre'] . "</summary>";

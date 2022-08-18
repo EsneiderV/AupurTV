@@ -70,6 +70,12 @@ function mostrarArea($conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+function mostrarAreaDirectorio($conexion)
+{
+    $query = "SELECT * FROM `area` ";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
 //Nos trae todos los usuarios registrados con su respectiva area
 function mostrarUsuario($conexion,$id,$area)
 {

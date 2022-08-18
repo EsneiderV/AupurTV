@@ -153,6 +153,9 @@ $mes = date('m'); // retiene el mes actual
       </div>
     </div>
 
+    <div class="calificar-empleados">
+
+    
     <?php
 
     $areas = mostrarArea($conexion); //recolecta todas las areas
@@ -188,6 +191,9 @@ $mes = date('m'); // retiene el mes actual
       echo "</div>";
     }
     ?>
+    
+    <div class="calificar-basio"></div>
+    </div>
 
   </div>
 
