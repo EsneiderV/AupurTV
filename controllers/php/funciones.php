@@ -58,9 +58,15 @@ function redireccion($rol)
 // Calificar///
 
 //nos trae todas las areas registradas en la base de datos
+function mostrarAreaAdmi($conexion)
+{
+    $query = "SELECT * FROM `area` WHERE codigo = '1' ";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
 function mostrarArea($conexion)
 {
-    $query = "SELECT * FROM `area` ";
+    $query = "SELECT * FROM `area` WHERE codigo != '1' ";
     return $consulta = mysqli_query($conexion, $query);
 }
 

@@ -12,6 +12,7 @@
     font-family: DBoldA;
     src: url('/fonts/DIN-Alternate-Bold.otf') format('opentype');
 }
+
 * {
     margin: 0%;
     padding: 0%;
@@ -72,7 +73,7 @@
     align-items: baseline;
 }
 
-.index-label{
+.index-label {
     color: #fff;
     font-family: DBoaldA;
     font-size: 20px;
@@ -102,12 +103,12 @@
     padding: 2%;
     color: #FFF;
     font-size: 25px;
-    cursor:pointer;
+    cursor: pointer;
     font-family: DBoaldA;
     margin-bottom: -10%;
 }
 
-.index-btn:hover{
+.index-btn:hover {
     background-color: #F36C35;
 }
 
@@ -126,17 +127,19 @@
 
 
 
-@media screen and (max-width: 4100px) and (min-width: 1800px){
+@media screen and (max-width: 4100px) and (min-width: 1800px) {
 
     .index-login-container {
         width: 50%;
-        height: 40em; 
+        height: 40em;
     }
-    .index-html{
+
+    .index-html {
         height: 100%;
         width: 100%;
     }
-    .index-body{
+
+    .index-body {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -149,13 +152,15 @@
 
     .index-login-container {
         width: 50%;
-        height: 42em; 
+        height: 42em;
     }
-    .index-html{
+
+    .index-html {
         height: 100%;
         width: 100%;
     }
-    .index-body{
+
+    .index-body {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -168,7 +173,7 @@
     .index-login-container {
         width: 50%;
         margin-top: 3rem;
-        
+
     }
 
     .index-login-info-container {
@@ -180,7 +185,7 @@
 @media screen and (max-width: 650px) {
     .index-login-container {
         width: 90%;
-       
+
     }
 }
 
@@ -194,12 +199,13 @@
 
 
 /* Empleado */
-.empleado-html,.empleado-body{
+.empleado-html,
+.empleado-body {
     height: 100%;
     width: 100%;
 }
 
-.empleado-body{
+.empleado-body {
     background: url(../../image/fondoLogin.png);
     background-position: center center;
     background-repeat: no-repeat;
@@ -210,7 +216,7 @@
     justify-content: space-around;
 }
 
-.empleado-contenedor-principal{
+.empleado-contenedor-principal {
     background-color: #FFF;
     width: 55%;
     height: 60%;
@@ -218,19 +224,19 @@
     border-radius: 10px;
 }
 
-.empleado-contenedor-izquierdo{
+.empleado-contenedor-izquierdo {
     background-color: #fff;
     width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     border-radius: 10px;
 }
 
-.empleado-contenedor-logo{
+.empleado-contenedor-logo {
     width: 100%;
     height: 20%;
     display: flex;
@@ -238,26 +244,27 @@
     flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
+    margin-top: 2%;
 }
 
-.empleado-logo{
-    min-height: 110%;
+.empleado-logo {
+    min-height: 100%;
     min-width: 100%;
 }
 
-.empleado-contenedor-imagen{
+.empleado-contenedor-imagen {
     width: 100%;
-    height: 80%;
+    height: 79%;
     display: flex;
 }
 
-.empleado-imagen{
+.empleado-imagen {
     max-width: 100%;
     max-height: 100%;
     margin-left: 8%;
 }
 
-.empleado-contenedor-derecho{
+.empleado-contenedor-derecho {
     width: 65%;
     height: 100%;
     margin-left: -5%;
@@ -267,19 +274,19 @@
     border-radius: 0 10px 10px 0;
 }
 
-.empleado-opciones{
+.empleado-opciones {
     width: 100%;
     height: 100%;
 }
 
-.empleado-nombre{
+.empleado-nombre {
     width: 100%;
     height: 20%;
     color: #FFF;
     margin: 0;
     font-size: 190%;
     font-weight: bold;
-    -webkit-text-stroke:1px #e36b0f;
+    -webkit-text-stroke: 1px #e36b0f;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -287,7 +294,7 @@
     justify-content: space-around;
 }
 
-.empleado-items{
+.empleado-items {
     height: 80%;
     width: 100%;
     margin-left: 8%;
@@ -298,7 +305,7 @@
     justify-content: flex-start;
 }
 
-.empleado-item{
+.empleado-item {
     background-color: transparent;
     border: none;
     color: #FFF;
@@ -308,7 +315,7 @@
     border-bottom: 1px solid #FFF;
 }
 
-.empleado-enlace{
+.empleado-enlace {
     text-decoration: none;
     color: #FFF;
     font-size: 30px;
@@ -318,14 +325,14 @@
     border-bottom: 1px solid #FFF;
 }
 
-.empleado-enlace:hover{
+.empleado-enlace:hover {
     text-decoration: none;
     color: #FFF;
     font-size: 30px;
     text-align: center;
 }
 
-.empleado-enlace-salir{
+.empleado-enlace-salir {
     text-decoration: none;
     color: #FFF;
     font-size: 25px;
@@ -334,7 +341,7 @@
     margin-top: 2%;
 }
 
-.empleado-enlace-salir:hover{
+.empleado-enlace-salir:hover {
     text-decoration: none;
     color: #FFF;
     font-size: 25px;
@@ -343,79 +350,163 @@
     margin-top: 2%;
 }
 
-.empleado-enlace-calificar{
+.empleado-enlace-calificar {
     margin-top: 0;
 }
 
-@media screen and (max-width: 4100px) and (min-width: 1800px){
+/* jefe  */
 
+.empleado-item-jefe {
+    background-color: transparent;
+    border: none;
+    color: #FFF;
+    font-size: 17px;
+    width: 50%;
+    margin-top: 3%;
+    border-bottom: 1px solid #FFF;
 }
 
-@media screen and (max-width: 2300px) and (min-width: 1800px) {
-
+.empleado-enlace-jefe {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 17px;
+    width: 50%;
+    margin-top: 3%;
+    text-align: center;
+    border-bottom: 1px solid #FFF;
 }
+
+.empleado-enlace-jefe:hover {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 17px;
+    text-align: center;
+}
+
+.empleado-enlace-jefe-salir {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 20px;
+    width: 70%;
+    text-align: right;
+    margin-top: 2%;
+}
+
+.empleado-enlace-jefe-salir:hover {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 20px;
+    width: 70%;
+    text-align: right;
+    margin-top: 2%;
+}
+
+@media screen and (max-width: 4100px) and (min-width: 1800px) {}
+
+@media screen and (max-width: 2300px) and (min-width: 1800px) {}
+
 @media screen and (max-width: 1000px) {
 
-    .empleado-html,.empleado-body{
+    .empleado-html,
+    .empleado-body {
         height: 120%;
         width: 100%;
     }
-    
+
     .empleado-contenedor-principal {
         width: 80%;
         height: 90%;
         margin-top: 4%;
         margin-bottom: 4%;
     }
-   
+
 }
 
 @media screen and (max-width: 650px) {
+
+    .empleado-html,
+    .empleado-body {
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    .empleado-body {
+        background: none;
+    }
+
     .empleado-contenedor-principal {
         background: none;
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: center;
-        width: 70%;
-        height: 90%;
-
-    }
-
-    .empleado-contenedor-izquierdo{
         width: 100%;
-        height: 50%;
-        border-radius: 10px 10px 0 0;
+        height: 100%;
+    }
 
+    .empleado-contenedor-izquierdo {
+        width: 100%;
+        height: 40%;
+        border-radius: 0;
 
     }
-    
+
+    .empleado-contenedor-logo {
+        height: 30%;
+        margin-top: 3%;
+    }
+
+    .empleado-logo {
+        min-height: 100%;
+        min-width: 100%;
+        max-height: 100%;
+    }
+
     .empleado-contenedor-imagen {
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-around;
+        height: 67%;
     }
 
-    .empleado-imagen{
+
+    .empleado-imagen {
         margin: 0;
     }
-    
-    .empleado-contenedor-derecho{
+
+    .empleado-contenedor-derecho {
         width: 100%;
-        height: 50%;
+        height: 60%;
         margin: 0;
         clip-path: none;
-        border-radius: 0 0 10px 10px;
+        border-radius: 0;
+    }
+
+    .empleado-nombre {
+        font-size: 180%;
+        text-align: center;
     }
 
     .empleado-items {
         margin: 0;
     }
 
-    .empleado-nombre {
-      
-        font-size: 140%;
-        text-align: center;
+    .empleado-enlace-calificar,
+    .empleado-item,
+    .empleado-enlace-salir,
+    .empleado-enlace {
+        font-size: 180%;
+        margin-top: 6%;
     }
+
+    .empleado-enlace-jefe-salir,
+    .empleado-enlace-jefe,
+    .empleado-item-jefe {
+        font-size: 145%;
+        margin-top: 4%;
+    }
+
+
+
 }
 
 
@@ -423,134 +514,128 @@
 
 
 /* Calificar */
+
+
+.calificar-html,
 .calificar-body {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23BBBBBB' cx='50' cy='0' r='50'/%3E%3Cg fill='%23b6b6b6' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23b0b0b0' cx='50' cy='100' r='50'/%3E%3Cg fill='%23ababab' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23a6a6a6' cx='50' cy='200' r='50'/%3E%3Cg fill='%23a0a0a0' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%239b9b9b' cx='50' cy='300' r='50'/%3E%3Cg fill='%23969696' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23919191' cx='50' cy='400' r='50'/%3E%3Cg fill='%238b8b8b' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%23868686' cx='50' cy='500' r='50'/%3E%3Cg fill='%23818181' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%237c7c7c' cx='50' cy='600' r='50'/%3E%3Cg fill='%23777777' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23727272' cx='50' cy='700' r='50'/%3E%3Cg fill='%236d6d6d' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23686868' cx='50' cy='800' r='50'/%3E%3Cg fill='%23636363' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%235f5f5f' cx='50' cy='900' r='50'/%3E%3Cg fill='%235a5a5a' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23555555' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: fixed;
-    background-size: contain;
+    height: 100%;
+    width: 100%;
 }
 
-.calificar-contenedor-empleado {
-    background-color: rgba(242, 248, 248, 0.068);
-    border-radius: 2%;
-    width: 40%;
+.calificar-body {
+    background: url(../../image/fondoLogin.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     display: flex;
-    margin: 1%;
     flex-direction: column;
     flex-wrap: nowrap;
 }
 
-.calificar-contenedorp-empleado {
+.calificar-nav{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.calificar-contenedor-titulo {
-    text-align: center;
-}
-
-.calificar-btnmodal {
-    background: transparent;
-    margin: 2% 4%;
-    display: flex;
+    flex-wrap: nowrap;
     justify-content: flex-start;
+    align-items: center;
+    background: red;
+    width: 100%;
+    height: 10%;
+}
+.calificar-volver-atras{
+    margin-left: 3%;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+.calificar-volver-atras:hover{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+.calificar-titulo{
+   margin-left: 30%;
+
+}
+
+
+
+.calificar-cuerpo{
+    height: 90%;
+    width: 100%;
+    display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.calificar-contenedor-empleado{
+    height: 90%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    background: #0075BC;
+    border-radius: 10px;
+}
+
+.calificar-auto-admi{
+    height: 90%;
+    width: 30%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 }
 
-.calificar-contenedor-imagen {
-    display: inline-block;
-    position: relative;
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin: 2% 7% 2% 10%;
-}
-
-.calificar-contenedor-imagen img {
-    width: auto;
-    height: 100%;
-}
-
-.calificar-nombre-btn {
-    font-size: x-large;
-}
-
-.calificar-contenedor-auto {
+.calificar-auto{
+    height: 35%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    background: #0075BC;
+    width: 100%;
+    border-radius: 10px;
 }
 
-.calificar-contenedor-auto a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: bold;
-    font-size: 110%;
-}
-
-.calificar-contenedor-auto button {
-    background-color: transparent;
-    border: 0;
-    color: rgb(0, 0, 0);
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: bold;
-    font-size: 110%;
+.calificar-administracion{
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    background: #0075BC;
+    border-radius: 10px;
 }
 
 
-/* jefe  */
-
-.empleado-item-jefe{
-    background-color: transparent;
-    border: none;
-    color: #FFF;
-    font-size: 17px;
+.calificar-imagen{
+    max-height: 70%;
+}
+.auto-calificar-btnmodal{
+    background: transparent;
     width: 50%;
-    margin-top: 3%;
-    border-bottom: 1px solid #FFF;
+    padding: 2%;
+}
+.calificar-btnmodal{
+    background: transparent;
+    width: 80%;
+    padding: 2%;
 }
 
-.empleado-enlace-jefe{
-    text-decoration: none;
-    color: #FFF;
-    font-size: 17px;
-    width: 50%;
-    margin-top: 3%;
-    text-align: center;
-    border-bottom: 1px solid #FFF;
-}
-
-.empleado-enlace-jefe:hover{
-    text-decoration: none;
-    color: #FFF;
-    font-size: 17px;
-    text-align: center;
-}
-
-.empleado-enlace-jefe-salir{
-    text-decoration: none;
-    color: #FFF;
-    font-size: 20px;
-    width: 70%;
-    text-align: right;
-    margin-top: 2%;
-}
-
-.empleado-enlace-jefe-salir:hover{
-    text-decoration: none;
-    color: #FFF;
-    font-size: 20px;
-    width: 70%;
-    text-align: right;
-    margin-top: 2%;
+.calificar-btn-disable{
+    background: transparent;
+    width: 80%;
+    padding: 2%;
 }
 
 /* Inventario Por Area*/
@@ -720,4 +805,3 @@
     align-items: center;
     margin: 2% 5% 2% 5%;
 }
-

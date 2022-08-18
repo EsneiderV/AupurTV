@@ -26,7 +26,7 @@ $mes = date('m');
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="calificacionArea-html">
 
 <head>
     <meta charset="UTF-8">
