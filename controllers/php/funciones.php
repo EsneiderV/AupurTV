@@ -160,6 +160,11 @@ function guardarCalificaciones($idP,$idCalificante,$idCalificador,$nota,$mes,$ar
         $insertar = mysqli_query($conexion, $query);
 }
 
+function guardarComentario($mensaje,$idP,$idCalificante,$idCalificador,$mes,$conexion)
+{
+    $query = "UPDATE `calificaciones` SET mensaje='$mensaje' WHERE `idP`= '$idP' and `idCalificante`= '$idCalificante' and `idCalificador`='$idCalificador'  and `mes`= '$mes'";
+    $insertar = mysqli_query($conexion, $query);
+}
 
 //Mi inventario
 

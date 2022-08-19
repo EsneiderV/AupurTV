@@ -19,11 +19,16 @@ if (isset($_POST['calificar'])) {
   $nota = $_POST['valor'];
   $tipo = $_POST['tipo'];
   $rol = $_SESSION['rol'];
+  $mensaje = $_POST['mensaje'];
   $mes = date('m');
   $preguntas = mostrarPreguntasid($tipo, $conexion);
   foreach ($nota as $key => $value) {
     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area, $preguntas[$key][1], $rol, $_SESSION['area'], $conexion);
   }
+  if($mensaje != ""){
+    guardarComentario($mensaje,$preguntas[0][0],$idCalificante,$idCalificador,$mes,$conexion);
+  }
+
   echo '<script type="text/javascript">
         window.location.href="calificar.php";
         </script>';
@@ -217,11 +222,11 @@ $mes = date('m'); // retiene el mes actual
               $preguntas = mostrarPreguntas(0, $conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
+                <div class="calificar-div-preguntas"> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
               <?php
               }
               ?>
-              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="5"></textarea>
+              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="5" name="mensaje"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -252,11 +257,11 @@ $mes = date('m'); // retiene el mes actual
               $preguntas = mostrarPreguntas(1, $conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
+                <div class="calificar-div-preguntas"> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
               <?php
               }
               ?>
-              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="5"></textarea>
+              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="5" name="mensaje"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -284,7 +289,7 @@ $mes = date('m'); // retiene el mes actual
               $preguntas = mostrarPreguntas(0, $conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
+                <div class="calificar-div-preguntas"> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
               <?php
               }
               ?>
@@ -298,9 +303,6 @@ $mes = date('m'); // retiene el mes actual
       </div>
     </div>
   </div>
-
-
-
 
 
 
