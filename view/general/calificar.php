@@ -93,7 +93,7 @@ $mes = date('m'); // retiene el mes actual
 <body class="calificar-body">
 
   <div class="calificar-nav">
-    <a class="calificar-volver-atras" href="<?php echo $redirecionar ?>"> ᗕ Volver atrás</a>
+    <a class="calificar-volver-atras" href="<?php echo $redirecionar ?>"> ᗕ Atrás</a>
     <h1 class="calificar-titulo">Calificación</h1>
   </div>
 
@@ -155,44 +155,44 @@ $mes = date('m'); // retiene el mes actual
 
     <div class="calificar-empleados">
 
-    
-    <?php
 
-    $areas = mostrarArea($conexion); //recolecta todas las areas
-    while ($area = mysqli_fetch_array($areas)) { // mostrar cada area en un cuadro
-      $usuarios = mostrarUsuario($conexion, $_SESSION['id'], $area['codigo']);
-      echo "<div class='calificar-contenedor-empleado'>";
-      echo "<h3 class='calificar-contenedor-titulo'>" . strtoupper($area['nombre']) . "</h1>";
-      while ($usuario = mysqli_fetch_array($usuarios)) {
-        $calificado = empleadoCalificado($mes, $_SESSION['id'], $usuario['id'], $conexion);
-        $modal = '';
-        if ($usuario['area'] == $_SESSION['area']) {
-          $modal = '#completo';
-        } else {
-          $modal = '#general';
+      <?php
+
+      $areas = mostrarArea($conexion); //recolecta todas las areas
+      while ($area = mysqli_fetch_array($areas)) { // mostrar cada area en un cuadro
+        $usuarios = mostrarUsuario($conexion, $_SESSION['id'], $area['codigo']);
+        echo "<div class='calificar-contenedor-empleado'>";
+        echo "<h3 class='calificar-contenedor-titulo'>" . strtoupper($area['nombre']) . "</h1>";
+        while ($usuario = mysqli_fetch_array($usuarios)) {
+          $calificado = empleadoCalificado($mes, $_SESSION['id'], $usuario['id'], $conexion);
+          $modal = '';
+          if ($usuario['area'] == $_SESSION['area']) {
+            $modal = '#completo';
+          } else {
+            $modal = '#general';
+          }
+          if ($calificado->num_rows > 0) {
+      ?>
+            <button class="calificar-btn-disable" disabled>
+              <?php echo $usuario['nombre'] ?>
+            </button>
+          <?php
+
+
+          } else {
+          ?>
+            <button class="btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $usuario['nombre'] ?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
+              <?php echo $usuario['nombre'] ?>
+            </button>
+
+      <?php
+          }
         }
-        if ($calificado->num_rows > 0) {
-    ?>
-          <button class="calificar-btn-disable" disabled>
-            <?php echo $usuario['nombre'] ?>
-          </button>
-        <?php
-
-
-        } else {
-        ?>
-          <button class="btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $usuario['nombre'] ?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
-            <?php echo $usuario['nombre'] ?>
-          </button>
-
-    <?php
-        }
+        echo "</div>";
       }
-      echo "</div>";
-    }
-    ?>
-    
-    <div class="calificar-basio"></div>
+      ?>
+
+      <div class="calificar-basio"></div>
     </div>
 
   </div>
@@ -204,7 +204,7 @@ $mes = date('m'); // retiene el mes actual
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <h5 class="modal-title1 calificar-modal-titulo" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -217,11 +217,11 @@ $mes = date('m'); // retiene el mes actual
               $preguntas = mostrarPreguntas(0, $conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div><?php echo $pregunta['pregunta'] ?> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="numero">5</span></div>
+                <div> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
               <?php
               }
               ?>
-              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje"></textarea>
+              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="5"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -239,7 +239,7 @@ $mes = date('m'); // retiene el mes actual
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title1" id="exampleModalLabel"></h5>
+          <h5 class="modal-title calificar-modal-titulo" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -252,11 +252,11 @@ $mes = date('m'); // retiene el mes actual
               $preguntas = mostrarPreguntas(1, $conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div><?php echo $pregunta['pregunta'] ?> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="numero">5</span></div>
+                <div> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
               <?php
               }
               ?>
-              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje"></textarea>
+              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="5"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -274,7 +274,7 @@ $mes = date('m'); // retiene el mes actual
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Auto evaluación</h5>
+          <h5 class="modal-title1 calificar-modal-titulo" id="exampleModalLabel">Auto evaluación</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -284,7 +284,7 @@ $mes = date('m'); // retiene el mes actual
               $preguntas = mostrarPreguntas(0, $conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div><?php echo $pregunta['pregunta'] ?> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="numero">5</span></div>
+                <div> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
               <?php
               }
               ?>

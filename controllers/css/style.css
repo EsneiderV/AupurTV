@@ -292,6 +292,7 @@
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-around;
+    font-family: DBoaldA;
 }
 
 .empleado-items {
@@ -313,6 +314,7 @@
     width: 50%;
     margin-top: 3%;
     border-bottom: 1px solid #FFF;
+    font-family: DBoaldA;
 }
 
 .empleado-enlace {
@@ -323,6 +325,7 @@
     margin-top: 3%;
     text-align: center;
     border-bottom: 1px solid #FFF;
+    font-family: DBoaldA;
 }
 
 .empleado-enlace:hover {
@@ -330,6 +333,7 @@
     color: #FFF;
     font-size: 30px;
     text-align: center;
+    font-family: DBoaldA;
 }
 
 .empleado-enlace-salir {
@@ -339,6 +343,7 @@
     width: 70%;
     text-align: right;
     margin-top: 2%;
+    font-family: DBoaldA;
 }
 
 .empleado-enlace-salir:hover {
@@ -348,10 +353,12 @@
     width: 70%;
     text-align: right;
     margin-top: 2%;
+    font-family: DBoaldA;
 }
 
 .empleado-enlace-calificar {
     margin-top: 0;
+    font-family: DBoaldA;
 }
 
 /* jefe  */
@@ -364,6 +371,7 @@
     width: 50%;
     margin-top: 3%;
     border-bottom: 1px solid #FFF;
+    font-family: DBoaldA;
 }
 
 .empleado-enlace-jefe {
@@ -374,6 +382,7 @@
     margin-top: 3%;
     text-align: center;
     border-bottom: 1px solid #FFF;
+    font-family: DBoaldA;
 }
 
 .empleado-enlace-jefe:hover {
@@ -381,6 +390,7 @@
     color: #FFF;
     font-size: 17px;
     text-align: center;
+    font-family: DBoaldA;
 }
 
 .empleado-enlace-jefe-salir {
@@ -390,6 +400,7 @@
     width: 70%;
     text-align: right;
     margin-top: 2%;
+    font-family: DBoaldA;
 }
 
 .empleado-enlace-jefe-salir:hover {
@@ -399,6 +410,7 @@
     width: 70%;
     text-align: right;
     margin-top: 2%;
+    font-family: DBoaldA;
 }
 
 @media screen and (max-width: 4100px) and (min-width: 1800px) {
@@ -567,17 +579,24 @@
 .calificar-volver-atras{
     margin-left: 3%;
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: #f36c35;
     font-weight: bold;
+    font-size: 150%; 
+    font-family: DBoaldA;
 }
 .calificar-volver-atras:hover{
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 150%;
+    color: #f36c35;
+    font-family: DBoaldA;
 }
 
 .calificar-titulo{
-   margin-left: 30%;
+   margin-left: 35%;
    font-weight: bold;
+   color: #f36c35;
+   font-family: DBoaldA;
 }
 
 .calificar-cuerpo{
@@ -650,6 +669,7 @@
     border: none;
     border-bottom: 2px solid #FFF;
     font-weight: bold;
+    font-family: DBoaldA;
 }
 .calificar-btnmodal{
     background: transparent;
@@ -659,6 +679,7 @@
     border: none;
     border-bottom: 2px solid #FFF;
     font-weight: bold;
+    font-family: DBoaldA;
 }
 
 .calificar-btn-disable{
@@ -669,12 +690,15 @@
     border: none;
     border-bottom: 2px solid #f36c35;
     font-weight: bold;
+    font-family: DBoaldA;
 }
 
 .calificar-contenedor-titulo{
     font-size: 180%;
     font-weight: bold;
-    color: #FFF;
+    color:#f36c35;
+    -webkit-text-stroke: 0.1px #fff;
+    font-family: DBoaldA;
 }
 
 .calificar-empleados{
@@ -686,6 +710,23 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.calificar-modal-titulo{
+    color: #f36c35;
+    font-family: DBoaldA;
+    font-size: 140%;
+}
+
+.calificar-prefunta{
+    font-family: DBoaldA;
+    font-size: 140%;
+}
+
+.calificar-numero{
+    font-family: DBoaldA;
+    font-size: 140%;
+}
+
 
 @media screen and (max-width: 1000px) {
 
