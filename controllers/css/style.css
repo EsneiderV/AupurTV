@@ -27,6 +27,10 @@
 
 
 /* Inicio de cesccion */
+.modal-title-calificar{
+    width: 100%;
+    text-align: center;
+}
 
 .index-body {
     height: 100%;
@@ -679,7 +683,6 @@
     font-size: 140%;
     border: none;
     border-bottom: 2px solid #FFF;
-    font-weight: bold;
     font-family: 'Roboto', sans-serif;
 }
 .calificar-btnmodal{
@@ -689,7 +692,6 @@
     font-size: 140%;
     border: none;
     border-bottom: 2px solid #FFF;
-    font-weight: bold;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -700,7 +702,6 @@
     font-size: 140%;
     border: none;
     border-bottom: 2px solid #f36c35;
-    font-weight: bold;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -708,7 +709,6 @@
     font-size: 180%;
     font-weight: bold;
     color:#f36c35;
-    -webkit-text-stroke: 0.1px #fff;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -761,6 +761,8 @@
         align-items: center;
         margin-bottom: 15%;
     }
+
+    
     .calificar-auto {
         height: 100%;
         width: 45%;
@@ -787,6 +789,18 @@
     .calificar-body {
         min-height: 100%;
         width: 100%;
+    }
+
+    .calificar-btnmodal{
+        border-bottom: 1px solid #fff;
+    }
+
+    .auto-calificar-btnmodal{
+        border-bottom: 1px solid #fff;
+    }
+
+    .calificar-btn-disable{
+        border-bottom: 1px solid #f36c35;
     }
 
     .calificar-cuerpo {

@@ -209,7 +209,7 @@ $mes = date('m'); // retiene el mes actual
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title1 calificar-modal-titulo" id="exampleModalLabel"></h5>
+          <h5 class="modal-title1 calificar-modal-titulo modal-title-calificar" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -244,7 +244,7 @@ $mes = date('m'); // retiene el mes actual
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title calificar-modal-titulo" id="exampleModalLabel"></h5>
+          <h5 class="modal-title calificar-modal-titulo modal-title-calificar" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -279,7 +279,7 @@ $mes = date('m'); // retiene el mes actual
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title1 calificar-modal-titulo" id="exampleModalLabel">Auto evaluación</h5>
+          <h5 class="modal-title1 calificar-modal-titulo modal-title-calificar" id="exampleModalLabel">Auto evaluación</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
