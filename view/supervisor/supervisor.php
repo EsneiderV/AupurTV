@@ -136,8 +136,7 @@ if (isset($_SESSION['rol'])) {
     </div>
 
 
-
-
+    
 </body>
 
 </html>

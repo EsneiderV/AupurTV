@@ -1,30 +1,15 @@
 @font-face {
-    font-family: Dcondensed;
-    src: url('/fonts/D-DINCONDENSED.OTF') format('opentype');
-}
-
-@font-face {
-    font-family: DBold;
-    src: url('/fonts/D-DINEXP-BOLD.OTF') format('opentype');
-}
-
-@font-face {
-    font-family: DBoldA;
-    src: url('/fonts/DIN-Alternate-Bold.otf') format('opentype');
-}
-
-@font-face {
     font-family: Robot;
     src: url('/fonts/Roboto-Regular.ttf');
 }
 
 @import url('https://fonts.googleapis.com/css2? family= Roboto:wght@300 & display=swap');
 
+
 * {
     margin: 0%;
     padding: 0%;
 }
-
 
 /* Inicio de cesccion */
 .modal-title-calificar{
@@ -41,7 +26,6 @@
     background-attachment: fixed;
     background-size: cover;
 }
-
 
 .index-login-container {
     height: 35em;
@@ -479,7 +463,6 @@
         width: 100%;
         height: 40%;
         border-radius: 0;
-
     }
 
     .empleado-contenedor-logo {
@@ -550,18 +533,10 @@
         margin-top: 4%;
     }
 
-    
-
-
 }
 
 
-
-
-
 /* Calificar */
-
-
 .calificar-html,
 .calificar-body {
     height: 100%;
