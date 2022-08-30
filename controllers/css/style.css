@@ -371,6 +371,12 @@
     margin-top: 0;
     font-family: 'Roboto', sans-serif;
 }
+.empleados-p-directorio{
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
 
 /* jefe  */
 
@@ -992,6 +998,7 @@
 
 .modal-title {
     text-align: center;
+    color: #e36b0f;;
 }
 
 .modificar {
