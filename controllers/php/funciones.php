@@ -193,7 +193,7 @@ function  mostrarDirectorio($idArea,$conexion)
 // muestra al jefe de area todo el inventario de su area
 function mostarInventarioAreaPersona($area,$conexion)
 {
-        $query = "SELECT `id_responsable`, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE inventariogeneral.area = '$area' GROUP BY id_responsable";
+        $query = "SELECT * FROM `usuarios` WHERE usuarios.area = '$area'";
         return $consulta = mysqli_query($conexion, $query);
 }
 
@@ -235,12 +235,12 @@ function modificarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$c
 }
 
 // nos trae los articulos de cada persona a cargo
-function mostarInventarioAreaProducto($id,$conexion)
-{
+// function mostarInventarioAreaProducto($id,$conexion)
+// {
 
-    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE `id_responsable` = '$id'";
-    return $consulta = mysqli_query($conexion, $query);
-}
+//     $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE `id_responsable` = '$id'";
+//     return $consulta = mysqli_query($conexion, $query);
+// }
 
 
 ///////// Calificacion area//
