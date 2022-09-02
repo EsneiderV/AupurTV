@@ -896,14 +896,76 @@
 }
 
 .inventarioArea-abrirInventario{
-    text-decoration: none;
-    background-color: transparent;
-    border: none;
     color: #FFF;
-    font-size: 22px;
-    text-align: center;
-    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+
+.inventarioAreaGerente-emergente-contenedor{
+    position: fixed;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inventarioAreaGerente-emergente{
+    margin-top: 5%;
+    height: 80%;
+    width: 60%;
+    background-color: #fff;
+    border-radius: 2%;
+}
+
+
+.invetarioArea-emergente-navar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 15%;
+    border-bottom: 2px solid #DEE2E6;
+}
+
+.inventarioAreaGerente-emergente-x{
+    text-decoration: none;
+    color: gray;
+    font-size: 200%;
+    width: 10%;
+    text-align: center;
+}
+
+
+.inventarioAreaGerente-emergente-x:hover{
+    color: gray;
+}
+
+
+.invetarioArea-emergente-nombre{
+    width: 90%;
+    text-align: center;
+}
+
+.invetarioArea-emergente-main{
+    overflow-x: auto;
+    height: 70%;
+}
+
+.invetarioArea-emergente-footer{
+    height: 15%;
+    border-top: 2px solid #DEE2E6;
+}
+
+
+.inventarioArea-abrirInventario:hover{
+    color: #FFF;
 }
 
 .inventarioArea-abrirInventario:active {

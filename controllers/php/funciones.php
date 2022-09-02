@@ -252,6 +252,12 @@ function mostarUsuarioCalificacionArea($area,$conexion)
         return $consulta = mysqli_query($conexion, $query);
 }
 
+function mostarUsuarioCalificacionAreaEmergente($id,$conexion)
+{
+        $query = "SELECT * FROM `usuarios`  WHERE `id` = '$id'";
+        return $consulta = mysqli_query($conexion, $query);
+}
+
 // nos muestra el promedio por cada pregunta de un usuario determinado
 function calificacionPersonaPorcentage($mes,$rol,$id,$conexion)
 {

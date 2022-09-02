@@ -55,7 +55,17 @@ if (isset($_SESSION['rol'])) {
                     <a href="../general/calificar.php" class="empleado-enlace-jefe empleado-enlace-calificar">Calificar</a>
                     <button class="empleado-item-jefe" data-bs-toggle="modal" data-bs-target="#inventario">Inventario</button>
                     <button class="empleado-item-jefe" data-bs-toggle="modal" data-bs-target="#directorio">Directorio</button>
-                    <a class="empleado-enlace-jefe" href="inventarioArea.php">Inventario área</a>
+                    <?php
+                        if($_SESSION['area'] == 1 && $_SESSION['rol'] == 3 ){
+                            ?>
+                            <a class="empleado-enlace-jefe" href="inventarioAreaGerente.php">Inventario área</a>
+                            <?php
+                        }else{
+                            ?>
+                            <a class="empleado-enlace-jefe" href="">Inventario área</a>
+                            <?php
+                        }
+                    ?>
                     <a class="empleado-enlace-jefe" href="calificacionArea.php">Calificaciones área</a>
                     <a class="empleado-enlace-jefe" target="_blank" href="https://mail.google.com/mail/u/0/">Correo</a>
                     <a href="../../models/Cerrar.php" class="empleado-enlace-jefe-salir">Salir</a>

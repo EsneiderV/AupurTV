@@ -45,7 +45,7 @@ if (isset($_POST['agregar'])) {
     } else {
         insertarInventarioAreaProducto($cod, $nombre, $estado, $id_responsable, $area, $conexion);
         echo '<script type="text/javascript">
-            window.location.href="inventarioArea.php";
+            window.location.href="inventarioAreaGerente.php";
             </script>';
     }
 }
@@ -58,7 +58,7 @@ if (isset($_POST['modificar'])) {
 
     modificarInventarioAreaProducto($cod, $nombre, $estado, $id_responsable, $conexion);
     echo '<script type="text/javascript">
-    window.location.href="inventarioArea.php";
+    window.location.href="inventarioAreaGerente.php";
     </script>';
 }
 
@@ -81,6 +81,7 @@ if (isset($_POST['modificar'])) {
 
 <body class="inventarioArea-body">
 
+    <!-- Agregar inventario -->
     <div class="inventarioArea-agregar-articulo">
         <h3 class="text-center titulo-agregar">AGREGAR</h3>
         <form action="" class="inventarioArea-formulario" method="POST" id="formulario">
@@ -100,12 +101,71 @@ if (isset($_POST['modificar'])) {
         </form>
     </div>
 
+    <!-- Navegador -->
     <div class="inventarioArea-div-nav">
         <a href="../supervisor/supervisor.php" class="inventarioArea-volver"> ᗕ Atrás</a>
         <h1 class="inventarioArea-titulo">Inventario área</h1>
     </div>
 
+    <!-- Contenedor de contenedorcitos de cada persona y area -->
     <div class="inventarioArea-contenedor">
+
+        <div class="inventarioArea-contenedor-empleados">
+            <div class="inventarioArea-contenedor-img">
+                <img class="inventarioArea-img  rounded-circle " src="../../image/logoinventario.png" alt="foto de perfil">
+            </div>
+
+            <div class="inventarioArea-contenedor-nombre">
+                <h4 class="inventarioArea-nombre"> General </h4>
+            </div>
+
+            <div class="inventarioArea-contenedor-abrirInventario">
+                <a href="" class="inventarioArea-abrirInventario">Inventario</a>
+            </div>
+        </div>
+
+        <div class="inventarioArea-contenedor-empleados">
+            <div class="inventarioArea-contenedor-img">
+                <img class="inventarioArea-img  rounded-circle " src="../../image/logoinventario.png" alt="foto de perfil">
+            </div>
+
+            <div class="inventarioArea-contenedor-nombre">
+                <h4 class="inventarioArea-nombre"> Area Administrativa </h4>
+            </div>
+
+            <div class="inventarioArea-contenedor-abrirInventario">
+                <a href="inventarioAreaGerente.php?identifier=1" class="inventarioArea-abrirInventario">Inventario</a>
+            </div>
+        </div>
+
+        <div class="inventarioArea-contenedor-empleados">
+            <div class="inventarioArea-contenedor-img">
+                <img class="inventarioArea-img  rounded-circle " src="../../image/logoinventario.png" alt="foto de perfil">
+            </div>
+
+            <div class="inventarioArea-contenedor-nombre">
+                <h4 class="inventarioArea-nombre"> Area Tecnica </h4>
+            </div>
+
+            <div class="inventarioArea-contenedor-abrirInventario">
+                <a href="" class="inventarioArea-abrirInventario">Inventario</a>
+            </div>
+        </div>
+
+        <div class="inventarioArea-contenedor-empleados">
+            <div class="inventarioArea-contenedor-img">
+                <img class="inventarioArea-img  rounded-circle " src="../../image/logoinventario.png" alt="foto de perfil">
+            </div>
+
+            <div class="inventarioArea-contenedor-nombre">
+                <h4 class="inventarioArea-nombre"> Area Canal </h4>
+            </div>
+
+            <div class="inventarioArea-contenedor-abrirInventario">
+                <a href="" class="inventarioArea-abrirInventario">Inventario</a>
+            </div>
+        </div>
+
         <?php
         while ($persona = mysqli_fetch_array($personas)) {
         ?>
@@ -119,7 +179,7 @@ if (isset($_POST['modificar'])) {
                 </div>
 
                 <div class="inventarioArea-contenedor-abrirInventario">
-                    <a href="" class="inventarioArea-abrirInventario">Inventario</a>
+                    <a href="inventarioAreaGerente.php?identifier=<?php echo $persona['id'] ?>" class="inventarioArea-abrirInventario">Inventario</a>
                 </div>
             </div>
         <?php
@@ -128,45 +188,42 @@ if (isset($_POST['modificar'])) {
 
     </div>
 
-    <!-- Modal para abrir el inventario-->
-    <div class="modal fade" id="abrirInventario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Inventario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Launch demo modal
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Descargar Inventario</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <?php
+    if (isset($_GET['identifier'])) {
+        $usuario = mostarUsuarioCalificacionAreaEmergente($_GET['identifier'], $conexion);
+        $personaNombre = mysqli_fetch_array($usuario);
+    ?>
+        <div class="inventarioAreaGerente-emergente-contenedor">
+
+            <div class="inventarioAreaGerente-emergente">
+                <div class="invetarioArea-emergente-navar">
+                    <?php
+                    echo "<h2 class='invetarioArea-emergente-nombre'>" . $personaNombre['nombre'] . "</h2>"
+                    ?>
+                    <a href="inventarioAreaGerente.php" class="inventarioAreaGerente-emergente-x">x</a>
                 </div>
-                <div class="modal-body">
-                    ...
+
+                <div class="invetarioArea-emergente-main">
+                    
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+
+                <div class="invetarioArea-emergente-footer">
+
                 </div>
             </div>
+
         </div>
-    </div>
+    <?php
+    }
+    ?>
+
+
+
+
+
+
+
 
 </body>
 
