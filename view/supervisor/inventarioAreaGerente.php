@@ -193,6 +193,7 @@ if (isset($_POST['modificar'])) {
     if (isset($_GET['identifier'])) {
         $usuario = mostarUsuarioCalificacionAreaEmergente($_GET['identifier'], $conexion);
         $personaNombre = mysqli_fetch_array($usuario);
+        $items = mostarInventarioAreaProducto($_GET['identifier'], $conexion)
     ?>
         <div class="inventarioAreaGerente-emergente-contenedor">
 
@@ -205,11 +206,46 @@ if (isset($_POST['modificar'])) {
                 </div>
 
                 <div class="invetarioArea-emergente-main">
-                    
+                    <hr>
+                    <?php
+                    while ($item = mysqli_fetch_array($items)) {
+                    ?>
+
+                        <div class="invetarioArea-emergente-main-contenedor-item">
+                            <p class="invetarioArea-emergente-main-item">
+                                <span>
+                                    <?php echo $item['cod'] ?>
+                                </span>
+
+                                <span>
+                                    <?php echo $item['nombre'] ?>
+                                </span>
+
+                                <span>
+                                    <?php echo $item['estado'] ?>
+                                </span>
+                            </p>
+
+                            <div class="invetarioArea-emergente-main-contenedor-btn">
+
+                                <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                    <i class="fa-solid fa-pen-to-square modificarL"></i>
+                                </button>
+
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $item['cod'] ?>">
+                                </a>
+                            </div>
+
+
+                        </div>
+                        <hr>
+                    <?php
+                    }
+                    ?>
                 </div>
 
                 <div class="invetarioArea-emergente-footer">
-
+                    <a href="inventarioAreaGerente.php" class="btn btn-secondary invetarioArea-emergente-footer-btn">Cerrar</a>
                 </div>
             </div>
 
@@ -220,6 +256,39 @@ if (isset($_POST['modificar'])) {
 
 
 
+
+    <!-- Modal para el boton de modificar articulos -->
+    <div class="modal fade" id="articulosModificar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Modificar articulo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        Código : <input autocomplete="off" readonly id="codigo" class="inventarioArea-item-formulario" type="number" name="codigo"> <br>
+                        Nombre : <input autocomplete="off" id="nombre" class="inventarioArea-item-formulario" type="text" name="nombre"> <br>
+                        Estado : <input autocomplete="off" id="estado" class="inventarioArea-item-formulario" type="text" name="estado"> <br>
+                        Empleado : <select class="inventarioArea-item-formulario" name="responsable">
+                            <option id="optionRes">Seleccione...</option>
+                            <?php
+                            while ($articulo = mysqli_fetch_array($articulos)) {
+                                echo "<option value=" . $articulo['id_responsable'] . ">" . $articulo['nombre_responsable'] . "</option>";
+                            }
+                            ?>
+                        </select>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" name="modificar" class="btn btn-primary">Modificar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

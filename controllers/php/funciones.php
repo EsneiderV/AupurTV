@@ -235,12 +235,12 @@ function modificarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$c
 }
 
 // nos trae los articulos de cada persona a cargo
-// function mostarInventarioAreaProducto($id,$conexion)
-// {
+function mostarInventarioAreaProducto($id,$conexion)
+{
 
-//     $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE `id_responsable` = '$id'";
-//     return $consulta = mysqli_query($conexion, $query);
-// }
+    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE `id_responsable` = '$id'";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
 
 ///////// Calificacion area//
