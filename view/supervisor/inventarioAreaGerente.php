@@ -215,7 +215,7 @@ if (isset($_POST['modificar'])) {
     ?>
         <div class="inventarioAreaGerente-emergente-contenedor">
 
-            <div class="inventarioAreaGerente-emergente">
+            <div class="inventarioAreaGerente-emergente-indivudual">
                 <div class="invetarioArea-emergente-navar">
                     <?php
                     echo "<h2 class='invetarioArea-emergente-nombre'>" . $personaNombre['nombre'] . "</h2>"
@@ -302,19 +302,19 @@ if (isset($_POST['modificar'])) {
 
                         <div class="invetarioArea-emergente-main-contenedor-item">
                             <p class="invetarioArea-emergente-main-item">
-                                <span>
+                                <span class="span-items">
                                     <?php echo $item['cod'] ?>
                                 </span>
 
-                                <span>
+                                <span class="span-items">
                                     <?php echo $item['nombre'] ?>
                                 </span>
 
-                                <span>
+                                <span class="span-items">
                                     <?php echo $item['estado'] ?>
                                 </span>
 
-                                <span>
+                                <span class="span-items">
                                     <?php echo $item['nombre_responsable'] ?>
                                 </span>
                             </p>
@@ -340,19 +340,19 @@ if (isset($_POST['modificar'])) {
 
                         <div class="invetarioArea-emergente-main-contenedor-item">
                             <p class="invetarioArea-emergente-main-item">
-                                <span>
+                                <span class="span-items">
                                     <?php echo $itemG['cod'] ?>
                                 </span>
 
-                                <span>
+                                <span class="span-items">
                                     <?php echo $itemG['nombre'] ?>
                                 </span>
 
-                                <span>
+                                <span class="span-items">
                                     <?php echo $itemG['estado'] ?>
                                 </span>
 
-                                <span>
+                                <span class="span-items">
                                     <?php if ($itemG['id_responsable'] == 'Noasignado') {
                                         echo 'No asignado';
                                     } else {
@@ -417,19 +417,19 @@ if (isset($_POST['modificar'])) {
                     ?>
                             <div class="invetarioArea-emergente-main-contenedor-item">
                                 <p class="invetarioArea-emergente-main-item">
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $sinAsignarItem['cod'] ?>
                                     </span>
 
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $sinAsignarItem['nombre'] ?>
                                     </span>
 
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $sinAsignarItem['estado'] ?>
                                     </span>
 
-                                    <span>
+                                    <span class="span-items">
                                         <?php if ($sinAsignarItem['area'] == 'Noasignado') {
                                             echo 'No asignado';
                                         } else {
@@ -473,19 +473,19 @@ if (isset($_POST['modificar'])) {
                             </style>
                             <div class="invetarioArea-emergente-main-contenedor-item">
                                 <p class="invetarioArea-emergente-main-item">
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $item['cod'] ?>
                                     </span>
 
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $item['nombre'] ?>
                                     </span>
 
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $item['estado'] ?>
                                     </span>
 
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $item['nombre_responsable'] ?>
                                     </span>
                                 </p>
@@ -511,19 +511,19 @@ if (isset($_POST['modificar'])) {
 
                             <div class="invetarioArea-emergente-main-contenedor-item">
                                 <p class="invetarioArea-emergente-main-item">
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $itemG['cod'] ?>
                                     </span>
 
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $itemG['nombre'] ?>
                                     </span>
 
-                                    <span>
+                                    <span class="span-items">
                                         <?php echo $itemG['estado'] ?>
                                     </span>
 
-                                    <span>
+                                    <span class="span-items">
                                         <?php if ($itemG['id_responsable'] == 'Noasignado') {
                                             echo 'No asignado';
                                         } else {
@@ -561,8 +561,6 @@ if (isset($_POST['modificar'])) {
     <?php
     }
     ?>
-
-
 
 
     <!-- Modal para el boton de modificar articulos -->

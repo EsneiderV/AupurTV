@@ -921,11 +921,22 @@
 }
 
 .inventarioAreaGerente-emergente{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+}
+
+.inventarioAreaGerente-emergente-indivudual{
     margin-top: 5%;
     height: 80%;
     width: 60%;
-    background-color: #fff;
     border-radius: 2%;
+    background-color: #fff;
+}
+
+.span-items{
+    width: 25%;
+    text-align: center;
 }
 
 
