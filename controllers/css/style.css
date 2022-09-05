@@ -954,8 +954,15 @@
 
 
 .invetarioArea-emergente-nombre{
+    color: #F36C35;
     width: 90%;
+    text-transform: uppercase;
     text-align: center;
+}
+
+.inventarioAreaGerenteTituloArea{
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .invetarioArea-emergente-main{

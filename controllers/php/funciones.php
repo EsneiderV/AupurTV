@@ -242,6 +242,19 @@ function mostarInventarioAreaProducto($id,$conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+// nos trae los articulos por area de la empresa
+function mostrarInventarioPorArea($cod,$conexion)
+{
+
+    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE inventariogeneral.area = '$cod'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+function mostrarAreaPorCodigo($cod,$conexion)
+{
+    $query = "SELECT * FROM `area` WHERE codigo = '$cod' ";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
 ///////// Calificacion area//
 
