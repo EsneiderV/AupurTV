@@ -242,13 +242,32 @@ function mostarInventarioAreaProducto($id,$conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+
+
 // nos trae los articulos por area de la empresa
 function mostrarInventarioPorArea($cod,$conexion)
 {
 
-    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE inventariogeneral.area = '$cod' ";
+    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE inventariogeneral.area = '$cod' AND inventariogeneral.id_responsable != 'Noasignado' ";
     return $consulta = mysqli_query($conexion, $query);
 }
+
+// nos trae los articulos por area de la empresa que no estan asignados a una persona
+function mostrarInventarioPorAreaGeneral($cod,$conexion)
+{
+
+    $query = "SELECT * FROM inventariogeneral WHERE area = '$cod' AND id_responsable = 'Noasignado'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+// nos trae los articulos por area de la empresa que no estan asignados a una area
+function mostrarInventarioPorAreaGeneralNoA($conexion)
+{
+
+    $query = "SELECT * FROM `inventariogeneral` WHERE id_responsable = 'Noasignado' AND area = 'Noasignado'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
 
 function mostrarAreaPorCodigo($cod,$conexion)
 {

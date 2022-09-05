@@ -1153,6 +1153,9 @@ option{
     margin-bottom: 20px;
 }
 
+.inventario-empleado-desable{
+    color: #DEE2E6;
+}
 
 
 /* Calificaciones Por Area*/
