@@ -88,14 +88,18 @@ if (isset($_POST['modificar'])) {
             <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="codigo" placeholder="Código artículo" required>
             <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="nombre" placeholder="Nombre artículo" required>
             <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="estado" placeholder="Estado artículo" required>
-            <select class="inventarioArea-item-formulario" id="select-agregar" name="responsable" required>
-                <option class="option-select" value="0">Seleccione...</option>
+            <select class="inventarioArea-item-formulario" id="select-agregar-area" name="responsable" required>
+                <option class="option-select" value="0">Areas</option>
                 <?php
-                while ($idPersona = mysqli_fetch_array($idPersonas)) {
-                    echo "<option value=" . $idPersona['id_responsable'] . ">" . $idPersona['nombre_responsable'] . "</option>";
+                $areasS = mostrarAreaDirectorio($conexion);
+                while ($areaS = mysqli_fetch_array($areasS)) {
+                    echo "<option value=" . $areaS['codigo'] . ">" . $areaS['nombre'] . "</option>";
                 }
                 ?>
+            </select>
 
+            <select class="inventarioArea-item-formulario" id="select-agregar-empleado" name="responsable" required>
+                <option class="option-select" value="0">Empleados</option>
             </select>
             <button class="inventarioArea-item-formulario-agregar" type="submit" name="agregar">Agregar</button>
         </form>
@@ -348,46 +352,46 @@ if (isset($_POST['modificar'])) {
                     <hr>
                     <?php
                     while ($area = mysqli_fetch_array($areas)) {
-                        echo "<h2 class='inventarioAreaGerenteTituloArea'>".$area['nombre']."</h2>";
-                       echo "<hr>";
-                        $items = mostrarInventarioPorArea($area['codigo'],$conexion);
-                        while ($item = mysqli_fetch_array($items) ){        
+                        echo "<h2 class='inventarioAreaGerenteTituloArea'>" . $area['nombre'] . "</h2>";
+                        echo "<hr>";
+                        $items = mostrarInventarioPorArea($area['codigo'], $conexion);
+                        while ($item = mysqli_fetch_array($items)) {
                     ?>
 
-                        <div class="invetarioArea-emergente-main-contenedor-item">
-                            <p class="invetarioArea-emergente-main-item">
-                                <span>
-                                    <?php echo $item['cod'] ?>
-                                </span>
+                            <div class="invetarioArea-emergente-main-contenedor-item">
+                                <p class="invetarioArea-emergente-main-item">
+                                    <span>
+                                        <?php echo $item['cod'] ?>
+                                    </span>
 
-                                <span>
-                                    <?php echo $item['nombre'] ?>
-                                </span>
+                                    <span>
+                                        <?php echo $item['nombre'] ?>
+                                    </span>
 
-                                <span>
-                                    <?php echo $item['estado'] ?>
-                                </span>
+                                    <span>
+                                        <?php echo $item['estado'] ?>
+                                    </span>
 
-                                <span>
-                                    <?php echo $item['nombre_responsable'] ?>
-                                </span>
-                            </p>
+                                    <span>
+                                        <?php echo $item['nombre_responsable'] ?>
+                                    </span>
+                                </p>
 
-                            <div class="invetarioArea-emergente-main-contenedor-btn">
+                                <div class="invetarioArea-emergente-main-contenedor-btn">
 
-                                <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
-                                    <i class="fa-solid fa-pen-to-square modificarL"></i>
-                                </button>
+                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                        <i class="fa-solid fa-pen-to-square modificarL"></i>
+                                    </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $item['cod'] ?>">
-                                </a>
+                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $item['cod'] ?>">
+                                    </a>
+                                </div>
+
+
                             </div>
-
-
-                        </div>
-                        <hr>
+                            <hr>
                     <?php
-                    }
+                        }
                     }
                     ?>
                 </div>
@@ -439,8 +443,28 @@ if (isset($_POST['modificar'])) {
     </div>
 
 
+    <script src="../../controllers/js/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function() {
 
+            var empleados = $('#select-agregar-empleado');
 
+            $('#select-agregar-area').change(function() {
+                var id_area = $(this).val();
+
+                $.ajax({
+                    data: {id_area: id_area},
+                    dataType: 'html',
+                    type: 'POST',
+                    url: 'get_empleados.php',
+                }).done(function(data) {
+                    empleados.html(data);
+                });
+
+            });
+
+        });
+    </script>
 
 </body>
 
@@ -484,8 +508,19 @@ if (isset($_POST['modificar'])) {
     const form = document.querySelector('#formulario')
     const btn = document.querySelector('.inventarioArea-item-formulario-agregar')
 
+    
     btn.addEventListener('click', e => {
-        const select = document.querySelector('#select-agregar').value
+        const select = document.querySelector('#select-agregar-area').value
+        console.log(select)
+        if (select == 0) {
+            e.preventDefault();
+            alert('Por favor seleccione una area')
+        }
+
+    })
+
+    btn.addEventListener('click', e => {
+        const select = document.querySelector('#select-agregar-empleado').value
         console.log(select)
         if (select == 0) {
             e.preventDefault();
@@ -493,4 +528,5 @@ if (isset($_POST['modificar'])) {
         }
 
     })
+
 </script>
