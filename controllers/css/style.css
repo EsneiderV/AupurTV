@@ -1132,7 +1132,7 @@ option{
 }
 
 .fa-trash-can:before {
-    color: black;
+    color: #0075BC;
 }
 
 .fa-trash-can:hover:before {
@@ -1140,7 +1140,7 @@ option{
 }
 
 .fa-pen-to-square:before {
-    color: black;
+    color:  #0075BC;
 }
 
 .fa-pen-to-square:hover:before {

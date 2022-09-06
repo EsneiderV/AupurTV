@@ -23,10 +23,6 @@ $articulos = mostarUsuarioArea($_SESSION['area'], $conexion);
 if (isset($_GET['eliminar'])) {
     $cod = $_GET['eliminar'];
     eliminarProducto($cod, $conexion);
-
-    echo '<script type="text/javascript">
-        window.location.href="inventarioArea.php";
-      </script>';
 }
 
 if (isset($_POST['agregar'])) {
@@ -206,6 +202,8 @@ if (isset($_POST['modificar'])) {
 
     </div>
 
+
+
     <!-- Inventario por cada persona -->
     <?php
     if (isset($_GET['identifier'])) {
@@ -250,7 +248,7 @@ if (isset($_POST['modificar'])) {
                                     <i class="fa-solid fa-pen-to-square modificarL"></i>
                                 </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $item['cod'] ?>">
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifier=<?php echo $_GET['identifier'] ?>">
                                 </a>
                             </div>
 
@@ -325,7 +323,7 @@ if (isset($_POST['modificar'])) {
                                     <i class="fa-solid fa-pen-to-square modificarL"></i>
                                 </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $item['cod'] ?>">
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifierArea=<?php echo $_GET['identifierArea']?>">
                                 </a>
                             </div>
 
@@ -368,7 +366,7 @@ if (isset($_POST['modificar'])) {
                                     <i class="fa-solid fa-pen-to-square modificarL"></i>
                                 </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $item['cod'] ?>">
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>&identifierArea=<?php echo $_GET['identifierArea']?>">
                                 </a>
                             </div>
 
@@ -445,7 +443,7 @@ if (isset($_POST['modificar'])) {
                                         <i class="fa-solid fa-pen-to-square modificarL"></i>
                                     </button>
 
-                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $item['cod'] ?>">
+                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $sinAsignarItem['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral'] ?>">
                                     </a>
                                 </div>
 
@@ -496,7 +494,7 @@ if (isset($_POST['modificar'])) {
                                         <i class="fa-solid fa-pen-to-square modificarL"></i>
                                     </button>
 
-                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $item['cod'] ?>">
+                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral']?>">
                                     </a>
                                 </div>
 
@@ -539,7 +537,7 @@ if (isset($_POST['modificar'])) {
                                         <i class="fa-solid fa-pen-to-square modificarL"></i>
                                     </button>
 
-                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioArea.php?eliminar=<?php echo $item['cod'] ?>">
+                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral']?>">
                                     </a>
                                 </div>
 
