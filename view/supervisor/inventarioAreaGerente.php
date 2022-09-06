@@ -98,7 +98,7 @@ if (isset($_POST['modificar'])) {
                 <?php
                 $areasS = mostrarAreaDirectorio($conexion);
                 while ($areaS = mysqli_fetch_array($areasS)) {
-                    echo "<option value=" . $areaS['codigo'] . ">" . $areaS['nombre'] . "</option>";
+                    echo "<option class='option-select' value=" . $areaS['codigo'] . ">" . $areaS['nombre'] . "</option>";
                 }
                 ?>
                 <option class="option-select" value="Noasignado">No asignado</option>
@@ -566,16 +566,19 @@ if (isset($_POST['modificar'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Modificar articulo</h5>
+                    <h5 class="modal-title modf-Art" id="exampleModalLabel"> MODIFICAR ARTÍCULO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
-                        Código : <input autocomplete="off" readonly id="codigo" class="inventarioArea-item-formulario" type="number" name="codigo"> <br>
-                        Nombre : <input autocomplete="off" id="nombre" class="inventarioArea-item-formulario" type="text" name="nombre"> <br>
-                        Estado : <input autocomplete="off" id="estado" class="inventarioArea-item-formulario" type="text" name="estado"> <br>
-                        Empleado : <select class="inventarioArea-item-formulario" name="responsable">
-                            <option id="optionRes">Seleccione...</option>
+                    <form class="inventarioArea-items-modificar" action="" method="POST">
+                        <input autocomplete="off" readonly id="codigo" class="inventarioArea-item-formulario-modf" type="number" name="codigo" placeholder="Código" readonly> <br>
+
+                        <input autocomplete="off" id="nombre" class="inventarioArea-item-formulario-modf" type="text" name="nombre" placeholder="Nombre"> <br>
+                        
+                        <input autocomplete="off" id="estado" class="inventarioArea-item-formulario-modf" type="text" name="estado" placeholder="Estado"> <br>
+                        
+                        <select class="inventarioArea-item-formulario-modf modf" name="responsable">
+                            <option id="optionRes">Areas</option>
                             <?php
                             while ($articulo = mysqli_fetch_array($articulos)) {
                                 echo "<option value=" . $articulo['id_responsable'] . ">" . $articulo['nombre_responsable'] . "</option>";
@@ -583,7 +586,14 @@ if (isset($_POST['modificar'])) {
                             ?>
                         </select>
 
-
+                        <select class="inventarioArea-item-formulario-modf" name="responsable">
+                            <option id="optionRes">Empleados</option>
+                            <?php
+                            while ($articulo = mysqli_fetch_array($articulos)) {
+                                echo "<option value=" . $articulo['id_responsable'] . ">" . $articulo['nombre_responsable'] . "</option>";
+                            }
+                            ?>
+                        </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -637,7 +647,6 @@ if (isset($_POST['modificar'])) {
 </body>
 
 </html>
-
 
 <script>
     function eliminar() {

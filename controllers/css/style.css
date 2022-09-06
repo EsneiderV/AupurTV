@@ -1066,6 +1066,15 @@
     align-items: center;
 }
 
+.inventarioArea-items-modificar{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .inventarioArea-item-formulario {
     text-decoration: none;
     background-color: transparent;
@@ -1079,7 +1088,33 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
-option{
+.inventarioArea-item-formulario-modf{
+    display: flex;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #DEE2E6;
+    color: rgba(0, 0, 0, 0.998);
+    font-size: 20px;
+    width: 50%;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif; 
+}
+
+.modf{
+    margin-bottom: 5%;
+}
+
+.inventarioArea-item-formulario-modf:focus,.inventarioArea-item-formulario-modf:active{
+    outline: none;
+}
+
+.inventarioArea-item-formulario-modf::placeholder {
+    color: rgb(0, 0, 0);
+}
+
+.option-select{
     background-color: #0075BC;
     color: #fff;
 }
@@ -1140,7 +1175,7 @@ option{
 }
 
 .fa-pen-to-square:before {
-    color:  #0075BC;
+    color: #0075BC;
 }
 
 .fa-pen-to-square:hover:before {
@@ -1156,6 +1191,10 @@ option{
 .modal-title {
     text-align: center;
     color: #e36b0f;;
+}
+
+.modf-Art{
+    margin-left: 28%;
 }
 
 .modificar {
