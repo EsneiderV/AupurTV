@@ -49,7 +49,11 @@ if (isset($_SESSION['rol'])) {
 
         <div class="empleado-contenedor-derecho">
             <div class="empleado-opciones">
-                <h1 class="empleado-nombre"> <?php echo strtoupper($_SESSION['nombre'] . ' ' . $_SESSION['apellidos']) ?></h1>
+                <h1 class="empleado-nombre"> <?php
+                $nombre = explode(' ',$_SESSION['nombre']);
+                $apellido = explode(' ',$_SESSION['apellidos']);
+                 echo strtoupper($nombre[0]. ' ' .$apellido[0]) ;
+                 ?></h1>
                 <div class="empleado-items">
 
                     <a href="../general/calificar.php" class="empleado-enlace-jefe empleado-enlace-calificar">Calificar</a>
@@ -62,7 +66,7 @@ if (isset($_SESSION['rol'])) {
                             <?php
                         }else{
                             ?>
-                            <a class="empleado-enlace-jefe" href="">Inventario área</a>
+                            <a class="empleado-enlace-jefe" href="inventarioArea.php">Inventario área</a>
                             <?php
                         }
                     ?>

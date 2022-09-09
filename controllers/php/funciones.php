@@ -228,9 +228,9 @@ function insertarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$ar
 }
 
 // modifica un producto del inventario general
-function modificarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$conexion)
+function modificarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$area,$conexion)
 {
-        $query = "UPDATE `inventariogeneral` SET `nombre`='$nombre',`estado`='$estado',`id_responsable`='$id_responsable' WHERE `cod`='$cod'";
+        $query = "UPDATE `inventariogeneral` SET `nombre`='$nombre',`estado`='$estado',`id_responsable`='$id_responsable',`area`='$area' WHERE `cod`='$cod'";
         $consulta = mysqli_query($conexion, $query);
 }
 
@@ -238,7 +238,7 @@ function modificarInventarioAreaProducto($cod,$nombre,$estado,$id_responsable,$c
 function mostarInventarioAreaProducto($id,$conexion)
 {
 
-    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE `id_responsable` = '$id'";
+    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, area.nombre AS 'nombre_area', usuarios.nombre AS 'nombre_responsable',usuarios.apellidos AS 'apellido_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable INNER JOIN area ON area.codigo = inventariogeneral.area WHERE `id_responsable` = '$id'";
     return $consulta = mysqli_query($conexion, $query);
 }
 
@@ -248,7 +248,7 @@ function mostarInventarioAreaProducto($id,$conexion)
 function mostrarInventarioPorArea($cod,$conexion)
 {
 
-    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`, `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable WHERE inventariogeneral.area = '$cod' AND inventariogeneral.id_responsable != 'Noasignado' ";
+    $query = "SELECT `cod`, inventariogeneral.nombre, `estado`,  area.nombre AS 'nombre_area', `id_responsable`, inventariogeneral.area, usuarios.nombre AS 'nombre_responsable', usuarios.apellidos AS 'apellido_responsable' FROM `inventariogeneral` INNER JOIN usuarios ON usuarios.id = inventariogeneral.id_responsable INNER JOIN area ON area.codigo = inventariogeneral.area WHERE inventariogeneral.area = '$cod' AND inventariogeneral.id_responsable != 'Noasignado' ";
     return $consulta = mysqli_query($conexion, $query);
 }
 
@@ -256,7 +256,7 @@ function mostrarInventarioPorArea($cod,$conexion)
 function mostrarInventarioPorAreaGeneral($cod,$conexion)
 {
 
-    $query = "SELECT * FROM inventariogeneral WHERE area = '$cod' AND id_responsable = 'Noasignado'";
+    $query = "SELECT cod,inventariogeneral.nombre ,estado,id_responsable,area, area.nombre AS 'nombre_area' FROM inventariogeneral INNER JOIN area ON area.codigo = inventariogeneral.area WHERE area = '$cod' AND id_responsable = 'Noasignado'";
     return $consulta = mysqli_query($conexion, $query);
 }
 
@@ -280,7 +280,7 @@ function mostrarAreaPorCodigo($cod,$conexion)
 // muestra todos lo usuarios que pertenecen a un area predeterminada
 function mostarUsuarioCalificacionArea($area,$conexion)
 {
-        $query = "SELECT `id` ,`nombre`,rol, area FROM `usuarios`  WHERE `area` = '$area'";
+        $query = "SELECT `id` ,`nombre`,apellidos,rol, area FROM `usuarios`  WHERE `area` = '$area'";
         return $consulta = mysqli_query($conexion, $query);
 }
 

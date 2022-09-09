@@ -40,7 +40,7 @@ if (isset($_POST['agregar'])) {
     if ($consultaProducto->num_rows > 0) {
         echo '<script type="text/javascript">
         alert("El codigo del articulo ya esta registrado");
-        window.location.href="inventarioArea.php";
+        window.location.href="inventarioAreaGerente.php";
         </script>';
     } else {
         insertarInventarioAreaProducto($cod, $nombre, $estado, $id_responsable, $area, $conexion);
@@ -54,12 +54,10 @@ if (isset($_POST['modificar'])) {
     $cod = $_POST['codigo'];
     $nombre = $_POST['nombre'];
     $estado = $_POST['estado'];
+    $area = $_POST['area'];
     $id_responsable = $_POST['responsable'];
 
-    modificarInventarioAreaProducto($cod, $nombre, $estado, $id_responsable, $conexion);
-    echo '<script type="text/javascript">
-    window.location.href="inventarioAreaGerente.php";
-    </script>';
+    modificarInventarioAreaProducto($cod, $nombre, $estado, $id_responsable, $area, $conexion);
 }
 
 ?>
@@ -189,7 +187,12 @@ if (isset($_POST['modificar'])) {
                 </div>
 
                 <div class="inventarioArea-contenedor-nombre">
-                    <h4 class="inventarioArea-nombre"> <?php echo $persona['nombre'] ?> </h4>
+                    <h4 class="inventarioArea-nombre"> <?php
+                    $nombre = explode(' ',$persona['nombre']);
+                    $apellido = explode(' ',$persona['apellidos']);
+            
+                    echo $nombre[0].' '.$apellido[0] ;
+                    ?> </h4>
                 </div>
 
                 <div class="inventarioArea-contenedor-abrirInventario">
@@ -216,7 +219,11 @@ if (isset($_POST['modificar'])) {
             <div class="inventarioAreaGerente-emergente-indivudual">
                 <div class="invetarioArea-emergente-navar">
                     <?php
-                    echo "<h2 class='invetarioArea-emergente-nombre'>" . $personaNombre['nombre'] . "</h2>"
+                    $nombre = explode(' ', $personaNombre['nombre']);
+                    $apellido = explode(' ', $personaNombre['apellidos']);
+
+
+                    echo "<h2 class='invetarioArea-emergente-nombre'>" . $nombre[0].' '.$apellido[0]. "</h2>"
                     ?>
                     <a href="inventarioAreaGerente.php" class="inventarioAreaGerente-emergente-x">X</a>
                 </div>
@@ -244,7 +251,7 @@ if (isset($_POST['modificar'])) {
 
                             <div class="invetarioArea-emergente-main-contenedor-btn">
 
-                                <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $item['nombre_area'] ?>" data-areaid="<?php echo $item['area'] ?>" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
                                     <i class="fa-solid fa-pen-to-square modificarL"></i>
                                 </button>
 
@@ -313,17 +320,17 @@ if (isset($_POST['modificar'])) {
                                 </span>
 
                                 <span class="span-items">
-                                    <?php echo $item['nombre_responsable'] ?>
+                                    <?php echo $item['nombre_responsable'].' '.$item['apellido_responsable'] ?>
                                 </span>
                             </p>
 
                             <div class="invetarioArea-emergente-main-contenedor-btn">
 
-                                <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $item['nombre_area'] ?>" data-areaid="<?php echo $item['area'] ?>" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
                                     <i class="fa-solid fa-pen-to-square modificarL"></i>
                                 </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifierArea=<?php echo $_GET['identifierArea']?>">
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifierArea=<?php echo $_GET['identifierArea'] ?>">
                                 </a>
                             </div>
 
@@ -362,11 +369,11 @@ if (isset($_POST['modificar'])) {
 
                             <div class="invetarioArea-emergente-main-contenedor-btn">
 
-                                <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $itemG['nombre_area'] ?>" data-areaid="<?php echo $itemG['area'] ?>" data-cod="<?php echo $itemG['cod'] ?>" data-nombre="<?php echo $itemG['nombre'] ?>" data-estado="<?php echo $itemG['estado'] ?>" data-responsableid="<?php echo $itemG['id_responsable'] ?>" data-responsablenom="No asignado">
                                     <i class="fa-solid fa-pen-to-square modificarL"></i>
                                 </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>&identifierArea=<?php echo $_GET['identifierArea']?>">
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>&identifierArea=<?php echo $_GET['identifierArea'] ?>">
                                 </a>
                             </div>
 
@@ -379,6 +386,7 @@ if (isset($_POST['modificar'])) {
                 </div>
 
                 <div class="invetarioArea-emergente-footer">
+                    <a href="../../pdf/pdf-inventario.php?area=<?php echo $_GET['identifierArea'] ?>" class="btn btn-secondary invetarioArea-emergente-footer-btn">Descargar</a>
                     <a href="inventarioAreaGerente.php" class="btn btn-secondary invetarioArea-emergente-footer-btn">Cerrar</a>
                 </div>
             </div>
@@ -439,7 +447,7 @@ if (isset($_POST['modificar'])) {
 
                                 <div class="invetarioArea-emergente-main-contenedor-btn">
 
-                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="No asignado" data-areaid="<?php echo $sinAsignarItem['area'] ?>" data-cod="<?php echo $sinAsignarItem['cod'] ?>" data-nombre="<?php echo $sinAsignarItem['nombre'] ?>" data-estado="<?php echo $sinAsignarItem['estado'] ?>" data-responsableid="<?php echo $sinAsignarItem['id_responsable'] ?>" data-responsablenom="No asignado">
                                         <i class="fa-solid fa-pen-to-square modificarL"></i>
                                     </button>
 
@@ -484,17 +492,17 @@ if (isset($_POST['modificar'])) {
                                     </span>
 
                                     <span class="span-items">
-                                        <?php echo $item['nombre_responsable'] ?>
+                                        <?php echo $item['nombre_responsable'].' '.$item['apellido_responsable'] ?>
                                     </span>
                                 </p>
 
                                 <div class="invetarioArea-emergente-main-contenedor-btn">
 
-                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $item['nombre_area'] ?>" data-areaid="<?php echo $item['area'] ?>" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
                                         <i class="fa-solid fa-pen-to-square modificarL"></i>
                                     </button>
 
-                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral']?>">
+                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral'] ?>">
                                     </a>
                                 </div>
 
@@ -533,11 +541,11 @@ if (isset($_POST['modificar'])) {
 
                                 <div class="invetarioArea-emergente-main-contenedor-btn">
 
-                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $itemG['nombre_area'] ?>" data-areaid="<?php echo $itemG['area'] ?>" data-cod="<?php echo $itemG['cod'] ?>" data-nombre="<?php echo $itemG['nombre'] ?>" data-estado="<?php echo $itemG['estado'] ?>" data-responsableid="<?php echo $itemG['id_responsable'] ?>" data-responsablenom="No asignado">
                                         <i class="fa-solid fa-pen-to-square modificarL"></i>
                                     </button>
 
-                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral']?>">
+                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral'] ?>">
                                     </a>
                                 </div>
 
@@ -551,6 +559,7 @@ if (isset($_POST['modificar'])) {
                 </div>
 
                 <div class="invetarioArea-emergente-footer">
+                    <a href="../../pdf/pdf-inventario.php?area=0" class="btn btn-secondary invetarioArea-emergente-footer-btn">Descargar</a>
                     <a href="inventarioAreaGerente.php" class="btn btn-secondary invetarioArea-emergente-footer-btn">Cerrar</a>
                 </div>
             </div>
@@ -571,28 +580,30 @@ if (isset($_POST['modificar'])) {
                 </div>
                 <div class="modal-body">
                     <form class="inventarioArea-items-modificar" action="" method="POST">
-                        <input autocomplete="off" readonly id="codigo" class="inventarioArea-item-formulario-modf" type="number" name="codigo" placeholder="Código" readonly> <br>
+                        <input autocomplete="off" readonly id="codigoM" value="2" class="inventarioArea-item-formulario-modf" type="text" name="codigo" placeholder="Código"> <br>
 
-                        <input autocomplete="off" id="nombre" class="inventarioArea-item-formulario-modf" type="text" name="nombre" placeholder="Nombre"> <br>
-                        
-                        <input autocomplete="off" id="estado" class="inventarioArea-item-formulario-modf" type="text" name="estado" placeholder="Estado"> <br>
-                        
-                        <select class="inventarioArea-item-formulario-modf modf" name="responsable">
-                            <option id="optionRes">Areas</option>
+                        <input autocomplete="off" id="nombreM" class="inventarioArea-item-formulario-modf" type="text" name="nombre" placeholder="Nombre"> <br>
+
+                        <select name="estado" id="estadoM" class="inventarioArea-item-formulario-modf">
+                            <option value="" id="option-default-estado"></option>
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        </select> <br>
+
+                        <select id="select-agregar-area-modi" class="inventarioArea-item-formulario-modf modf" name="area">
+                            <option id="option-default-area"></option>
                             <?php
-                            while ($articulo = mysqli_fetch_array($articulos)) {
-                                echo "<option value=" . $articulo['id_responsable'] . ">" . $articulo['nombre_responsable'] . "</option>";
+                            $areasSM = mostrarAreaDirectorio($conexion);
+                            while ($areaSM = mysqli_fetch_array($areasSM)) {
+                                echo "<option  value=" . $areaSM['codigo'] . ">" . $areaSM['nombre'] . "</option>";
                             }
                             ?>
+                            <option value="Noasignado">No asignado</option>
                         </select>
 
-                        <select class="inventarioArea-item-formulario-modf" name="responsable">
-                            <option id="optionRes">Empleados</option>
-                            <?php
-                            while ($articulo = mysqli_fetch_array($articulos)) {
-                                echo "<option value=" . $articulo['id_responsable'] . ">" . $articulo['nombre_responsable'] . "</option>";
-                            }
-                            ?>
+                        <select id="select-agregar-empleado-modi" class="inventarioArea-item-formulario-modf" name="responsable">
+
                         </select>
                 </div>
                 <div class="modal-footer">
@@ -604,12 +615,44 @@ if (isset($_POST['modificar'])) {
         </div>
     </div>
 
+    <script>
+            const form = document.querySelector('#formulario')
+    const btn = document.querySelector('.inventarioArea-item-formulario-agregar')
+
+
+    btn.addEventListener('click', e => {
+        console.log('Holaa')
+
+        const selectES = document.querySelector('#select-agregar-estado').value
+        if (selectES == 0) {
+            e.preventDefault();
+            alert('Por favor seleccione estado')
+        }
+
+
+        const select = document.querySelector('#select-agregar-area').value
+        if (select == 0) {
+            e.preventDefault();
+            alert('Por favor seleccione area')
+        }
+
+        const selectA = document.querySelector('#select-agregar-area').value
+        const selectE = document.querySelector('#select-agregar-empleado').value
+        if (selectA != 'Noasignado' && selectE == 0) {
+            e.preventDefault();
+            alert('Por favor seleccione empleado')
+        }
+
+    })
+    </script>
 
     <script src="../../controllers/js/jquery-1.10.2.min.js"></script>
     <script>
         const selectArea = document.querySelector('#select-agregar-area');
         const selectEmpleado = document.querySelector('#select-agregar-empleado')
         const optionEmpleado = document.querySelector('#option-empleado')
+
+        
         selectArea.addEventListener('input', e => {
             if (selectArea.value == 'Noasignado') {
                 selectEmpleado.disabled = true
@@ -617,6 +660,7 @@ if (isset($_POST['modificar'])) {
             } else {
                 selectEmpleado.disabled = false
                 selectEmpleado.classList.remove('inventario-empleado-desable');
+
                 $(document).ready(function() {
 
                     var empleados = $('#select-agregar-empleado');
@@ -659,54 +703,62 @@ if (isset($_POST['modificar'])) {
         }
     }
 
-    const div = document.querySelector('.inventarioArea-contenedor')
+    const div = document.querySelector('.inventarioAreaGerente-emergente-contenedor')
+
     div.addEventListener("click", e => {
-        if (e.target.classList.contains("modificar")) {
-            const btn = e.target;
-            document.querySelector('#codigo').value = btn.dataset.cod
-            document.querySelector('#nombre').value = btn.dataset.nombre
-            document.querySelector('#estado').value = btn.dataset.estado
-            document.querySelector('#optionRes').value = `${btn.dataset.responsableid}`;
-            document.querySelector('#optionRes').textContent = `${btn.dataset.responsablenom}`;
+        if (e.target.classList.contains("modificar") || e.target.classList.contains("modificarL")) {
+
+            const btn = (e.target.classList.contains("modificar")) ? e.target : e.target.parentNode;
+
+
+            document.querySelector('#codigoM').value = btn.dataset.cod
+            document.querySelector('#nombreM').value = btn.dataset.nombre
+            document.querySelector('#option-default-estado').value = btn.dataset.estado
+            document.querySelector('#option-default-estado').textContent = btn.dataset.estado
+            document.querySelector('#option-default-area').value = btn.dataset.areaid
+            document.querySelector('#option-default-area').textContent = btn.dataset.areanom
+
+            const url = 'get_empleados-modi.php?idEmpleado=' + btn.dataset.responsableid + '&nomEmpleado=' + btn.dataset.responsablenom;
+            $(document).ready(function() {
+                var empleados = $('#select-agregar-empleado-modi');
+                var id_area = $('#select-agregar-area-modi').val();
+                $.ajax({
+                    data: {
+                        id_area: id_area
+                    },
+                    dataType: 'html',
+                    type: 'POST',
+                    url: url,
+                }).done(function(data) {
+                    empleados.html(data);
+                });
+
+            });
+
 
         }
-
-        if (e.target.classList.contains("modificarL")) {
-            const btn = e.target.parentNode;
-            document.querySelector('#codigo').value = btn.dataset.cod
-            document.querySelector('#nombre').value = btn.dataset.nombre
-            document.querySelector('#estado').value = btn.dataset.estado
-            document.querySelector('#optionRes').value = `${btn.dataset.responsableid}`
-            document.querySelector('#optionRes').textContent = `${btn.dataset.responsablenom}`
-        }
-
     })
 
-    const form = document.querySelector('#formulario')
-    const btn = document.querySelector('.inventarioArea-item-formulario-agregar')
+    $(document).ready(function() {
 
+        var empleados = $('#select-agregar-empleado-modi');
 
-    btn.addEventListener('click', e => {
+        $('#select-agregar-area-modi').change(function() {
+            var id_area = $(this).val();
 
-        const selectES = document.querySelector('#select-agregar-estado').value
-        if (selectES == 0) {
-            e.preventDefault();
-            alert('Por favor seleccione estado')
-        }
+            $.ajax({
+                data: {
+                    id_area: id_area
+                },
+                dataType: 'html',
+                type: 'POST',
+                url: 'get_empleados-modi1.php',
+            }).done(function(data) {
+                empleados.html(data);
+            });
 
+        });
 
-        const select = document.querySelector('#select-agregar-area').value
-        if (select == 0) {
-            e.preventDefault();
-            alert('Por favor seleccione area')
-        }
+    });
 
-        const selectA = document.querySelector('#select-agregar-area').value
-        const selectE = document.querySelector('#select-agregar-empleado').value
-        if (selectA != 'Noasignado' && selectE == 0) {
-            e.preventDefault();
-            alert('Por favor seleccione empleado')
-        }
-
-    })
 </script>
