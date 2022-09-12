@@ -25,8 +25,8 @@ if (isset($_POST['calificar'])) {
   foreach ($nota as $key => $value) {
     guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area, $preguntas[$key][1], $rol, $_SESSION['area'], $conexion);
   }
-  if($mensaje != ""){
-    guardarComentario($mensaje,$preguntas[0][0],$idCalificante,$idCalificador,$mes,$conexion);
+  if ($mensaje != "") {
+    guardarComentario($mensaje, $preguntas[0][0], $idCalificante, $idCalificador, $mes, $conexion);
   }
 
   echo '<script type="text/javascript">
@@ -113,14 +113,16 @@ $mes = date('m'); // retiene el mes actual
         <img class="calificar-imagen" src="data:<?php echo $_SESSION['tipo_imagen'] ?>;base64,<?php echo base64_encode($_SESSION['imagen']) ?>" alt="foto de perfil">
 
         <?php
-        ?>
 
-        <?php
+        echo "<div class='calificar-auto-comentario'>";
         if ($autoCalificacion->num_rows <= 0) {
-          echo "<button class='btnmodal auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#autoevaluacion'>Auto evaluación</button>";
+          echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#autoevaluacion'>Auto evaluación</button>";
         } else {
           echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' onclick='return auto()'>Auto evaluación</button>";
         }
+
+        echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#comentarios'>Comentarios</button>";
+        echo "</div>";
 
         echo " </div>";
         echo "<div class='calificar-administracion'>";
@@ -304,7 +306,33 @@ $mes = date('m'); // retiene el mes actual
     </div>
   </div>
 
-
+  <!-- Modal para los comentarios -->
+  <div class="modal fade" id="comentarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Comentarios</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="calificar-div-general-comentarios">
+            <?php
+            $comentarios = empleadoComentario($mes, $idCalificador, $conexion);;
+            while ($comentario = mysqli_fetch_array($comentarios)) {
+            ?>
+              <div class="calificar-div-comentarios"> <span class="calificar-comentarios"> <?php echo $comentario['mensaje'] ?></div>
+              <hr>
+            <?php
+            }
+            ?>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     const contenedordiv = document.querySelector('.calificar-cuerpo');

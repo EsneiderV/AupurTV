@@ -11,7 +11,7 @@
     padding: 0%;
 }
 
-/* Inicio de cesccion */
+/* Inicio de sesion */
 .modal-title-calificar{
     width: 100%;
     text-align: center;
@@ -657,19 +657,24 @@
     background: #0075BC;
     border-radius: 10px;
 }
-
+.calificar-div-general-comentarios{
+ max-width: 100%;
+ max-height: 300px;
+ overflow-x: auto;
+}
 
 .calificar-imagen{
     max-height: 70%;
 }
 .auto-calificar-btnmodal{
     background: transparent;
-    width: 50%;
+    width: 100%;
     color: #FFF;
     font-size: 140%;
     border: none;
     border-bottom: 2px solid #FFF;
     font-family: 'Roboto', sans-serif;
+    margin-bottom: 10%;
 }
 .calificar-btnmodal{
     background: transparent;
@@ -722,6 +727,18 @@
 .calificar-numero{
     font-family: 'Roboto', sans-serif;
     font-size: 140%;
+}
+.calificar-auto-comentario{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+.Inventario-area-gerente-body{
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -848,6 +865,8 @@
     .calificar-numero{
         font-size: 100%;
     }
+
+    
 }
 
 
@@ -1205,6 +1224,89 @@
 
 .inventario-empleado-desable{
     color: #DEE2E6;
+}
+
+.inventarioAreaDirector-contenedor{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.inventarioAreaDirector-contenedor-empleados{
+    display: flex;
+    background-color: #0075BC;
+    margin: 10px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 65%;
+    border-radius: 10px;
+}
+
+.inventarioAreaDirector-contenedor-img{
+    width: 10%;
+    margin-left: 20px;
+}
+
+.inventarioAreaDirector-contenedor-abrirInventario{
+    width: 10%;
+    margin-right: 80px;
+}
+
+@media screen and (max-width: 650px) {
+    .inventarioArea-agregar-articulo {
+        position: static;
+        margin-left: 5%;
+        width: 90%;
+        top: 0;
+        right: 0;
+    }
+
+    .inventarioArea-div-nav {
+        flex-direction: column;
+    }
+
+    .inventarioArea-contenedor {
+        width: 94%;
+        margin-left: 4%;
+        margin-top: 5%;
+    }
+
+
+
+    .inventarioArea-contenedor-empleados {
+        height: 15%;
+    }
+
+    .inventarioArea-nombre{
+        font-size: 20px;
+        text-align: center;
+        margin: 20px;
+    }
+
+    .inventarioArea-abrirInventario {
+        text-align: center;
+    }
+
+    .inventarioArea-img {
+        width: 100%;
+    }
+
+    .inventarioArea-contenedor-img, .inventarioArea-contenedor-abrirInventario{
+        height: auto;
+    }
+
+    .inventarioAreaGerente-emergente-indivudual {
+        margin-top: 50%;
+        height: 50%;
+        width: 95%;
+    }
+    
 }
 
 

@@ -97,6 +97,13 @@ function empleadoAutocalificado($mes,$idCalificante,$idCalificador,$conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+//nos trae los comentarios de cada persona 
+function empleadoComentario($mes,$idCalificador,$conexion)
+{
+    $query = "SELECT `mensaje` FROM `calificaciones` WHERE `mes` = '$mes' AND `idCalificador` = '$idCalificador' AND `mensaje` != 'NULL';";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
 //trae las preguntas dependiendo de su tipo ya sea general o no
 function mostrarPreguntas($tipo,$conexion)
 {

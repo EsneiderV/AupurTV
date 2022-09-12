@@ -4,7 +4,7 @@ include_once '../../controllers/php/funciones.php'; // traemos las funciones que
 include_once '../../models/Conexion.php'; // traemos la conexion con la base de datos 
 
 if (isset($_SESSION['rol'])) {
-    if ($_SESSION['rol'] != 2 && $_SESSION['rol'] != 3) {
+    if ($_SESSION['rol'] != 3) {
         echo '<script type="text/javascript">
                 window.location.href="../../index.php";
                 </script>';
@@ -176,12 +176,15 @@ if (isset($_POST['modificar'])) {
             <div class="inventarioArea-contenedor-abrirInventario">
                 <a href="inventarioAreaGerente.php?identifierArea=3" class="inventarioArea-abrirInventario">Inventario</a>
             </div>
+
+
         </div>
 
         <?php
         while ($persona = mysqli_fetch_array($personas)) {
         ?>
             <div class="inventarioArea-contenedor-empleados">
+
                 <div class="inventarioArea-contenedor-img">
                     <img class="inventarioArea-img  rounded-circle " src="data:<?php echo $persona['tipo_imagen'] ?>;base64,<?php echo base64_encode($persona['imagen']) ?>" alt="foto de perfil">
                 </div>
