@@ -1,4 +1,3 @@
-
 <?php
 require('fpdf/fpdf.php');
 require('../models/Conexion.php');
@@ -13,11 +12,11 @@ if (isset($_GET['area'])) {
             public function header()
             {
                 $this->SetFont('Arial', 'B', 12);
-                $this->Cell(0, 3, utf8_decode('AUPUT TV'), 0, 0, 'C');
-                $this->Image('../image/logoNaranja.png', 179, 1, 40, 20, 'png');
+
+                $this->Image('../image/headerpdf.jpg', 115, 3, 100, 20, 'jpg');
                 $this->Ln(20);
                 $this->sety(30);
-                $this->Cell(0, 0, 'Inventario general', 0, 1, 'C', 0);
+                $this->Cell(0, 0, 'Inventario General ', 0, 1, 'C', 0);
                 $this->sety(40);
                 $this->Cell(19, 8, 'Codigo', 1, 0, 'C', 0);
                 $this->Cell(40, 8, 'Nombre', 1, 0, 'C', 0);
@@ -31,7 +30,8 @@ if (isset($_GET['area'])) {
                 $this->SetFont('Arial', 'B', 12);
                 $this->setY(-15);
                 $this->AliasNbPages();
-                $this->Cell(0, 3, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
+                $this->Image('../image/footerpdf.jpg', 0, 258, 220, 22, 'jpg');
+
             }
         }
 
@@ -41,13 +41,15 @@ if (isset($_GET['area'])) {
         $sinAsignar = mostrarInventarioPorAreaGeneralNoA($conexion);
         // Muesta los no asignados
         while ($sinAsignarItem = mysqli_fetch_array($sinAsignar)) {
-            $fpdf->Cell(19, 8,  utf8_decode($sinAsignarItem['cod']), 1, 0, 'C', 0);
+            $fpdf->Cell(19, 8, utf8_decode($sinAsignarItem['cod']), 1, 0, 'C', 0);
             $fpdf->Cell(40, 8, utf8_decode($sinAsignarItem['nombre']), 1, 0, 'C', 0);
             $fpdf->Cell(25, 8, utf8_decode($sinAsignarItem['estado']), 1, 0, 'C', 0);
             $fpdf->Cell(40, 8, utf8_decode('No asignado'), 1, 0, 'C', 0);
             $fpdf->Cell(70, 8, utf8_decode('No asignado'), 1, 1, 'C', 0);
         }
         $areas = mostrarAreaDirectorio($conexion);
+
+
         while ($area = mysqli_fetch_array($areas)) {
 
             $items =  mostrarInventarioPorArea($area['codigo'], $conexion);
@@ -73,6 +75,8 @@ if (isset($_GET['area'])) {
         $fpdf->Output('D', 'Inventario General.pdf', true);
     }
 
+
+
     if($_GET['area'] != '0'){
 
          $nombreArea =  mostrarInventarioPorArea($_GET['area'], $conexion);
@@ -90,8 +94,8 @@ if (isset($_GET['area'])) {
             public function header()
             {
                 $this->SetFont('Arial', 'B', 12);
-                $this->Cell(0, 3, utf8_decode('AUPUT TV'), 0, 0, 'C');
-                $this->Image('../image/logoNaranja.png', 179, 1, 40, 20, 'png');
+
+                $this->Image('../image/headerpdf.jpg', 115, 3, 100, 20, 'jpg');
                 $this->Ln(20);
                 $this->sety(30);
                 $this->Cell(0, 0, 'Inventario Area '.$this->nombre, 0, 1, 'C', 0);
@@ -108,11 +112,12 @@ if (isset($_GET['area'])) {
                 $this->SetFont('Arial', 'B', 12);
                 $this->setY(-15);
                 $this->AliasNbPages();
-                $this->Cell(0, 3, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
+                $this->Image('../image/footerpdf.jpg', 0, 258, 220, 22, 'jpg');
+
             }
         }
 
-        $fpdf = new pdf('P', 'mm', 'letter', true, $nombreArea['nombre_area']);
+        $fpdf = new pdf('P', 'mm','letter' , true, $nombreArea['nombre_area']);
         $fpdf->AddPage('PORTRAIT', 'letter');
         $fpdf->SetFont('Arial', '', 12);
 

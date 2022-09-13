@@ -79,8 +79,17 @@ if (isset($_POST['modificar'])) {
 
 <body class="inventarioArea-body">
 
-    <!-- Agregar inventario -->
-    <div class="inventarioArea-agregar-articulo">
+
+
+    <!-- Navegador -->
+    <div class="inventarioArea-div-nav">
+        <a href="../supervisor/supervisor.php" class="inventarioArea-volver"> ᗕ Atrás</a>
+        <h1 class="inventarioArea-titulo">Inventario área</h1>
+    </div>
+
+
+        <!-- Agregar inventario -->
+        <div class="inventarioArea-agregar-articulo">
         <h3 class="text-center titulo-agregar">AGREGAR</h3>
         <form action="" class="inventarioArea-formulario" method="POST" id="formulario">
             <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="codigo" placeholder="Código artículo" required>
@@ -107,12 +116,6 @@ if (isset($_POST['modificar'])) {
             </select>
             <button class="inventarioArea-item-formulario-agregar" type="submit" name="agregar">Agregar</button>
         </form>
-    </div>
-
-    <!-- Navegador -->
-    <div class="inventarioArea-div-nav">
-        <a href="../supervisor/supervisor.php" class="inventarioArea-volver"> ᗕ Atrás</a>
-        <h1 class="inventarioArea-titulo">Inventario área</h1>
     </div>
 
     <!-- Contenedor de contenedorcitos de cada persona y area -->
