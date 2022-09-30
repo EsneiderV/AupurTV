@@ -116,7 +116,7 @@ $mes = date('m'); // retiene el mes actual
 
         echo "<div class='calificar-auto-comentario'>";
         if ($autoCalificacion->num_rows <= 0) {
-          echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#autoevaluacion'>Auto evaluación</button>";
+          echo "<button class='auto-calificar-btnmodal btnmodal' data-bs-toggle='modal' data-bs-target='#autoevaluacion'>Auto evaluación</button>";
         } else {
           echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' onclick='return auto()'>Auto evaluación</button>";
         }
@@ -159,6 +159,9 @@ $mes = date('m'); // retiene el mes actual
         ?>
       </div>
     </div>
+
+
+
 
     <div class="calificar-empleados">
 
@@ -340,6 +343,7 @@ $mes = date('m'); // retiene el mes actual
       let btnmodal;
       if (e.target.classList.contains('btnmodal')) {
         btnmodal = e.target
+        console.log('Hola')
 
 
         document.querySelector('.modal-title').textContent = `${btnmodal.dataset.nombre}`

@@ -70,7 +70,7 @@ if (isset($_SESSION['rol'])) {
                             <?php
                         }
                     ?>
-                    <a class="empleado-enlace-jefe" href="calificacionArea.php">Calificaciones área</a>
+                    <a class="empleado-enlace-jefe" href="calificacionArea1.php">Calificaciones área</a>
                     <a class="empleado-enlace-jefe" target="_blank" href="https://mail.google.com/mail/u/0/">Correo</a>
                     <a href="../../models/Cerrar.php" class="empleado-enlace-jefe-salir">Salir</a>
                 </div>
