@@ -300,6 +300,13 @@ function mostarUsuarioCalificacionAreaEmergente($id,$conexion)
         return $consulta = mysqli_query($conexion, $query);
 }
 
+//mostrar el total de ususarios por area
+function totalUsuariosArea($area,$conexion){
+    $query = "SELECT COUNT(id) AS 'total' FROM `usuarios` WHERE `area` = '$area'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
 // nos muestra el promedio por cada pregunta de un usuario determinado
 function promedioPreguntaUsuario($idCalificador,$mes,$rol,$idP,$area,$conexion){
     $query = "SELECT round(AVG(`nota`),2) AS 'Promedio' FROM calificaciones WHERE `idCalificador` = '$idCalificador' AND `mes` = '$mes' AND `rol` = '$rol' AND `area` = '$area' AND `area_calificante` = `area` AND `idP` = '$idP' AND `idCalificante` != `idCalificador`";
@@ -344,6 +351,18 @@ function promedioPreguntaUsuarioAdministracion($idCalificador,$mes,$idP,$area,$c
     }
     return $retornar;
 }
+
+// nos muestra cuantas calificaciones tiene la persona
+function totalDeCalificaciones($idCalificador,$mes,$area,$conexion){
+    $query = "SELECT COUNT(`nota`) AS 'total' FROM `calificaciones` WHERE `mes` = '$mes' AND `area` = '$area' AND `area` = `area_calificante` AND `idCalificador` = '$idCalificador'";
+    $consulta = mysqli_query($conexion, $query);
+    $retornar = [];
+    while($pregunta = mysqli_fetch_array($consulta)){
+        array_push($retornar,$pregunta['total']);
+    }
+    return $retornar;
+}
+
 
 
 

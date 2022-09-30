@@ -45,42 +45,16 @@ $mes = date('m');
 
   <div class="calificacionesArea-contenedor-principal">
 
-    <div class="calificacionesArea-contenedor-persona">
-      <div class="calificacionesArea-contenedor-persona-nombre">
-        <h2>Juan Luis Urrego</h2>
-      </div>
-      <div class="calificacionesArea-contenedor-persona-preguntas">
-        <div class="calificacionesArea-contenedor-persona-pregunta">
-          <p>ESTA SERIA LA PREGUNTA</p>
-          <p>ESTA ES NOTA</p>
-        </div>
-
-        <div class="calificacionesArea-contenedor-persona-pregunta">
-          <p>ESTA SERIA LA PREGUNTA</p>
-          <p>ESTA ES NOTA</p>
-        </div>
-
-        <div class="calificacionesArea-contenedor-persona-pregunta">
-          <p>ESTA SERIA LA PREGUNTA</p>
-          <p>ESTA ES NOTA</p>
-        </div>
-
-
-      </div>
-      <div class="calificacionesArea-contenedor-persona-barra">
-        <div class="progress">
-          <div class="progress-bar calificacionesArea-contenedor-persona-barra-color" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">25%</div>
-        </div>
-      </div>
-    </div>
-
-
     <?php
     $usuarios = mostarUsuarioCalificacionArea($_SESSION['area'], $conexion);
+    $totalUsuario =  totalUsuariosArea($_SESSION['area'],$conexion);
+    $totalUsuario = mysqli_fetch_array($totalUsuario);
     // mostramos los usuarios
     while ($usuario = mysqli_fetch_array($usuarios)) {
       $nombre = explode(' ', $usuario['nombre']);
       $apellido = explode(' ', $usuario['apellidos']);
+      $i = 0;
+      $promT = 0;
     ?>
       <div class="calificacionesArea-contenedor-persona">
         <div class="calificacionesArea-contenedor-persona-nombre">
@@ -101,8 +75,10 @@ $mes = date('m');
                 $auto = $auto[0]  === NULL  ? 0 : $auto[0];
                 $notaPregunta = (($sesenta * 0.6) + ($treinta * 0.3) + ($auto * 0.1));
                 $notaPregunta = number_format($notaPregunta, 2);
+                $promT = $promT + $notaPregunta;
+                $i++;
                 echo ' <div class="calificacionesArea-contenedor-persona-pregunta">';
-                echo "<p class='calificacionesArea-contenedor-persona-pregunta-nombre'>" . $pregunta['pregunta'] . ": </p> ";
+                echo "<p class='calificacionesArea-contenedor-persona-pregunta-nombre'>" . $pregunta['pregunta'] . " : </p> ";
                 echo "<p class='calificacionesArea-contenedor-persona-pregunta-nota'>" . $notaPregunta . "</p>";
                 echo  '</div>';
               } else {  // para los jefes de cada area
@@ -112,8 +88,10 @@ $mes = date('m');
                 $auto = $auto[0]  === NULL  ? 0 : $auto[0];
                 $notaPregunta = (($ochenta * 0.8) + ($auto * 0.2));
                 $notaPregunta = number_format($notaPregunta, 2);
+                $promT = $promT + $notaPregunta;
+                $i++;
                 echo ' <div class="calificacionesArea-contenedor-persona-pregunta">';
-                echo "<p class='calificacionesArea-contenedor-persona-pregunta-nombre'>" . $pregunta['pregunta'] . ": </p> ";
+                echo "<p class='calificacionesArea-contenedor-persona-pregunta-nombre'>" . $pregunta['pregunta'] . " : </p> ";
                 echo "<p class='calificacionesArea-contenedor-persona-pregunta-nota'>" . $notaPregunta . "</p>";
                 echo  '</div>';
               }
@@ -121,17 +99,32 @@ $mes = date('m');
               $general = promedioPreguntaUsuarioAdministracion($usuario['id'], $mes, $pregunta['id'],$usuario['area'],  $conexion);
               $general = $general[0]  === NULL  ? 0 : $general[0];
               $general = number_format($general, 2);
+              $promT = $promT + $general;
+              $i++;
                 echo ' <div class="calificacionesArea-contenedor-persona-pregunta">';
-                echo "<p class='calificacionesArea-contenedor-persona-pregunta-nombre'>" . $pregunta['pregunta'] . ": </p> ";
+                echo "<p class='calificacionesArea-contenedor-persona-pregunta-nombre'>" . $pregunta['pregunta'] . " : </p> ";
                 echo "<p class='calificacionesArea-contenedor-persona-pregunta-nota'>" . $general . "</p>";
                 echo  '</div>';
             }
           }
+
+          $promedioTotal = ($promT / $i);
+          $promedioTotal = number_format($promedioTotal, 2);
+          echo ' <div class="calificacionesArea-contenedor-persona-pregunta">';
+          echo "<p class='calificacionesArea-contenedor-persona-pregunta-nombre'>Total : </p> ";
+          echo "<p class='calificacionesArea-contenedor-persona-pregunta-nota'>" . $promedioTotal. "</p>";
+          echo  '</div>';
+
+           $totaldeNotasRequeridas = $totalUsuario[0] * $i;
+           $totaldeNotas = totalDeCalificaciones($usuario['id'],$mes,$usuario['area'],$conexion);
+           
+           $PromedioFinal =  ((100 * $totaldeNotas[0]) / $totaldeNotasRequeridas);
+           $PromedioFinal =  number_format($PromedioFinal,0)
           ?>
         </div>
         <div class="calificacionesArea-contenedor-persona-barra">
           <div class="progress">
-            <div class="progress-bar calificacionesArea-contenedor-persona-barra-color" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">25%</div>
+            <div class="progress-bar calificacionesArea-contenedor-persona-barra-color" role="progressbar" style="width: <?php echo $PromedioFinal?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $PromedioFinal?>%</div>
           </div>
         </div>
       </div>
