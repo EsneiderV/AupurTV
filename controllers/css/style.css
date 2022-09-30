@@ -1353,7 +1353,6 @@
 
 .calificacionesArea-contenedor-principal {
     display: flex;
-    background-color: gray;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -1391,10 +1390,14 @@
 .calificacionesArea-contenedor-persona-pregunta-nombre{
     width: 50%;
     text-align: center;
+    color: #FFF;
+    font-family: 'Roboto',sans-serif;
 }
 .calificacionesArea-contenedor-persona-pregunta-nota{
     width: 40%;
     text-align: center;
+    color: #FFF;
+    font-family: 'Roboto',sans-seri
 }
 
 .calificacionesArea-contenedor-persona-barra{

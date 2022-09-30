@@ -38,8 +38,8 @@ $mes = date('m');
   <!-- Barra de navegacion -->
 
   <div class="inventarioArea-div-nav">
-    <a href="supervisor.php" class="inventarioArea-volver"> ᗕ Atrás</a>
-    <h1 class="inventarioArea-titulo">Calificación área</h1>
+    <a href="supervisor.php" class="calificar-volver-atras"> ᗕ Atrás</a>
+    <h1 class="calificar-titulo">Calificación área</h1>
   </div>
 
 
