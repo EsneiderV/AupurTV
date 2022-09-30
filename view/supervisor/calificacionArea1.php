@@ -38,7 +38,7 @@ $mes = date('m');
   <!-- Barra de navegacion -->
 
   <div class="inventarioArea-div-nav">
-    <a href="supervisor.php" class="inventarioArea-volver"> ᗕ Volver atrás</a>
+    <a href="supervisor.php" class="inventarioArea-volver"> ᗕ Atrás</a>
     <h1 class="inventarioArea-titulo">Calificación área</h1>
   </div>
 
@@ -117,8 +117,14 @@ $mes = date('m');
                 echo "<p class='calificacionesArea-contenedor-persona-pregunta-nota'>" . $notaPregunta . "</p>";
                 echo  '</div>';
               }
-            } else { // para los de administracion
-              echo "NO Hola";
+            } else { // para el area administrativa
+              $general = promedioPreguntaUsuarioAdministracion($usuario['id'], $mes, $pregunta['id'],$usuario['area'],  $conexion);
+              $general = $general[0]  === NULL  ? 0 : $general[0];
+              $general = number_format($general, 2);
+                echo ' <div class="calificacionesArea-contenedor-persona-pregunta">';
+                echo "<p class='calificacionesArea-contenedor-persona-pregunta-nombre'>" . $pregunta['pregunta'] . ": </p> ";
+                echo "<p class='calificacionesArea-contenedor-persona-pregunta-nota'>" . $general . "</p>";
+                echo  '</div>';
             }
           }
           ?>

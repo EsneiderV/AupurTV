@@ -45,7 +45,7 @@ $mes = date('m');
 
 
     <div class="inventarioArea-div-nav">
-        <a href="supervisor.php" class="inventarioArea-volver"> ᗕ Volver atrás</a>
+        <a href="supervisor.php" class="inventarioArea-volver"> ᗕ Atrás</a>
         <h1 class="inventarioArea-titulo">Calificación área</h1>
     </div>
 

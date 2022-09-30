@@ -323,10 +323,20 @@ function promedioPreguntaUsuarioJefe($idCalificador,$mes,$idP,$area,$conexion){
 }
 
 
-
 // nos muestra el promedio por cada pregunta de un usuario determinado pero de la autoevaluacion
 function promedioPreguntaUsuarioAuto($idCalificador,$mes,$rol,$idP,$area,$conexion){
     $query = "SELECT round(AVG(`nota`),2) AS 'Promedio' FROM calificaciones WHERE `idCalificador` = '$idCalificador' AND `mes` = '$mes' AND `rol` = '$rol' AND `idP` = '$idP' AND `area` = '$area' AND `area_calificante` = `area` AND `idCalificante` = `idCalificador`";
+    $consulta = mysqli_query($conexion, $query);
+    $retornar = [];
+    while($pregunta = mysqli_fetch_array($consulta)){
+        array_push($retornar,$pregunta['Promedio']);
+    }
+    return $retornar;
+}
+
+// nos muestra el promedio por cada pregunta de un usuario determinado pero del area administrativa
+function promedioPreguntaUsuarioAdministracion($idCalificador,$mes,$idP,$area,$conexion){
+    $query = "SELECT round(AVG(`nota`),2) AS 'Promedio' FROM calificaciones WHERE `idCalificador` = '$idCalificador' AND `mes` = '$mes' AND `idP` = '$idP' AND `area` = '$area' AND `area_calificante` = '$area'";
     $consulta = mysqli_query($conexion, $query);
     $retornar = [];
     while($pregunta = mysqli_fetch_array($consulta)){
