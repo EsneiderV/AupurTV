@@ -139,24 +139,24 @@ $anio = date('Y');
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
     <div>
-      <h3>
+      <h3 class="titulo-diagrama-por-año">
         <?php 
         if (isset($_POST['aniodiagrama'])) {
           $anio = $_POST['aniodiagrama'];
-          echo "Diagrama del Año : ".$anio;
+          echo "Notas ".$anio;
         }else{
-          echo "Diagrama del Año : ".$anio;
+          echo "Notas ".$anio;
         }
         ?>
       </h3>
     </div>
 
-  <div class="contenedor-canba-buscador">
+  <div class="contenedor-canva-buscador">
     <div class="contenedor-de-canvas">
       <canvas id="datosD"></canvas>
     </div>
     <form id="formularioCambiarAnio" action="" method="post">
-      <select id="SelectCambiarAnio" name="aniodiagrama" id="">
+      <select class="select-año" id="SelectCambiarAnio" name="aniodiagrama" id="">
         <option value="0">Seleccione año</option>
        <?php 
         $consultaSelects = traerAniosQueTiene($conexion);
@@ -169,7 +169,6 @@ $anio = date('Y');
       </select>
     </form>
   </div>
-
 
 
 
@@ -266,7 +265,4 @@ $anio = date('Y');
 
 
 </body>
-
-
-
 </html>

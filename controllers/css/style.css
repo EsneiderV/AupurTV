@@ -1397,7 +1397,7 @@
     width: 40%;
     text-align: center;
     color: #FFF;
-    font-family: 'Roboto',sans-seri
+    font-family: 'Roboto',sans-serif;
 }
 
 .calificacionesArea-contenedor-persona-barra{
@@ -1410,19 +1410,41 @@
     background-color: #f36b0f;
 }
 
-.contenedor-canba-buscador{
+
+/* Canvas */
+
+.contenedor-canva-buscador{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     align-items: center;
-
 }
 
 .contenedor-de-canvas {
     background: #fff;
     box-sizing: border-box;
     margin: 2%;
-    width: 70%;
-   
-  }
+    width: 80%;
+}
+
+.titulo-diagrama-por-año{
+    margin-top: 20px;
+    color: #f36b0f;
+    font-family: 'Roboto',sans-serif;
+    text-align: center;
+    font-size: 250%;
+    font-weight: bold;
+}
+
+.select-año{
+    margin: 0 auto;
+    background-color: #0075BC;
+    border-radius: 5%;
+    padding: 2%;
+    color: #FFF;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: -10%;
+}
