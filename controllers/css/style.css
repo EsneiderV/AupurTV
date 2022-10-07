@@ -1409,3 +1409,20 @@
 .calificacionesArea-contenedor-persona-barra-color{
     background-color: #f36b0f;
 }
+
+.contenedor-canba-buscador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    align-items: center;
+
+}
+
+.contenedor-de-canvas {
+    background: #fff;
+    box-sizing: border-box;
+    margin: 2%;
+    width: 70%;
+   
+  }

@@ -75,7 +75,12 @@ switch ($_SESSION['rol']) {
     # code...
     break;
 }
-$mes = date('m'); // retiene el mes actual
+
+date_default_timezone_set('America/Bogota');
+$mes = date('m');
+$anio = date('Y');
+
+registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
 ?>
 
 <!DOCTYPE html>
