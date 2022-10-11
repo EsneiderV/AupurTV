@@ -44,6 +44,11 @@
 <?php
 include_once 'controllers/php/funciones.php';
 include_once 'models/Conexion.php';
+date_default_timezone_set('America/Bogota');
+$mes = date('m');
+$anio = date('Y');
+eliminarCalificacionAnual($anio, $conexion);
+
 if (isset($_POST['acceder'])) {
     $correo = $_POST['correo'];
     $clave = $_POST['clave'];

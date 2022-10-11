@@ -639,3 +639,11 @@ function registroCalificacionArea($area, $mes, $anio, $conexion)
         }
     }
 }
+
+
+// Eliminar todas las calificaciones que sean diferentes al año actual.
+function eliminarCalificacionAnual($anio, $conexion)
+{
+    $query = "DELETE FROM `calificaciones` WHERE `anio` != '$anio'";
+    $consulta = mysqli_query($conexion, $query);
+}
