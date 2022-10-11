@@ -1,7 +1,9 @@
 <?php
 include_once '../../controllers/php/funciones.php'; // traemos las funciones que contiene las consultas sql
 include_once '../../models/Conexion.php'; // traemos la conexion con la base de datos 
-
+date_default_timezone_set('America/Bogota');
+$mes = date('m');
+$anio = date('Y');
 
 // verificamos que si se aya logiado primero el usuario
 session_start();
@@ -23,7 +25,7 @@ if (isset($_POST['calificar'])) {
   $mes = date('m');
   $preguntas = mostrarPreguntasid($tipo, $conexion);
   foreach ($nota as $key => $value) {
-    guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area, $preguntas[$key][1], $rol, $_SESSION['area'], $conexion);
+    guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area, $preguntas[$key][1], $rol, $_SESSION['area'],$anio, $conexion);
   }
   if ($mensaje != "") {
     guardarComentario($mensaje, $preguntas[0][0], $idCalificante, $idCalificador, $mes, $conexion);
@@ -45,7 +47,7 @@ if (isset($_POST['auto'])) {
   $mes = date('m');
   $preguntas = mostrarPreguntasid($tipo, $conexion);
   foreach ($nota as $key => $value) {
-    guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area, $preguntas[$key][1], $rol, $_SESSION['area'], $conexion);
+    guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area, $preguntas[$key][1], $rol, $_SESSION['area'],$anio, $conexion);
   }
   echo '<script type="text/javascript">
         window.location.href="calificar.php";
@@ -54,7 +56,6 @@ if (isset($_POST['auto'])) {
 
 $idCalificante = $_SESSION['id'];
 $idCalificador = $_SESSION['id'];
-$mes = date('m');
 $autoCalificacion = empleadoAutocalificado($mes, $idCalificante, $idCalificador, $conexion);
 
 //redireccionar para volver atras
@@ -76,9 +77,7 @@ switch ($_SESSION['rol']) {
     break;
 }
 
-date_default_timezone_set('America/Bogota');
-$mes = date('m');
-$anio = date('Y');
+
 
 registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
 ?>
@@ -236,7 +235,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
               <?php
               }
               ?>
-              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="5" name="mensaje"></textarea>
+              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="3" name="mensaje"></textarea>
             </div>
         </div>
         <div class="modal-footer">
