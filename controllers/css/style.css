@@ -1306,8 +1306,6 @@
         margin-top: 5%;
     }
 
-
-
     .inventarioArea-contenedor-empleados {
         height: 15%;
     }
@@ -1410,7 +1408,6 @@
     background-color: #f36b0f;
 }
 
-
 /* Canvas */
 
 .contenedor-canva-buscador{
@@ -1447,4 +1444,44 @@
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
     margin-bottom: -10%;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .calificacionesArea-contenedor-persona{
+        min-width: 40%;
+    }
+
+    .calificar-titulo{
+        margin-left: 25%;
+    }
+
+    .contenedor-canva-buscador{
+        padding-right: 3%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .calificacionesArea-contenedor-principal {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 90%;
+        margin-left: 5%;
+    }
+    
+    .calificar-titulo {
+        margin-left: 20%;
+    }
+    
+    .contenedor-canva-buscador{
+        flex-direction: column;
+    }
+
+    .contenedor-de-canvas {
+        width: 100%;
+    }
+
+    .select-año{
+        margin-bottom: 10%;
+    }
 }
