@@ -13,47 +13,6 @@ if (!isset($_SESSION['rol'])) {
         </script>';
 }
 
-// calificamos 
-if (isset($_POST['calificar'])) {
-  $idCalificante = $_SESSION['id'];
-  $idCalificador = $_POST['id'];
-  $area = $_POST['area'];
-  $nota = $_POST['valor'];
-  $tipo = $_POST['tipo'];
-  $rol = $_SESSION['rol'];
-  $mensaje = $_POST['mensaje'];
-  $mes = date('m');
-  $preguntas = mostrarPreguntasid($tipo, $conexion);
-  foreach ($nota as $key => $value) {
-    guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area, $preguntas[$key][1], $rol, $_SESSION['area'],$anio, $conexion);
-  }
-  if ($mensaje != "") {
-    guardarComentario($mensaje, $preguntas[0][0], $idCalificante, $idCalificador, $mes, $conexion);
-  }
-
-  echo '<script type="text/javascript">
-        window.location.href="calificar.php";
-        </script>';
-}
-
-// autoevaalumos
-if (isset($_POST['auto'])) {
-  $idCalificante = $_SESSION['id'];
-  $idCalificador = $_SESSION['id'];
-  $area = $_SESSION['area'];
-  $nota = $_POST['valor'];
-  $tipo = 0;
-  $rol = $_SESSION['rol'];
-  $mes = date('m');
-  $preguntas = mostrarPreguntasid($tipo, $conexion);
-  foreach ($nota as $key => $value) {
-    guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area, $preguntas[$key][1], $rol, $_SESSION['area'],$anio, $conexion);
-  }
-  echo '<script type="text/javascript">
-        window.location.href="calificar.php";
-        </script>';
-}
-
 $idCalificante = $_SESSION['id'];
 $idCalificador = $_SESSION['id'];
 $autoCalificacion = empleadoAutocalificado($mes, $idCalificante, $idCalificador, $conexion);
@@ -77,9 +36,7 @@ switch ($_SESSION['rol']) {
     break;
 }
 
-
-
-registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
+registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +77,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
 
         echo "<div class='calificar-auto-comentario'>";
         if ($autoCalificacion->num_rows <= 0) {
-          echo "<button class='auto-calificar-btnmodal btnmodal' data-bs-toggle='modal' data-bs-target='#autoevaluacion'>Auto evaluación</button>";
+          echo "<button id='btnAutoJq' class='auto-calificar-btnmodal btnmodal' data-bs-toggle='modal' data-bs-target='#autoevaluacion'>Auto evaluación</button>";
         } else {
           echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' onclick='return auto()'>Auto evaluación</button>";
         }
@@ -152,7 +109,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
 
             } else {
             ?>
-              <button class="btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $usuario['nombre'] ?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
+              <button class="btnmodal calificar-btnmodal" id="<?php echo $usuario['id'] ?>" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $usuario['nombre'] ?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
                 <?php echo $usuario['nombre'] ?>
               </button>
 
@@ -195,7 +152,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
 
           } else {
           ?>
-            <button class="btnmodal calificar-btnmodal" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $usuario['nombre'] ?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
+            <button class="btnmodal calificar-btnmodal" id="<?php echo $usuario['id'] ?>" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $usuario['nombre'] ?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
               <?php echo $usuario['nombre'] ?>
             </button>
 
@@ -222,7 +179,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="" method="POST">
+          <form id="formTodasPreguntas" method="POST">
             <input type="text" name="id" class="id_calificado" hidden>
             <input type="text" name="area" class="area" hidden>
             <input type="text" name="tipo" value="0" class="area" hidden>
@@ -240,7 +197,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" name="calificar" class="btn btn-primary">Calificar</button>
+          <button type="submit" id="btnTodasPreguntas" name="calificar" class="btn btn-primary">Calificar</button>
           </form>
         </div>
       </div>
@@ -257,7 +214,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="" method="POST">
+          <form id="formGpreguntas" method="POST">
             <input type="text" name="id" class="id_calificado1" hidden>
             <input type="text" name="area" class="area1" hidden>
             <input type="text" name="tipo" value="1" class="area" hidden>
@@ -275,7 +232,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" name="calificar" class="btn btn-primary">Calificar</button>
+          <button type="button" id="btnGPreguntas" name="calificar" class="btn btn-primary">Calificar</button>
           </form>
         </div>
       </div>
@@ -292,7 +249,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="" method="POST">
+          <form id="formAuto" method="POST">
             <div class="contenedor2">
               <?php
               $preguntas = mostrarPreguntas(0, $conexion);
@@ -306,7 +263,7 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" name="auto" class="btn btn-primary">Calificar</button>
+          <button type="button" id="btnAuto" name="auto" class="btn btn-primary">Calificar</button>
           </form>
         </div>
       </div>
@@ -341,13 +298,96 @@ registroCalificacionArea($_SESSION['area'],$mes, $anio, $conexion);
     </div>
   </div>
 
-  <script>
+  <script src="../../controllers/js/jquery-3.2.1.min.js"></script>
+<!-- Para todas las preguntas -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#btnTodasPreguntas').click(function() {
+        let datos = $('#formTodasPreguntas').serialize();
+        console.log(datos)
+        $.ajax({
+          type: "POST",
+          url: "insertarTpreguntas.php",
+          data: datos,
+          success: function(r) {
+            if (!r) {
+             let id = $('#formTodasPreguntas').serializeArray();
+             id = id.filter(value => value.name == 'id')
+             id = id[0].value;
+            $(`#${id}`).addClass('calificar-btn-disable')
+            $(`#${id}`).attr('disabled', true)
+            $("#completo").modal('hide');
+              alert("agregado con exito");
+            } else {
+              alert("Ya lo calificastes");
+            }
+          }
+        });
+        return false;
+      });
+    });
+  </script>
+
+<!-- para las preguntas generales -->
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#btnGPreguntas').click(function() {
+        let datos = $('#formGpreguntas').serialize();
+        $.ajax({
+          type: "POST",
+          url: "insertarTpreguntas.php",
+          data: datos,
+          success: function(r) {
+            if (!r) {
+             let id = $('#formGpreguntas').serializeArray();
+             id = id.filter(value => value.name == 'id')
+             id = id[0].value;
+            $(`#${id}`).addClass('calificar-btn-disable')
+            $(`#${id}`).attr('disabled', true)
+            $("#general").modal('hide');
+              alert("agregado con exito");
+            } else {
+              alert("Ya lo calificastes");
+            }
+          }
+        });
+        return false;
+      });
+    });
+  </script>
+
+  <!-- para la auto -->
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#btnAuto').click(function() {
+        let datos = $('#formAuto').serialize();
+        $.ajax({
+          type: "POST",
+          url: "auto.php",
+          data: datos,
+          success: function(r) {
+            if (!r) {
+              $(`#btnAutoJq`).attr('disabled', true)
+            $("#autoevaluacion").modal('hide');
+              alert("agregado con exito");
+            } else {
+              alert("Ya lo calificastes");
+            }
+          }
+        });
+        return false;
+      });
+    });
+  </script>
+
+
+
+  <script type="text/javascript">
     const contenedordiv = document.querySelector('.calificar-cuerpo');
     contenedordiv.addEventListener('click', e => {
       let btnmodal;
       if (e.target.classList.contains('btnmodal')) {
         btnmodal = e.target
-        console.log('Hola')
 
 
         document.querySelector('.modal-title').textContent = `${btnmodal.dataset.nombre}`

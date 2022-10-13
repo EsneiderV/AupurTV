@@ -20,7 +20,7 @@
 .index-body {
     height: 100%;
     font-family: 'Poppins', sans-serif;
-    background: url(../../image/fondoLogin.png);
+    background:gray;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -201,7 +201,7 @@
 }
 
 .empleado-body {
-    background: url(../../image/fondoLogin.png);
+    background:gray;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -560,7 +560,7 @@
 }
 
 .calificar-body {
-    background: url(../../image/fondoLogin.png);
+    background:gray;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;

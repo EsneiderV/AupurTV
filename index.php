@@ -1,3 +1,48 @@
+<?php
+if( empty(session_id()) && !headers_sent()){
+    session_start();
+}
+include_once 'controllers/php/funciones.php';
+include_once 'models/Conexion.php';
+date_default_timezone_set('America/Bogota');
+$mes = date('m');
+$anio = date('Y');
+eliminarCalificacionAnual($anio, $conexion);
+
+if (isset($_POST['acceder'])) {
+    $correo = $_POST['correo'];
+    $clave = $_POST['clave'];
+
+   $consultaCorreo = loginCorreo($correo,$conexion);
+    if($consultaCorreo->num_rows > 0){
+        $consulta =  login($correo, $clave, $conexion);
+        if ($consulta->num_rows > 0) {
+            $usuario = mysqli_fetch_array($consulta);
+            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['nombre'] = $usuario['nombre'];
+            $_SESSION['apellidos'] = $usuario['apellidos'];
+            $_SESSION['clave'] = $usuario['clave'];
+            $_SESSION['rol'] = $usuario['rol'];
+            $_SESSION['area'] = $usuario['area'];
+            $_SESSION['imagen'] = $usuario['imagen'];
+            $_SESSION['tipo_imagen'] = $usuario['tipo_imagen'];
+    
+            redireccion($_SESSION['rol']);
+        } else {
+            echo '<script type="text/javascript">
+            alert("Clave Incorrecta");
+            window.location.href="index.php";
+            </script>';
+        }
+    }else{
+        echo '<script type="text/javascript">
+        alert("El correo no se encuentra registrado");
+        window.location.href="index.php";
+        </script>';
+    
+    } 
+}
+?>
 <!DOCTYPE html>
 <html lang="es" class="index-html">
 
@@ -40,47 +85,3 @@
 </body>
 
 </html>
-
-<?php
-include_once 'controllers/php/funciones.php';
-include_once 'models/Conexion.php';
-date_default_timezone_set('America/Bogota');
-$mes = date('m');
-$anio = date('Y');
-eliminarCalificacionAnual($anio, $conexion);
-
-if (isset($_POST['acceder'])) {
-    $correo = $_POST['correo'];
-    $clave = $_POST['clave'];
-
-   $consultaCorreo = loginCorreo($correo,$conexion);
-    if($consultaCorreo->num_rows > 0){
-        $consulta =  login($correo, $clave, $conexion);
-        if ($consulta->num_rows > 0) {
-            session_start();
-            $usuario = mysqli_fetch_array($consulta);
-            $_SESSION['id'] = $usuario['id'];
-            $_SESSION['nombre'] = $usuario['nombre'];
-            $_SESSION['apellidos'] = $usuario['apellidos'];
-            $_SESSION['clave'] = $usuario['clave'];
-            $_SESSION['rol'] = $usuario['rol'];
-            $_SESSION['area'] = $usuario['area'];
-            $_SESSION['imagen'] = $usuario['imagen'];
-            $_SESSION['tipo_imagen'] = $usuario['tipo_imagen'];
-    
-            redireccion($_SESSION['rol']);
-        } else {
-            echo '<script type="text/javascript">
-            alert("Clave Incorrecta");
-            window.location.href="index.php";
-            </script>';
-        }
-    }else{
-        echo '<script type="text/javascript">
-        alert("El correo no se encuentra registrado");
-        window.location.href="index.php";
-        </script>';
-    
-    } 
-}
-?>
