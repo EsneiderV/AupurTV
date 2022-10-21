@@ -88,8 +88,8 @@ if (isset($_POST['modificar'])) {
     </div>
 
 
-        <!-- Agregar inventario -->
-        <div class="inventarioArea-agregar-articulo">
+    <!-- Agregar inventario -->
+    <div class="inventarioArea-agregar-articulo">
         <h3 class="text-center titulo-agregar">AGREGAR</h3>
         <form action="" class="inventarioArea-formulario" method="POST" id="formulario">
             <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="codigo" placeholder="Código artículo" required>
@@ -119,7 +119,7 @@ if (isset($_POST['modificar'])) {
     </div>
 
     <!-- Contenedor de contenedorcitos de cada persona y area -->
-    <div class="inventarioArea-contenedor">
+    <div id="inventarioAreaContenedorPrincipal" class="inventarioArea-contenedor">
 
         <!-- Inventario general de la empresa -->
         <div class="inventarioArea-contenedor-empleados">
@@ -132,7 +132,8 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
-                <a href="inventarioAreaGerente.php?identifierGeneral" class="inventarioArea-abrirInventario">Inventario</a>
+
+                <span id="inventarioArea-abrirInventario-general" class="inventarioArea-abrirInventario">Inventario</span>
             </div>
         </div>
 
@@ -147,7 +148,7 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
-                <a href="inventarioAreaGerente.php?identifierArea=1" class="inventarioArea-abrirInventario">Inventario</a>
+                <span id="inventarioArea-abrirInventario-administracio" class="inventarioArea-abrirInventario">Inventario</span>
             </div>
         </div>
 
@@ -162,7 +163,7 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
-                <a href="inventarioAreaGerente.php?identifierArea=2" class="inventarioArea-abrirInventario">Inventario</a>
+                <span id="inventarioArea-abrirInventario-Tecnico" class="inventarioArea-abrirInventario">Inventario</span>
             </div>
         </div>
 
@@ -177,7 +178,7 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
-                <a href="inventarioAreaGerente.php?identifierArea=3" class="inventarioArea-abrirInventario">Inventario</a>
+                <span id="inventarioArea-abrirInventario-Canal" class="inventarioArea-abrirInventario">Inventario</span>
             </div>
 
 
@@ -194,15 +195,15 @@ if (isset($_POST['modificar'])) {
 
                 <div class="inventarioArea-contenedor-nombre">
                     <h4 class="inventarioArea-nombre"> <?php
-                    $nombre = explode(' ',$persona['nombre']);
-                    $apellido = explode(' ',$persona['apellidos']);
-            
-                    echo $nombre[0].' '.$apellido[0] ;
-                    ?> </h4>
+                                                        $nombre = explode(' ', $persona['nombre']);
+                                                        $apellido = explode(' ', $persona['apellidos']);
+
+                                                        echo $nombre[0] . ' ' . $apellido[0];
+                                                        ?> </h4>
                 </div>
 
                 <div class="inventarioArea-contenedor-abrirInventario">
-                    <a href="inventarioAreaGerente.php?identifier=<?php echo $persona['id'] ?>" class="inventarioArea-abrirInventario">Inventario</a>
+                    <span id="<?php echo $persona['id'] ?>" class="inventarioArea-abrirInventario inventarioArea-abrirInventario-persona">Inventario</span>
                 </div>
             </div>
         <?php
@@ -215,12 +216,13 @@ if (isset($_POST['modificar'])) {
 
     <!-- Inventario por cada persona -->
     <?php
-    if (isset($_GET['identifier'])) {
-        $usuario = mostarUsuarioCalificacionAreaEmergente($_GET['identifier'], $conexion);
+    $personasInventarios = mostarInventarioAreaPersona($_SESSION['area'], $conexion);
+    while ($personaInventario = mysqli_fetch_array($personasInventarios)) {
+        $usuario = mostarUsuarioCalificacionAreaEmergente($personaInventario['id'], $conexion);
         $personaNombre = mysqli_fetch_array($usuario);
-        $items = mostarInventarioAreaProducto($_GET['identifier'], $conexion)
+        $items = mostarInventarioAreaProducto($personaInventario['id'], $conexion);
     ?>
-        <div class="inventarioAreaGerente-emergente-contenedor">
+        <div id="inventarioAreaDirector-abrir-persona-<?php echo $personaInventario['id'] ?>" class="inventarioAreaGerente-emergente-contenedor inventarioAreaDirector-desactivarContenedor inventarioAreaGerente-emergente-contenedor-persona">
 
             <div class="inventarioAreaGerente-emergente-indivudual">
                 <div class="invetarioArea-emergente-navar">
@@ -229,9 +231,9 @@ if (isset($_POST['modificar'])) {
                     $apellido = explode(' ', $personaNombre['apellidos']);
 
 
-                    echo "<h2 class='invetarioArea-emergente-nombre'>" . $nombre[0].' '.$apellido[0]. "</h2>"
+                    echo "<h2 class='invetarioArea-emergente-nombre'>" . $nombre[0] . ' ' . $apellido[0] . "</h2>"
                     ?>
-                    <a href="inventarioAreaGerente.php" class="inventarioAreaGerente-emergente-x">X</a>
+                    <span class="inventarioAreaGerente-emergente-x cerrar-persona">X</span>
                 </div>
 
                 <div class="invetarioArea-emergente-main">
@@ -258,10 +260,10 @@ if (isset($_POST['modificar'])) {
                             <div class="invetarioArea-emergente-main-contenedor-btn">
 
                                 <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $item['nombre_area'] ?>" data-areaid="<?php echo $item['area'] ?>" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
-                                    <i class="fa-solid fa-pen-to-square modificarL"></i>
+                                    <i class="fa-solid fa-pen-to-square modificarL etiqueta-i "></i>
                                 </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifier=<?php echo $_GET['identifier'] ?>">
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>">
                                 </a>
                             </div>
 
@@ -274,7 +276,7 @@ if (isset($_POST['modificar'])) {
                 </div>
 
                 <div class="invetarioArea-emergente-footer">
-                    <a href="inventarioAreaGerente.php" class="btn btn-secondary invetarioArea-emergente-footer-btn">Cerrar</a>
+                    <button class="btn btn-secondary invetarioArea-emergente-footer-btn cerrar-persona"> Cerrar</button>
                 </div>
             </div>
 
@@ -283,34 +285,421 @@ if (isset($_POST['modificar'])) {
     }
     ?>
 
-    <!-- Inventario por cada area -->
+
+
+
+    <!-- Inventario Administracion -->
     <?php
-    if (isset($_GET['identifierArea'])) {
-        $area = mostrarInventarioPorArea($_GET['identifierArea'], $conexion);
-        $areaNombre = mostrarAreaPorCodigo($_GET['identifierArea'], $conexion);
-        $areaTitulo = mysqli_fetch_array($areaNombre);
+    $area = mostrarInventarioPorArea(1, $conexion);
+    $areaNombre = mostrarAreaPorCodigo(1, $conexion);
+    $areaTitulo = mysqli_fetch_array($areaNombre);
     ?>
-        <style>
-            .inventarioArea-html {
-                overflow: hidden;
-            }
-        </style>
-        <div class="inventarioAreaGerente-emergente-contenedor">
+    <div id="inventarioGerenteContenedorAdministracion" class="inventarioAreaGerente-emergente-contenedor inventarioAreaDirector-desactivarContenedor">
 
-            <div class="inventarioAreaGerente-emergente">
-                <div class="invetarioArea-emergente-navar">
-                    <?php
-                    echo "<h2 class='invetarioArea-emergente-nombre'>" . $areaTitulo['nombre'] . "</h2>"
-                    ?>
-                    <a href="inventarioAreaGerente.php" class="inventarioAreaGerente-emergente-x">X</a>
-                </div>
+        <div class="inventarioAreaGerente-emergente">
+            <div class="invetarioArea-emergente-navar">
+                <?php
+                echo "<h2 class='invetarioArea-emergente-nombre'>" . $areaTitulo['nombre'] . "</h2>"
+                ?>
+                <span id="cerrarAdministracionx" class="inventarioAreaGerente-emergente-x">X</span>
+            </div>
 
-                <div class="invetarioArea-emergente-main">
+            <div class="invetarioArea-emergente-main">
+                <hr>
+                <?php
+                while ($item = mysqli_fetch_array($area)) {
+                ?>
+
+                    <div class="invetarioArea-emergente-main-contenedor-item">
+                        <p class="invetarioArea-emergente-main-item">
+                            <span class="span-items">
+                                <?php echo $item['cod'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $item['nombre'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $item['estado'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $item['nombre_responsable'] . ' ' . $item['apellido_responsable'] ?>
+                            </span>
+                        </p>
+
+                        <div class="invetarioArea-emergente-main-contenedor-btn">
+
+                            <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $item['nombre_area'] ?>" data-areaid="<?php echo $item['area'] ?>" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                <i class="fa-solid fa-pen-to-square modificarL etiqueta-i"></i>
+                            </button>
+
+                            <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>">
+                            </a>
+                        </div>
+
+
+                    </div>
                     <hr>
-                    <?php
-                    while ($item = mysqli_fetch_array($area)) {
-                    ?>
+                <?php
+                }
+                $itemsG = mostrarInventarioPorAreaGeneral(1, $conexion);
+                while ($itemG = mysqli_fetch_array($itemsG)) {
+                ?>
 
+                    <div class="invetarioArea-emergente-main-contenedor-item">
+                        <p class="invetarioArea-emergente-main-item">
+                            <span class="span-items">
+                                <?php echo $itemG['cod'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $itemG['nombre'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $itemG['estado'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php if ($itemG['id_responsable'] == 'Noasignado') {
+                                    echo 'No asignado';
+                                } else {
+                                    echo $itemG['id_responsable'];
+                                }
+                                ?>
+                            </span>
+                        </p>
+
+                        <div class="invetarioArea-emergente-main-contenedor-btn">
+
+                            <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $itemG['nombre_area'] ?>" data-areaid="<?php echo $itemG['area'] ?>" data-cod="<?php echo $itemG['cod'] ?>" data-nombre="<?php echo $itemG['nombre'] ?>" data-estado="<?php echo $itemG['estado'] ?>" data-responsableid="<?php echo $itemG['id_responsable'] ?>" data-responsablenom="No asignado">
+                                <i class="fa-solid fa-pen-to-square modificarL etiqueta-i"></i>
+                            </button>
+
+                            <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>">
+                            </a>
+                        </div>
+
+
+                    </div>
+                    <hr>
+                <?php
+                }
+                ?>
+            </div>
+
+            <div class="invetarioArea-emergente-footer">
+                <a href="../../pdf/pdf-inventario.php?area=1" class="btn btn-secondary invetarioArea-emergente-footer-btn">Descargar</a>
+                <button id="cerrarAdministracionBtn" class="btn btn-secondary invetarioArea-emergente-footer-btn"> Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Mostrar inventario Tecnicos -->
+
+    <?php
+    $area = mostrarInventarioPorArea(2, $conexion);
+    $areaNombre = mostrarAreaPorCodigo(2, $conexion);
+    $areaTitulo = mysqli_fetch_array($areaNombre);
+    ?>
+    <div id="inventarioGerenteContenedorTecnico" class="inventarioAreaGerente-emergente-contenedor inventarioAreaDirector-desactivarContenedor">
+
+        <div class="inventarioAreaGerente-emergente">
+            <div class="invetarioArea-emergente-navar">
+                <?php
+                echo "<h2 class='invetarioArea-emergente-nombre'>" . $areaTitulo['nombre'] . "</h2>"
+                ?>
+                <span id="cerrarTecnicox" class="inventarioAreaGerente-emergente-x">X</span>
+            </div>
+
+            <div class="invetarioArea-emergente-main">
+                <hr>
+                <?php
+                while ($item = mysqli_fetch_array($area)) {
+                ?>
+
+                    <div class="invetarioArea-emergente-main-contenedor-item">
+                        <p class="invetarioArea-emergente-main-item">
+                            <span class="span-items">
+                                <?php echo $item['cod'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $item['nombre'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $item['estado'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $item['nombre_responsable'] . ' ' . $item['apellido_responsable'] ?>
+                            </span>
+                        </p>
+
+                        <div class="invetarioArea-emergente-main-contenedor-btn">
+
+                            <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $item['nombre_area'] ?>" data-areaid="<?php echo $item['area'] ?>" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                <i class="fa-solid fa-pen-to-square modificarL etiqueta-i"></i>
+                            </button>
+
+                            <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>">
+                            </a>
+                        </div>
+
+
+                    </div>
+                    <hr>
+                <?php
+                }
+                $itemsG = mostrarInventarioPorAreaGeneral(2, $conexion);
+                while ($itemG = mysqli_fetch_array($itemsG)) {
+                ?>
+
+                    <div class="invetarioArea-emergente-main-contenedor-item">
+                        <p class="invetarioArea-emergente-main-item">
+                            <span class="span-items">
+                                <?php echo $itemG['cod'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $itemG['nombre'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $itemG['estado'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php if ($itemG['id_responsable'] == 'Noasignado') {
+                                    echo 'No asignado';
+                                } else {
+                                    echo $itemG['id_responsable'];
+                                }
+                                ?>
+                            </span>
+                        </p>
+
+                        <div class="invetarioArea-emergente-main-contenedor-btn">
+
+                            <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $itemG['nombre_area'] ?>" data-areaid="<?php echo $itemG['area'] ?>" data-cod="<?php echo $itemG['cod'] ?>" data-nombre="<?php echo $itemG['nombre'] ?>" data-estado="<?php echo $itemG['estado'] ?>" data-responsableid="<?php echo $itemG['id_responsable'] ?>" data-responsablenom="No asignado">
+                                <i class="fa-solid fa-pen-to-square modificarL etiqueta-i"></i>
+                            </button>
+
+                            <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>">
+                            </a>
+                        </div>
+
+
+                    </div>
+                    <hr>
+                <?php
+                }
+                ?>
+            </div>
+
+            <div class="invetarioArea-emergente-footer">
+                <a href="../../pdf/pdf-inventario.php?area=2" class="btn btn-secondary invetarioArea-emergente-footer-btn">Descargar</a>
+                <button id="cerrarTecnicoBtn" class="btn btn-secondary invetarioArea-emergente-footer-btn"> Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Mostrar inventario Canal -->
+
+    <?php
+    $area = mostrarInventarioPorArea(3, $conexion);
+    $areaNombre = mostrarAreaPorCodigo(3, $conexion);
+    $areaTitulo = mysqli_fetch_array($areaNombre);
+    ?>
+
+    <div id="inventarioGerenteContenedorCanal" class="inventarioAreaGerente-emergente-contenedor inventarioAreaDirector-desactivarContenedor">
+
+        <div class="inventarioAreaGerente-emergente">
+            <div class="invetarioArea-emergente-navar">
+                <?php
+                echo "<h2 class='invetarioArea-emergente-nombre'>" . $areaTitulo['nombre'] . "</h2>"
+                ?>
+                <span id="cerrarCanalx" class="inventarioAreaGerente-emergente-x">X</span>
+            </div>
+
+            <div class="invetarioArea-emergente-main">
+                <hr>
+                <?php
+                while ($item = mysqli_fetch_array($area)) {
+                ?>
+
+                    <div class="invetarioArea-emergente-main-contenedor-item">
+                        <p class="invetarioArea-emergente-main-item">
+                            <span class="span-items">
+                                <?php echo $item['cod'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $item['nombre'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $item['estado'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $item['nombre_responsable'] . ' ' . $item['apellido_responsable'] ?>
+                            </span>
+                        </p>
+
+                        <div class="invetarioArea-emergente-main-contenedor-btn">
+
+                            <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $item['nombre_area'] ?>" data-areaid="<?php echo $item['area'] ?>" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
+                                <i class="fa-solid fa-pen-to-square modificarL etiqueta-i"></i>
+                            </button>
+
+                            <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>">
+                            </a>
+                        </div>
+
+
+                    </div>
+                    <hr>
+                <?php
+                }
+                $itemsG = mostrarInventarioPorAreaGeneral(3, $conexion);
+                while ($itemG = mysqli_fetch_array($itemsG)) {
+                ?>
+
+                    <div class="invetarioArea-emergente-main-contenedor-item">
+                        <p class="invetarioArea-emergente-main-item">
+                            <span class="span-items">
+                                <?php echo $itemG['cod'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $itemG['nombre'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php echo $itemG['estado'] ?>
+                            </span>
+
+                            <span class="span-items">
+                                <?php if ($itemG['id_responsable'] == 'Noasignado') {
+                                    echo 'No asignado';
+                                } else {
+                                    echo $itemG['id_responsable'];
+                                }
+                                ?>
+                            </span>
+                        </p>
+
+                        <div class="invetarioArea-emergente-main-contenedor-btn">
+
+                            <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $itemG['nombre_area'] ?>" data-areaid="<?php echo $itemG['area'] ?>" data-cod="<?php echo $itemG['cod'] ?>" data-nombre="<?php echo $itemG['nombre'] ?>" data-estado="<?php echo $itemG['estado'] ?>" data-responsableid="<?php echo $itemG['id_responsable'] ?>" data-responsablenom="No asignado">
+                                <i class="fa-solid fa-pen-to-square modificarL etiqueta-i"></i>
+                            </button>
+
+                            <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>">
+                            </a>
+                        </div>
+
+
+                    </div>
+                    <hr>
+                <?php
+                }
+                ?>
+            </div>
+
+            <div class="invetarioArea-emergente-footer">
+                <a href="../../pdf/pdf-inventario.php?area=3" class="btn btn-secondary invetarioArea-emergente-footer-btn">Descargar</a>
+                <button id="cerrarCanalBtn" class="btn btn-secondary invetarioArea-emergente-footer-btn"> Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Inventario general-->
+    <?php
+    $areas = mostrarAreaDirectorio($conexion);
+
+    ?>
+    <div id="inventarioGerenteContenedorGerente" class="inventarioAreaGerente-emergente-contenedor inventarioAreaDirector-desactivarContenedor">
+
+        <div class="inventarioAreaGerente-emergente">
+            <div class="invetarioArea-emergente-navar">
+                <?php
+                echo "<h1 class='invetarioArea-emergente-nombre'> General </h1>"
+                ?>
+
+                <span id="cerrarGeneralx" class="inventarioAreaGerente-emergente-x">X</span>
+            </div>
+
+            <div class="invetarioArea-emergente-main">
+                <?php
+                $sinAsignar = mostrarInventarioPorAreaGeneralNoA($conexion);
+                if ($sinAsignar->num_rows > 0) {
+                    echo "<hr>";
+                    echo "<h2 class='inventarioAreaGerenteTituloArea'>No asignados</h2>";
+                    echo "<hr>";
+                    while ($sinAsignarItem = mysqli_fetch_array($sinAsignar)) {
+                ?>
+                        <div class="invetarioArea-emergente-main-contenedor-item">
+                            <p class="invetarioArea-emergente-main-item">
+                                <span class="span-items">
+                                    <?php echo $sinAsignarItem['cod'] ?>
+                                </span>
+
+                                <span class="span-items">
+                                    <?php echo $sinAsignarItem['nombre'] ?>
+                                </span>
+
+                                <span class="span-items">
+                                    <?php echo $sinAsignarItem['estado'] ?>
+                                </span>
+
+                                <span class="span-items">
+                                    <?php if ($sinAsignarItem['area'] == 'Noasignado') {
+                                        echo 'No asignado';
+                                    } else {
+                                        echo $sinAsignarItem['area'];
+                                    }
+                                    ?>
+                                </span>
+                            </p>
+
+                            <div class="invetarioArea-emergente-main-contenedor-btn">
+
+                                <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="No asignado" data-areaid="<?php echo $sinAsignarItem['area'] ?>" data-cod="<?php echo $sinAsignarItem['cod'] ?>" data-nombre="<?php echo $sinAsignarItem['nombre'] ?>" data-estado="<?php echo $sinAsignarItem['estado'] ?>" data-responsableid="<?php echo $sinAsignarItem['id_responsable'] ?>" data-responsablenom="No asignado">
+                                    <i class="fa-solid fa-pen-to-square modificarL etiqueta-i"></i>
+                                </button>
+
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $sinAsignarItem['cod'] ?>">
+                                </a>
+                            </div>
+
+
+                        </div>
+                        <hr>
+
+                <?php
+                    }
+                }
+                ?>
+
+                <hr>
+                <?php
+                while ($area = mysqli_fetch_array($areas)) {
+                    echo "<h2 class='inventarioAreaGerenteTituloArea'>" . $area['nombre'] . "</h2>";
+                    echo "<hr>";
+                    $items = mostrarInventarioPorArea($area['codigo'], $conexion);
+                    while ($item = mysqli_fetch_array($items)) {
+                ?>
                         <div class="invetarioArea-emergente-main-contenedor-item">
                             <p class="invetarioArea-emergente-main-item">
                                 <span class="span-items">
@@ -326,17 +715,17 @@ if (isset($_POST['modificar'])) {
                                 </span>
 
                                 <span class="span-items">
-                                    <?php echo $item['nombre_responsable'].' '.$item['apellido_responsable'] ?>
+                                    <?php echo $item['nombre_responsable'] . ' ' . $item['apellido_responsable'] ?>
                                 </span>
                             </p>
 
                             <div class="invetarioArea-emergente-main-contenedor-btn">
 
                                 <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $item['nombre_area'] ?>" data-areaid="<?php echo $item['area'] ?>" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
-                                    <i class="fa-solid fa-pen-to-square modificarL"></i>
+                                    <i class="fa-solid fa-pen-to-square modificarL etiqueta-i"></i>
                                 </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifierArea=<?php echo $_GET['identifierArea'] ?>">
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>">
                                 </a>
                             </div>
 
@@ -345,7 +734,7 @@ if (isset($_POST['modificar'])) {
                         <hr>
                     <?php
                     }
-                    $itemsG = mostrarInventarioPorAreaGeneral($_GET['identifierArea'], $conexion);
+                    $itemsG = mostrarInventarioPorAreaGeneral($area['codigo'], $conexion);
                     while ($itemG = mysqli_fetch_array($itemsG)) {
                     ?>
 
@@ -376,204 +765,36 @@ if (isset($_POST['modificar'])) {
                             <div class="invetarioArea-emergente-main-contenedor-btn">
 
                                 <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $itemG['nombre_area'] ?>" data-areaid="<?php echo $itemG['area'] ?>" data-cod="<?php echo $itemG['cod'] ?>" data-nombre="<?php echo $itemG['nombre'] ?>" data-estado="<?php echo $itemG['estado'] ?>" data-responsableid="<?php echo $itemG['id_responsable'] ?>" data-responsablenom="No asignado">
-                                    <i class="fa-solid fa-pen-to-square modificarL"></i>
+                                    <i class="fa-solid fa-pen-to-square modificarL etiqueta-i"></i>
                                 </button>
 
-                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>&identifierArea=<?php echo $_GET['identifierArea'] ?>">
+                                <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>">
                                 </a>
                             </div>
 
 
                         </div>
                         <hr>
-                    <?php
+                <?php
                     }
-                    ?>
-                </div>
-
-                <div class="invetarioArea-emergente-footer">
-                    <a href="../../pdf/pdf-inventario.php?area=<?php echo $_GET['identifierArea'] ?>" class="btn btn-secondary invetarioArea-emergente-footer-btn">Descargar</a>
-                    <a href="inventarioAreaGerente.php" class="btn btn-secondary invetarioArea-emergente-footer-btn">Cerrar</a>
-                </div>
+                }
+                ?>
             </div>
 
-        </div>
-    <?php
-    }
-    ?>
-
-    <!-- Inventario general -->
-    <?php
-    if (isset($_GET['identifierGeneral'])) {
-        $areas = mostrarAreaDirectorio($conexion);
-
-    ?>
-        <div class="inventarioAreaGerente-emergente-contenedor">
-
-            <div class="inventarioAreaGerente-emergente">
-                <div class="invetarioArea-emergente-navar">
-                    <?php
-                    echo "<h1 class='invetarioArea-emergente-nombre'> General </h1>"
-                    ?>
-                    <a href="inventarioAreaGerente.php" class="inventarioAreaGerente-emergente-x">X</a>
-                </div>
-
-                <div class="invetarioArea-emergente-main">
-                    <?php
-                    $sinAsignar = mostrarInventarioPorAreaGeneralNoA($conexion);
-                    if ($sinAsignar->num_rows > 0) {
-                        echo "<hr>";
-                        echo "<h2 class='inventarioAreaGerenteTituloArea'>No asignados</h2>";
-                        echo "<hr>";
-                        while ($sinAsignarItem = mysqli_fetch_array($sinAsignar)) {
-                    ?>
-                            <div class="invetarioArea-emergente-main-contenedor-item">
-                                <p class="invetarioArea-emergente-main-item">
-                                    <span class="span-items">
-                                        <?php echo $sinAsignarItem['cod'] ?>
-                                    </span>
-
-                                    <span class="span-items">
-                                        <?php echo $sinAsignarItem['nombre'] ?>
-                                    </span>
-
-                                    <span class="span-items">
-                                        <?php echo $sinAsignarItem['estado'] ?>
-                                    </span>
-
-                                    <span class="span-items">
-                                        <?php if ($sinAsignarItem['area'] == 'Noasignado') {
-                                            echo 'No asignado';
-                                        } else {
-                                            echo $sinAsignarItem['area'];
-                                        }
-                                        ?>
-                                    </span>
-                                </p>
-
-                                <div class="invetarioArea-emergente-main-contenedor-btn">
-
-                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="No asignado" data-areaid="<?php echo $sinAsignarItem['area'] ?>" data-cod="<?php echo $sinAsignarItem['cod'] ?>" data-nombre="<?php echo $sinAsignarItem['nombre'] ?>" data-estado="<?php echo $sinAsignarItem['estado'] ?>" data-responsableid="<?php echo $sinAsignarItem['id_responsable'] ?>" data-responsablenom="No asignado">
-                                        <i class="fa-solid fa-pen-to-square modificarL"></i>
-                                    </button>
-
-                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $sinAsignarItem['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral'] ?>">
-                                    </a>
-                                </div>
-
-
-                            </div>
-                            <hr>
-
-                    <?php
-                        }
-                    }
-                    ?>
-
-                    <hr>
-                    <?php
-                    while ($area = mysqli_fetch_array($areas)) {
-                        echo "<h2 class='inventarioAreaGerenteTituloArea'>" . $area['nombre'] . "</h2>";
-                        echo "<hr>";
-                        $items = mostrarInventarioPorArea($area['codigo'], $conexion);
-                        while ($item = mysqli_fetch_array($items)) {
-                    ?>
-                            <style>
-                                .inventarioArea-html {
-                                    overflow: hidden;
-                                }
-                            </style>
-                            <div class="invetarioArea-emergente-main-contenedor-item">
-                                <p class="invetarioArea-emergente-main-item">
-                                    <span class="span-items">
-                                        <?php echo $item['cod'] ?>
-                                    </span>
-
-                                    <span class="span-items">
-                                        <?php echo $item['nombre'] ?>
-                                    </span>
-
-                                    <span class="span-items">
-                                        <?php echo $item['estado'] ?>
-                                    </span>
-
-                                    <span class="span-items">
-                                        <?php echo $item['nombre_responsable'].' '.$item['apellido_responsable'] ?>
-                                    </span>
-                                </p>
-
-                                <div class="invetarioArea-emergente-main-contenedor-btn">
-
-                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $item['nombre_area'] ?>" data-areaid="<?php echo $item['area'] ?>" data-cod="<?php echo $item['cod'] ?>" data-nombre="<?php echo $item['nombre'] ?>" data-estado="<?php echo $item['estado'] ?>" data-responsableid="<?php echo $item['id_responsable'] ?>" data-responsablenom="<?php echo $item['nombre_responsable'] ?>">
-                                        <i class="fa-solid fa-pen-to-square modificarL"></i>
-                                    </button>
-
-                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $item['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral'] ?>">
-                                    </a>
-                                </div>
-
-
-                            </div>
-                            <hr>
-                        <?php
-                        }
-                        $itemsG = mostrarInventarioPorAreaGeneral($area['codigo'], $conexion);
-                        while ($itemG = mysqli_fetch_array($itemsG)) {
-                        ?>
-
-                            <div class="invetarioArea-emergente-main-contenedor-item">
-                                <p class="invetarioArea-emergente-main-item">
-                                    <span class="span-items">
-                                        <?php echo $itemG['cod'] ?>
-                                    </span>
-
-                                    <span class="span-items">
-                                        <?php echo $itemG['nombre'] ?>
-                                    </span>
-
-                                    <span class="span-items">
-                                        <?php echo $itemG['estado'] ?>
-                                    </span>
-
-                                    <span class="span-items">
-                                        <?php if ($itemG['id_responsable'] == 'Noasignado') {
-                                            echo 'No asignado';
-                                        } else {
-                                            echo $itemG['id_responsable'];
-                                        }
-                                        ?>
-                                    </span>
-                                </p>
-
-                                <div class="invetarioArea-emergente-main-contenedor-btn">
-
-                                    <button data-bs-toggle="modal" data-bs-target="#articulosModificar" class="inventarioArea-boton-modificar modificar" data-areanom="<?php echo $itemG['nombre_area'] ?>" data-areaid="<?php echo $itemG['area'] ?>" data-cod="<?php echo $itemG['cod'] ?>" data-nombre="<?php echo $itemG['nombre'] ?>" data-estado="<?php echo $itemG['estado'] ?>" data-responsableid="<?php echo $itemG['id_responsable'] ?>" data-responsablenom="No asignado">
-                                        <i class="fa-solid fa-pen-to-square modificarL"></i>
-                                    </button>
-
-                                    <a onclick="return eliminar()" class="fa-solid fa-trash-can modificar" href="inventarioAreaGerente.php?eliminar=<?php echo $itemG['cod'] ?>&identifierGeneral=<?php echo $_GET['identifierGeneral'] ?>">
-                                    </a>
-                                </div>
-
-
-                            </div>
-                            <hr>
-                    <?php
-                        }
-                    }
-                    ?>
-                </div>
-
-                <div class="invetarioArea-emergente-footer">
-                    <a href="../../pdf/pdf-inventario.php?area=0" class="btn btn-secondary invetarioArea-emergente-footer-btn">Descargar</a>
-                    <a href="inventarioAreaGerente.php" class="btn btn-secondary invetarioArea-emergente-footer-btn">Cerrar</a>
-                </div>
+            <div class="invetarioArea-emergente-footer">
+                <a href="../../pdf/pdf-inventario.php?area=0" class="btn btn-secondary invetarioArea-emergente-footer-btn">Descargar</a>
+                <button id="cerrarGeneralBtn" class="btn btn-secondary invetarioArea-emergente-footer-btn"> Cerrar</button>
             </div>
-
         </div>
+
+    </div>
+
     <?php
-    }
+
     ?>
+
+
+
 
 
     <!-- Modal para el boton de modificar articulos -->
@@ -621,44 +842,45 @@ if (isset($_POST['modificar'])) {
         </div>
     </div>
 
-    <script>
-            const form = document.querySelector('#formulario')
-    const btn = document.querySelector('.inventarioArea-item-formulario-agregar')
-
-
-    btn.addEventListener('click', e => {
-        console.log('Holaa')
-
-        const selectES = document.querySelector('#select-agregar-estado').value
-        if (selectES == 0) {
-            e.preventDefault();
-            alert('Por favor seleccione estado')
-        }
-
-
-        const select = document.querySelector('#select-agregar-area').value
-        if (select == 0) {
-            e.preventDefault();
-            alert('Por favor seleccione area')
-        }
-
-        const selectA = document.querySelector('#select-agregar-area').value
-        const selectE = document.querySelector('#select-agregar-empleado').value
-        if (selectA != 'Noasignado' && selectE == 0) {
-            e.preventDefault();
-            alert('Por favor seleccione empleado')
-        }
-
-    })
-    </script>
 
     <script src="../../controllers/js/jquery-1.10.2.min.js"></script>
+
     <script>
+        //AGREAGAR
+
+        const form = document.querySelector('#formulario')
+        const btn = document.querySelector('.inventarioArea-item-formulario-agregar')
+
+
+        btn.addEventListener('click', e => {
+            const selectES = document.querySelector('#select-agregar-estado').value
+            if (selectES == 0) {
+                e.preventDefault();
+                alert('Por favor seleccione estado')
+            }
+
+
+            const select = document.querySelector('#select-agregar-area').value
+            if (select == 0) {
+                e.preventDefault();
+                alert('Por favor seleccione area')
+            }
+
+            const selectA = document.querySelector('#select-agregar-area').value
+            const selectE = document.querySelector('#select-agregar-empleado').value
+            if (selectA != 'Noasignado' && selectE == 0) {
+                e.preventDefault();
+                alert('Por favor seleccione empleado')
+            }
+
+        })
+
+
         const selectArea = document.querySelector('#select-agregar-area');
         const selectEmpleado = document.querySelector('#select-agregar-empleado')
         const optionEmpleado = document.querySelector('#option-empleado')
 
-        
+
         selectArea.addEventListener('input', e => {
             if (selectArea.value == 'Noasignado') {
                 selectEmpleado.disabled = true
@@ -692,79 +914,162 @@ if (isset($_POST['modificar'])) {
 
 
         })
-    </script>
 
-</body>
 
-</html>
+        //abrir por persona
+        const inventarioAreaContenedorPrincipal = document.querySelector('#inventarioAreaContenedorPrincipal')
+        inventarioAreaContenedorPrincipal.addEventListener('click', e => {
+            if (e.target.classList.contains('inventarioArea-abrirInventario-persona')) {
+                idContenedor = e.target.id;
+                const contenedorAbrir = document.querySelector(`#inventarioAreaDirector-abrir-persona-${idContenedor}`)
+                contenedorAbrir.classList.remove('inventarioAreaDirector-desactivarContenedor')
+            }
 
-<script>
-    function eliminar() {
-        let respuesta = confirm('¿Está seguro de que desea eliminar este articulo de forma permanente?');
+        })
 
-        if (respuesta) {
-            return true
-        } else {
-            return false
+        const cerrar = document.querySelectorAll('.inventarioAreaGerente-emergente-contenedor-persona')
+        cerrar.forEach(contenedor => {
+            contenedor.addEventListener('click', e => {
+                if (e.target.classList.contains('cerrar-persona')) {
+                    contenedor.classList.add('inventarioAreaDirector-desactivarContenedor')
+                }
+            })
+        })
+
+
+
+        // abrir general
+        const AbrirGenetal = document.querySelector('#inventarioArea-abrirInventario-general');
+        const contenedorGeneral = document.querySelector('#inventarioGerenteContenedorGerente');
+        const cerrarGeneralBtn = document.querySelector('#cerrarGeneralBtn');
+        const cerrarGeneralx = document.querySelector('#cerrarGeneralx');
+        AbrirGenetal.addEventListener('click', e => {
+            contenedorGeneral.classList.remove('inventarioAreaDirector-desactivarContenedor')
+        })
+        cerrarGeneralBtn.addEventListener('click', e => {
+            contenedorGeneral.classList.add('inventarioAreaDirector-desactivarContenedor')
+        })
+
+        cerrarGeneralx.addEventListener('click', e => {
+            contenedorGeneral.classList.add('inventarioAreaDirector-desactivarContenedor')
+        })
+
+        // abrir Administracion
+        const AbrirAdministracion = document.querySelector('#inventarioArea-abrirInventario-administracio');
+        const contenedorAdministracion = document.querySelector('#inventarioGerenteContenedorAdministracion');
+        const cerrarAdministracionBtn = document.querySelector('#cerrarAdministracionBtn');
+        const cerrarAdministracionx = document.querySelector('#cerrarAdministracionx');
+        AbrirAdministracion.addEventListener('click', e => {
+            contenedorAdministracion.classList.remove('inventarioAreaDirector-desactivarContenedor')
+        })
+        cerrarAdministracionBtn.addEventListener('click', e => {
+            contenedorAdministracion.classList.add('inventarioAreaDirector-desactivarContenedor')
+        })
+        cerrarAdministracionx.addEventListener('click', e => {
+            contenedorAdministracion.classList.add('inventarioAreaDirector-desactivarContenedor')
+        })
+
+        // abrir Tecnico
+        const AbrirTecnico = document.querySelector('#inventarioArea-abrirInventario-Tecnico');
+        const contenedorTecnico = document.querySelector('#inventarioGerenteContenedorTecnico');
+        const cerrarTecnicoBtn = document.querySelector('#cerrarTecnicoBtn');
+        const cerrarTecnicox = document.querySelector('#cerrarTecnicox');
+        AbrirTecnico.addEventListener('click', e => {
+            contenedorTecnico.classList.remove('inventarioAreaDirector-desactivarContenedor')
+        })
+        cerrarTecnicoBtn.addEventListener('click', e => {
+            contenedorTecnico.classList.add('inventarioAreaDirector-desactivarContenedor')
+        })
+        cerrarTecnicox.addEventListener('click', e => {
+            contenedorTecnico.classList.add('inventarioAreaDirector-desactivarContenedor')
+        })
+
+        // abrir Canal
+        const AbrirCanal = document.querySelector('#inventarioArea-abrirInventario-Canal');
+        const contenedorCanal = document.querySelector('#inventarioGerenteContenedorCanal');
+        const cerrarCanalBtn = document.querySelector('#cerrarCanalBtn');
+        const cerrarCanalx = document.querySelector('#cerrarCanalx');
+        AbrirCanal.addEventListener('click', e => {
+            contenedorCanal.classList.remove('inventarioAreaDirector-desactivarContenedor')
+        })
+        cerrarCanalBtn.addEventListener('click', e => {
+            contenedorCanal.classList.add('inventarioAreaDirector-desactivarContenedor')
+        })
+        cerrarCanalx.addEventListener('click', e => {
+            contenedorCanal.classList.add('inventarioAreaDirector-desactivarContenedor')
+        })
+
+
+        //modificar
+        function eliminar() {
+            let respuesta = confirm('¿Está seguro de que desea eliminar este articulo de forma permanente?');
+
+            if (respuesta) {
+                return true
+            } else {
+                return false
+            }
         }
-    }
 
-    const div = document.querySelector('.inventarioAreaGerente-emergente-contenedor')
+        const div = document.querySelectorAll('.inventarioAreaGerente-emergente-contenedor')
 
-    div.addEventListener("click", e => {
-        if (e.target.classList.contains("modificar") || e.target.classList.contains("modificarL")) {
+        div.forEach(cont => {
+            cont.addEventListener('click', e => {
+                if (e.target.classList.contains("modificar") || e.target.classList.contains("modificarL")) {
+                    buttonComponents = e.target.classList.contains('etiqueta-i') ? e.target.parentNode : e.target;
+                    const btn = (e.target.classList.contains("modificar")) ? e.target : e.target.parentNode;
+                    document.querySelector('#codigoM').value = btn.dataset.cod
+                    document.querySelector('#nombreM').value = btn.dataset.nombre
+                    document.querySelector('#option-default-estado').value = btn.dataset.estado
+                    document.querySelector('#option-default-estado').textContent = btn.dataset.estado
+                    document.querySelector('#option-default-area').value = btn.dataset.areaid
+                    document.querySelector('#option-default-area').textContent = btn.dataset.areanom
+                    const url = 'get_empleados-modi.php?idEmpleado=' + btn.dataset.responsableid + '&nomEmpleado=' + btn.dataset.responsablenom;
+                    $(document).ready(function() {
+                        var empleados = $('#select-agregar-empleado-modi');
+                        var id_area = $('#select-agregar-area-modi').val();
+                        $.ajax({
+                            data: {
+                                id_area: id_area
+                            },
+                            dataType: 'html',
+                            type: 'POST',
+                            url: url,
+                        }).done(function(data) {
+                            empleados.html(data);
+                        });
 
-            const btn = (e.target.classList.contains("modificar")) ? e.target : e.target.parentNode;
+                    });
+
+                }
+            })
+        })
 
 
-            document.querySelector('#codigoM').value = btn.dataset.cod
-            document.querySelector('#nombreM').value = btn.dataset.nombre
-            document.querySelector('#option-default-estado').value = btn.dataset.estado
-            document.querySelector('#option-default-estado').textContent = btn.dataset.estado
-            document.querySelector('#option-default-area').value = btn.dataset.areaid
-            document.querySelector('#option-default-area').textContent = btn.dataset.areanom
 
-            const url = 'get_empleados-modi.php?idEmpleado=' + btn.dataset.responsableid + '&nomEmpleado=' + btn.dataset.responsablenom;
-            $(document).ready(function() {
-                var empleados = $('#select-agregar-empleado-modi');
-                var id_area = $('#select-agregar-area-modi').val();
+        $(document).ready(function() {
+
+            var empleados = $('#select-agregar-empleado-modi');
+
+            $('#select-agregar-area-modi').change(function() {
+                var id_area = $(this).val();
+
                 $.ajax({
                     data: {
                         id_area: id_area
                     },
                     dataType: 'html',
                     type: 'POST',
-                    url: url,
+                    url: 'get_empleados-modi1.php',
                 }).done(function(data) {
                     empleados.html(data);
                 });
 
             });
 
-
-        }
-    })
-
-    $(document).ready(function() {
-
-        var empleados = $('#select-agregar-empleado-modi');
-
-        $('#select-agregar-area-modi').change(function() {
-            var id_area = $(this).val();
-
-            $.ajax({
-                data: {
-                    id_area: id_area
-                },
-                dataType: 'html',
-                type: 'POST',
-                url: 'get_empleados-modi1.php',
-            }).done(function(data) {
-                empleados.html(data);
-            });
-
         });
+    </script>
 
-    });
+</body>
 
-</script>
+</html>

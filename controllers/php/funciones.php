@@ -351,9 +351,9 @@ function promedioPreguntaUsuarioAdministracion($idCalificador, $mes, $idP, $area
 }
 
 // nos muestra cuantas calificaciones tiene la persona
-function totalDeCalificaciones($idCalificador, $mes, $area, $conexion)
+function totalDeCalificaciones($idCalificante, $mes, $conexion)
 {
-    $query = "SELECT COUNT(`nota`) AS 'total' FROM `calificaciones` WHERE `mes` = '$mes' AND `area` = '$area' AND `area` = `area_calificante` AND `idCalificador` = '$idCalificador'";
+    $query = "SELECT COUNT(`nota`) AS 'total' FROM `calificaciones` WHERE `idCalificante` = '$idCalificante' AND `area` = `area_calificante` AND `mes` = '$mes' ";
     $consulta = mysqli_query($conexion, $query);
     $retornar = [];
     while ($pregunta = mysqli_fetch_array($consulta)) {

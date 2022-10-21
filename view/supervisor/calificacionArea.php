@@ -119,7 +119,7 @@ $anio = date('Y');
           echo  '</div>';
 
           $totaldeNotasRequeridas = $totalUsuario[0] * $i;
-          $totaldeNotas = totalDeCalificaciones($usuario['id'], $mes, $usuario['area'], $conexion);
+          $totaldeNotas = totalDeCalificaciones($usuario['id'], $mes, $conexion);
 
           $PromedioFinal =  ((100 * $totaldeNotas[0]) / $totaldeNotasRequeridas);
           $PromedioFinal =  number_format($PromedioFinal, 0)
@@ -136,20 +136,37 @@ $anio = date('Y');
     ?>
   </div>
 
+  <div>
+    <a href="" disable>Enero</a>
+    <a href="">Febrero</a>
+    <a href="">Marzo</a>
+    <a href="">Abril</a>
+    <a href="">Mayo</a>
+    <a href="">Junio</a>
+    <a href="">Julio</a>
+    <a href="">Agosto</a>
+    <a href="">Septiembre</a>
+    <a href="">Octubre</a>
+    <a href="">Nobiembre</a>
+    <a href="">Diciembre</a>
+  </div>
+
+
+
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
-    <div>
-      <h3 class="titulo-diagrama-por-año">
-        <?php 
-        if (isset($_POST['aniodiagrama'])) {
-          $anio = $_POST['aniodiagrama'];
-          echo "Notas ".$anio;
-        }else{
-          echo "Notas ".$anio;
-        }
-        ?>
-      </h3>
-    </div>
+  <div>
+    <h3 class="titulo-diagrama-por-año">
+      <?php
+      if (isset($_POST['aniodiagrama'])) {
+        $anio = $_POST['aniodiagrama'];
+        echo "Notas " . $anio;
+      } else {
+        echo "Notas " . $anio;
+      }
+      ?>
+    </h3>
+  </div>
 
   <div class="contenedor-canva-buscador">
     <div class="contenedor-de-canvas">
@@ -158,14 +175,14 @@ $anio = date('Y');
     <form id="formularioCambiarAnio" action="" method="post">
       <select class="select-año" id="SelectCambiarAnio" name="aniodiagrama" id="">
         <option value="0">Seleccione año</option>
-       <?php 
+        <?php
         $consultaSelects = traerAniosQueTiene($conexion);
-        while ( $consultaSelect = mysqli_fetch_array($consultaSelects)) {
-          ?>
+        while ($consultaSelect = mysqli_fetch_array($consultaSelects)) {
+        ?>
           <option value="<?php echo $consultaSelect['anio'] ?>"><?php echo $consultaSelect['anio'] ?></option>
-          <?php
+        <?php
         }
-       ?>
+        ?>
       </select>
     </form>
   </div>
@@ -178,11 +195,11 @@ $anio = date('Y');
     $anio = $_POST['aniodiagrama'];
     $mesMin = sacarMesMin($anio, $_SESSION['area'], $conexion);
     $mesMin =  mysqli_fetch_array($mesMin)[0];
-  }else{
+  } else {
     $mesMin = sacarMesMin($anio, $_SESSION['area'], $conexion);
     $mesMin =  mysqli_fetch_array($mesMin)[0];
   }
- 
+
   $relleno = '';
   for ($i = 1; $i < $mesMin; $i++) {
     $relleno = $relleno . ',';
@@ -193,7 +210,7 @@ $anio = date('Y');
   <script>
     const formParaLosAnios = document.querySelector('#formularioCambiarAnio')
     const selectCambiarAnio = document.querySelector('#SelectCambiarAnio')
-    selectCambiarAnio.addEventListener('input',e => {
+    selectCambiarAnio.addEventListener('input', e => {
       formParaLosAnios.submit();
     })
 
@@ -265,4 +282,5 @@ $anio = date('Y');
 
 
 </body>
+
 </html>
