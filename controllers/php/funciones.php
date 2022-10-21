@@ -154,7 +154,7 @@ function mostrarPreguntasid($tipo, $conexion)
 }
 
 // guarda la calificaciones y sus notas
-function guardarCalificaciones($idP, $idCalificante, $idCalificador, $nota, $mes, $area, $tipo, $rol, $area_calificante,$anio, $conexion)
+function guardarCalificaciones($idP, $idCalificante, $idCalificador, $nota, $mes, $area, $tipo, $rol, $area_calificante, $anio, $conexion)
 {
     $query = "INSERT INTO `calificaciones`(`idP`, `idCalificante`, `idCalificador`, `nota`, `mes`,area,general,rol,area_calificante,anio) VALUES ('$idP','$idCalificante','$idCalificador','$nota','$mes','$area','$tipo','$rol','$area_calificante','$anio')";
     $insertar = mysqli_query($conexion, $query);
@@ -362,32 +362,35 @@ function totalDeCalificaciones($idCalificante, $mes, $conexion)
     return $retornar;
 }
 
-function sacarMesMin($anio,$area,$conexion){
+function sacarMesMin($anio, $area, $conexion)
+{
     $query = "SELECT  MIN(`mes`) AS 'mes' FROM `registrocalificacionarea` WHERE `anio` = '$anio' AND `area` = '$area'";
-    return  $consulta = mysqli_query($conexion,$query);
+    return  $consulta = mysqli_query($conexion, $query);
 }
 
 function sacarPreguntasDiagrama($conexion)
 {
     $query = "SELECT * FROM `preguntas`";
-    return $consulta = mysqli_query($conexion,$query);
+    return $consulta = mysqli_query($conexion, $query);
 }
 
-function sacarMesesDiagrama($anio,$area,$conexion){
+function sacarMesesDiagrama($anio, $area, $conexion)
+{
     $query = "SELECT `mes` FROM `registrocalificacionarea` WHERE `anio` = '$anio' AND `area` = '$area'  GROUP BY `mes` ORDER BY `mes` ASC";
-    return $consulta = mysqli_query($conexion,$query);
+    return $consulta = mysqli_query($conexion, $query);
 }
 
-function NotaPorMesAnioArea($idP,$mes,$anio,$area,$conexion)
+function NotaPorMesAnioArea($idP, $mes, $anio, $area, $conexion)
 {
     $query = "SELECT `nota` FROM `registrocalificacionarea` WHERE `idPregunta` = '$idP' AND `mes` = '$mes' AND `anio` = '$anio' AND `area` = '$area';
     ";
-    return $consulta = mysqli_query($conexion,$query);
+    return $consulta = mysqli_query($conexion, $query);
 }
 
-function traerAniosQueTiene($conexion){
+function traerAniosQueTiene($conexion)
+{
     $query = "SELECT  `anio` FROM `registrocalificacionarea` GROUP BY `anio` ASC";
-    return $consulta = mysqli_query($conexion,$query);
+    return $consulta = mysqli_query($conexion, $query);
 }
 
 
@@ -587,7 +590,7 @@ function registroCalificacionArea($area, $mes, $anio, $conexion)
                     $notaPregunta = number_format($notaPregunta, 2);
                     $promT = $promT + $notaPregunta;
                     $i++;
-                    $promfD[$contPromfD] =  number_format($promfD[$contPromfD] + $notaPregunta,2);
+                    $promfD[$contPromfD] =  number_format($promfD[$contPromfD] + $notaPregunta, 2);
                 } else {  // para los jefes de cada area
                     $ochenta = promedioPreguntaUsuarioJefe($usuario['id'], $mes, $pregunta['id'], $usuario['area'],  $conexion);
                     $ochenta = $ochenta[0]  === NULL  ? 0 : $ochenta[0];
@@ -597,17 +600,31 @@ function registroCalificacionArea($area, $mes, $anio, $conexion)
                     $notaPregunta = number_format($notaPregunta, 2);
                     $promT = $promT + $notaPregunta;
                     $i++;
-                    $promfD[$contPromfD] =  number_format($promfD[$contPromfD] + $notaPregunta,2);
+                    $promfD[$contPromfD] =  number_format($promfD[$contPromfD] + $notaPregunta, 2);
                 }
             } else { // para el area administrativa
-                $general = promedioPreguntaUsuarioAdministracion($usuario['id'], $mes, $pregunta['id'], $usuario['area'],  $conexion);
-                $general = $general[0]  === NULL  ? 0 : $general[0];
-                $general = number_format($general, 2);
-                $promT = $promT + $general;
+                $notaPregunta = promedioPreguntaUsuarioAdministracion($usuario['id'], $mes, $pregunta['id'], $usuario['area'],  $conexion);
+                $notaPregunta = $notaPregunta[0]  === NULL  ? 0 : $notaPregunta[0];
+                $notaPregunta = number_format($notaPregunta, 2);
+                $promT = $promT + $notaPregunta;
                 $i++;
-                $promfD[$contPromfD] =  number_format($promfD[$contPromfD] + $general,2);
+                $promfD[$contPromfD] =  number_format($promfD[$contPromfD] + $notaPregunta, 2);
             }
             $contPromfD++;
+            $usuarioId = $usuario['id'];
+            $preguntaId = $pregunta['id'];
+
+            $query = "SELECT * FROM `calificacionmespersona` WHERE `idPersona` = '$usuarioId' AND `idPregunta` = '$preguntaId' AND `mes` = '$mes' AND `area` = '$area'";
+            $consulta = mysqli_query($conexion, $query);
+
+            if ($consulta->num_rows > 0) {
+                $query = "UPDATE `calificacionmespersona` SET `nota`='$notaPregunta' WHERE `idPersona` = '$usuarioId' AND `idPregunta` = '$preguntaId' AND `mes` = '$mes' AND `area` = '$area'";
+                $consulta = mysqli_query($conexion, $query);
+            } else {
+
+                $query = "INSERT INTO `calificacionmespersona`(`idPersona`, `idPregunta`, `nota`, `mes`, `area`) VALUES ('$usuarioId','$preguntaId','$notaPregunta','$mes','$area')";
+                $consulta = mysqli_query($conexion, $query);
+            }
         }
     }
 
@@ -616,21 +633,21 @@ function registroCalificacionArea($area, $mes, $anio, $conexion)
     $r = 0;
 
 
-    if ($consulta->num_rows > 0){
-       $preguntas =  mostrarPreguntas(0, $conexion);
+    if ($consulta->num_rows > 0) {
+        $preguntas =  mostrarPreguntas(0, $conexion);
         while ($pregunta = mysqli_fetch_array($preguntas)) {
-            $nota =  $promfD[$r]/$totalUsuario[0];
-            $nota = number_format($nota,2); 
+            $nota =  $promfD[$r] / $totalUsuario[0];
+            $nota = number_format($nota, 2);
             $idPregunta = $pregunta['id'];
             $query = "UPDATE `registrocalificacionarea` SET `nota`='$nota' WHERE `area` = '$area' AND  `idPregunta`='$idPregunta' AND `mes`='$mes' AND `anio`='$anio'";
             $consulta = mysqli_query($conexion, $query);
             $r++;
         }
-    }else{
+    } else {
         $preguntas =  mostrarPreguntas(0, $conexion);
         while ($pregunta = mysqli_fetch_array($preguntas)) {
-           $nota = $promfD[$r]/$totalUsuario[0];
-            $nota = number_format($nota,2);  
+            $nota = $promfD[$r] / $totalUsuario[0];
+            $nota = number_format($nota, 2);
             $idPregunta = $pregunta['id'];
             $nombreP = $pregunta['pregunta'];
             $query = "INSERT INTO `registrocalificacionarea`(`idPregunta`, `nombreP`, `mes`, `anio`, `nota`, `area`) VALUES ('$idPregunta','$nombreP','$mes','$anio','$nota','$area')";

@@ -1415,6 +1415,46 @@
     background-color: #f36b0f;
 }
 
+.calificacionAreaBotonesMesCalificaciones{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-wrap: wrap;
+}
+
+.titulo-botones-mes-calificacion{
+    margin-top: 70px;
+    color: #f36b0f;
+    font-family: 'Roboto',sans-serif;
+    text-align: center;
+    font-size: 250%;
+    font-weight: bold;
+}
+
+.calificacionAreaBotonMes{
+    text-decoration:none;
+    background-color: #0075BC;
+    border-radius: 5%;
+    padding: 0.5%;
+    margin: 1%;
+    color: #FFF;
+    font-size: 17px;
+    width: 6%;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.calificacionAreaBotonMes:hover{
+    color: #FFF;
+}
+
+.not-active{ 
+    pointer-events: none; 
+    cursor: default; 
+} 
 /* Canvas */
 
 .contenedor-canva-buscador{
@@ -1428,12 +1468,12 @@
 .contenedor-de-canvas {
     background: #fff;
     box-sizing: border-box;
-    margin: 2%;
+    margin: 1% 2% 2% 2%;
     width: 80%;
 }
 
 .titulo-diagrama-por-año{
-    margin-top: 20px;
+    margin-top: 70px;
     color: #f36b0f;
     font-family: 'Roboto',sans-serif;
     text-align: center;
