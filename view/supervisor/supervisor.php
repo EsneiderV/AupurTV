@@ -15,8 +15,10 @@ if (isset($_SESSION['rol'])) {
                 </script>';
 }
 
-
-     
+date_default_timezone_set('America/Bogota');
+$mes = date('m');
+$anio = date('Y');
+registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
 ?>
 
 <!DOCTYPE html>

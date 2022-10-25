@@ -394,9 +394,22 @@ function traerAniosQueTiene($conexion)
 }
 
 
+// saber si existe mes en calificaciones por persona 
+function  preguntarmesexistecalificacionesmespersonaarea($mes,$area,$conexion){
+    $query = "SELECT `idPersona` FROM `calificacionmespersona` WHERE `mes` = '$mes' AND `area` = '$area'";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
-
-
+// traer total de notas por area mes actual
+function totaldenotasporareamesactual($mes,$area,$anio,$conexion){
+    $query = "SELECT COUNT(`nota`) AS 'total' FROM `calificaciones` WHERE `mes` = '$mes' AND `anio` = '$anio' AND `area` = '$area' AND `area` = `area_calificante`";
+    $consulta = mysqli_query($conexion, $query);
+    $retornar = [];
+    while ($pregunta = mysqli_fetch_array($consulta)) {
+        array_push($retornar, $pregunta['total']);
+    }
+    return $retornar;
+}
 
 
 

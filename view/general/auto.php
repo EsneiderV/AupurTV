@@ -15,6 +15,7 @@ $anio = date('Y');
     $mes = date('m');
     $preguntas = mostrarPreguntasid($tipo, $conexion);
     foreach ($nota as $key => $value) {
+      
       guardarCalificaciones($preguntas[$key][0], $idCalificante, $idCalificador, $value, $mes, $area, $preguntas[$key][1], $rol, $_SESSION['area'], $anio, $conexion);
     }
 

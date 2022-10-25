@@ -139,18 +139,32 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
 
   <h3 class="titulo-botones-mes-calificacion">Calificación por mes</h3>
   <div class="calificacionAreaBotonesMesCalificaciones">
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=01" class="calificacionAreaBotonMes not-active">Enero</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=02" class="calificacionAreaBotonMes">Febrero</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=03" class="calificacionAreaBotonMes">Marzo</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=04" class="calificacionAreaBotonMes">Abril</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=05" class="calificacionAreaBotonMes">Mayo</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=06" class="calificacionAreaBotonMes">Junio</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=07" class="calificacionAreaBotonMes">Julio</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=08" class="calificacionAreaBotonMes">Agosto</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=09" class="calificacionAreaBotonMes">Septiembre</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=10" class="calificacionAreaBotonMes">Octubre</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=11" class="calificacionAreaBotonMes">Nobiembre</a>
-    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=12" class="calificacionAreaBotonMes">Diciembre</a>
+    <?php 
+    $mesesNomNum = [['01','Enero'],['02','Febrero'],['03','Marzo'],['04','Abril'],['05','Mayo'],['06','Junio'],['07','Julio'],['08','Agosto'],['09','Septiembre'],['10','Octubre'],['11','Nobiembre'],['12','Diciembre'],];
+
+    foreach ($mesesNomNum as $value) {
+      $area = $_SESSION['area'];
+      $consultaSelectmesexiste = preguntarmesexistecalificacionesmespersonaarea($value[0],$area,$conexion);
+
+      if($value[0] == $mes){
+        $notasparaActivar = $totaldeNotasRequeridas * $totalUsuario[0] ;
+         $totalnotasmes = totaldenotasporareamesactual($value[0],$area,$anio,$conexion);
+         
+        if($totalnotasmes[0] >= $notasparaActivar){
+          echo "<a href='../../pdf/pdf-notaAreaMes.php?area=<?php echo $area?>&mes=01' class='calificacionAreaBotonMes'>$value[1]</a>";
+        }else{
+        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=<?php echo $area?>&mes=01' class='calificacionAreaBotonMes not-active'>$value[1]</a>";
+        }
+      
+      }else if($consultaSelectmesexiste->num_rows > 0){
+        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=<?php echo $area?>&mes=01' class='calificacionAreaBotonMes'>$value[1]</a>";
+      }else{
+        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=<?php echo $area?>&mes=01' class='calificacionAreaBotonMes not-active'>$value[1]</a>";
+      }
+      
+    }
+    ?>
+    
   </div>
 
 
