@@ -18,6 +18,7 @@ if (isset($_SESSION['rol'])) {
 date_default_timezone_set('America/Bogota');
 $mes = date('m');
 $anio = date('Y');
+registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
 ?>
 
 <!DOCTYPE html>
@@ -136,19 +137,20 @@ $anio = date('Y');
     ?>
   </div>
 
-  <div>
-    <a href="" disable>Enero</a>
-    <a href="">Febrero</a>
-    <a href="">Marzo</a>
-    <a href="">Abril</a>
-    <a href="">Mayo</a>
-    <a href="">Junio</a>
-    <a href="">Julio</a>
-    <a href="">Agosto</a>
-    <a href="">Septiembre</a>
-    <a href="">Octubre</a>
-    <a href="">Nobiembre</a>
-    <a href="">Diciembre</a>
+  <h3 class="titulo-botones-mes-calificacion">Calificación por mes</h3>
+  <div class="calificacionAreaBotonesMesCalificaciones">
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=01" class="calificacionAreaBotonMes not-active">Enero</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=02" class="calificacionAreaBotonMes">Febrero</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=03" class="calificacionAreaBotonMes">Marzo</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=04" class="calificacionAreaBotonMes">Abril</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=05" class="calificacionAreaBotonMes">Mayo</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=06" class="calificacionAreaBotonMes">Junio</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=07" class="calificacionAreaBotonMes">Julio</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=08" class="calificacionAreaBotonMes">Agosto</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=09" class="calificacionAreaBotonMes">Septiembre</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=10" class="calificacionAreaBotonMes">Octubre</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=11" class="calificacionAreaBotonMes">Nobiembre</a>
+    <a href="../../pdf/pdf-notaAreaMes.php?area=<?php echo $_SESSION['area']?>&mes=12" class="calificacionAreaBotonMes">Diciembre</a>
   </div>
 
 

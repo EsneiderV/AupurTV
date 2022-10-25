@@ -2,6 +2,7 @@
 session_start();
 include_once '../../controllers/php/funciones.php';
 include_once '../../models/Conexion.php';
+
 if (isset($_SESSION['rol'])) {
     if ($_SESSION['rol'] != 2 && $_SESSION['rol'] != 3) {
         echo '<script type="text/javascript">
@@ -13,6 +14,9 @@ if (isset($_SESSION['rol'])) {
                 window.location.href="../../index.php";
                 </script>';
 }
+
+
+     
 ?>
 
 <!DOCTYPE html>

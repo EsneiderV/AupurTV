@@ -20,6 +20,6 @@ $anio = date('Y');
     if ($mensaje != "") {
       guardarComentario($mensaje, $preguntas[0][0], $idCalificante, $idCalificador, $mes, $conexion);
     }
-  
+
 
  ?>
