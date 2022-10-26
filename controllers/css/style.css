@@ -672,7 +672,8 @@
 }
 
 .calificar-imagen {
-    max-height: 70%;
+    max-height: 75%;
+    margin-left: -10%;
 }
 
 .auto-calificar-btnmodal {
@@ -683,7 +684,7 @@
     border: none;
     border-bottom: 2px solid #FFF;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: 10%;
+    margin-bottom: 15%;
 }
 
 .calificar-btnmodal {
@@ -745,6 +746,8 @@
     flex-wrap: nowrap;
     align-content: center;
     justify-content: flex-start;
+    margin-left: -20%;
+    margin-bottom: -6%;
 }
 
 .Inventario-area-gerente-body {

@@ -82,6 +82,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
         }
 
         echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#comentarios'>Comentarios</button>";
+        echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#misNotas'>Mis notas</button>";
         echo "</div>";
 
         echo " </div>";
@@ -296,6 +297,27 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
       </div>
     </div>
   </div>
+
+  <!-- Modal para las notas de cada empleado -->
+  <div class="modal fade" id="misNotas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title1 calificar-modal-titulo modal-title-calificar" id="exampleModalLabel">Mis calificaciones</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h2>Diagramas</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo voluptate, illum ducimus placeat, velit, officiis assumenda id tempore numquam deserunt atque expedita in ullam quasi dolorum? Vel provident autem animi?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
   <script src="../../controllers/js/jquery-3.2.1.min.js"></script>
 <!-- Para todas las preguntas -->
