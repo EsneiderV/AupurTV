@@ -5,7 +5,6 @@ include_once '../../models/Conexion.php'; // traemos la conexion con la base de 
 date_default_timezone_set('America/Bogota');
 $mes = date('m');
 $anio = date('Y');
-
     $idCalificante = $_SESSION['id'];
     $idCalificador = $_SESSION['id'];
     $area = $_SESSION['area'];

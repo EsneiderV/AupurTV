@@ -151,15 +151,15 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
          $totalnotasmes = totaldenotasporareamesactual($value[0],$area,$anio,$conexion);
          
         if($totalnotasmes[0] >= $notasparaActivar){
-          echo "<a href='../../pdf/pdf-notaAreaMes.php?area=<?php echo $area?>&mes=01' class='calificacionAreaBotonMes'>$value[1]</a>";
+          echo "<a href='../../pdf/pdf-notaAreaMes.php?area=$area&mes=$mes' class='calificacionAreaBotonMes'>$value[1]</a>";
         }else{
-        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=<?php echo $area?>&mes=01' class='calificacionAreaBotonMes not-active'>$value[1]</a>";
+        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=$area&mes=$mes' class='calificacionAreaBotonMes not-active'>$value[1]</a>";
         }
       
       }else if($consultaSelectmesexiste->num_rows > 0){
-        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=<?php echo $area?>&mes=01' class='calificacionAreaBotonMes'>$value[1]</a>";
+        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=$area&mes=$mes' class='calificacionAreaBotonMes'>$value[1]</a>";
       }else{
-        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=<?php echo $area?>&mes=01' class='calificacionAreaBotonMes not-active'>$value[1]</a>";
+        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=$area&mes=$mes' class='calificacionAreaBotonMes not-active'>$value[1]</a>";
       }
       
     }

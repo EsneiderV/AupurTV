@@ -4,7 +4,6 @@ include_once '../../models/Conexion.php'; // traemos la conexion con la base de 
 date_default_timezone_set('America/Bogota');
 $mes = date('m');
 $anio = date('Y');
-
 // verificamos que si se aya logiado primero el usuario
 session_start();
 if (!isset($_SESSION['rol'])) {

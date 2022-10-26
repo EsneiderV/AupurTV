@@ -412,8 +412,49 @@ function totaldenotasporareamesactual($mes,$area,$anio,$conexion){
 }
 
 
+// traer total de notas por area mes actual
+function totalPreguntas($conexion){
+    $query = "SELECT COUNT(`id`) AS 'total' FROM `preguntas`";
+    $consulta = mysqli_query($conexion, $query);
+    $retornar = [];
+    while ($pregunta = mysqli_fetch_array($consulta)) {
+        array_push($retornar, $pregunta['total']);
+    }
+    return $retornar;
+}
 
 
+
+// saber si existe mes en calificaciones por persona 
+function consultapreguntamespersonapdf($mes,$area,$conexion){
+    $query = "SELECT usuarios.nombre,usuarios.apellidos,calificacionmespersona.idPersona, calificacionmespersona.idPregunta,calificacionmespersona.nota FROM calificacionmespersona INNER JOIN usuarios ON calificacionmespersona.idPersona = usuarios.id WHERE calificacionmespersona.mes = '$mes' AND calificacionmespersona.area = '$area'";
+
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
+function mostrarelmesporid($id,$conexion){
+    $query = "SELECT `nombre` FROM `area` WHERE `codigo` = '$id'";
+    $consulta = mysqli_query($conexion, $query);
+    $retornar = [];
+
+    while ($pregunta = mysqli_fetch_array($consulta)) {
+        array_push($retornar, $pregunta['nombre']);
+    }
+
+    return $retornar;
+}
+
+function retornarmesNumero($num){
+    $mesesNomNum = [['01','Enero'],['02','Febrero'],['03','Marzo'],['04','Abril'],['05','Mayo'],['06','Junio'],['07','Julio'],['08','Agosto'],['09','Septiembre'],['10','Octubre'],['11','Nobiembre'],['12','Diciembre'],];
+    $mes = '';
+    foreach ($mesesNomNum as $value) {
+        if($value[0] == $num){
+            $mes = $value[1];
+        }
+    }
+    return $mes;
+}
 
 
 
