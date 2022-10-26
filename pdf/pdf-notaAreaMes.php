@@ -53,16 +53,19 @@ if (isset($_GET['area']) && isset($_GET['mes'])) {
 
                 $this->sety(90);
                 $preguntas = sacarPreguntasDiagrama($this->conexion);
-                $this->setX(20);
+                $this->setX(25);
                 $this->SetFillColor(0,171,57); 
                 $this->SetTextColor(255,255,255);
                 $this->Cell(45, 8,'Empleado', 1, 0, 'C', 1);
                 $this->SetFillColor(0,117,188);
                 $this->SetTextColor(0,0,0);
+                $this->SetFont('Arial', 'B', 10);
                 while($pregunta = mysqli_fetch_array($preguntas)){
                     $nom = substr($pregunta['pregunta'],0,3);
-                    $this->Cell(19, 8,$pregunta['id'].'. '.$nom, 1, 0, 'C', 1);
+                    $this->Cell(15, 8,$pregunta['id'].'. '.$nom, 1, 0, 'C', 1);
                 }
+
+                    $this->Cell(15, 8,'Total', 1, 0, 'C', 1);
 
             }
 
@@ -82,27 +85,33 @@ if (isset($_GET['area']) && isset($_GET['mes'])) {
         $nombrePersonaNotas = consultapreguntamespersonapdf($mes,$area,$conexion);
         $fpdf->Ln();
         $j=0;
-        $fpdf->setX(20);
+        $fpdf->setX(25);
         $fpdf->SetFillColor(243,107,15); 
+        $prom = 0;
         while ($nombrePersonaNota = mysqli_fetch_array($nombrePersonaNotas)) {
+            $apellido = explode(' ',$nombrePersonaNota['apellidos']) ;
+            $letraApellido = substr($apellido[1],0, 1);
+            $letraApellido = strtoupper($letraApellido);
             $j = $j + 1;
             if($j ===1){
-                $fpdf->Cell(45, 8,$nombrePersonaNota['nombre'], 1, 0, 'C',1);   
+                $fpdf->Cell(45, 8,$nombrePersonaNota['nombre'].' '.$apellido[0].' '.$letraApellido.'.', 1, 0, 'C',1);   
             }
-            if($j < $totalPreguntas[0]){
-                $fpdf->Cell(19, 8,$nombrePersonaNota['nota'], 1, 0, 'C');
+            if($j <= $totalPreguntas[0]){
+                $fpdf->Cell(15, 8,$nombrePersonaNota['nota'], 1, 0, 'C');
+                $prom = $prom +$nombrePersonaNota['nota'];
             }
             if($j == $totalPreguntas[0]){
-                $fpdf->Cell(19, 8,$nombrePersonaNota['nota'], 1, 1, 'C');
+                $prom = $prom / $totalPreguntas[0];
+                $fpdf->Cell(15, 8,number_format($prom, 2),1, 1, 'C');
                 $j =0;
-                $fpdf->setX(20);
+                $fpdf->setX(25);
+                $prom = 0;
             }
+
         }
+
 
         
         $fpdf->Close();
         $fpdf->Output('I', 'Inventario General.pdf', true);
     }
-
-
-?> 
