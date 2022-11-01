@@ -19,6 +19,7 @@ date_default_timezone_set('America/Bogota');
 $mes = date('m');
 $anio = date('Y');
 registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
+registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
 ?>
 
 <!DOCTYPE html>

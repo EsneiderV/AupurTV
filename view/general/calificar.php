@@ -36,6 +36,8 @@ switch ($_SESSION['rol']) {
 }
 
 registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
+registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
+
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +55,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../controllers/css/style.css">
   <title>Calificar - Aupur Televisión</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
 
 <body class="calificar-body">
@@ -82,7 +85,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
         }
 
         echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#comentarios'>Comentarios</button>";
-        echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#misNotas'>Mis notas</button>";
+        echo "<button id='abrircontenedorvercalificacion' class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#misNotas'>Mis notas</button>";
         echo "</div>";
 
         echo " </div>";
@@ -188,7 +191,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
               $preguntas = mostrarPreguntas(0, $conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div class="calificar-div-preguntas"> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
+                <div class="calificar-div-preguntas"> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input class="calificarModalTodasPreguntas" type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero calificarModalTodasPreguntasSpan">5</span></div>
               <?php
               }
               ?>
@@ -223,7 +226,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
               $preguntas = mostrarPreguntas(1, $conexion);
               while ($pregunta = mysqli_fetch_array($preguntas)) {
               ?>
-                <div class="calificar-div-preguntas"> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero">5</span></div>
+                <div class="calificar-div-preguntas"> <span class="calificar-prefunta"> <?php echo $pregunta['pregunta'] ?> </span> <input class="calificarModalPreguntasGeneral" type="range" name="valor[]" min="1" max="10" value="5" id="input" step="1"><span class="calificar-numero calificarModalPreguntasGeneralSpan">5</span></div>
               <?php
               }
               ?>
@@ -298,49 +301,357 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
     </div>
   </div>
 
-  <!-- Modal para las notas de cada empleado -->
-  <div class="modal fade" id="misNotas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title1 calificar-modal-titulo modal-title-calificar" id="exampleModalLabel">Mis calificaciones</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <!-- calificarnotaPersona-desactivarContenedor -->
+  <div id="calificarcontenedorvercalificacion" class="calificarmostrarnotascadaempleadocontenedor calificarnotaPersona-desactivarContenedor">
+    <div class="calificarmostrarnotascadaempleado">
+      <div class="inventarioAreaGerente-emergente">
+        <div class="invetarioArea-emergente-navar">
+          <h1 class='invetarioArea-emergente-nombre'> General </h1>
+          <span id="cerrarverCalificarx" class="inventarioAreaGerente-emergente-x">X</span>
         </div>
-        <div class="modal-body">
-            <h2>Diagramas</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo voluptate, illum ducimus placeat, velit, officiis assumenda id tempore numquam deserunt atque expedita in ullam quasi dolorum? Vel provident autem animi?</p>
+        <div class="invetarioArea-emergente-main">
+          <div class="calificarvernotamescontenedores">
+
+            <div class="calificacionesArea-contenedor-persona">
+              <div class="calificacionesArea-contenedor-persona-nombre">
+                <h2>Grupo</h2>
+              </div>
+              <div class="calificacionesArea-contenedor-persona-preguntas">
+
+                <?php
+                $preguntasMostrarPersona = AdConsultarPreguntas($conexion);
+                $notaFinal = 0;
+                $i = 0;
+                while ($pregunta = mysqli_fetch_array($preguntasMostrarPersona)) {
+                  $notaPersonas = mostrarnotasmespersonacalificaciones($_SESSION['area'], $mes, $_SESSION['id'], $pregunta['id'], $conexion);
+                  $nota = 0.00;
+                  if ($notaPersonas->num_rows > 0) {
+                    while ($notaPersona =  mysqli_fetch_array($notaPersonas)) {
+                      $nota = $notaPersona['nota'];
+                    }
+                  }
+
+                ?>
+                  <div class="calificacionesArea-contenedor-persona-pregunta">
+                    <p class='calificacionesArea-contenedor-persona-pregunta-nombre'><?php echo $pregunta['pregunta'] ?></p>
+                    <p class='calificacionesArea-contenedor-persona-pregunta-nota'><?php echo $nota ?></p>
+                  </div>
+                <?php
+                  $i++;
+                  $notaFinal = $notaFinal + $nota;
+                }
+                ?>
+                <div class="calificacionesArea-contenedor-persona-pregunta">
+                  <p class='calificacionesArea-contenedor-persona-pregunta-nombre'>Total</p>
+                  <p class='calificacionesArea-contenedor-persona-pregunta-nota'><?php echo number_format($notaFinal / $i, 2); ?></p>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="calificacionesArea-contenedor-persona">
+              <div class="calificacionesArea-contenedor-persona-nombre">
+                <h2>Empresa</h2>
+              </div>
+              <div class="calificacionesArea-contenedor-persona-preguntas">
+
+
+                <?php
+                //consultar las preguntas generales
+                $preguntasGenerales = traerPreguntas($conexion);
+                $i = 0;
+                while ($preguntaGeneral = mysqli_fetch_array($preguntasGenerales)) {
+                  $i++;
+                  $consultaNotaGeneral =  consultarPreguntasGeneralesPorPersona($preguntaGeneral['id'], $_SESSION['id'], $mes, $anio, $_SESSION['area'], $conexion);
+                  $nota =  mysqli_fetch_array($consultaNotaGeneral)[0];
+                  $promedioTotal = $promedioTotal + $nota;
+                ?>
+                  <div class="calificacionesArea-contenedor-persona-pregunta">
+                    <p class='calificacionesArea-contenedor-persona-pregunta-nombre'><?php echo $preguntaGeneral['pregunta'] ?></p>
+                    <p class='calificacionesArea-contenedor-persona-pregunta-nota'><?php echo $nota ?></p>
+                  </div>
+                <?php
+                }
+
+                ?>
+
+                <div class="calificacionesArea-contenedor-persona-pregunta">
+                  <p class='calificacionesArea-contenedor-persona-pregunta-nombre'>Total</p>
+                  <p class='calificacionesArea-contenedor-persona-pregunta-nota'><?php echo number_format($promedioTotal / $i, 2)?></p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="contenedordecanvasprincipal">
+            <div class="contenedor-de-canvas">
+              <canvas id="datosD"></canvas>
+            </div>
+          </div>
+
+          <div class="contenedordecanvasprincipal">
+            <div class="contenedor-de-canvas">
+              <canvas id="datosDE"></canvas>
+            </div>
+          </div>
+
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <div class="invetarioArea-emergente-footer">
+          <button id="cerrarvercalicacionBtn" class="btn btn-secondary invetarioArea-emergente-footer-btn"> Cerrar</button>
         </div>
       </div>
     </div>
   </div>
 
+  <?php
+  $arreglodeMeses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  $mesesquehay = [];
+  $meses = sacarMesesDiagramaPersona($_SESSION['id'], $conexion);
+  while ($array = mysqli_fetch_array($meses)) {
+    array_push($mesesquehay, $array['mes']);
+  }
+  $mesesParaMostrarenDiagrama = [];
+
+  foreach ($arreglodeMeses as  $value) {
+    if (in_array($value, $mesesquehay)) {
+      array_push($mesesParaMostrarenDiagrama, $value);
+    } else {
+      array_push($mesesParaMostrarenDiagrama, 'null');
+    }
+  }
+
+  $mesesquehayGeneral = [];
+
+
+    $mesesGeneral = sacarMesesDiagramaPersonaGeneral($_SESSION['id'], $conexion);
+
+
+  while ($arrayG = mysqli_fetch_array($mesesGeneral)) {
+    array_push($mesesquehayGeneral, $arrayG['mes']);
+  }
+
+  $mesesParaMostrarenDiagramaGeneral = [];
+
+  foreach ($arreglodeMeses as  $value) {
+    if (in_array($value, $mesesquehayGeneral)) {
+      array_push($mesesParaMostrarenDiagramaGeneral, $value);
+    } else {
+      array_push($mesesParaMostrarenDiagramaGeneral, 'null');
+    }
+  }
+
+  ?>
+
+  <script>
+    const dynamicColors = function(i) {
+      const arregloDeColores = [
+        'rgb(199, 81, 220)',
+        'rgb(87, 126, 246)',
+        'rgb(119, 177, 21)',
+        'rgb(101, 224, 20)',
+        'rgb(23, 130, 230)',
+        'rgb(173, 77, 244)',
+        'rgb(255, 113, 56)',
+        'rgb(30, 108, 165)',
+        'rgb(229, 61, 119)',
+        'rgb(207, 78, 78)',
+        'rgb(240, 121, 31)',
+      ]
+
+      return arregloDeColores[i];
+    };
+
+    // diagrama para Todas las preguntas
+    const ctx = document.getElementById('datosD');
+    ctx.height = 100;
+    const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', ];
+    data = {
+      labels,
+      datasets: [
+
+        <?php
+        $i = 0;
+        $preguntasTotales = sacarPreguntasDiagrama($conexion);
+        while ($preguntaTotale = mysqli_fetch_array($preguntasTotales)) {
+
+          $notasTotales = '';
+          foreach ($mesesParaMostrarenDiagrama as $value) {
+            if ($value != 'null') {
+              $notamesarea = NotaPorMesAreaPersona($preguntaTotale['id'], $value, $_SESSION['id'], $conexion);
+              $notamesarea = mysqli_fetch_array($notamesarea)[0];
+              $notasTotales = $notasTotales . $notamesarea . ",";
+            } else {
+              $notasTotales = $notasTotales . "0,";
+            }
+          }
+
+
+          $nombreDiagrama = $preguntaTotale['pregunta'];          
+
+          echo "{";
+          echo "label: '$nombreDiagrama',";
+          echo "data: [" . $notasTotales . "] ,";
+          echo "
+            fill: false,
+            borderColor: dynamicColors($i),
+            tension: 0.1,
+            yAxisID: 'yAxis'
+          },
+          ";
+          $i++;
+        }
+        ?>
+      ]
+
+    };
+
+    const options = {
+      scales: {
+        yAxis: {
+          type: "linear",
+          position: "left",
+          min: 0,
+          max: 10
+        }
+      }
+    }
+
+
+    const config = {
+      type: 'line',
+      data: data,
+      options: options
+    }
+
+    const myChart = new Chart(ctx, config);
+
+
+
+
+
+
+
+    // Diagra para  calificaciones por grupo por persona
+    const ctxE = document.getElementById('datosDE');
+    ctxE.height = 100;
+    data = {
+      labels,
+      datasets: [
+
+        <?php
+        $i = 0;
+        $preguntasTotales = traerPreguntas($conexion);
+        while ($preguntaTotale = mysqli_fetch_array($preguntasTotales)) {
+
+          $notasTotales = '';
+          foreach ($mesesParaMostrarenDiagramaGeneral as $value) {
+            if ($value != 'null') {
+              $notamesarea = NotaPorMesAreaPersonaGeneralMes($preguntaTotale['id'], $value, $_SESSION['id'], $conexion);
+              $notamesarea = mysqli_fetch_array($notamesarea)[0];
+              $notasTotales = $notasTotales . $notamesarea . ",";
+            } else {
+              $notasTotales = $notasTotales . "0,";
+            }
+          }
+
+
+          $nombreDiagrama = $preguntaTotale['pregunta'];
+
+
+          echo "{";
+          echo "label: '$nombreDiagrama',";
+          echo "data: [" . $notasTotales . "] ,";
+          echo "
+            fill: false,
+            borderColor: dynamicColors($i),
+            tension: 0.1,
+            yAxisID: 'yAxis'
+          },
+          ";
+          $i++;
+        }
+        ?>
+      ]
+
+    };
+
+    const optionsE = {
+      scales: {
+        yAxis: {
+          type: "linear",
+          position: "left",
+          min: 0,
+          max: 10
+        }
+      }
+    }
+
+
+    const configE = {
+      type: 'line',
+      data: data,
+      options: optionsE
+    }
+
+    const myChartE = new Chart(ctxE, configE);
+  </script>
+
 
 
   <script src="../../controllers/js/jquery-3.2.1.min.js"></script>
-<!-- Para todas las preguntas -->
+  <!-- Para todas las preguntas -->
   <script type="text/javascript">
+
+   function reiniciarModalGenerales(){
+    const PreguntasGenerales = document.querySelectorAll('.calificarModalPreguntasGeneral')
+
+      PreguntasGenerales.forEach(pregunta => {
+        pregunta.value = 5;
+    });
+
+    const calificarModalPreguntasGeneralSpan = document.querySelectorAll('.calificarModalPreguntasGeneralSpan')
+
+      calificarModalPreguntasGeneralSpan.forEach(numeroPregunta => {
+        numeroPregunta.textContent = '5'
+      })
+
+   }
+
+   function reiniciarModalTodas(){
+    const calificarModalTodasPreguntas = document.querySelectorAll('.calificarModalTodasPreguntas')
+    calificarModalTodasPreguntas.forEach(pregunta => {
+      pregunta.value = 5;
+    });
+
+    const calificarModalTodasPreguntasSpan = document.querySelectorAll('.calificarModalTodasPreguntasSpan')
+    calificarModalTodasPreguntasSpan.forEach(numeroPregunta => {
+      numeroPregunta.textContent = '5'
+    })
+   }
+
     $(document).ready(function() {
       $('#btnTodasPreguntas').click(function() {
         let datos = $('#formTodasPreguntas').serialize();
-        console.log(datos)
         $.ajax({
           type: "POST",
           url: "insertarTpreguntas.php",
           data: datos,
           success: function(r) {
             if (!r) {
-             let id = $('#formTodasPreguntas').serializeArray();
-             id = id.filter(value => value.name == 'id')
-             id = id[0].value;
-            $(`#${id}`).addClass('calificar-btn-disable')
-            $(`#${id}`).attr('disabled', true)
-            $("#completo").modal('hide');
+              let id = $('#formTodasPreguntas').serializeArray();
+              id = id.filter(value => value.name == 'id')
+              id = id[0].value;
+              $(`#${id}`).addClass('calificar-btn-disable')
+              $(`#${id}`).attr('disabled', true)
+              $("#completo").modal('hide');
               alert("agregado con exito");
+              reiniciarModalTodas()
             } else {
               alert("Ya lo calificastes");
+              reiniciarModalTodas()
             }
           }
         });
@@ -349,8 +660,25 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
     });
   </script>
 
-<!-- para las preguntas generales -->
-<script type="text/javascript">
+  <!-- para las preguntas generales -->
+  <script type="text/javascript">
+    const abrircontenedorvercalificacion = document.querySelector('#abrircontenedorvercalificacion')
+    const calificarcontenedorvercalificacion = document.querySelector('#calificarcontenedorvercalificacion')
+    const cerrarverCalificarx = document.querySelector('#cerrarverCalificarx');
+    const cerrarvercalicacionBtn = document.querySelector('#cerrarvercalicacionBtn')
+
+    abrircontenedorvercalificacion.addEventListener('click', () => {
+      calificarcontenedorvercalificacion.classList.remove('calificarnotaPersona-desactivarContenedor')
+    })
+
+    cerrarverCalificarx.addEventListener('click', () => {
+      calificarcontenedorvercalificacion.classList.add('calificarnotaPersona-desactivarContenedor')
+    })
+
+    cerrarvercalicacionBtn.addEventListener('click', () => {
+      calificarcontenedorvercalificacion.classList.add('calificarnotaPersona-desactivarContenedor')
+    })
+
     $(document).ready(function() {
       $('#btnGPreguntas').click(function() {
         let datos = $('#formGpreguntas').serialize();
@@ -360,15 +688,17 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
           data: datos,
           success: function(r) {
             if (!r) {
-             let id = $('#formGpreguntas').serializeArray();
-             id = id.filter(value => value.name == 'id')
-             id = id[0].value;
-            $(`#${id}`).addClass('calificar-btn-disable')
-            $(`#${id}`).attr('disabled', true)
-            $("#general").modal('hide');
+              let id = $('#formGpreguntas').serializeArray();
+              id = id.filter(value => value.name == 'id')
+              id = id[0].value;
+              $(`#${id}`).addClass('calificar-btn-disable')
+              $(`#${id}`).attr('disabled', true)
+              $("#general").modal('hide');
               alert("agregado con exito");
+              reiniciarModalGenerales();
             } else {
               alert("Ya lo calificastes");
+              reiniciarModalGenerales();
             }
           }
         });
@@ -378,7 +708,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
   </script>
 
   <!-- para la auto -->
-<script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function() {
       $('#btnAuto').click(function() {
         let datos = $('#formAuto').serialize();
@@ -389,7 +719,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
           success: function(r) {
             if (!r) {
               $(`#btnAutoJq`).attr('disabled', true)
-            $("#autoevaluacion").modal('hide');
+              $("#autoevaluacion").modal('hide');
               alert("agregado con exito");
             } else {
               alert("Ya lo calificastes");

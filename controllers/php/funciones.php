@@ -457,21 +457,56 @@ function retornarmesNumero($num){
 }
 
 
+function mostrarnotasmespersonacalificaciones($area,$mes,$idPersona,$idPregunta,$conexion)
+{
+    $query = "SELECT * FROM `calificacionmespersona` WHERE `area` = '$area' AND `mes` = '$mes' AND `idPersona` = '$idPersona' AND `idPregunta` = '$idPregunta'";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
 
+function sacarMesMinPersona($idPersona, $conexion)
+{
+    $query = "SELECT MIN(`mes`) AS 'mes' FROM `calificacionmespersona` WHERE `idPersona` = '$idPersona'";
+    return  $consulta = mysqli_query($conexion, $query);
+}
+
+function sacarMesesDiagramaPersona($idPersona, $conexion)
+{
+    $query = "SELECT `mes` FROM `calificacionmespersona` WHERE `idPersona` = '$idPersona' GROUP BY `mes` ORDER BY `mes` ASC";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
 
+function NotaPorMesAreaPersona($idP, $mes, $idPersona, $conexion)
+{
+    $query = "SELECT `nota` FROM `calificacionmespersona` WHERE `idPregunta` = '$idP' AND `mes` = '$mes' AND `idPersona` = '$idPersona'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+function traerPreguntas($conexion)
+{
+    $query = "SELECT * FROM `preguntas` WHERE `general` = '1'";
+    return $consulta = mysqli_query($conexion, $query);   
+}
+
+function consultarPreguntasGeneralesPorPersona($idP,$idPersona,$mes,$anio,$area,$conexion)
+{
+    $query = "SELECT `nota` FROM `registroCalificacionpersonaGeneral` WHERE `idPregunta` = '$idP' AND `idPersona` = '$idPersona' AND `mes` = '$mes' AND `anio` = '$anio' AND `area` = '$area'";
+   return $consulta = mysqli_query($conexion, $query);
+}
 
 
+function sacarMesesDiagramaPersonaGeneral($idPersona, $conexion)
+{
+    $query = "SELECT `mes` FROM `registroCalificacionPersonaGeneralMes` WHERE `idPersona` = '$idPersona' GROUP BY `mes` ORDER BY `mes` ASC";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
-
-
-
-
-
-
-
-
+function NotaPorMesAreaPersonaGeneralMes($idP, $mes, $idPersona, $conexion)
+{
+    $query = "SELECT `nota` FROM `registroCalificacionPersonaGeneralMes` WHERE `idPregunta` = '$idP' AND `mes` = '$mes' AND `idPersona` = '$idPersona'";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
 
 
@@ -707,6 +742,62 @@ function registroCalificacionArea($area, $mes, $anio, $conexion)
             $query = "INSERT INTO `registrocalificacionarea`(`idPregunta`, `nombreP`, `mes`, `anio`, `nota`, `area`) VALUES ('$idPregunta','$nombreP','$mes','$anio','$nota','$area')";
             $consulta = mysqli_query($conexion, $query);
             $r++;
+        }
+    }
+}
+
+
+//Funcion para actualizar las notas de cada persona en el las preguntas generales
+function registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion){
+    $query = "SELECT * FROM `preguntas` WHERE `general` = '1'";
+    $consulta = mysqli_query($conexion, $query);
+
+    while ($preguntasgenerales = mysqli_fetch_array($consulta)) {
+        $queryUsuarios = "SELECT * FROM `usuarios`";
+        $consultaUsuarios = mysqli_query($conexion, $queryUsuarios);
+        while ($consultaUsuario = mysqli_fetch_array($consultaUsuarios) ) {
+
+            $idP = $preguntasgenerales['id'];
+            $idCalificador = $consultaUsuario['id'];
+            $area = $consultaUsuario['area'];
+            $queryNota = "SELECT AVG(`nota`) AS 'nota' FROM `calificaciones` WHERE `idP` = '$idP' AND `idCalificador` = '$idCalificador' AND `mes` = '$mes' AND `anio` = '$anio' AND `area` = '$area'";
+            $consultaNota = mysqli_query($conexion, $queryNota);
+            $nota =  mysqli_fetch_array($consultaNota)[0];
+            $nota = number_format($nota, 2);
+
+
+            $queryConsultaExistencia = "SELECT * FROM `registroCalificacionpersonaGeneral` WHERE `idPregunta` = '$idP' AND `idPersona` = '$idCalificador' AND `mes` = '$mes' AND `anio` = '$anio' AND `area` = '$area'";
+            $consultaExistencia = mysqli_query($conexion, $queryConsultaExistencia);
+
+            if($consultaExistencia->num_rows > 0){
+                $queryUpdate = "UPDATE `registroCalificacionpersonaGeneral` SET  `nota`='$nota' WHERE `idPregunta` = '$idP' AND `idPersona` = '$idCalificador' AND `mes` = '$mes' AND `anio` = '$anio' AND `area` = '$area' ";
+                $consultaUpdate = mysqli_query($conexion, $queryUpdate);
+
+            }else{
+
+                $queryInsert = "INSERT INTO `registroCalificacionpersonaGeneral`(`idPregunta`, `idPersona`, `mes`, `anio`, `nota`, `area`) VALUES ('$idP',' $idCalificador','$mes','$anio','$nota','$area')";
+                $consultaInsert = mysqli_query($conexion, $queryInsert);
+
+            }
+
+
+            // solo el mes 
+
+            $queryConsultaExistencia = "SELECT * FROM `registroCalificacionPersonaGeneralMes` WHERE `idPregunta` = '$idP' AND `idPersona` = '$idCalificador' AND `mes` = '$mes' AND `area` = '$area'";
+            $consultaExistencia = mysqli_query($conexion, $queryConsultaExistencia);
+
+            if($consultaExistencia->num_rows > 0){
+                $queryUpdate = "UPDATE `registroCalificacionPersonaGeneralMes` SET  `nota`='$nota' WHERE `idPregunta` = '$idP' AND `idPersona` = '$idCalificador' AND `mes` = '$mes'  AND `area` = '$area' ";
+                $consultaUpdate = mysqli_query($conexion, $queryUpdate);
+
+            }else{
+
+                $queryInsert = "INSERT INTO `registroCalificacionPersonaGeneralMes`(`idPregunta`, `idPersona`, `mes`, `nota`, `area`) VALUES ('$idP',' $idCalificador','$mes','$nota','$area')";
+                $consultaInsert = mysqli_query($conexion, $queryInsert);
+
+            }
+
+
         }
     }
 }

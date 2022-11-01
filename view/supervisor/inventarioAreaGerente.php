@@ -164,7 +164,8 @@ if (isset($_POST['modificar'])) {
 
             <div class="inventarioArea-contenedor-abrirInventario">
                 <span id="inventarioArea-abrirInventario-Tecnico" class="inventarioArea-abrirInventario">Inventario</span>
-            </div>
+            </div>￼
+
         </div>
 
         <!-- Inventario del area de canal de la empresa -->

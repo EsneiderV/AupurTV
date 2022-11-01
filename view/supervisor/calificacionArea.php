@@ -140,7 +140,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
   <h3 class="titulo-botones-mes-calificacion">Calificación por mes</h3>
   <div class="calificacionAreaBotonesMesCalificaciones">
     <?php 
-    $mesesNomNum = [['01','Enero'],['02','Febrero'],['03','Marzo'],['04','Abril'],['05','Mayo'],['06','Junio'],['07','Julio'],['08','Agosto'],['09','Septiembre'],['10','Octubre'],['11','Nobiembre'],['12','Diciembre'],];
+    $mesesNomNum = [['01','Enero'],['02','Febrero'],['03','Marzo'],['04','Abril'],['05','Mayo'],['06','Junio'],['07','Julio'],['08','Agosto'],['09','Septiembre'],['10','Octubre'],['11','Noviembre'],['12','Diciembre'],];
 
     foreach ($mesesNomNum as $value) {
       $area = $_SESSION['area'];
@@ -246,8 +246,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
       labels,
       datasets: [
 
-        <?php
-
+  <?php
 
         $preguntasTotales = sacarPreguntasDiagrama($conexion);
         while ($preguntaTotale = mysqli_fetch_array($preguntasTotales)) {

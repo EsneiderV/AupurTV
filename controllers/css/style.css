@@ -1449,6 +1449,41 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.calificarmostrarnotascadaempleadocontenedor{
+    position: fixed;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: red;
+}
+
+.calificarmostrarnotascadaempleado{
+    background-color: #DEE2E6;
+    height: 100%;
+    width: 100%;
+}
+
+.calificarnotaPersona-desactivarContenedor{
+    display: none;
+}
+
+.calificarvernotamescontenedores{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.contenedordecanvasprincipal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .calificacionAreaBotonMes:hover{
     color: #FFF;
@@ -1458,8 +1493,8 @@
     pointer-events: none; 
     cursor: default; 
 } 
-/* Canvas */
 
+/* Canvas */
 .contenedor-canva-buscador{
     display: flex;
     flex-direction: row;
