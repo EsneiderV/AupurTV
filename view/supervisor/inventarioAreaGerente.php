@@ -82,9 +82,9 @@ if (isset($_POST['modificar'])) {
 
 
     <!-- Navegador -->
-    <div class="inventarioArea-div-nav">
-        <a href="../supervisor/supervisor.php" class="inventarioArea-volver"> ᗕ Atrás</a>
-        <h1 class="inventarioArea-titulo">Inventario área</h1>
+    <div class="calificar-nav">
+        <a href="../supervisor/supervisor.php" class="calificar-volver-atras"> ᗕ Atrás</a>
+        <h1 class="calificar-titulo">Inventario área</h1>
     </div>
 
 
@@ -164,7 +164,7 @@ if (isset($_POST['modificar'])) {
 
             <div class="inventarioArea-contenedor-abrirInventario">
                 <span id="inventarioArea-abrirInventario-Tecnico" class="inventarioArea-abrirInventario">Inventario</span>
-            </div>￼
+            </div>
 
         </div>
 

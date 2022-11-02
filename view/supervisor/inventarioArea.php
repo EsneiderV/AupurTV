@@ -52,9 +52,9 @@ if (isset($_POST['modificar'])) {
 <body class="inventarioArea-body">
 
     <!-- Navegador -->
-    <div class="inventarioArea-div-nav">
-        <a href="../supervisor/supervisor.php" class="inventarioArea-volver"> ᗕ Atrás</a>
-        <h1 class="inventarioArea-titulo">Inventario área</h1>
+    <div class="calificar-nav">
+        <a href="../supervisor/supervisor.php" class="calificar-volver-atras"> ᗕ Atrás</a>
+        <h1 class="calificar-titulo">Inventario área</h1>
     </div>
 
     <!-- Contenedor de contenedorcitos de cada persona y area -->

@@ -364,7 +364,7 @@ function totalDeCalificaciones($idCalificante, $mes, $conexion)
 
 function sacarMesMin($anio, $area, $conexion)
 {
-    $query = "SELECT  MIN(`mes`) AS 'mes' FROM `registrocalificacionarea` WHERE `anio` = '$anio' AND `area` = '$area'";
+    $query = "SELECT `mes` FROM `registrocalificacionarea` WHERE `anio` = '$anio' AND `area` = '$area' GROUP BY `mes`";
     return  $consulta = mysqli_query($conexion, $query);
 }
 

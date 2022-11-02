@@ -139,39 +139,37 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
 
   <h3 class="titulo-botones-mes-calificacion">Calificación por mes</h3>
   <div class="calificacionAreaBotonesMesCalificaciones">
-    <?php 
-    $mesesNomNum = [['01','Enero'],['02','Febrero'],['03','Marzo'],['04','Abril'],['05','Mayo'],['06','Junio'],['07','Julio'],['08','Agosto'],['09','Septiembre'],['10','Octubre'],['11','Noviembre'],['12','Diciembre'],];
+    <?php
+    $mesesNomNum = [['01', 'Enero'], ['02', 'Febrero'], ['03', 'Marzo'], ['04', 'Abril'], ['05', 'Mayo'], ['06', 'Junio'], ['07', 'Julio'], ['08', 'Agosto'], ['09', 'Septiembre'], ['10', 'Octubre'], ['11', 'Noviembre'], ['12', 'Diciembre'],];
 
     foreach ($mesesNomNum as $value) {
       $area = $_SESSION['area'];
-      $consultaSelectmesexiste = preguntarmesexistecalificacionesmespersonaarea($value[0],$area,$conexion);
+      $consultaSelectmesexiste = preguntarmesexistecalificacionesmespersonaarea($value[0], $area, $conexion);
 
-      if($value[0] == $mes){
-        $notasparaActivar = $totaldeNotasRequeridas * $totalUsuario[0] ;
-         $totalnotasmes = totaldenotasporareamesactual($value[0],$area,$anio,$conexion);
-         
-        if($totalnotasmes[0] >= $notasparaActivar){
+      if ($value[0] == $mes) {
+        $notasparaActivar = $totaldeNotasRequeridas * $totalUsuario[0];
+        $totalnotasmes = totaldenotasporareamesactual($value[0], $area, $anio, $conexion);
+
+        if ($totalnotasmes[0] >= $notasparaActivar) {
           echo "<a href='../../pdf/pdf-notaAreaMes.php?area=$area&mes=$mes' class='calificacionAreaBotonMes'>$value[1]</a>";
-        }else{
-        echo "<a href='../../pdf/pdf-notaAreaMes.php?area=$area&mes=$mes' class='calificacionAreaBotonMes not-active'>$value[1]</a>";
+        } else {
+          echo "<a href='../../pdf/pdf-notaAreaMes.php?area=$area&mes=$mes' class='calificacionAreaBotonMes not-active'>$value[1]</a>";
         }
-      
-      }else if($consultaSelectmesexiste->num_rows > 0){
+      } else if ($consultaSelectmesexiste->num_rows > 0) {
         echo "<a href='../../pdf/pdf-notaAreaMes.php?area=$area&mes=$mes' class='calificacionAreaBotonMes'>$value[1]</a>";
-      }else{
+      } else {
         echo "<a href='../../pdf/pdf-notaAreaMes.php?area=$area&mes=$mes' class='calificacionAreaBotonMes not-active'>$value[1]</a>";
       }
-      
     }
     ?>
-    
+
   </div>
 
 
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
-  <div>
+  <div class="desactivar-contenedor-650">
     <h3 class="titulo-diagrama-por-año">
       <?php
       if (isset($_POST['aniodiagrama'])) {
@@ -184,7 +182,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
     </h3>
   </div>
 
-  <div class="contenedor-canva-buscador">
+  <div class="contenedor-canva-buscador desactivar-contenedor-650">
     <div class="contenedor-de-canvas">
       <canvas id="datosD"></canvas>
     </div>
@@ -210,16 +208,28 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
   if (isset($_POST['aniodiagrama'])) {
     $anio = $_POST['aniodiagrama'];
     $mesMin = sacarMesMin($anio, $_SESSION['area'], $conexion);
-    $mesMin =  mysqli_fetch_array($mesMin)[0];
   } else {
     $mesMin = sacarMesMin($anio, $_SESSION['area'], $conexion);
-    $mesMin =  mysqli_fetch_array($mesMin)[0];
   }
 
-  $relleno = '';
-  for ($i = 1; $i < $mesMin; $i++) {
-    $relleno = $relleno . ',';
+
+  $arreglodeMeses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  $mesesquehay = [];
+  $mesesParaMostrarenDiagrama = [];
+
+  while ($array = mysqli_fetch_array($mesMin)) {
+    array_push($mesesquehay, $array['mes']);
   }
+
+  foreach ($arreglodeMeses as  $value) {
+    if (in_array($value, $mesesquehay)) {
+      array_push($mesesParaMostrarenDiagrama, $value);
+    } else {
+      array_push($mesesParaMostrarenDiagrama, 'null');
+    }
+  }
+
+
   ?>
 
 
@@ -246,21 +256,32 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
       labels,
       datasets: [
 
-  <?php
+        <?php
 
         $preguntasTotales = sacarPreguntasDiagrama($conexion);
         while ($preguntaTotale = mysqli_fetch_array($preguntasTotales)) {
           $notasTotales = '';
-          $meses = sacarMesesDiagrama($anio, $_SESSION['area'], $conexion);
-          while ($mese = mysqli_fetch_array($meses)) {
-            $notamesarea = NotaPorMesAnioArea($preguntaTotale['id'], $mese['mes'], $anio, $_SESSION['area'], $conexion);
-            $notamesarea = mysqli_fetch_array($notamesarea)[0];
-            $notasTotales = $notasTotales . $notamesarea . ",";
+
+          foreach ($mesesParaMostrarenDiagrama as $value) {
+            if ($value != 'null') {
+              $notamesarea = NotaPorMesAnioArea($preguntaTotale['id'], $value, $anio, $_SESSION['area'], $conexion);
+              $notamesarea = mysqli_fetch_array($notamesarea)[0];
+              $notasTotales = $notasTotales . $notamesarea . ",";
+            } else {
+              $notasTotales = $notasTotales . "0,";
+            }
           }
+
+
+          // while ($mese = mysqli_fetch_array($meses)) {
+          //   $notamesarea = NotaPorMesAnioArea($preguntaTotale['id'], $mese['mes'], $anio, $_SESSION['area'], $conexion);
+          //   $notamesarea = mysqli_fetch_array($notamesarea)[0];
+          //   $notasTotales = $notasTotales . $notamesarea . ",";
+          // }
           $nombreDiagrama = $preguntaTotale['pregunta'];
           echo "{";
           echo "label: '$nombreDiagrama',";
-          echo "data: " . '[' . $relleno . $notasTotales . ']' . ",";
+          echo "data: [" . $notasTotales . "] ,";
           echo "
             fill: false,
             borderColor: dynamicColors(),

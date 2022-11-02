@@ -305,14 +305,14 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
   <div id="calificarcontenedorvercalificacion" class="calificarmostrarnotascadaempleadocontenedor calificarnotaPersona-desactivarContenedor">
     <div class="calificarmostrarnotascadaempleado">
       <div class="inventarioAreaGerente-emergente">
-        <div class="invetarioArea-emergente-navar">
-          <h1 class='invetarioArea-emergente-nombre'> General </h1>
+        <div class="invetarioArea-emergente-navar">          
+          <h1 class='invetarioArea-emergente-nombre'> MIS NOTAS </h1>
           <span id="cerrarverCalificarx" class="inventarioAreaGerente-emergente-x">X</span>
         </div>
         <div class="invetarioArea-emergente-main">
           <div class="calificarvernotamescontenedores">
 
-            <div class="calificacionesArea-contenedor-persona">
+            <div class="calificacionesArea-contenedor-persona calificar-contenedores-nota">
               <div class="calificacionesArea-contenedor-persona-nombre">
                 <h2>Grupo</h2>
               </div>
@@ -350,7 +350,7 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
 
 
 
-            <div class="calificacionesArea-contenedor-persona">
+            <div class="calificacionesArea-contenedor-persona calificar-contenedores-nota">
               <div class="calificacionesArea-contenedor-persona-nombre">
                 <h2>Empresa</h2>
               </div>
@@ -386,13 +386,15 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
 
           </div>
 
-          <div class="contenedordecanvasprincipal">
+          <div class="contenedordecanvasprincipal desactivar-contenedor-650">
+            <h4 class="tituloContenedoresCanvasPrincipal">Calificaciones mensuales del grupo</h4>
             <div class="contenedor-de-canvas">
               <canvas id="datosD"></canvas>
             </div>
           </div>
 
-          <div class="contenedordecanvasprincipal">
+          <div class="contenedordecanvasprincipal desactivar-contenedor-650">
+          <h4 class="tituloContenedoresCanvasPrincipal">Calificaciones mensuales de la empresa</h4>
             <div class="contenedor-de-canvas">
               <canvas id="datosDE"></canvas>
             </div>
