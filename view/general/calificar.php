@@ -61,8 +61,8 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
 <body class="calificar-body">
 
   <div class="calificar-nav">
-    <a class="calificar-volver-atras" href="<?php echo $redirecionar ?>"> ᗕ Atrás</a>
-    <h1 class="calificar-titulo">Calificación</h1>
+    <a class="calificar-volver-atras" href="<?php echo $redirecionar ?>"> ᗕ ATRÁS</a>
+    <h1 class="calificar-titulo">CALIFICACIÓN</h1>
   </div>
 
 
@@ -79,13 +79,13 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
 
         echo "<div class='calificar-auto-comentario'>";
         if ($autoCalificacion->num_rows <= 0) {
-          echo "<button id='btnAutoJq' class='auto-calificar-btnmodal btnmodal' data-bs-toggle='modal' data-bs-target='#autoevaluacion'>Auto evaluación</button>";
+          echo "<button id='btnAutoJq' class='auto-calificar-btnmodal btnmodal' data-bs-toggle='modal' data-bs-target='#autoevaluacion'>AUTO EVALUACIÓN</button>";
         } else {
-          echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' onclick='return auto()'>Auto evaluación</button>";
+          echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' onclick='return auto()'>AUTO EVALUACIÓN</button>";
         }
 
-        echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#comentarios'>Comentarios</button>";
-        echo "<button id='abrircontenedorvercalificacion' class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#misNotas'>Mis notas</button>";
+        echo "<button class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#comentarios'>COMENTARIOS</button>";
+        echo "<button id='abrircontenedorvercalificacion' class='auto-calificar-btnmodal' data-bs-toggle='modal' data-bs-target='#misNotas'>MIS NOTAS</button>";
         echo "</div>";
 
         echo " </div>";
@@ -103,17 +103,29 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
               $modal = '#general';
             }
             if ($calificado->num_rows > 0) {
+              $apellido = explode(' ',$_SESSION['apellidos']) ;
+              $letraApellido = substr($_SESSION['apellidos'],0, 1);
+              $letraApellido = strtoupper($letraApellido);
+              $nombreCompleto = strtoupper($usuario['nombre']. ' ' .$apellido[0].' '.$letraApellido.'.') ;
         ?>
               <button class="calificar-btn-disable" disabled>
-                <?php echo $usuario['nombre'] ?>
+                <?php 
+                 echo $nombreCompleto;
+                 ?>
               </button>
             <?php
 
 
             } else {
+              $apellido = explode(' ',$_SESSION['apellidos']) ;
+              $letraApellido = substr($_SESSION['apellidos'],0, 1);
+              $letraApellido = strtoupper($letraApellido);
+              $nombreCompleto = strtoupper($usuario['nombre']. ' ' .$apellido[0].' '.$letraApellido.'.') ;
             ?>
-              <button class="btnmodal calificar-btnmodal" id="<?php echo $usuario['id'] ?>" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $usuario['nombre'] ?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
-                <?php echo $usuario['nombre'] ?>
+              <button class="btnmodal calificar-btnmodal" id="<?php echo $usuario['id'] ?>" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $nombreCompleto ?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
+              <?php 
+                 echo $nombreCompleto;
+                 ?>
               </button>
 
         <?php
@@ -146,17 +158,28 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
             $modal = '#general';
           }
           if ($calificado->num_rows > 0) {
+            $apellido = explode(' ',$_SESSION['apellidos']) ;
+            $letraApellido = substr($_SESSION['apellidos'],0, 1);
+            $letraApellido = strtoupper($letraApellido);
+            $nombreCompleto = strtoupper($usuario['nombre']. ' ' .$apellido[0].' '.$letraApellido.'.') ;
       ?>
             <button class="calificar-btn-disable" disabled>
-              <?php echo $usuario['nombre'] ?>
+            <?php echo $nombreCompleto;
+                 ?>
             </button>
           <?php
 
 
           } else {
+            $apellido = explode(' ',$_SESSION['apellidos']) ;
+            $letraApellido = substr($_SESSION['apellidos'],0, 1);
+            $letraApellido = strtoupper($letraApellido);
+            $nombreCompleto = strtoupper($usuario['nombre']. ' ' .$apellido[0].' '.$letraApellido.'.') ;
           ?>
-            <button class="btnmodal calificar-btnmodal" id="<?php echo $usuario['id'] ?>" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $usuario['nombre'] ?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
-              <?php echo $usuario['nombre'] ?>
+            <button class="btnmodal calificar-btnmodal" id="<?php echo $usuario['id'] ?>" data-bs-toggle="modal" data-bs-target="<?php echo $modal ?>" data-nombre="<?php echo $nombreCompleto?>" data-id="<?php echo $usuario['id'] ?>" data-areaid="<?php echo $usuario['area'] ?>">
+            <?php 
+            echo $nombreCompleto;
+                 ?>
             </button>
 
       <?php
@@ -248,7 +271,7 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title1 calificar-modal-titulo modal-title-calificar" id="exampleModalLabel">Auto evaluación</h5>
+          <h5 class="modal-title1 calificar-modal-titulo modal-title-calificar" id="exampleModalLabel">AUTO EVALUACIÓN</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -278,7 +301,7 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Comentarios</h5>
+          <h5 class="modal-title" id="exampleModalLabel">COMENTARIOS</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -314,7 +337,7 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
 
             <div class="calificacionesArea-contenedor-persona calificar-contenedores-nota">
               <div class="calificacionesArea-contenedor-persona-nombre">
-                <h2>Grupo</h2>
+                <h2>GRUPO</h2>
               </div>
               <div class="calificacionesArea-contenedor-persona-preguntas">
 
@@ -352,7 +375,7 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
 
             <div class="calificacionesArea-contenedor-persona calificar-contenedores-nota">
               <div class="calificacionesArea-contenedor-persona-nombre">
-                <h2>Empresa</h2>
+                <h2>EMPRESA</h2>
               </div>
               <div class="calificacionesArea-contenedor-persona-preguntas">
 

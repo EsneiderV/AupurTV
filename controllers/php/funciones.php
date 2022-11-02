@@ -180,7 +180,7 @@ function  mostrarInventario($id, $conexion)
 // muestra la informacion de contacto de todos los usuarios
 function  mostrarDirectorio($idArea, $conexion)
 {
-    $query = "SELECT nombre, correo, telefono FROM `usuarios` WHERE `area` = '$idArea'";
+    $query = "SELECT nombre, apellidos, correo, telefono FROM `usuarios` WHERE `area` = '$idArea'";
     return $consulta = mysqli_query($conexion, $query);
 }
 

@@ -57,9 +57,11 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
         <div class="empleado-contenedor-derecho">
             <div class="empleado-opciones">
                 <h1 class="empleado-nombre"> <?php
-                $nombre = explode(' ',$_SESSION['nombre']);
-                $apellido = explode(' ',$_SESSION['apellidos']);
-                 echo strtoupper($nombre[0]. ' ' .$apellido[0]) ;
+                 $apellido = explode(' ',$_SESSION['apellidos']) ;
+                 $letraApellido = substr($_SESSION['apellidos'],0, 1);
+                 $letraApellido = strtoupper($letraApellido);
+
+                 echo strtoupper($_SESSION['nombre']. ' ' .$apellido[0].' '.$letraApellido.'.') ;
                  ?></h1>
                 <div class="empleado-items">
 
@@ -132,12 +134,15 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
                         echo "<summary class='pt-4 h5'>" . $area['nombre'] . "</summary>";
                         $directorios = mostrarDirectorio($area['codigo'], $conexion);
                         while ($directorio = mysqli_fetch_array($directorios)) {
-
-
+                            $apellido = explode(' ',$directorio['apellidos']) ;
+                            $letraApellido = substr($directorio['apellidos'],0, 1);
+                            $letraApellido = strtoupper($letraApellido);
+                            $nombreCompleto = strtoupper($directorio['nombre']. ' ' .$apellido[0].' '.$letraApellido.'.') ;
+                            
                     ?>
                             <hr>
                             <p class="empleados-p-directorio">
-                                <span> <b> <?php echo $directorio['nombre'] ?> </b> </span>
+                                <span> <b> <?php echo $nombreCompleto ?> </b> </span>
                                 <span> <b>EM :</b> <?php echo $directorio['correo'] ?> </span>
                                 <span> <b>CEL :</b> <?php echo $directorio['telefono'] ?></span>
                             </p>

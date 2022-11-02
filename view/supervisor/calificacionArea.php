@@ -40,8 +40,8 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
   <!-- Barra de navegacion -->
 
   <div class="inventarioArea-div-nav">
-    <a href="supervisor.php" class="calificar-volver-atras"> ᗕ Atrás</a>
-    <h1 class="calificar-titulo">Calificación área</h1>
+    <a href="supervisor.php" class="calificar-volver-atras"> ᗕ ATRÁS</a>
+    <h1 class="calificar-titulo">CALIFICACIÓN ÁREA</h1>
   </div>
 
 
@@ -54,15 +54,17 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
 
     // mostramos los usuarios
     while ($usuario = mysqli_fetch_array($usuarios)) {
-      $nombre = explode(' ', $usuario['nombre']);
       $apellido = explode(' ', $usuario['apellidos']);
+    $letraApellido = substr($usuario['apellidos'], 0, 1);
+    $letraApellido = strtoupper($letraApellido);
+    $nombreCompleto = strtoupper($usuario['nombre'] . ' ' . $apellido[0] . ' ' . $letraApellido . '.');
       $i = 0;
       $promT = 0;
 
     ?>
       <div class="calificacionesArea-contenedor-persona">
         <div class="calificacionesArea-contenedor-persona-nombre">
-          <h2><?php echo $nombre[0] . ' ' . $apellido[0] ?></h2>
+          <h2><?php echo $nombreCompleto ?></h2>
         </div>
         <div class="calificacionesArea-contenedor-persona-preguntas">
           <!-- mostramos las preguntas -->

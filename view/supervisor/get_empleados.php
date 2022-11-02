@@ -8,8 +8,11 @@ echo "<option class='option-select' value=" .'0'. ">" .'Empleados'. "</option>";
 echo "<option class='option-select' value=" .'Noasignado'. ">" .'No asignado'. "</option>";
 
 while ($item = mysqli_fetch_array($consulta)) {
-
-    echo "<option class='option-select' value=" . $item['id'] . ">" . $item['nombre'] . "</option>";
+    $apellido = explode(' ', $item['apellidos']);
+    $letraApellido = substr($item['apellidos'], 0, 1);
+    $letraApellido = strtoupper($letraApellido);
+    $nombreCompleto = strtolower($item['nombre'] . ' ' . $apellido[0] . ' ' . $letraApellido . '.');
+    echo "<option class='option-select' value=" . $item['id'] . ">" . $nombreCompleto. "</option>";
     
 
 }
