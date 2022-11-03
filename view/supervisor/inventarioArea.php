@@ -69,7 +69,7 @@ if (isset($_POST['modificar'])) {
                 <h4 class="inventarioArea-nombre">
                     <?php
                     if ($_SESSION['area'] == '2') {
-                        echo 'ÁREA TECNICA';
+                        echo 'TECNICOS';
                     } elseif ($_SESSION['area'] == '3') {
                         echo 'ÁREA CANAL';
                     }

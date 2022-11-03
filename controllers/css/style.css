@@ -564,7 +564,7 @@
 }
 
 .inventarioArea-body {
-    background: url('../../image/fondoLogin.png');
+    background: gray;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -962,7 +962,7 @@
 /* Calificaciones Por Area*/
 
 .calificacionArea-body {
-    background: url('../../image/fondoLogin.png');
+    background: gray;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -1097,7 +1097,7 @@
     align-items: center;
 }
 
-.tituloContenedoresCanvasPrincipal{
+.tituloContenedoresCanvasPrincipal {
     margin-top: 5%;
     color: #F36C35;
     width: 90%;
@@ -1189,12 +1189,12 @@
         font-size: 150%;
     }
 
-    .empleado-imagen{
+    .empleado-imagen {
         max-height: 90%;
         margin-top: 10.5%;
     }
 
-    .empleado-logo{
+    .empleado-logo {
         margin-top: 10%;
         margin-right: 10%;
     }
@@ -1287,6 +1287,10 @@
     .calificar-administracion {
         height: 100%;
         width: 45%;
+        padding: 4% 0;
+    }
+    .calificar-administracion button {
+        padding: 2%;
     }
 
     .calificar-empleados {
@@ -1310,6 +1314,40 @@
     .contenedor-canva-buscador {
         padding-right: 3%;
     }
+    .calificar-btnmodal{
+        font-size: 100%;
+    }
+    .calificar-btn-disable{
+        font-size: 100%;
+    }
+    .auto-calificar-btnmodal{
+        font-size: 100%;
+        margin-bottom: 10%;
+    }
+    .calificar-auto{
+        padding: 2% 0;
+    }
+
+    .inventarioArea-nombre{
+        font-size: 17px;
+    }
+    .inventarioArea-abrirInventario{
+        font-size: 17px;
+    }
+    .inventarioArea-item-formulario{
+        width: 70%;
+    }
+    .inventarioArea-agregar-articulo{
+        padding: 10px;
+    }
+    .calificacionesArea-contenedor-persona-nombre{
+        padding: 5% 0;
+    }
+    .calificacionesArea-contenedor-persona-nombre h2{
+        font-size: 22px
+    }
+   
+
 }
 
 
@@ -1436,6 +1474,8 @@
 
     .calificar-btn-disable {
         border-bottom: 1px solid #f36c35;
+        font-size: 95%;
+        margin-bottom: 6%;
     }
 
     .calificar-cuerpo {
@@ -1504,19 +1544,34 @@
         flex-wrap: wrap;
     }
 
-    .calificacionAreaBotonMes{
+    .calificacionAreaBotonMes {
         width: 35%;
         padding: 2%;
         margin-top: 3%;
     }
 
-    /* .calificarvernotamescontenedores {
-        flex-direction: column;
-        align-items: center;
-        background-color: red;
-        flex-wrap: nowrap
-    } */
+    .auto-calificar-btnmodal {
+        font-size: 100%;
+        margin-bottom: 10%;
+    }
 
+    .calificar-contenedor-titulo {
+        font-size: 140%;
+    }
+
+    .calificar-btnmodal {
+        font-size: 95%;
+        margin-bottom: 6%;
+    }
+
+    .calificar-administracion {
+        margin-bottom: 20%;
+        padding-top: 10%;
+    }
+
+    .calificar-nav {
+        flex-direction: column;
+    }
 
     /* PARA EL INVENTARIO */
     .inventarioArea-agregar-articulo {
@@ -1542,12 +1597,13 @@
     }
 
     .inventarioArea-nombre {
-        font-size: 20px;
+        font-size: 15px;
         text-align: center;
         margin: 20px;
     }
 
     .inventarioArea-abrirInventario {
+        font-size: 17px;
         text-align: center;
     }
 
@@ -1566,6 +1622,10 @@
         width: 95%;
     }
 
+    .inventarioAreaDirector-contenedor-empleados {
+        width: 90%;
+    }
+
 
     /* PARA EL CANVAS */
     .calificacionesArea-contenedor-principal {
@@ -1576,7 +1636,7 @@
     }
 
     .calificar-titulo {
-        margin-left: 30%; 
+        margin-left: 30%;
     }
 
     .contenedor-canva-buscador {
@@ -1604,7 +1664,7 @@
         margin-top: 3%;
     }
 
-    .desactivar-contenedor-650{
+    .desactivar-contenedor-650 {
         display: none;
     }
 }

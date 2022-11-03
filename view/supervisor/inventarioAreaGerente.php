@@ -144,7 +144,7 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-nombre">
-                <h4 class="inventarioArea-nombre"> ÁREA ADMINISTRATIVA </h4>
+                <h4 class="inventarioArea-nombre"> ADMINISTRACIÓN </h4>
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
@@ -159,7 +159,7 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-nombre">
-                <h4 class="inventarioArea-nombre"> ÁREA TECNICA </h4>
+                <h4 class="inventarioArea-nombre"> TECNICOS </h4>
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
@@ -175,7 +175,7 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-nombre">
-                <h4 class="inventarioArea-nombre"> ÁREA CANAL </h4>
+                <h4 class="inventarioArea-nombre"> CANAL </h4>
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
