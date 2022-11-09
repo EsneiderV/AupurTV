@@ -4,10 +4,17 @@ if( empty(session_id()) && !headers_sent()){
 }
 include_once 'controllers/php/funciones.php';
 include_once 'models/Conexion.php';
+include_once 'email/index.php';
 date_default_timezone_set('America/Bogota');
 $mes = date('m');
 $anio = date('Y');
 eliminarCalificacionAnual($anio, $conexion);
+
+$claseDesactivarSpan = 'desactivar-span-recuperar-clave';
+if(isset($_SESSION['clave']) && $_SESSION['clave'] == true){
+    $claseDesactivarSpan = '';
+    $_SESSION['clave'] = false;
+}
 
 if (isset($_POST['acceder'])) {
     $correo = $_POST['correo'];
@@ -29,6 +36,7 @@ if (isset($_POST['acceder'])) {
     
             redireccion($_SESSION['rol']);
         } else {
+            $_SESSION['clave'] = true;
             echo '<script type="text/javascript">
             alert("Clave Incorrecta");
             window.location.href="index.php";
@@ -42,7 +50,42 @@ if (isset($_POST['acceder'])) {
     
     } 
 }
+
+if(isset($_POST['correoRecuperar'])){
+    $correoRecuperar = $_POST['correoRecuperar'];
+    $existe = buscarCorreoRecuperarClave($correoRecuperar, $conexion);
+
+    if($existe->num_rows <= 0){
+        echo '<script type="text/javascript">
+        alert("El correo no se encuentra registrado");
+        window.location.href="index.php";
+        </script>';
+    }else{
+        
+      $datos =  mysqli_fetch_row($existe);
+      $nombre = $datos[1];
+      $correo = $datos[0];
+      $nuevaClave = random_password();
+
+      try {
+        restablecerClave($nuevaClave,$correo,$conexion);
+        recuperarClave($nombre,$nuevaClave);
+      } catch (\Throwable $th) {
+        echo $th;
+      } 
+      
+        echo '<script type="text/javascript">
+        alert("Revisa tu correo eletronico");
+        window.location.href="index.php";
+        </script>';
+    }
+
+
+}
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="es" class="index-html">
 
@@ -52,13 +95,10 @@ if (isset($_POST['acceder'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://aupur.co/wp-content/uploads/2021/07/cropped-Logos-AUPUR-32x32.png" sizes="32x32">
     <link rel="stylesheet" href="controllers/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="controllers/bootstrap/bootstrap.min.css">
+    <script src="controllers/bootstrap/bootstrap.min.js"></script>
     <title>Login - Aupur Televisión</title>
 </head>
-
 <body class="index-body">
     <div class="index-login-container">
         <div class="index-login-info-container">
@@ -68,10 +108,10 @@ if (isset($_POST['acceder'])) {
 
             <form class="index-inputs-container" action="" method="POST">
                 <label  for="correo" class="index-label">Correo</label>
-                <input required name="correo" class="index-input" type="email" id="correo" >
-                                                                     
+                <input required name="correo" class="index-input" type="email" id="correo" >                                         
                 <label  for="clave" class="index-label">Clave</label>
                 <input required name="clave"  class="index-input" type="password" id="clave">
+                <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="index-span-recuper-clave <?php echo $claseDesactivarSpan ?>"> Recuperar contraseña</span>
                 <button class="index-btn" name="acceder">Ingresar</button>
             </form>
             <div class="index-footer-container">
@@ -82,6 +122,28 @@ if (isset($_POST['acceder'])) {
 
     </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 ms-auto" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+    <form action=""  method="POST">
+        <label for="email">Ingrese su correo</label>
+        <input type="email" id="email" name="correoRecuperar">
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
 </body>
 
 </html>

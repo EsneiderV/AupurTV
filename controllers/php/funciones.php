@@ -42,20 +42,31 @@ function redireccion($rol)
     }
 }
 
-////////////////// empleado//////////////////////////////////
 
-//Datos personales/////
+function buscarCorreoRecuperarClave($correo, $conexion){
+    $query = "SELECT `correo`,`nombre` FROM `usuarios` WHERE `correo` = '$correo'";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
-//muestra los datos personales de cada usuario
-// function datosPersonales($id,$conexion)
-// {
-//     $query = "SELECT `id`, usuarios.nombre, rol.nombre AS 'rol', area.nombre AS 'area',correo,telefono FROM `usuarios` INNER JOIN rol ON rol.codigo = usuarios.rol INNER JOIN area ON area.codigo = usuarios.area WHERE id = '$id';";
-//     return $consulta = mysqli_query($conexion, $query);
-// }
 
-// Calificar///
+function restablecerClave($clave,$correo,$conexion){
+    $query = "UPDATE `usuarios` SET `clave`='$clave' WHERE `correo` = '$correo'";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
-//nos trae todas las areas registradas en la base de datos
+function random_password()  
+{  
+    $caracteres='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    $longpalabra=10;
+    for($pass='', $n=strlen($caracteres)-1; strlen($pass) < $longpalabra ; ) {
+      $x = rand(0,$n);
+      $pass.= $caracteres[$x];
+    }  
+
+    return $pass;
+}
+
+
 function mostrarAreaAdmi($conexion)
 {
     $query = "SELECT * FROM `area` WHERE codigo = '1' ";
