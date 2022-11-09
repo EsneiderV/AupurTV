@@ -57,10 +57,10 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
             <div class="empleado-opciones">
             <h1 class="empleado-nombre"> <?php
                  $apellido = explode(' ',$_SESSION['apellidos']) ;
-                 $letraApellido = substr($_SESSION['apellidos'],0, 1);
-                 $letraApellido = strtoupper($letraApellido);
+                 $nombrecompleto = $_SESSION['nombre']. ' ' .$apellido[0];
+                 $nombrecompleto = ucwords($nombrecompleto);
 
-                 echo strtoupper($_SESSION['nombre']. ' ' .$apellido[0].' '.$letraApellido.'.') ;
+                 echo $nombrecompleto ;
                  ?></h1>
                 <div class="empleado-items">
 
@@ -68,6 +68,7 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
                     <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#inventario">Inventario</button>
                     <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Directorio</button>
                     <a class="empleado-enlace" target="_blank" href="https://mail.google.com/mail/u/0/">Correo</a>
+                    <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#contraseña">Contraseña</button>
                     <a href="../../models/Cerrar.php" class="empleado-enlace-salir">Salir</a>
                 </div>
             </div>
@@ -81,7 +82,7 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title a-ms-30 fs-2 a-f-t-r" id="exampleModalLabel">INVENTARIO</h5>
+                    <h5 class="modal-title a-ms-30 fs-2 a-f-t-r" id="exampleModalLabel">Inventario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -113,7 +114,7 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title a-ms-40 fs-2 a-f-t-r" id="exampleModalLabel">DIRECTORIO</h5>
+                    <h5 class="modal-title a-ms-40 fs-2 a-f-t-r" id="exampleModalLabel">Directorio</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -126,9 +127,8 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
                         $directorios = mostrarDirectorio($area['codigo'], $conexion);
                         while ($directorio = mysqli_fetch_array($directorios)) {
                             $apellido = explode(' ',$directorio['apellidos']) ;
-                            $letraApellido = substr($directorio['apellidos'],0, 1);
-                            $letraApellido = strtoupper($letraApellido);
-                            $nombreCompleto = strtoupper($directorio['nombre']. ' ' .$apellido[0].' '.$letraApellido.'.') ;
+                            $nombreCompleto = $directorio['nombre']. ' ' .$apellido[0];
+                            $nombreCompleto = ucwords($nombreCompleto);
 
                     ?>
                             <hr>

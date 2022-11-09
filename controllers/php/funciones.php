@@ -88,7 +88,7 @@ function mostrarAreaDirectorio($conexion)
 //Nos trae todos los usuarios registrados con su respectiva area
 function mostrarUsuario($conexion, $id, $area)
 {
-    $query = "SELECT id,usuarios.nombre, area.nombre AS 'ambiente',usuarios.area,imagen,tipo_imagen FROM usuarios INNER JOIN area ON area.codigo = usuarios.area WHERE id != '$id' AND usuarios.area = '$area'";
+    $query = "SELECT id,usuarios.nombre, usuarios.apellidos, area.nombre AS 'ambiente',usuarios.area,imagen,tipo_imagen FROM usuarios INNER JOIN area ON area.codigo = usuarios.area WHERE id != '$id' AND usuarios.area = '$area'";
     return $consulta = mysqli_query($conexion, $query);
 }
 

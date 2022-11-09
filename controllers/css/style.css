@@ -214,7 +214,7 @@
     height: 20%;
     color: #FFF;
     margin: 0;
-    font-size: 190%;
+    font-size: 200%;
     font-weight: bold;
     -webkit-text-stroke: 1px #e36b0f;
     display: flex;
@@ -382,6 +382,7 @@
     align-items: flex-start;
     width: 100%;
     height: 10%;
+    margin-top: 2%;
 }
 
 .calificar-volver-atras {
@@ -404,6 +405,7 @@
 .calificar-titulo {
     margin-left: 35%;
     font-weight: bold;
+    font-size: 300%;
     color: #f36c35;
     font-family: 'Roboto', sans-serif;
 }
@@ -683,13 +685,12 @@
 .invetarioArea-emergente-nombre {
     color: #F36C35;
     width: 90%;
-    text-transform: uppercase;
     text-align: center;
+    margin-top: 1%;
 }
 
 .inventarioAreaGerenteTituloArea {
     text-align: center;
-    text-transform: uppercase;
 }
 
 .invetarioArea-emergente-main {
@@ -907,10 +908,9 @@
     color: rgb(0, 0, 0);
 }
 
-.modal-title {
+.modal-title, .modal-title1 {
     text-align: center;
-    color: #e36b0f;
-    ;
+    color: #0075BC;
 }
 
 .modf-Art {
@@ -988,6 +988,7 @@
     min-width: 30%;
     margin: 1% 0% 1% 0%;
     border-radius: 10px;
+    padding: 1% 0;
 }
 
 .calificacionesArea-contenedor-persona-nombre {
@@ -995,6 +996,7 @@
     color: #f36c35;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
+    padding: 1% 0;
 }
 
 .calificacionesArea-contenedor-persona-preguntas {
@@ -1107,8 +1109,8 @@
     margin-top: 5%;
     color: #F36C35;
     width: 90%;
-    text-transform: uppercase;
     text-align: center;
+    font-size: 180%;
     font-family: 'Roboto', sans-serif;
 }
 

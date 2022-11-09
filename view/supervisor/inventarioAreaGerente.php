@@ -83,8 +83,8 @@ if (isset($_POST['modificar'])) {
 
     <!-- Navegador -->
     <div class="calificar-nav">
-        <a href="../supervisor/supervisor.php" class="calificar-volver-atras"> ᗕ ATRÁS</a>
-        <h1 class="calificar-titulo">INVENTARIO ÁREA</h1>
+        <a href="../supervisor/supervisor.php" class="calificar-volver-atras"> ᗕ Atrás</a>
+        <h1 class="calificar-titulo">Inventario Área</h1>
     </div>
 
 
@@ -128,12 +128,12 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-nombre">
-                <h4 class="inventarioArea-nombre"> GENERAL </h4>
+                <h4 class="inventarioArea-nombre">General</h4>
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
 
-                <span id="inventarioArea-abrirInventario-general" class="inventarioArea-abrirInventario">INVENTARIO</span>
+                <span id="inventarioArea-abrirInventario-general" class="inventarioArea-abrirInventario">Inventario</span>
             </div>
         </div>
 
@@ -144,11 +144,11 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-nombre">
-                <h4 class="inventarioArea-nombre"> ADMINISTRACIÓN </h4>
+                <h4 class="inventarioArea-nombre">Administración</h4>
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
-                <span id="inventarioArea-abrirInventario-administracio" class="inventarioArea-abrirInventario">INVENTARIO</span>
+                <span id="inventarioArea-abrirInventario-administracio" class="inventarioArea-abrirInventario">Inventario</span>
             </div>
         </div>
 
@@ -159,11 +159,11 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-nombre">
-                <h4 class="inventarioArea-nombre"> TECNICOS </h4>
+                <h4 class="inventarioArea-nombre">Tecnicos</h4>
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
-                <span id="inventarioArea-abrirInventario-Tecnico" class="inventarioArea-abrirInventario">INVENTARIO</span>
+                <span id="inventarioArea-abrirInventario-Tecnico" class="inventarioArea-abrirInventario">Inventario</span>
             </div>
 
         </div>
@@ -175,11 +175,11 @@ if (isset($_POST['modificar'])) {
             </div>
 
             <div class="inventarioArea-contenedor-nombre">
-                <h4 class="inventarioArea-nombre"> CANAL </h4>
+                <h4 class="inventarioArea-nombre">Canal</h4>
             </div>
 
             <div class="inventarioArea-contenedor-abrirInventario">
-                <span id="inventarioArea-abrirInventario-Canal" class="inventarioArea-abrirInventario">INVENTARIO</span>
+                <span id="inventarioArea-abrirInventario-Canal" class="inventarioArea-abrirInventario">Inventario</span>
             </div>
 
 
@@ -197,10 +197,9 @@ if (isset($_POST['modificar'])) {
                 <div class="inventarioArea-contenedor-nombre">
                     <h4 class="inventarioArea-nombre">
                         <?php
-                        $apellido = explode(' ', $persona['apellidos']);
-                        $letraApellido = substr($persona['apellidos'], 0, 1);
-                        $letraApellido = strtoupper($letraApellido);
-                        $nombreCompleto = strtoupper($persona['nombre'] . ' ' . $apellido[0] . ' ' . $letraApellido . '.');
+                        $apellido = explode(' ',$persona['apellidos']) ;
+                        $nombreCompleto = $persona['nombre']. ' ' .$apellido[0];
+                        $nombreCompleto = ucwords($nombreCompleto);
 
                         echo $nombreCompleto;
                         ?>
@@ -208,7 +207,7 @@ if (isset($_POST['modificar'])) {
                 </div>
 
                 <div class="inventarioArea-contenedor-abrirInventario">
-                    <span id="<?php echo $persona['id'] ?>" class="inventarioArea-abrirInventario inventarioArea-abrirInventario-persona">INVENTARIO</span>
+                    <span id="<?php echo $persona['id'] ?>" class="inventarioArea-abrirInventario inventarioArea-abrirInventario-persona">Inventario</span>
                 </div>
             </div>
         <?php
