@@ -92,28 +92,43 @@ if (isset($_POST['modificar'])) {
     <div class="inventarioArea-agregar-articulo">
         <h3 class="text-center titulo-agregar">AGREGAR</h3>
         <form action="" class="inventarioArea-formulario" method="POST" id="formulario">
-            <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="codigo" placeholder="Código artículo" required>
-            <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="nombre" placeholder="Nombre artículo" required>
-            <select class="inventarioArea-item-formulario" id="select-agregar-estado" name="estado" required>
-                <option class="option-select" value="0" default>Estado...</option>
-                <option class="option-select" value="Bueno">Bueno</option>
-                <option class="option-select" value="Regular">Regular</option>
-                <option class="option-select" value="Malo">Malo</option>
-            </select>
+            <div class="agregar-items-nombres-resultado">
+                <label class="agregar-items-nombres" for="codigoLabel">Codigo : </label>
+                <input id="codigoLabel" autocomplete="off" class="inventarioArea-item-formulario" type="text" name="codigo" placeholder="Código artículo" required>
+            </div>
+            <div class="agregar-items-nombres-resultado">
+                <label class="agregar-items-nombres">Nombre : </label>    
+                <input autocomplete="off" class="inventarioArea-item-formulario" type="text" name="nombre" placeholder="Nombre artículo" required>
+            </div>
+
+            <div class="agregar-items-nombres-resultado">
+                <label class="agregar-items-nombres" for="">Estado : </label>
+                <select class="inventarioArea-item-formulario" id="select-agregar-estado" name="estado" required>
+                    <option class="option-select" value="Bueno">Bueno</option>
+                    <option class="option-select" value="Regular">Regular</option>
+                    <option class="option-select" value="Malo">Malo</option>
+                </select>
+            </div>
+
+            <div class="agregar-items-nombres-resultado">
+                <label class="agregar-items-nombres" for="">Area : </label>
             <select class="inventarioArea-item-formulario" id="select-agregar-area" name="area" required>
-                <option class="option-select" value="0">Areas</option>
+                <option class="option-select" value="Noasignado">No asignado</option>
                 <?php
                 $areasS = mostrarAreaDirectorio($conexion);
                 while ($areaS = mysqli_fetch_array($areasS)) {
                     echo "<option class='option-select' value=" . $areaS['codigo'] . ">" . $areaS['nombre'] . "</option>";
                 }
                 ?>
-                <option class="option-select" value="Noasignado">No asignado</option>
             </select>
-
-            <select class="inventarioArea-item-formulario" id="select-agregar-empleado" name="responsable" required>
-                <option class="option-select" id="option-empleado" value="0">Empleados</option>
-            </select>
+            </div>
+           
+            <div class="agregar-items-nombres-resultado">
+                <label class="agregar-items-nombres" for="">Empleado : </label>
+                <select class="inventarioArea-item-formulario" id="select-agregar-empleado" name="responsable" required>
+                <option class='option-select' value="Noasignado"> No asignado </option>
+                </select>
+            </div>
             <button class="inventarioArea-item-formulario-agregar" type="submit" name="agregar">Agregar</button>
         </form>
     </div>

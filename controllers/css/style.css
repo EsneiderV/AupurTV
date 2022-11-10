@@ -11,6 +11,9 @@
     padding: 0%;
 }
 
+h1,h2,h3,h4,h5,h6,p,summary,span{
+    font-family: 'Roboto', sans-serif;
+}
 /* Inicio de sesion */
 .modal-title-calificar {
     width: 100%;
@@ -121,10 +124,13 @@
 }
 .index-span-recuper-clave{
     cursor: pointer;
+    color: #FFF;
 }
 
 .desactivar-span-recuperar-clave{
     display: none;
+    color: #FFF;
+
 }
 
 
@@ -148,8 +154,8 @@
 
 .empleado-contenedor-principal {
     background-color: #FFF;
-    width: 55%;
-    height: 60%;
+    width: 60%;
+    height: 65%;
     display: flex;
     border-radius: 10px;
 }
@@ -214,7 +220,7 @@
     height: 20%;
     color: #FFF;
     margin: 0;
-    font-size: 200%;
+    font-size: 230%;
     font-weight: bold;
     -webkit-text-stroke: 1px #e36b0f;
     display: flex;
@@ -379,7 +385,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     height: 10%;
     margin-top: 2%;
@@ -557,6 +563,8 @@
     margin-bottom: -6%;
 }
 
+
+
 .Inventario-area-gerente-body {
     display: flex;
     flex-direction: column;
@@ -687,6 +695,7 @@
     width: 90%;
     text-align: center;
     margin-top: 1%;
+    font-family: 'Roboto', sans-serif;
 }
 
 .inventarioAreaGerenteTituloArea {
@@ -796,7 +805,6 @@
     border: none;
     border-bottom: 1px solid #FFF;
     color: #FFF;
-    margin-top: 3%;
     font-size: 20px;
     width: 50%;
     text-align: center;
@@ -849,10 +857,11 @@
     background-color: transparent;
     border: 0.5px solid #FFF;
     border-radius: 5%;
-    padding: 1%;
-    margin: 4%;
     color: #FFF;
     font-family: 'Roboto', sans-serif;
+    margin-top:2em ;
+    height: 2.5em;
+    width: 5em;
 }
 
 .inventarioArea-item-formulario-agregar:hover {
@@ -911,6 +920,7 @@
 .modal-title, .modal-title1 {
     text-align: center;
     color: #0075BC;
+    font-family: 'Roboto', sans-serif;
 }
 
 .modf-Art {
@@ -963,7 +973,21 @@
     display: none;
 }
 
+.agregar-items-nombres-resultado{
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    padding:1em 0;
+}
 
+.agregar-items-nombres{
+    color: #FFF;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
 
 /* Calificaciones Por Area*/
 
@@ -1257,13 +1281,20 @@
     }
 
     .empleado-contenedor-principal {
-        width: 80%;
-        height: 90%;
+        width: 85%;
+        height: 95%;
         margin-top: 4%;
         margin-bottom: 4%;
     }
 
     /* PARA LAS CALIFICACIONES */
+
+    .calificar-html, .calificar-body{
+        height: auto;
+        width: auto;
+    }
+
+
 
     .calificar-cuerpo {
         flex-direction: column;
@@ -1274,7 +1305,10 @@
 
     .calificar-nav {
         margin-top: 2%;
-        margin-bottom: 2%;
+        margin-bottom: 40px;
+    }
+    .extra{
+        margin-top: 4%;
     }
 
     .calificar-auto-admi {
@@ -1284,12 +1318,15 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        margin-bottom: 15%;
+        margin-bottom: 2em;
     }
 
     .calificar-auto {
-        height: 100%;
         width: 45%;
+    }
+
+    .calificar-auto{
+        height: 14em;
     }
 
     .calificar-administracion {
@@ -1307,7 +1344,7 @@
     }
 
     .calificar-contenedor-empleado {
-        min-height: 210%;
+        min-height: 30em;
     }
 
     /* PARA EL CANVAS */
@@ -1336,6 +1373,7 @@
         padding: 2% 0;
     }
 
+   
     .inventarioArea-nombre{
         font-size: 17px;
     }
@@ -1347,6 +1385,13 @@
     }
     .inventarioArea-agregar-articulo{
         padding: 10px;
+        width: 68%;
+        position: static;
+        margin: auto;
+    }
+    .inventarioArea-contenedor{
+        width: 70%;
+        margin: auto;
     }
     .calificacionesArea-contenedor-persona-nombre{
         padding: 5% 0;
@@ -1354,7 +1399,33 @@
     .calificacionesArea-contenedor-persona-nombre h2{
         font-size: 22px
     }
-   
+    .empleado-enlace-calificar,
+    .empleado-item,
+    .empleado-enlace-salir,
+    .empleado-enlace {
+      font-size: 17px;
+    }
+    
+    .empleado-enlace-calificar:hover,
+    .empleado-enlace-salir:hover,
+    .empleado-enlace:hover {
+        font-size: 17px;
+       
+    }
+
+    .empleado-enlace-jefe-salir,
+    .empleado-enlace-jefe,
+    .empleado-item-jefe {
+        font-size: 17px;
+        
+    }
+
+    .empleado-enlace-jefe-salir:hover,
+    .empleado-enlace-jefe:hover {
+        font-size: 17px;
+        
+    }
+
 
 }
 
@@ -1435,27 +1506,27 @@
     .empleado-item,
     .empleado-enlace-salir,
     .empleado-enlace {
-        font-size: 180%;
+        font-size: 130%;
         margin-top: 6%;
     }
 
     .empleado-enlace-calificar:hover,
     .empleado-enlace-salir:hover,
     .empleado-enlace:hover {
-        font-size: 180%;
+        font-size: 130%;
         margin-top: 6%;
     }
 
     .empleado-enlace-jefe-salir,
     .empleado-enlace-jefe,
     .empleado-item-jefe {
-        font-size: 145%;
+        font-size: 130%;
         margin-top: 4%;
     }
 
     .empleado-enlace-jefe-salir:hover,
     .empleado-enlace-jefe:hover {
-        font-size: 145%;
+        font-size: 130%;
         margin-top: 4%;
     }
 
@@ -1536,7 +1607,7 @@
 
     .calificar-auto {
         width: 95%;
-        height: 40%;
+        height: 11em;
     }
 
     .calificar-prefunta {
@@ -1573,14 +1644,18 @@
     }
 
     .calificar-administracion {
-        margin-bottom: 20%;
+        margin-bottom: 30%;
         padding-top: 10%;
     }
 
     .calificar-nav {
         flex-direction: column;
+        align-items: flex-start;
     }
 
+    .calificar-nav h1 {
+        margin: auto;
+    }
     /* PARA EL INVENTARIO */
     .inventarioArea-agregar-articulo {
         position: static;
@@ -1632,6 +1707,11 @@
 
     .inventarioAreaDirector-contenedor-empleados {
         width: 90%;
+    }
+
+    .agregar-items-nombres-resultado{
+        flex-direction: column;
+        align-items: center;
     }
 
 

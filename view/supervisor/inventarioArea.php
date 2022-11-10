@@ -52,9 +52,9 @@ if (isset($_POST['modificar'])) {
 <body class="inventarioArea-body">
 
     <!-- Navegador -->
-    <div class="calificar-nav">
-        <a href="../supervisor/supervisor.php" class="calificar-volver-atras"> ᗕ ATRÁS</a>
-        <h1 class="calificar-titulo">INVENTARIO ÁREA</h1>
+    <div class="calificar-nav extra">
+        <a href="../supervisor/supervisor.php" class="calificar-volver-atras"> ᗕ Atrás</a>
+        <h1 class="calificar-titulo">Inventario Área</h1>
     </div>
 
     <!-- Contenedor de contenedorcitos de cada persona y area -->
@@ -69,16 +69,16 @@ if (isset($_POST['modificar'])) {
                 <h4 class="inventarioArea-nombre">
                     <?php
                     if ($_SESSION['area'] == '2') {
-                        echo 'TECNICOS';
+                        echo 'Tecnicos';
                     } elseif ($_SESSION['area'] == '3') {
-                        echo 'ÁREA CANAL';
+                        echo 'Canal';
                     }
                     ?>
                 </h4>
             </div>
 
             <div class="inventarioAreaDirector-contenedor-abrirInventario">
-                <span id="inventarioArea-abrirInventario-area" class="inventarioArea-abrirInventario">INVENTARIO</span>
+                <span id="inventarioArea-abrirInventario-area" class="inventarioArea-abrirInventario">Inventario</span>
             </div>
 
 
@@ -96,10 +96,9 @@ if (isset($_POST['modificar'])) {
                 <div class="inventarioArea-contenedor-nombre">
                     <h4 class="inventarioArea-nombre">
                         <?php
-                         $apellido = explode(' ', $persona['apellidos']);
-                         $letraApellido = substr($persona['apellidos'], 0, 1);
-                         $letraApellido = strtoupper($letraApellido);
-                         $nombreCompleto = strtoupper($persona['nombre'] . ' ' . $apellido[0] . ' ' . $letraApellido . '.');
+                        $apellido = explode(' ', $persona['apellidos']);
+                        $nombreCompleto = $persona['nombre'] . ' ' . $apellido[0];
+                        $nombreCompleto = ucwords($nombreCompleto);
 
                         echo $nombreCompleto;
                         ?>
@@ -107,7 +106,7 @@ if (isset($_POST['modificar'])) {
                 </div>
 
                 <div class="inventarioAreaDirector-contenedor-abrirInventario">
-                    <span id="<?php echo $persona['id'] ?>" class="inventarioArea-abrirInventario inventarioArea-abrirInventario-persona">INVENTARIO</span>
+                    <span id="<?php echo $persona['id'] ?>" class="inventarioArea-abrirInventario inventarioArea-abrirInventario-persona">Inventario</span>
                 </div>
             </div>
         <?php
@@ -329,7 +328,7 @@ if (isset($_POST['modificar'])) {
                                 $letraApellido = strtoupper($letraApellido);
                                 $nombreCompleto = strtolower($personaM['nombre'] . ' ' . $apellido[0] . ' ' . $letraApellido . '.');
 
-                                echo "<option  value=" . $personaM['id'] . ">" .$nombreCompleto. "</option>";
+                                echo "<option  value=" . $personaM['id'] . ">" . $nombreCompleto . "</option>";
                             }
                             ?>
                             <option value="Noasignado" id="option-default-encargado">No asignado</option>

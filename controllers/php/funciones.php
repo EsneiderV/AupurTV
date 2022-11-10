@@ -54,6 +54,20 @@ function restablecerClave($clave,$correo,$conexion){
     return $consulta = mysqli_query($conexion, $query);
 }
 
+function ClaveActual($conexion,$id)
+{
+
+    $query = "SELECT  `clave` FROM `usuarios` WHERE `id` = '$id'";
+    return $consulta = mysqli_query($conexion, $query);
+    
+}
+
+function CambiarClave($conexion,$clave,$id)
+{
+    $query = "UPDATE `usuarios` SET `clave`='$clave' WHERE `id` = '$id'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
 function random_password()  
 {  
     $caracteres='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
