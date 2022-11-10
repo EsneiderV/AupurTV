@@ -202,7 +202,7 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion)
     </div>
 
 
-
+    <!-- Cambiar contraseña -->
     <div class="modal fade" id="contraseña" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -212,22 +212,22 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion)
                 </div>
                 <div class="modal-body">
                     <form action="" method="POST">
-                        <div>
-                            <label for="">Contraseña Actual</label>
+                        <div class="div-cambiar-contraseñas">
+                            <label for="">Contraseña Actual :</label>
                             <input required name="cambioclaveactual" type="password">
                         </div>
-                        <div>
-                            <label for="">Nueva Contraseña</label>
+                        <div class="div-cambiar-contraseñas">
+                            <label for="">Nueva Contraseña :</label>
                             <input required name="cambioclavenueva" type="password">
                         </div>
-                        <div>
-                            <label for="">Confirmar contraseña</label>
+                        <div class="div-cambiar-contraseñas">
+                            <label for="">Confirmar contraseña :</label>
                             <input required name="cambioclaveconfirmar" type="password">
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" name="cambiarclave" class="btn btn-primary">Cambiar Contraseña</button>
+                    <button type="submit" name="cambiarclave" class="btn btn-primary">Cambiar</button>
                 </div>
                 </form>
             </div>

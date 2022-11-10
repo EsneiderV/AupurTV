@@ -133,6 +133,10 @@ h1,h2,h3,h4,h5,h6,p,summary,span{
 
 }
 
+.div-cambiar-contraseñas{
+    padding: 5px;
+}
+
 
 /* Empleado */
 .empleado-html,
