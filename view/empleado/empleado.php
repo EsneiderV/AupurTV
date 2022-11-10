@@ -15,6 +15,48 @@ if (isset($_SESSION['rol'])) {
                 window.location.href="../../index.php";
                 </script>';
 }
+
+
+if (isset($_POST['cambiarclave'])) {
+    $claveActual  = $_POST["cambioclaveactual"];
+    $claveNueva = $_POST["cambioclavenueva"];
+    $claveConfirmada = $_POST["cambioclaveconfirmar"];
+
+    // que la clace actual si sea la correcta
+    $claveCorrecta = ClaveActual($conexion, $_SESSION['id']);
+
+    $datos =  mysqli_fetch_row($claveCorrecta);
+    $claveActualdb = $datos[0];
+
+    if($claveActual == $claveActualdb){
+
+        if($claveNueva == $claveConfirmada){
+
+            CambiarClave($conexion,$claveNueva,$_SESSION['id']);
+
+            echo '<script type="text/javascript">
+            alert("clave actualizada correctamente");
+            window.location.href="empleado.php";
+            </script>';
+            
+        }else{
+            echo '<script type="text/javascript">
+            alert("las claves no coinciden");
+            window.location.href="empleado.php";
+            </script>';
+        }
+
+    }else{
+        echo '<script type="text/javascript">
+        alert("Clave actual incorrecta");
+        window.location.href="empleado.php";
+        </script>';
+    }
+
+}
+
+
+
 date_default_timezone_set('America/Bogota');
 $mes = date('m');
 $anio = date('Y');
@@ -153,6 +195,36 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
         </div>
     </div>
 
+    <div class="modal fade" id="contraseña" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar Contraseña</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        <div>
+                            <label for="">Contraseña Actual</label>
+                            <input required name="cambioclaveactual" type="password">
+                        </div>
+                        <div>
+                            <label for="">Nueva Contraseña</label>
+                            <input required name="cambioclavenueva" type="password">
+                        </div>
+                        <div>
+                            <label for="">Confirmar contraseña</label>
+                            <input required name="cambioclaveconfirmar" type="password">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" name="cambiarclave" class="btn btn-primary">Cambiar Contraseña</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </body>
 
