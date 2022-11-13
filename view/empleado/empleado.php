@@ -124,7 +124,7 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title a-ms-30 fs-2 a-f-t-r" id="exampleModalLabel">Inventario</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Inventario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -156,7 +156,7 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title a-ms-40 fs-2 a-f-t-r" id="exampleModalLabel">Directorio</h5>
+                    <h5 class="modal-title w-100" id="exampleModalLabel">Directorio</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -201,7 +201,7 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar Contraseña</h1>
+                    <h1 class="modal-title w-100" id="exampleModalLabel">Cambiar Contraseña</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
