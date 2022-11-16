@@ -120,7 +120,7 @@ if (isset($_POST['correoRecuperar'])) {
 
     </div>
 
-    <!-- Modal -->
+    <!-- Modal para recuperar contraseña-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -130,7 +130,8 @@ if (isset($_POST['correoRecuperar'])) {
                 </div>
                 <div class="modal-body">
                     <form action="" method="POST">
-                        <label for="email">Ingrese su correo :</label>
+                        <p>Introduce tu dirección de email. Te enviaremos un correo donde se adjunta tu contraseña.</p>
+                        <label for="email">Email :</label>
                         <input type="email" id="email" name="correoRecuperar">
                 </div>
                 <div class="modal-footer">
