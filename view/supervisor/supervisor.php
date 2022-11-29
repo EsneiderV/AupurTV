@@ -122,6 +122,13 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion)
                     <a class="empleado-enlace-jefe" href="calificacionArea.php">Calificaciones área</a>
                     <a class="empleado-enlace-jefe" target="_blank" href="https://mail.google.com/mail/u/0/">Correo</a>
                     <button class="empleado-item-jefe" data-bs-toggle="modal" data-bs-target="#contraseña">Contraseña</button>
+                    <?php
+                    if ($_SESSION['admi'] == 1) {
+                    ?>
+                        <a class="empleado-enlace-jefe" href="../administrador/administrador.php">Administración</a>
+                    <?php
+                    }
+                    ?>
                     <a href="../../models/Cerrar.php" class="empleado-enlace-jefe-salir">Salir</a>
                 </div>
             </div>

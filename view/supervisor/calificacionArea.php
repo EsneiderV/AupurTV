@@ -22,7 +22,7 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">

@@ -111,10 +111,17 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
                     <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#directorio">Directorio</button>
                     <a class="empleado-enlace" target="_blank" href="https://mail.google.com/mail/u/0/">Correo</a>
                     <button class="empleado-item" data-bs-toggle="modal" data-bs-target="#contraseña">Contraseña</button>
+                    <?php
+                    if ($_SESSION['admi'] == 1) {
+                    ?>
+                        <a class="empleado-enlace-jefe" href="../administrador/administrador.php">Administración</a>
+                    <?php
+                    }
+                    ?>
                     <a href="../../models/Cerrar.php" class="empleado-enlace-salir">Salir</a>
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
 
 

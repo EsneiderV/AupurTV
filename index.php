@@ -33,6 +33,7 @@ if (isset($_POST['acceder'])) {
             $_SESSION['area'] = $usuario['area'];
             $_SESSION['imagen'] = $usuario['imagen'];
             $_SESSION['tipo_imagen'] = $usuario['tipo_imagen'];
+            $_SESSION['admi'] = $usuario['admi'];
 
             redireccion($_SESSION['rol']);
         } else {
