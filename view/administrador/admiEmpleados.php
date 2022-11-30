@@ -1,20 +1,22 @@
 <div class="admiEmpleado-contenedor-proncipal">
-    <h1 class="titulo-admiEmpleados">Empleados AupurTV</h1>
 
-    <hr>
-    <div class="admiEmpleados-div-datos">
-        <p class="admiEmpleados-p-datos">
-            <span class="span-datos">DNI</span>
-            <span class="span-datos">NOMBRES</span>
-            <span class="span-datos">APELLIDOS</span>
-            <span class="span-datos">CORREO</span>
-            <span class="span-datos">TELÉFONO</span>
-            <span class="span-datos">ROL</span>
-            <span class="span-datos">ÁREA</span>
-            <span class="span-datos">ACCIÓN</span>
-        </p>
+    <div class="admiEmpleado-contenedor">
+        <h1 class="titulo-admiEmpleados">Empleados AupurTV</h1>
+
+        <div class="admiEmpleados-div-datos-titulo">
+            <p class="admiEmpleados-p-datos-titulo">
+                <span class="span-datos">DNI</span>
+                <span class="span-datos">NOMBRES</span>
+                <span class="span-datos">APELLIDOS</span>
+                <span class="span-datos">CORREO</span>
+                <span class="span-datos">TELÉFONO</span>
+                <span class="span-datos">ROL</span>
+                <span class="span-datos">ÁREA</span>
+                <span class="span-datos">ACCIÓN</span>
+            </p>
+        </div>
     </div>
-    <hr>
+
     <?php
     $usuarios = usuario($conexion);
 
@@ -61,9 +63,7 @@
                     <a class="fa-solid fa-trash-can modificar" href=""></a>
                 </span>
             </p>
-
         </div>
-        <hr>
     <?php
 
     }
