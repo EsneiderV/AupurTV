@@ -1,43 +1,26 @@
 <?php 
-
-// Variables de mensajes y JSON
-$respuestaOK = false;
-$mensajeError = "No se puede ejecutar";
-$contenidoOK = "";
-
 // Se incluye el archivo de funciones y conexion con la base de datos
 include_once '../../controllers/php/funciones.php';
 include_once '../../models/Conexion.php';
 
+    $dni = $_POST['dni'];
+    $nombre = $_POST['nombre'];
+    $apellidos = $_POST['apellidos'];
+    $clave = $_POST['clave'];
+    $rol = $_POST['rol'];
+    $area = $_POST['area'];
+    $correo = $_POST['correo'];
+    $telefono = $_POST['telefono'];
 
-// Validar conexion con la base de datos
-if ($errorDbConexxion == false) {
-    // Validacion que existan las variables post
-    if (isset($_POST) && !empty($_POST)) {
-        // Se verifican las variables de accion
-        switch ($_POST['accion']) {
-            case 'addUser':
-                // Se arma el query
-                // $query = sprintf("INSERT INTO usuarios SET DNI, nombre, apellidos,
-                //  clave, rol, area, correo, telefono, imagen
-            
-                //  VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]',
-                //  '[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]','[value-12]')");
-                break;
-            
-            default:
-            $mensajeError = 'Esta acción no se encuentra disponible';
-            break;
-        }
-    }else {
-        $mensajeError = 'No se puede ejecutar';
-    }
-}else {
-    $mensajeError = 'No se puede establecer conexión con la base de datos';
-}
+    $tipo = $_FILES['imagen']['type'];
+    $nombrei = $_FILES['imagen']['name'];
+    $tamano = $_FILES['imagen']['size'];
+    $imagenSubida = fopen($_FILES['imagen']['tmp_name'],'r');
+    $binariosImagen = fread($imagenSubida,$tamano);
+    $binariosImagen =mysqli_escape_string($conexion,$binariosImagen);
 
-$salidaJson = array("respuesta" => $respuestaOK,
-                    "mensaje" => $mensajeError,
-                    "contenido" => $contenidoOK);
+    $query = "INSERT INTO usuarios (id, DNI, nombre, apellidos, clave, rol, area, correo, telefono, imagen, tipo_imagen) 
+    VALUES ('23', '$dni', '$nombre', '$apellidos', '$clave', '$rol', '$area', '$correo', '$telefono','$binariosImagen','$tipo')";
 
-echo json_encode($salidaJson);
+    $consulta = mysqli_query($conexion, $query);
+?>

@@ -1319,8 +1319,8 @@ span {
   padding: 1% 0;
 }
 
-.admiEmpleados-p-datos{
-    border-bottom: 1px solid #fff;
+.admiEmpleados-p-datos {
+  border-bottom: 1px solid #fff;
 }
 
 .span-datos {
@@ -1329,11 +1329,11 @@ span {
   font-size: 120%;
 }
 
-.admiEmpleado-contenedor{
-    background-color: gray;
-    position: -webkit-sticky;  
-    position: sticky;
-    top: 0; 
+.admiEmpleado-contenedor {
+  background-color: gray;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 /* admiCrearEmpleado */
@@ -1345,7 +1345,7 @@ span {
   align-items: center;
   text-align: center;
   margin: auto;
-  margin-top: 13%;
+  margin-top: 8%;
   padding: 1rem;
   background-color: #0075bc;
   border-radius: 10px;
@@ -1362,135 +1362,140 @@ span {
 }
 
 .admiCrearEmpleado-items {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-end;
-    flex-wrap: nowrap;
-    padding: 1em 0;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  padding: 1em 0;
 }
 
-.admiCrearEmpleado-btn-crear{
+.admiCrearEmpleado-cargar-imagen {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-top: 5%;
+  color: #fff;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+}
+
+.admiCrearEmpleado-btn-crear {
   background-color: transparent;
   border: 0.5px solid #fff;
   border-radius: 5%;
   color: #fff;
   font-family: "Roboto", sans-serif;
-  margin-top: 2em;
   height: 2.5em;
   width: 7em;
 }
 
-.admiCrearEmpleado-btn-crear:hover{
-    background-color: #e36b0f;
-    color: #fff;
-  }
-
-.admiCrearEmpleado-label{
-    color: #fff;
-    font-size: 20px;
-    font-family: "Roboto", sans-serif;
+.admiCrearEmpleado-btn-crear:hover {
+  background-color: #e36b0f;
+  color: #fff;
 }
 
-.admiCrearEmpleado-input{
-    text-decoration: none;
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #fff;
-    color: #fff;
-    font-size: 20px;
-    width: 60%;
-    text-align: center;
-    box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
+.admiCrearEmpleado-label {
+  color: #fff;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.admiCrearEmpleado-input {
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-size: 20px;
+  width: 60%;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 .admiCrearEmpleado-input::placeholder {
-    color: rgba(255, 255, 255, 0.414);
-  }
-
+  color: rgba(255, 255, 255, 0.414);
+}
 
 /* admiEmpleadoDelMes */
 
-.admiEmpleadoDelMes-contenedor-principal{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    padding: 5%;
+.admiEmpleadoDelMes-contenedor-principal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 5%;
 }
 
-.admiEmpleadoDelMes-contenedor-titulos{
-    margin-bottom: 10%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
+.admiEmpleadoDelMes-contenedor-titulos {
+  margin-bottom: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .titulo-empleado-mes {
-    font-size: 250%;
-    font-weight: bold;
-    color: #f36c35;
-    font-family: "Roboto", sans-serif;
+  font-size: 250%;
+  font-weight: bold;
+  color: #f36c35;
+  font-family: "Roboto", sans-serif;
 }
 
-.titulo-año-actual{
-    color: #f36b0f;
-    font-family: "Roboto", sans-serif;
-    text-align: center;
-    font-size: 200%;
-    font-weight: bold;
+.titulo-año-actual {
+  color: #f36b0f;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
 }
 
-
-.admiEmpleadoDelMes-contenedor-empleados{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
+.admiEmpleadoDelMes-contenedor-empleados {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.div-empleados-por-mes{
-    background-color: #0075bc;
-    width: 70%;
-    height: 100%;
-    border-radius: 10px;
+.div-empleados-por-mes {
+  background-color: #0075bc;
+  width: 70%;
+  height: 100%;
+  border-radius: 10px;
 }
 
-.titulo-empleado-por-mes{
-    color: rgb(243, 107, 15);
-    font-family: Roboto, sans-serif;
-    text-align: center;
-    font-size: 200%;
-    font-weight: bold;
-    padding: 5%;
+.titulo-empleado-por-mes {
+  color: rgb(243, 107, 15);
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+  padding: 5%;
 }
 
-.div-mes-persona{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+.div-mes-persona {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
 }
 
-.div-mesesDelAño{
-    margin: 0 5%;
+.div-mesesDelAño {
+  margin: 0 5%;
 }
-
-
-
-
-
-
 
 /* RESPONSIVE */
 
