@@ -18,8 +18,9 @@ if (isset($_SESSION['rol'])) {
 
 <!DOCTYPE html>
 <html lang="es" class="admi-html">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://aupur.co/wp-content/uploads/2021/07/cropped-Logos-AUPUR-32x32.png" sizes="32x32">
     <link rel="stylesheet" href="../../controllers/bootstrap/bootstrap.min.css">
     <script src="../../controllers/bootstrap/bootstrap.min.js"></script>
@@ -35,25 +36,6 @@ if (isset($_SESSION['rol'])) {
     <main class="admi-main">
         <div class="admi-contenedor-izquierdo">
 
-            <div class="admi-div-titulo">
-                <h1 class="admi-titulo">Administrador</h1>
-
-                <h2 class="admi-titulo"> <?php
-                                            $apellido = explode(' ', $_SESSION['apellidos']);
-                                            $nombrecompleto = $_SESSION['nombre'] . ' ' . $apellido[0];
-                                            $nombrecompleto = ucwords($nombrecompleto);
-
-                                            echo $nombrecompleto;
-                                            ?></h2>
-
-            </div>
-
-            <div class="admi-div-opciones">
-                <a href="administrador.php?option=1" class="admi-enlaces-opciones">Empleados</a>
-                <a href="administrador.php?option=2" class="admi-enlaces-opciones">Crear usuario</a>
-                <a href="administrador.php?option=3" class="admi-enlaces-opciones">Empleado del mes</a>
-            </div>
-
             <div class="admi-div-volver-atras">
                 <?php
                 if ($_SESSION['rol'] == 1) {
@@ -66,6 +48,13 @@ if (isset($_SESSION['rol'])) {
                 <?php
                 }
                 ?>
+            </div>
+
+
+            <div class="admi-div-opciones">
+                <a href="administrador.php?option=1" class="admi-enlaces-opciones">Empleados</a>
+                <a href="administrador.php?option=2" class="admi-enlaces-opciones">Crear usuario</a>
+                <a href="administrador.php?option=3" class="admi-enlaces-opciones">Empleado del mes</a>
             </div>
         </div>
 
