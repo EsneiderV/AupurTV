@@ -13,6 +13,28 @@ if (isset($_SESSION['rol'])) {
                 window.location.href="../../index.php";
                 </script>';
 }
+$clasehover1 = 'activado';
+$clasehover2 = '';
+$clasehover3 = '';
+if (isset($_GET['option'])) {
+    $redireccionar = $_GET['option'];
+    switch ($redireccionar) {
+        case '1':
+            $clasehover1 = 'activado';
+            break;
+        case '2':
+            $clasehover2 = 'activado';
+            $clasehover1 = '';
+            break;
+        case '3':
+            $clasehover3 = 'activado';
+            $clasehover1 = '';
+            break;
+
+        default:
+            break;
+        }
+    }
 ?>
 
 
@@ -50,11 +72,10 @@ if (isset($_SESSION['rol'])) {
                 ?>
             </div>
 
-
             <div class="admi-div-opciones">
-                <a href="administrador.php?option=1" class="admi-enlaces-opciones">Empleados</a>
-                <a href="administrador.php?option=2" class="admi-enlaces-opciones">Crear usuario</a>
-                <a href="administrador.php?option=3" class="admi-enlaces-opciones">Empleado del mes</a>
+                <a href="administrador.php?option=1" class="admi-enlaces-opciones <?php echo $clasehover1 ?>">Empleados</a>
+                <a href="administrador.php?option=2" class="admi-enlaces-opciones <?php echo $clasehover2 ?>">Crear usuario</a>
+                <a href="administrador.php?option=3" class="admi-enlaces-opciones <?php echo $clasehover3 ?>">Empleado del mes</a>
             </div>
         </div>
 
