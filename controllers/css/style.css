@@ -1210,13 +1210,15 @@ span {
 
 .admi-contenedor-principal {
   width: 100%;
-  height: 100%;
+  height: 95%;
+  margin-top: 5%;
 }
 
 .admi-contenedor-izquierdo {
   background-color: #0075bc;
   width: 100%;
   height: 10%;
+  position: fixed;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1315,6 +1317,35 @@ span {
   color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 120%;
+}
+
+.empleado-modal-body{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.empleado-items-modificar{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.empleado-item-formulario-modf{
+  display: flex;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #dee2e6;
+  color: rgba(0, 0, 0, 0.998);
+  font-size: 20px;
+  width: 50%;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 /* admiCrearEmpleado */
