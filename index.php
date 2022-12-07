@@ -22,9 +22,8 @@ if (isset($_POST['acceder'])) {
 
     $consultaCorreo = loginCorreo($correo, $conexion);
     if ($consultaCorreo->num_rows > 0) {
-        $consulta =  login($correo, $clave, $conexion);
-        if ($consulta->num_rows > 0) {
-            $usuario = mysqli_fetch_array($consulta);
+        $usuario = mysqli_fetch_array($consultaCorreo, MYSQLI_ASSOC);
+        if (password_verify($clave,$usuario['clave'])) {
             $_SESSION['id'] = $usuario['id'];
             $_SESSION['nombre'] = $usuario['nombre'];
             $_SESSION['apellidos'] = $usuario['apellidos'];
