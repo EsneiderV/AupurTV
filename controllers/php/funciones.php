@@ -826,3 +826,10 @@ function eliminarCalificacionAnual($anio, $conexion)
     $query = "DELETE FROM `calificaciones` WHERE `anio` != '$anio'";
     $consulta = mysqli_query($conexion, $query);
 }
+
+// Trae todos los datos de los usuarios
+function usuario($conexion)
+{
+    $query = "SELECT `id`, `DNI`, usuarios.nombre, `apellidos`, `clave`, rol.nombre AS 'rol' , area.nombre AS 'area' , `correo`, `telefono`, `imagen`, `tipo_imagen`, `admi` FROM `usuarios` INNER JOIN rol ON usuarios.rol = rol.codigo INNER JOIN area ON usuarios.area = area.codigo;";
+    return $consulta = mysqli_query($conexion, $query);
+}
