@@ -21,6 +21,7 @@ summary,
 span {
   font-family: "Roboto", sans-serif;
 }
+
 /* Inicio de sesion */
 .modal-title-calificar {
   width: 100%;
@@ -130,6 +131,7 @@ span {
   clip-path: polygon(0 0, 100% 67%, 100% 100%, 0% 100%);
   border-radius: 0 0 10px 10px;
 }
+
 .index-span-recuper-clave {
   cursor: pointer;
   color: #fff;
@@ -1257,20 +1259,20 @@ span {
   margin: 3% 8%;
 }
 
-.admi-enlaces-opciones:hover{
+.admi-enlaces-opciones:hover {
   text-decoration: none;
   color: #fff;
-  background-color:#f36c35; 
+  background-color: #f36c35;
   border-radius: 16px;
   font-size: 130%;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
 }
 
-.activado{
+.activado {
   text-decoration: none;
   color: #fff;
-  background-color:#f36c35; 
+  background-color: #f36c35;
   border-radius: 16px;
   font-size: 130%;
   font-weight: bold;
@@ -1319,14 +1321,14 @@ span {
   font-size: 120%;
 }
 
-.empleado-modal-body{
+.empleado-modal-body {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
 }
 
-.empleado-items-modificar{
+.empleado-items-modificar {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -1334,7 +1336,7 @@ span {
   align-items: center;
 }
 
-.empleado-item-formulario-modf{
+.empleado-item-formulario-modf {
   display: flex;
   text-decoration: none;
   background-color: transparent;
@@ -1520,6 +1522,7 @@ span {
 
 /* PARA WIDTH DE 4100px AND 1800px */
 @media screen and (max-width: 4100px) and (min-width: 1800px) {
+
   /* PARA EL INDEX */
   .index-login-container {
     width: 50%;
@@ -1564,6 +1567,7 @@ span {
 
 /* PARA WIDTH DE 2300px AND 1800px */
 @media screen and (max-width: 2300px) and (min-width: 1800px) {
+
   /* PARA EL INDEX */
   .index-login-container {
     width: 50%;
@@ -1581,6 +1585,17 @@ span {
     justify-content: center;
     align-content: center;
   }
+}
+
+
+/* PARA WIDTH DE 1000PX */
+@media screen and (max-width: 1500px) {
+
+  .empleado-contenedor-principal {
+    width: 75%;
+    height: 80%;
+  }
+
 }
 
 /* PARA WIDTH DE 1000PX */
@@ -1631,6 +1646,7 @@ span {
     margin-top: 2%;
     margin-bottom: 40px;
   }
+
   .extra {
     margin-top: 4%;
   }
@@ -1658,6 +1674,7 @@ span {
     width: 45%;
     padding: 4% 0;
   }
+
   .calificar-administracion button {
     padding: 2%;
   }
@@ -1683,16 +1700,20 @@ span {
   .contenedor-canva-buscador {
     padding-right: 3%;
   }
+
   .calificar-btnmodal {
     font-size: 100%;
   }
+
   .calificar-btn-disable {
     font-size: 100%;
   }
+
   .auto-calificar-btnmodal {
     font-size: 100%;
     margin-bottom: 10%;
   }
+
   .calificar-auto {
     padding: 2% 0;
   }
@@ -1700,28 +1721,35 @@ span {
   .inventarioArea-nombre {
     font-size: 17px;
   }
+
   .inventarioArea-abrirInventario {
     font-size: 17px;
   }
+
   .inventarioArea-item-formulario {
     width: 70%;
   }
+
   .inventarioArea-agregar-articulo {
     padding: 10px;
     width: 68%;
     position: static;
     margin: auto;
   }
+
   .inventarioArea-contenedor {
     width: 70%;
     margin: auto;
   }
+
   .calificacionesArea-contenedor-persona-nombre {
     padding: 5% 0;
   }
+
   .calificacionesArea-contenedor-persona-nombre h2 {
     font-size: 22px;
   }
+
   .empleado-enlace-calificar,
   .empleado-item,
   .empleado-enlace-salir,
@@ -1813,6 +1841,8 @@ span {
   .empleado-nombre {
     font-size: 180%;
     text-align: center;
+    height: 10%;
+    margin-bottom: 5%;
   }
 
   .empleado-items {
@@ -1972,6 +2002,7 @@ span {
   .calificar-nav h1 {
     margin: auto;
   }
+
   /* PARA EL INVENTARIO */
   .inventarioArea-agregar-articulo {
     position: static;

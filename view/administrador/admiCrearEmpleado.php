@@ -1,11 +1,50 @@
+<?php 
+if(isset($_POST['crear'])){
+
+    $dni = $_POST['dni'];
+    $nombre = $_POST['nombre'];
+    $apellidos = $_POST['apellidos'];
+    $rol = $_POST['rol'];
+    $area = $_POST['area'];
+    $correo = $_POST['correo'];
+    $telefono = $_POST['telefono'];
+
+    $clave = password_hash($dni, PASSWORD_DEFAULT);
+
+    $tipo = $_FILES['imagen']['type'];
+    $nombrei = $_FILES['imagen']['name'];
+    $tamano = $_FILES['imagen']['size'];
+    $imagenSubida = fopen($_FILES['imagen']['tmp_name'],'r');
+    $binariosImagen = fread($imagenSubida,$tamano);
+    $binariosImagen =mysqli_escape_string($conexion,$binariosImagen);
+
+
+    try {
+        AdInsertarUsuarios($dni,$nombre,$apellidos, $clave, $rol, $area, $correo, $telefono, $binariosImagen, $tipo, $conexion);
+        echo '<script type="text/javascript">
+            alert("Usuario creado correctamente");
+            window.location.href="administrador.php?option=2";
+            </script>';
+
+    } catch (\Throwable $th) {
+        echo $th;
+    }
+
+
+    
+}
+
+
+?>
+
 <div class="admiCrearEmpleado-contenedor-principal">
     <h1 class="titulo-admiEmpleados">Crear usuario</h1>
 
     <!-- Agregar usuario -->
-    <form class="admiCrearEmpleado-formulario-crearUsuario" action="" id="form_insert" method="post">
+    <form class="admiCrearEmpleado-formulario-crearUsuario" action="administrador.php?option=2" id="form_insert" method="POST" enctype="multipart/form-data">
         <div class="admiCrearEmpleado-items">
             <label class="admiCrearEmpleado-label" form="dni">DNI : </label>
-            <input class="admiCrearEmpleado-input" id="dni" type="text" name="dni" placeholder="Documento de Identidad" required>
+            <input class="admiCrearEmpleado-input" id="dni" type="number" name="dni" placeholder="Documento de Identidad" required>
         </div>
 
         <div class="admiCrearEmpleado-items">
@@ -18,10 +57,6 @@
             <input class="admiCrearEmpleado-input" id="apellidos" type="text" name="apellidos" placeholder="Apellidos" required>
         </div>
 
-        <div class="admiCrearEmpleado-items">
-            <label class="admiCrearEmpleado-label" form="contraseña">Contraseña : </label>
-            <input class="admiCrearEmpleado-input" id="clave" type="text" name="clave" placeholder="Contraseña" required>
-        </div>
 
         <div class="admiCrearEmpleado-items">
             <label class="admiCrearEmpleado-label" form="correo">Correo : </label>
@@ -52,35 +87,13 @@
         </div>
 
         <div class="admiCrearEmpleado-cargar-imagen">
-        <input type="file" name="imagen"/><br>
+        <input type="file" name="imagen" required /><br>
         </div>
 
         <button class="admiCrearEmpleado-btn-crear" type="submit" name="crear" id="btnCrearUsuario">Crear Usuario</button>
     </form>
 
-    <!-- Script para insertar usuarios -->
-    <script src="../../controllers/js/jquery-3.2.1.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#btnCrearUsuario').click(function() {
-                var datos = $('#form_insert').serialize();
-                $.ajax({
-                    type: "POST",
-                    url: "insertarUsuario.php",
-                    data: datos,
-                    success: function(r) {
-                        if (r != 1) {
-                            alert("Usuario agregado exitosamente");
-                        } else {
-                            alert("Fallo en el server");
-                        }
-                    }
-                });
-                return false;
-            });
-        });
-    </script>
 
 
 </div>

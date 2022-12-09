@@ -527,69 +527,25 @@ function NotaPorMesAreaPersonaGeneralMes($idP, $mes, $idPersona, $conexion)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //////////////// Administrador ////////////////////
 
 //USUARIOS///
 
-//consultar
-function AdMostrarUsuarios($conexion)
+
+
+
+// Trae todos los datos de los usuarios
+function usuario($conexion)
 {
-    $query = "SELECT * FROM `usuarios`";
+    $query = "SELECT `id`, `DNI`, usuarios.nombre, `apellidos`, `clave`, rol.nombre AS 'rol' , area.nombre AS 'area' , `correo`, `telefono`, `imagen`, `tipo_imagen`, `admi` FROM `usuarios` INNER JOIN rol ON usuarios.rol = rol.codigo INNER JOIN area ON usuarios.area = area.codigo;";
     return $consulta = mysqli_query($conexion, $query);
 }
 
-//eliminar
-function AdEliminarUsuarios($id, $conexion)
-{
-    $query = "DELETE FROM `usuarios` WHERE `id` = '$id'";
-    return $consulta = mysqli_query($conexion, $query);
-}
 
 //insertar
-function AdInsertarUsuarios($id, $nombre, $clave, $rol, $area, $correo, $telefono, $imagen, $tipo_imagen, $conexion)
+function AdInsertarUsuarios($dni,$nombre,$apellidos, $clave, $rol, $area, $correo, $telefono, $imagen, $tipo_imagen, $conexion)
 {
-    $query = "INSERT INTO `usuarios`(`id`, `nombre`, `clave`, `rol`, `area`, `correo`, `telefono`, `imagen`, `tipo_imagen`) VALUES (`$id`, `$nombre`, `$clave`, `$rol`, `$area`, `$correo`, `$telefono`, `$imagen`, `$tipo_imagen`)";
+    $query = "INSERT INTO `usuarios`(`DNI`, `nombre`, `apellidos`, `clave`, `rol`, `area`, `correo`, `telefono`, `imagen`, `tipo_imagen`) VALUES ('$dni','$nombre','$apellidos','$clave','$rol','$area','$correo','$telefono','$imagen','$tipo_imagen')";
     return $consulta = mysqli_query($conexion, $query);
 }
 
@@ -599,58 +555,6 @@ function AdModificarUsuarios($id, $nombre, $clave, $rol, $area, $correo, $telefo
     $query = "UPDATE `usuarios` SET `nombre`='$nombre',`clave`='$clave',`rol`='$rol',`area`='$area',`correo`='$correo',`telefono`='$telefono',`imagen`='$imagen',`tipo_imagen`='$tipo_imagen' WHERE `id`='$id'";
     return $consulta = mysqli_query($conexion, $query);
 }
-
-
-//PREGUNTAS//
-
-//consultar
-function AdConsultarPreguntas($conexion)
-{
-    $query = "SELECT * FROM `preguntas`";
-    return $consulta = mysqli_query($conexion, $query);
-}
-
-//eliminar
-function AdEliminarPreguntas($id, $conexion)
-{
-    $query = "DELETE FROM `preguntas` WHERE `id` = '$id'";
-    return $consulta = mysqli_query($conexion, $query);
-}
-//insertar
-function AdInsertarPreguntas($id, $pregunta, $general, $conexion)
-{
-    $query = "INSERT INTO `preguntas`(`id`, `pregunta`, `general`) VALUES ('$id','$pregunta','$general')";
-    return $consulta = mysqli_query($conexion, $query);
-}
-
-//modificar
-function AdModificarPregunta($id, $pregunta, $general, $conexion)
-{
-    $query = "UPDATE `preguntas` SET `pregunta`='$pregunta',`general`='$general' WHERE `id`='$id'";
-    return $consulta = mysqli_query($conexion, $query);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -825,11 +729,4 @@ function eliminarCalificacionAnual($anio, $conexion)
 {
     $query = "DELETE FROM `calificaciones` WHERE `anio` != '$anio'";
     $consulta = mysqli_query($conexion, $query);
-}
-
-// Trae todos los datos de los usuarios
-function usuario($conexion)
-{
-    $query = "SELECT `id`, `DNI`, usuarios.nombre, `apellidos`, `clave`, rol.nombre AS 'rol' , area.nombre AS 'area' , `correo`, `telefono`, `imagen`, `tipo_imagen`, `admi` FROM `usuarios` INNER JOIN rol ON usuarios.rol = rol.codigo INNER JOIN area ON usuarios.area = area.codigo;";
-    return $consulta = mysqli_query($conexion, $query);
 }

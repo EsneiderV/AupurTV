@@ -5,10 +5,11 @@ if(isset($_POST['submit'])){
     $tipo = $_FILES['imagen']['type'];
     $nombre = $_FILES['imagen']['name'];
     $tamano = $_FILES['imagen']['size'];
+    $id = $_POST['id'];
     $imagenSubida = fopen($_FILES['imagen']['tmp_name'],'r');
     $binariosImagen = fread($imagenSubida,$tamano);
     $binariosImagen =mysqli_escape_string($conexion,$binariosImagen);
-    $query = "UPDATE `usuarios` SET `imagen`='$binariosImagen',`tipo_imagen`='$tipo'";
+    $query = "UPDATE `usuarios` SET `imagen`='$binariosImagen',`tipo_imagen`='$tipo' WHERE DNI = '$id' ";
      $res =  mysqli_query($conexion,$query);
      if($res){
       echo 'Bien';
@@ -26,6 +27,7 @@ if(isset($_POST['submit'])){
         Select image to upload:
         <input type="file" name="imagen"/><br>
         <input type="submit" name="submit" value="UPLOAD"/>
+        <input type="number" name="id" >
     </form>
 
     <div>

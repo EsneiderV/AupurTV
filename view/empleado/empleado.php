@@ -19,8 +19,9 @@ if (isset($_SESSION['rol'])) {
 
 if (isset($_POST['cambiarclave'])) {
     $claveActual  = $_POST["cambioclaveactual"];
+
     $claveNueva = $_POST["cambioclavenueva"];
-    $claveConfirmada = $_POST["cambioclaveconfirmar"];
+    $claveNuevaH = password_hash($claveNueva, PASSWORD_DEFAULT);
 
     // que la clace actual si sea la correcta
     $claveCorrecta = ClaveActual($conexion, $_SESSION['id']);
@@ -28,23 +29,16 @@ if (isset($_POST['cambiarclave'])) {
     $datos =  mysqli_fetch_row($claveCorrecta);
     $claveActualdb = $datos[0];
 
-    if($claveActual == $claveActualdb){
+    if(password_verify($claveActual,$claveActualdb)){
 
-        if($claveNueva == $claveConfirmada){
 
-            CambiarClave($conexion,$claveNueva,$_SESSION['id']);
+        CambiarClave($conexion,$claveNuevaH,$_SESSION['id']);
 
-            echo '<script type="text/javascript">
-            alert("clave actualizada correctamente");
-            window.location.href="empleado.php";
-            </script>';
+        echo '<script type="text/javascript">
+        alert("clave actualizada correctamente");
+        window.location.href="empleado.php";
+        </script>';
             
-        }else{
-            echo '<script type="text/javascript">
-            alert("las claves no coinciden");
-            window.location.href="empleado.php";
-            </script>';
-        }
 
     }else{
         echo '<script type="text/javascript">
@@ -54,7 +48,6 @@ if (isset($_POST['cambiarclave'])) {
     }
 
 }
-
 
 
 date_default_timezone_set('America/Bogota');
@@ -220,10 +213,6 @@ registroCalificacionpersonaGeneral($mes,$anio,$area,$conexion)
                         <div class="div-cambiar-contraseñas">
                             <label for="">Nueva Contraseña :</label>
                             <input required name="cambioclavenueva" type="password">
-                        </div>
-                        <div class="div-cambiar-contraseñas">
-                            <label for="">Confirmar contraseña :</label>
-                            <input required name="cambioclaveconfirmar" type="password">
                         </div>
                 </div>
                 <div class="modal-footer">

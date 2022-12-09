@@ -53,7 +53,6 @@ if (isset($_POST['acceder'])) {
 if (isset($_POST['correoRecuperar'])) {
     $correoRecuperar = $_POST['correoRecuperar'];
     $existe = buscarCorreoRecuperarClave($correoRecuperar, $conexion);
-
     if ($existe->num_rows <= 0) {
         echo '<script type="text/javascript">
         alert("El correo no se encuentra registrado");
@@ -65,13 +64,14 @@ if (isset($_POST['correoRecuperar'])) {
         $nombre = $datos[1];
         $correo = $datos[0];
         $nuevaClave = random_password();
-
+        $nuevaClaveH = password_hash($nuevaClave, PASSWORD_DEFAULT);
         try {
-            restablecerClave($nuevaClave, $correo, $conexion);
-            recuperarClave($nombre, $nuevaClave);
+            restablecerClave($nuevaClaveH, $correo, $conexion);
+            recuperarClave($nombre, $nuevaClave,$correoRecuperar);
         } catch (\Throwable $th) {
             echo $th;
         }
+
 
         echo '<script type="text/javascript">
         alert("Revisa tu correo eletronico");
