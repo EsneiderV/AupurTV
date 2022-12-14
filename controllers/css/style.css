@@ -1471,12 +1471,14 @@ span {
 .admiEmpleadoDelMes-contenedor-titulos {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
 }
 
 .titulo-empleado-mes {
+  margin-right: 1%;
   font-size: 250%;
   font-weight: bold;
   color: #f36c35;
@@ -1507,6 +1509,10 @@ span {
   width: 60%;
   height: 100%;
   border-radius: 16px;
+  margin: 0 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .titulo-empleado-por-mes {
@@ -1516,21 +1522,64 @@ span {
   font-size: 200%;
   font-weight: bold;
   padding: 3%;
+  margin: 0;
 }
 
-.div-mes-persona {
+.div-contenedor-foto-mes-persona{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.div-foto-mes-persona{
+  width: 100%;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-left: 50%;
+}
+
+.div-mes{
   color: #fff;
-  font-size: 18px;
+  font-size: 22px;
   font-family: "Roboto", sans-serif;
 }
 
+.div-foto{
+  width: 50px;
+  height: 50px;
+  margin-left: 3%;
+}
+
+.div-persona {
+  color: #fff;
+  font-size: 22px;
+  font-family: "Roboto", sans-serif;
+  margin-left: 3%;
+}
+
+.div-mes-año {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 22px;
+  font-family: "Roboto", sans-serif;
+  align-items: flex-start;}
+
 .div-mesesDelAño {
-  margin: 0 5%;
+  margin: 5%;
+}
+
+.mesesDelAño {
+  color: #fff;
+  font-size: 22px;
+}
+
+.mesesDelAño:hover {
+  color: #fff;
+  font-size: 22px;
 }
 
 /* RESPONSIVE */

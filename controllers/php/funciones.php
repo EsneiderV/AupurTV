@@ -767,3 +767,32 @@ function eliminarCalificacionAnual($anio, $conexion)
     $query = "DELETE FROM `calificaciones` WHERE `anio` != '$anio'";
     $consulta = mysqli_query($conexion, $query);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function consultapreguntageneralmespersonapdf($conexion)
+{
+    $query = "SELECT * FROM `preguntas` WHERE `general` = 1 ORDER BY id ASC ";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
+function empleadosCalificaciones($idPersona,$mes,$anio,$conexion){
+    $query = "SELECT `idPregunta`, preguntas.pregunta, `idPersona`, `mes`, `anio`, `nota`, `area` FROM `registroCalificacionpersonaGeneral` INNER JOIN preguntas ON preguntas.id = idPregunta WHERE `idPersona` = '$idPersona' AND `mes` = '$mes' AND `anio` = '$anio' ORDER BY idPregunta ASC;";
+
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
+

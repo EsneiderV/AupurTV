@@ -204,7 +204,6 @@ if (isset($_POST['modificar'])) {
         while ($persona = mysqli_fetch_array($personas)) {
         ?>
             <div class="inventarioArea-contenedor-empleados">
-
                 <div class="inventarioArea-contenedor-img">
                     <img class="inventarioArea-img  rounded-circle " src="data:<?php echo $persona['tipo_imagen'] ?>;base64,<?php echo base64_encode($persona['imagen']) ?>" alt="foto de perfil">
                 </div>
