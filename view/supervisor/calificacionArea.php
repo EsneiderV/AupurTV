@@ -124,13 +124,50 @@ registroCalificacionArea($_SESSION['area'], $mes, $anio, $conexion);
           $totaldeNotas = totalDeCalificaciones($usuario['id'], $mes, $conexion);
 
           $PromedioFinal =  ((100 * $totaldeNotas[0]) / $totaldeNotasRequeridas);
-          $PromedioFinal =  number_format($PromedioFinal, 0)
+          $PromedioFinal =  number_format($PromedioFinal, 0);
+
+
+
+          //mostrar porcentage que aya calificado en general
+          $totalUsuarioGeneral =   totalUsuariosGeneral( $conexion);
+          $totalUsuarioGeneral = mysqli_fetch_array($totalUsuarioGeneral);
+          $totalUsuarioGeneral = $totalUsuarioGeneral[0];
+
+          $totalPreguntasGeneral =  totalPreguntasGeneral($conexion);
+          $totalPreguntasGeneral = mysqli_fetch_array($totalPreguntasGeneral);
+          $totalPreguntasGeneral = $totalPreguntasGeneral[0];
+
+          $totalPreguntasGeneralesHay = totalPreguntasGeneralRequeriadas($usuario['id'],$mes,$conexion);
+          $totalPreguntasGeneralesHay = mysqli_fetch_array($totalPreguntasGeneralesHay);
+          $totalPreguntasGeneralesHay =$totalPreguntasGeneralesHay[0];
+           
+
+          $pomedioNotasGeneralesCalificacion = ((100 * $totalPreguntasGeneralesHay)/ ($totalUsuarioGeneral * $totalPreguntasGeneral));
+          $pomedioNotasGeneralesCalificacion =  number_format($pomedioNotasGeneralesCalificacion, 0);
           ?>
         </div>
-        <div class="calificacionesArea-contenedor-persona-barra">
-          <div class="progress">
-            <div class="progress-bar calificacionesArea-contenedor-persona-barra-color" role="progressbar" style="width: <?php echo $PromedioFinal ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $PromedioFinal ?>%</div>
+        <div class="contenedor-barras-porcentage">
+
+         <div>
+          <span class="calificacionesArea-contenedor-persona-pregunta-nombre">Grupales</span>
+         </div>
+          <div class="calificacionesArea-contenedor-persona-barra">
+            <div class="progress">
+              <div class="progress-bar calificacionesArea-contenedor-persona-barra-color" role="progressbar" style="width: <?php echo $PromedioFinal ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $PromedioFinal ?>%</div>
+            </div>
           </div>
+        </div>
+
+        <div class="contenedor-barras-porcentage">
+          <div>
+            <span class="calificacionesArea-contenedor-persona-pregunta-nombre" >Generales</span>
+          </div>
+          <div class="calificacionesArea-contenedor-persona-barra">
+            <div class="progress">
+            <div class="progress-bar calificacionesArea-contenedor-persona-barra-color" role="progressbar" style="width: <?php echo $pomedioNotasGeneralesCalificacion  ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $pomedioNotasGeneralesCalificacion  ?>%</div>
+          </div>
+        </div>
+
         </div>
       </div>
     <?php

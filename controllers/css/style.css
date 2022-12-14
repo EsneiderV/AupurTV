@@ -329,6 +329,14 @@ span {
   font-family: "Roboto", sans-serif;
 }
 
+
+.contenedor-barras-porcentage{
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: center;
+}
+
 .empleado-enlace-jefe {
   text-decoration: none;
   color: #fff;
@@ -1381,6 +1389,14 @@ span {
   font-family: "Roboto", sans-serif;
 }
 
+.btn-modificar-admin-empleados{
+  margin: 0;
+  padding: 0;
+}
+
+.modificar-imagen{
+  color: #000000;
+}
 .admiCrearEmpleado-items {
   display: flex;
   width: 100%;
@@ -1425,7 +1441,6 @@ span {
 
 .admiCrearEmpleado-input {
   text-decoration: none;
-  background-color: transparent;
   border: none;
   border-bottom: 1px solid #fff;
   color: #fff;
@@ -1434,6 +1449,7 @@ span {
   text-align: center;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  background-color: #0075bc;
 }
 
 .admiCrearEmpleado-input::placeholder {
@@ -1453,7 +1469,6 @@ span {
 }
 
 .admiEmpleadoDelMes-contenedor-titulos {
-  margin-bottom: 5%;
   width: 100%;
   display: flex;
   flex-direction: column;

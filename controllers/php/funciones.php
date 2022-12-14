@@ -317,6 +317,27 @@ function totalUsuariosArea($area, $conexion)
     return $consulta = mysqli_query($conexion, $query);
 }
 
+//mostrar el total de ususarios por area
+function totalUsuariosGeneral( $conexion)
+{
+    $query = "SELECT COUNT(id) AS 'total' FROM `usuarios` ";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+function totalPreguntasGeneral($conexion)
+{
+    $query = "SELECT COUNT(id) AS 'total' FROM `preguntas` WHERE `general` = '1'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
+function totalPreguntasGeneralRequeriadas($id,$mes,$conexion)
+{
+    $query = "SELECT COUNT(`nota`) AS 'total' FROM `calificaciones` WHERE `idCalificante` = '$id' AND `general` = '1' AND `mes` = '$mes'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
 
 // nos muestra el promedio por cada pregunta de un usuario determinado
 function promedioPreguntaUsuario($idCalificador, $mes, $rol, $idP, $area, $conexion)
@@ -527,20 +548,18 @@ function NotaPorMesAreaPersonaGeneralMes($idP, $mes, $idPersona, $conexion)
 
 
 
+
+
 //////////////// Administrador ////////////////////
 
 //USUARIOS///
 
-
-
-
 // Trae todos los datos de los usuarios
 function usuario($conexion)
 {
-    $query = "SELECT `id`, `DNI`, usuarios.nombre, `apellidos`, `clave`, rol.nombre AS 'rol' , area.nombre AS 'area' , `correo`, `telefono`, `imagen`, `tipo_imagen`, `admi` FROM `usuarios` INNER JOIN rol ON usuarios.rol = rol.codigo INNER JOIN area ON usuarios.area = area.codigo;";
+    $query = "SELECT usuarios.rol AS 'idRol', usuarios.area AS 'idArea', `id`, `DNI`, usuarios.nombre, `apellidos`, `clave`, rol.nombre AS 'rol' , area.nombre AS 'area' , `correo`, `telefono`, `imagen`, `tipo_imagen`, `admi` FROM `usuarios` INNER JOIN rol ON usuarios.rol = rol.codigo INNER JOIN area ON usuarios.area = area.codigo ORDER BY idArea ASC ;";
     return $consulta = mysqli_query($conexion, $query);
 }
-
 
 //insertar
 function AdInsertarUsuarios($dni,$nombre,$apellidos, $clave, $rol, $area, $correo, $telefono, $imagen, $tipo_imagen, $conexion)
@@ -549,17 +568,35 @@ function AdInsertarUsuarios($dni,$nombre,$apellidos, $clave, $rol, $area, $corre
     return $consulta = mysqli_query($conexion, $query);
 }
 
-//modificar
-function AdModificarUsuarios($id, $nombre, $clave, $rol, $area, $correo, $telefono, $imagen, $tipo_imagen, $conexion)
+
+
+//modificar sin imagen 
+function AdModificarUsuarios($id,$DNI, $nombre,$apellidos,$correo,$telefono, $rol, $area, $conexion)
 {
-    $query = "UPDATE `usuarios` SET `nombre`='$nombre',`clave`='$clave',`rol`='$rol',`area`='$area',`correo`='$correo',`telefono`='$telefono',`imagen`='$imagen',`tipo_imagen`='$tipo_imagen' WHERE `id`='$id'";
+    $query = "UPDATE `usuarios` SET `DNI`='$DNI', `nombre`='$nombre',  `apellidos`='$apellidos', `rol`='$rol',`area`='$area',`correo`='$correo',`telefono`='$telefono' WHERE `id`='$id'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+//modificar con imagen 
+function AdModificarUsuariosImagen($id,$DNI, $nombre,$apellidos,$correo,$telefono, $rol, $area,$imagen,$tipo_imagen, $conexion)
+{
+    $query = "UPDATE `usuarios` SET `DNI`='$DNI', `nombre`='$nombre',  `apellidos`='$apellidos', `rol`='$rol',`area`='$area',`correo`='$correo',`telefono`='$telefono',`imagen`='$imagen',`tipo_imagen`='$tipo_imagen' WHERE `id`='$id'";
+    return $consulta = mysqli_query($conexion, $query);
+}
+
+
+function EliminarUsuario($id,$conexion){
+    $query = "DELETE FROM `usuarios` WHERE `id` = '$id'";
     return $consulta = mysqli_query($conexion, $query);
 }
 
 
 
-
-
+function AdConsultarPreguntas($conexion)
+{
+    $query = "SELECT * FROM `preguntas`";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
 
 

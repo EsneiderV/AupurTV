@@ -28,7 +28,6 @@ $anio = date('Y');
                 <div class="div-mesesDelAño">Enero :</div>
                 <div>Pepito de Jesus Perez Perez</div>
             </div>
-
         </div>
 
         <div class="div-seleccionar-año">

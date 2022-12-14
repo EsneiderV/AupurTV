@@ -87,7 +87,7 @@ if(isset($_POST['crear'])){
         </div>
 
         <div class="admiCrearEmpleado-cargar-imagen">
-        <input type="file" name="imagen" required /><br>
+        <input  type="file" name="imagen" required /><br>
         </div>
 
         <button class="admiCrearEmpleado-btn-crear" type="submit" name="crear" id="btnCrearUsuario">Crear Usuario</button>

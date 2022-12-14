@@ -215,7 +215,7 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
               <?php
               }
               ?>
-              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="3" name="mensaje"></textarea>
+              <textarea type="text" class="text-field form-control textarea-reiniciar" id="edit_content" placeholder="Mensaje" rows="3" name="mensaje"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -250,7 +250,7 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
               <?php
               }
               ?>
-              <textarea type="text" class="text-field form-control" id="edit_content" placeholder="Mensaje" rows="5" name="mensaje"></textarea>
+              <textarea type="text" class="text-field form-control textarea-reiniciar" id="edit_content" placeholder="Mensaje" rows="5" name="mensaje"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -630,7 +630,15 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
   <!-- Para todas las preguntas -->
   <script type="text/javascript">
 
+
+
    function reiniciarModalGenerales(){
+    const textareaReiniciar = document.querySelectorAll('.textarea-reiniciar')
+
+      textareaReiniciar.forEach(pregunta => {
+        pregunta.value = ''
+      })
+
     const PreguntasGenerales = document.querySelectorAll('.calificarModalPreguntasGeneral')
 
       PreguntasGenerales.forEach(pregunta => {
@@ -646,6 +654,13 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
    }
 
    function reiniciarModalTodas(){
+    const textareaReiniciar = document.querySelectorAll('.textarea-reiniciar')
+
+      textareaReiniciar.forEach(pregunta => {
+        pregunta.value = ''
+
+      })
+
     const calificarModalTodasPreguntas = document.querySelectorAll('.calificarModalTodasPreguntas')
     calificarModalTodasPreguntas.forEach(pregunta => {
       pregunta.value = 5;
@@ -657,29 +672,36 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
     })
    }
 
+
+
     $(document).ready(function() {
       $('#btnTodasPreguntas').click(function() {
         let datos = $('#formTodasPreguntas').serialize();
-        $.ajax({
-          type: "POST",
-          url: "insertarTpreguntas.php",
-          data: datos,
-          success: function(r) {
-            if (!r) {
-              let id = $('#formTodasPreguntas').serializeArray();
-              id = id.filter(value => value.name == 'id')
-              id = id[0].value;
-              $(`#${id}`).addClass('calificar-btn-disable')
-              $(`#${id}`).attr('disabled', true)
-              $("#completo").modal('hide');
-              alert("agregado con exito");
-              reiniciarModalTodas()
-            } else {
-              alert("Ya lo calificastes");
-              reiniciarModalTodas()
+
+        let confir = confirm('¿Está seguro?')
+        if(confir){
+          $.ajax({
+            type: "POST",
+            url: "insertarTpreguntas.php",
+            data: datos,
+            success: function(r) {
+              if (!r) {
+                let id = $('#formTodasPreguntas').serializeArray();
+                id = id.filter(value => value.name == 'id')
+                id = id[0].value;
+                $(`#${id}`).addClass('calificar-btn-disable')
+                $(`#${id}`).attr('disabled', true)
+                $("#completo").modal('hide');
+                alert("agregado con exito");
+                reiniciarModalTodas()
+              } else {
+                alert("Ya lo calificastes");
+                reiniciarModalTodas()
+              }
             }
-          }
-        });
+          });
+        }
+        ////
         return false;
       });
     });
@@ -707,7 +729,9 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
     $(document).ready(function() {
       $('#btnGPreguntas').click(function() {
         let datos = $('#formGpreguntas').serialize();
-        $.ajax({
+        let confir = confirm('¿Está seguro?')
+        if(confir){
+          $.ajax({
           type: "POST",
           url: "insertarTpreguntas.php",
           data: datos,
@@ -727,6 +751,8 @@ registroCalificacionpersonaGeneral($mes, $anio, $area, $conexion);
             }
           }
         });
+        }
+        
         return false;
       });
     });
