@@ -14,27 +14,30 @@ if (isset($_GET['anio']) && isset($_GET['mes'])) {
         public $conexion;
         public $id;
         public $mes;
+        public $anio;
 
-        function __construct($orientation = 'P', $unit = 'mm', $size = 'A4', $utf8 = false, $conexion, $id, $mes)
+        function __construct($orientation = 'P', $unit = 'mm', $size = 'A4', $utf8 = false, $conexion, $id, $mes,$anio)
         {
             parent::__construct($orientation, $unit, $size, $utf8);
             $this->conexion = $conexion;
             $this->id = $id;
             $this->mes = $mes;
+            $this->anio = $anio;
         }
 
         public function header()
         {
-            $this->SetFont('Arial', 'B', 10);
+            $this->SetFont('Arial', 'B', 15);
             // $this->Image('../image/headerpdf.jpg', 115, 3, 100, 20, 'jpg');
             $this->Image('../image/membretecarta.jpg', 0, 0, 216, 280, 'jpg');
             $this->Ln(20);
             $this->sety(40);
-            $this->Cell(0, 0,"Calificaciones empleados ".retornarmesNumero($mesConsultados['mes']), 0, 1, 'C', 0);
+            $this->Cell(0, 0,"Calificaciones empleados ".retornarmesNumero($this->mes).' '.$this->anio, 0, 1, 'C', 0);
             $this->sety(60);
             $this->setX(25);
+            $this->sety(55);
 
-            $this->sety(60);
+            $this->SetFont('Arial', 'B', 10);
             $preguntas = consultapreguntageneralmespersonapdf($this->conexion);
             $this->setX(20);
             // $this->SetFillColor(0, 171, 57);
@@ -58,12 +61,15 @@ if (isset($_GET['anio']) && isset($_GET['mes'])) {
         }
     }
 
-    $fpdf = new pdf('P', 'mm', 'letter', true, $conexion, $area, $mes);
+    $fpdf = new pdf('P', 'mm', 'letter', true, $conexion, $area, $mes,$anio);
     $fpdf->AddPage('PORTRAIT', 'letter');
     $fpdf->SetFont('Arial', '', 10);
    
     $usuarios = usuario($conexion);
     while ($usuario = mysqli_fetch_array($usuarios)) {
+        // if(){
+            
+        // }
         $fpdf->setX(20);
         $apellido = explode(' ',$usuario['apellidos']) ;
         $letraApellido = substr($apellido[1],0, 1);
@@ -72,15 +78,15 @@ if (isset($_GET['anio']) && isset($_GET['mes'])) {
         $nombre = explode(' ',$usuario['nombre']) ;
         $nombre = $nombre[0];
         $nombreCompleto = $nombre.' '.$apellido[0].' '.$letraApellido;
-        $fpdf->Cell(35, 8,utf8_decode($nombreCompleto) , 1, 0, 'C');
+        $fpdf->Cell(35, 8,utf8_decode($nombreCompleto) , 1, 0, 'C',0);
 
       $calificaciones = empleadosCalificaciones($usuario['id'],$mes,$anio,$conexion);
       while ($calificacion = mysqli_fetch_array($calificaciones)) {
-        $fpdf->Cell(40, 8,$calificacion['nota'], 1, 0, 'C');
+        $fpdf->Cell(40, 8,$calificacion['nota'], 1, 0, 'C',0);
       }
 
       $promedio = empleadosCalificacionesPromedio($usuario['id'],$mes,$anio,$conexion);
-      $fpdf->Cell(20, 8,number_format($promedio, 2), 1, 1, 'C');
+      $fpdf->Cell(20, 8,number_format($promedio, 2), 1, 1, 'C',0);
 
     }
 

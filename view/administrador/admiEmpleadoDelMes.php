@@ -52,17 +52,16 @@ if (isset($_POST['anioempleadomes']) && $_POST['anioempleadomes'] != 0) {
                 ?>
                     <div class="div-foto-mes-persona">
                         <div class="div-mes">
-                            <div class=""><?php echo retornarmesNumero($mesConsultados['mes'])?></div>
+                            <div class="empleadoMes-mes"><?php echo retornarmesNumero($mesConsultados['mes'])." :"?></div>
                         </div>
 
                         <div class="div-foto">
-                            <img class="inventarioArea-img  rounded-circle " src="data:<?php echo $ganador['tipo_imagen'] ?>;base64,<?php echo base64_encode($ganador['imagen']) ?>" alt="foto de perfil">
+                            <img class="empleadoMes-img" src="data:<?php echo $ganador['tipo_imagen'] ?>;base64,<?php echo base64_encode($ganador['imagen']) ?>" alt="foto de perfil">
                         </div>
 
                         <div class="div-persona">
-                            <h4 class="inventarioArea-nombre">
+                            <h4 class="empleadoMes-nombre">
                                 <?php
-
                                 $apellido = explode(' ', $ganador['apellidos']);
                                 $nombreCompleto = $ganador['nombre'] . ' ' . $apellido[0];
                                 $nombreCompleto = ucwords($nombreCompleto);
@@ -107,3 +106,5 @@ if (isset($_POST['anioempleadomes']) && $_POST['anioempleadomes'] != 0) {
         formParaLosAnios.submit();
     })
 </script>
+
+
