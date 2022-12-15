@@ -484,7 +484,7 @@ function mostrarelmesporid($id,$conexion){
 }
 
 function retornarmesNumero($num){
-    $mesesNomNum = [['01','Enero'],['02','Febrero'],['03','Marzo'],['04','Abril'],['05','Mayo'],['06','Junio'],['07','Julio'],['08','Agosto'],['09','Septiembre'],['10','Octubre'],['11','Nobiembre'],['12','Diciembre'],];
+    $mesesNomNum = [['01','Enero'],['02','Febrero'],['03','Marzo'],['04','Abril'],['05','Mayo'],['06','Junio'],['07','Julio'],['08','Agosto'],['09','Septiembre'],['10','Octubre'],['11','Noviembre'],['12','Diciembre'],];
     $mes = '';
     foreach ($mesesNomNum as $value) {
         if($value[0] == $num){
@@ -793,6 +793,26 @@ function empleadosCalificaciones($idPersona,$mes,$anio,$conexion){
 
     return $consulta = mysqli_query($conexion, $query);
 }
+function empleadosCalificacionesPromedio($idPersona,$mes,$anio,$conexion){
+    $query = "SELECT `idPregunta`, preguntas.pregunta, AVG(`nota`) AS 'promedio' FROM `registroCalificacionpersonaGeneral` INNER JOIN preguntas ON preguntas.id = idPregunta WHERE `idPersona` = '$idPersona' AND `mes` = '$mes' AND `anio` = '$anio' ORDER BY idPregunta ASC;";
+    $consulta = mysqli_query($conexion, $query);
+    $respuesta = mysqli_fetch_array($consulta);
+    return $respuesta[2];
+}
 
+function sacarTodosLosaniosEmpleadoMes($conexion){
+    $query = "SELECT `anio` FROM `registroCalificacionpersonaGeneral` GROUP BY `anio`";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
+function sacarTodosLosMesesEmpleadoMes($anio,$conexion){
+    $query = "SELECT `mes` FROM `registroCalificacionpersonaGeneral` WHERE `anio` = '$anio' GROUP BY `mes`";
+    return $consulta = mysqli_query($conexion, $query);
+}
 
+function sacarEmpleadodelMes($mes,$anio,$conexion){
+    $query = "SELECT usuarios.nombre, usuarios.apellidos, `idPersona`,`mes`,`anio`,registroCalificacionpersonaGeneral.`area`, AVG(`nota`) AS 'promedio', usuarios.imagen, usuarios.tipo_imagen FROM `registroCalificacionpersonaGeneral` INNER JOIN usuarios ON `idPersona` = usuarios.id WHERE `mes` = '$mes' AND `anio` = '$anio' GROUP BY `idPersona` ORDER BY promedio DESC LIMIT 1";
+    $consulta = mysqli_query($conexion, $query);
+    $respuesta = mysqli_fetch_array($consulta);
+    return $respuesta;
+}

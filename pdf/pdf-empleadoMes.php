@@ -30,7 +30,7 @@ if (isset($_GET['anio']) && isset($_GET['mes'])) {
             $this->Image('../image/membretecarta.jpg', 0, 0, 216, 280, 'jpg');
             $this->Ln(20);
             $this->sety(40);
-            $this->Cell(0, 0,"Calificaciones empleados enero 2021", 0, 1, 'C', 0);
+            $this->Cell(0, 0,"Calificaciones empleados ".retornarmesNumero($mesConsultados['mes']), 0, 1, 'C', 0);
             $this->sety(60);
             $this->setX(25);
 
@@ -79,7 +79,8 @@ if (isset($_GET['anio']) && isset($_GET['mes'])) {
         $fpdf->Cell(40, 8,$calificacion['nota'], 1, 0, 'C');
       }
 
-      $fpdf->Cell(20, 8,'total', 1, 1, 'C');
+      $promedio = empleadosCalificacionesPromedio($usuario['id'],$mes,$anio,$conexion);
+      $fpdf->Cell(20, 8,number_format($promedio, 2), 1, 1, 'C');
 
     }
 
