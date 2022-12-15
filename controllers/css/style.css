@@ -1605,6 +1605,40 @@ span {
   font-size: 22px;
 }
 
+.div-empleado-del-año{
+  display: flex;
+  margin-top: 2%;
+  background-color: #0075bc;
+  width: 95%;
+  border-radius: 16px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+
+.titulo-empleado-del-año {
+  color: rgb(243, 107, 15);
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+  padding: 1%;
+  margin: 0;
+}
+
+.nombre-empleado-del-año{
+  color: #fff;
+  font-size: 22px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+
+
+
+
+
+
 /* RESPONSIVE */
 
 /* PARA WIDTH DE 4100px AND 1800px */
