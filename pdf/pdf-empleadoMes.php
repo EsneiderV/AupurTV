@@ -47,7 +47,7 @@ if (isset($_GET['anio']) && isset($_GET['mes'])) {
             // $this->SetTextColor(0, 0, 0);
             $this->SetFont('Arial', 'B', 10);
             while ($pregunta = mysqli_fetch_array($preguntas)) {
-                $this->Cell(40, 8, $pregunta['pregunta'], 1, 0, 'C');
+                $this->Cell(40, 8, utf8_decode($pregunta['pregunta']), 1, 0, 'C');
             }
             $this->Cell(20, 8, "Total", 1, 1, 'C');
         }
@@ -66,27 +66,36 @@ if (isset($_GET['anio']) && isset($_GET['mes'])) {
     $fpdf->SetFont('Arial', '', 10);
    
     $usuarios = usuario($conexion);
+    $areamostrar = 0;
     while ($usuario = mysqli_fetch_array($usuarios)) {
-        // if(){
-            
-        // }
+
+        $fpdf->SetFillColor(170, 170, 170);
+
+        $fpdf->setX(20);
+        if($areamostrar != $usuario['idArea']){
+            $fpdf->Cell(175, 8, $usuario['area'], 1, 1, 'C',1);
+            $areamostrar = $usuario['idArea'];
+        }
+
+        
         $fpdf->setX(20);
         $apellido = explode(' ',$usuario['apellidos']) ;
         $letraApellido = substr($apellido[1],0, 1);
         $letraApellido = strtoupper($letraApellido);
 
-        $nombre = explode(' ',$usuario['nombre']) ;
+        
+        $nombre = explode(' ',$usuario['nombre']);
         $nombre = $nombre[0];
         $nombreCompleto = $nombre.' '.$apellido[0].' '.$letraApellido;
-        $fpdf->Cell(35, 8,utf8_decode($nombreCompleto) , 1, 0, 'C',0);
+        $fpdf->Cell(35, 8,utf8_decode($nombreCompleto) , 1, 0, 'C');
 
       $calificaciones = empleadosCalificaciones($usuario['id'],$mes,$anio,$conexion);
       while ($calificacion = mysqli_fetch_array($calificaciones)) {
-        $fpdf->Cell(40, 8,$calificacion['nota'], 1, 0, 'C',0);
+        $fpdf->Cell(40, 8, $calificacion['nota'], 1, 0, 'C');
       }
 
       $promedio = empleadosCalificacionesPromedio($usuario['id'],$mes,$anio,$conexion);
-      $fpdf->Cell(20, 8,number_format($promedio, 2), 1, 1, 'C',0);
+      $fpdf->Cell(20, 8,number_format($promedio, 2), 1, 1, 'C');
 
     }
 

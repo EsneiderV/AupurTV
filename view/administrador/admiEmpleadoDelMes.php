@@ -48,11 +48,11 @@ if (isset($_POST['anioempleadomes']) && $_POST['anioempleadomes'] != 0) {
                 <?php
                 $mesesConsultados = sacarTodosLosMesesEmpleadoMes($anio, $conexion);
                 while ($mesConsultados = mysqli_fetch_array($mesesConsultados)) {
-                  $ganador = sacarEmpleadodelMes($mesConsultados['mes'],$anio,$conexion);
+                    $ganador = sacarEmpleadodelMes($mesConsultados['mes'], $anio, $conexion);
                 ?>
                     <div class="div-foto-mes-persona">
                         <div class="div-mes">
-                            <div class="empleadoMes-mes"><?php echo retornarmesNumero($mesConsultados['mes'])." :"?></div>
+                            <div class="empleadoMes-mes"><?php echo retornarmesNumero($mesConsultados['mes']) . " :" ?></div>
                         </div>
 
                         <div class="div-foto">
@@ -86,17 +86,19 @@ if (isset($_POST['anioempleadomes']) && $_POST['anioempleadomes'] != 0) {
                 $mesesConsultados = sacarTodosLosMesesEmpleadoMes($anio, $conexion);
                 while ($mesConsultados = mysqli_fetch_array($mesesConsultados)) {
                 ?>
-                    <div class="div-mesesDelAño"><a href='../../pdf/pdf-empleadoMes.php?anio=<?php echo $anio?>&mes=<?php echo $mesConsultados['mes']?>' class="mesesDelAño"><?php echo retornarmesNumero($mesConsultados['mes'])?></a></div>
+                    <div class="div-mesesDelAño"><a href='../../pdf/pdf-empleadoMes.php?anio=<?php echo $anio ?>&mes=<?php echo $mesConsultados['mes'] ?>' class="mesesDelAño"><?php echo retornarmesNumero($mesConsultados['mes']) ?></a></div>
                 <?php
                 }
                 ?>
 
             </div>
         </div>
-
-
-
     </div>
+    <div class="div-empleado-del-año">
+        <h2 class="titulo-empleado-del-año">Empleado del año</h2>
+        <p class="nombre-empleado-del-año">Esneider Velásquez Urrego</p>
+    </div>
+
 </div>
 
 <script>
@@ -106,5 +108,3 @@ if (isset($_POST['anioempleadomes']) && $_POST['anioempleadomes'] != 0) {
         formParaLosAnios.submit();
     })
 </script>
-
-
