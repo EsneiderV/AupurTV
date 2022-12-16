@@ -67,15 +67,19 @@ if (isset($_GET['anio']) && isset($_GET['mes'])) {
    
     $usuarios = usuario($conexion);
     $areamostrar = 0;
+    
     while ($usuario = mysqli_fetch_array($usuarios)) {
-
+       
         $fpdf->SetFillColor(170, 170, 170);
 
         $fpdf->setX(20);
         if($areamostrar != $usuario['idArea']){
             $fpdf->Cell(175, 8, $usuario['area'], 1, 1, 'C',1);
             $areamostrar = $usuario['idArea'];
+            $pomedioBajo = notaBajaArea($usuario['idArea'],$mes,$anio,$conexion);
         }
+        
+        $fpdf->SetFillColor(235, 152, 78 );
 
         
         $fpdf->setX(20);
@@ -95,7 +99,13 @@ if (isset($_GET['anio']) && isset($_GET['mes'])) {
       }
 
       $promedio = empleadosCalificacionesPromedio($usuario['id'],$mes,$anio,$conexion);
-      $fpdf->Cell(20, 8,number_format($promedio, 2), 1, 1, 'C');
+
+      if($pomedioBajo == $promedio){
+        $fpdf->Cell(20, 8,number_format($promedio, 2), 1, 1, 'C',1);
+
+      }else{
+          $fpdf->Cell(20, 8,number_format($promedio, 2), 1, 1, 'C');
+      }
 
     }
 

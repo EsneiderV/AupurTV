@@ -7,6 +7,7 @@ if (isset($_POST['anioempleadomes']) && $_POST['anioempleadomes'] != 0) {
     $anio = $_POST['anioempleadomes'];
 }
 
+
 ?>
 
 <div class="admiEmpleadoDelMes-contenedor-principal">
@@ -95,8 +96,12 @@ if (isset($_POST['anioempleadomes']) && $_POST['anioempleadomes'] != 0) {
         </div>
     </div>
     <div class="div-empleado-del-año">
+    <?php 
+    $empleadoDelAnio =  sacarEmpleadodelAnio($anio,$conexion);
+
+    ?>
         <h2 class="titulo-empleado-del-año">Empleado del año</h2>
-        <p class="nombre-empleado-del-año">Esneider Velásquez Urrego</p>
+        <p class="nombre-empleado-del-año"><?php echo $empleadoDelAnio['nombre'].' '.$empleadoDelAnio['apellidos'] ?></p>
     </div>
 
 </div>

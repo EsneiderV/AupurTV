@@ -809,6 +809,12 @@ function sacarTodosLosMesesEmpleadoMes($anio,$conexion){
     $query = "SELECT `mes` FROM `registroCalificacionpersonaGeneral` WHERE `anio` = '$anio' GROUP BY `mes`";
     return $consulta = mysqli_query($conexion, $query);
 }
+function notaBajaArea($area,$mes,$anio,$conexion){
+    $query = "SELECT `idPregunta`, preguntas.pregunta, AVG(`nota`) AS 'promedio' FROM `registroCalificacionpersonaGeneral` INNER JOIN preguntas ON preguntas.id = idPregunta WHERE  `area` = '$area' AND `mes` = '$mes' AND `anio` = '$anio'  GROUP BY `idPersona` ORDER BY promedio ASC LIMIT 1";
+    $consulta = mysqli_query($conexion, $query);
+    $respuesta = mysqli_fetch_array($consulta);
+    return $respuesta[2];
+}
 
 function sacarEmpleadodelMes($mes,$anio,$conexion){
     $query = "SELECT usuarios.nombre, usuarios.apellidos, `idPersona`,`mes`,`anio`,registroCalificacionpersonaGeneral.`area`, AVG(`nota`) AS 'promedio', usuarios.imagen, usuarios.tipo_imagen FROM `registroCalificacionpersonaGeneral` INNER JOIN usuarios ON `idPersona` = usuarios.id WHERE `mes` = '$mes' AND `anio` = '$anio' GROUP BY `idPersona` ORDER BY promedio DESC LIMIT 1";
@@ -816,3 +822,11 @@ function sacarEmpleadodelMes($mes,$anio,$conexion){
     $respuesta = mysqli_fetch_array($consulta);
     return $respuesta;
 }
+
+function sacarEmpleadodelAnio($anio,$conexion){
+    $query = "SELECT usuarios.nombre, usuarios.apellidos, `idPersona`, AVG(`nota`) AS 'promedio' FROM `registroCalificacionpersonaGeneral` INNER JOIN usuarios ON registroCalificacionpersonaGeneral.idPersona = usuarios.id WHERE `anio` = '$anio' GROUP BY `idPersona` ORDER BY promedio DESC LIMIT 1";
+    $consulta = mysqli_query($conexion, $query);
+    $respuesta = mysqli_fetch_array($consulta);
+    return $respuesta;
+}
+
